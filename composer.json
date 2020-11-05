@@ -69,7 +69,7 @@
         ]
     },
     "support": {
-        "issues": "https://github.com/TYPO3-Initiatives/structured-content/issues",
-        "source": "https://github.com/TYPO3-Initiatives/structured-content"
+        "issues": "https://github.com/TYPO3-Initiatives/content-block-registration-api/issues",
+        "source": "https://github.com/TYPO3-Initiatives/content-block-registration-api"
     }
 }
