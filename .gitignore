@@ -2,6 +2,7 @@
 
 # composer
 /vendor/
+/composer.lock
 
 # Build stuff
 /.typo3/
