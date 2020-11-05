@@ -1,0 +1,75 @@
+{
+    "name": "sci/sci-api",
+    "type": "typo3-cms-extension",
+    "description": "",
+    "license": [
+        "GPL-2.0-or-later"
+    ],
+    "authors": [
+    ],
+    "require": {
+        "php": "^7.2",
+        "typo3/cms-core": "^10.4.0 || dev-master"
+    },
+    "require-dev": {
+        "ergebnis/composer-normalize": "^2.3",
+        "friendsofphp/php-cs-fixer": "^2.14",
+        "helhum/typo3-console": "^6.3",
+        "roave/security-advisories": "dev-master",
+        "typo3/cms-tstemplate": "^10.0 || dev-master",
+        "typo3/testing-framework": "^6.2"
+    },
+    "config": {
+        "bin-dir": ".typo3/bin",
+        "sort-packages": true,
+        "vendor-dir": ".typo3/vendor"
+    },
+    "extra": {
+        "typo3/cms": {
+            "extension-key": "sci_api",
+            "web-dir": ".typo3/public",
+            "app-dir": ".typo3"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Sci\\SciApi\\": "Classes/"
+        }
+    },
+    "autoload-dev": {
+    },
+    "prefer-stable": true,
+    "scripts": {
+        "post-autoload-dump": [
+            "[ -L .typo3/public/typo3conf/ext/sci_api ] || ln -snvf ../../../../. .typo3/public/typo3conf/ext/sci_api"
+        ],
+        "fix:cgl": [
+            "php-cs-fixer --config=.php_cs.dist fix --using-cache=no",
+            "composer normalize --no-update-lock"
+        ],
+        "install-extensions": [
+            "typo3 extension:activate -n sci_api"
+        ],
+        "install-typo3": [
+            "typo3cms install:setup --admin-user-name=admin --admin-password=adminadmin --no-interaction"
+        ],
+        "test": [
+            "@test:cgl",
+            "@test:unit"
+        ],
+        "test:cgl": [
+            "php-cs-fixer --config=.php_cs.dist fix -v --using-cache=no --dry-run",
+            "composer normalize --no-update-lock --dry-run"
+        ],
+        "test:unit": [
+            "phpunit -c Build/UnitTests.phpunit.xml"
+        ],
+        "typo3:flush": [
+            "typo3cms cache:flush"
+        ]
+    },
+    "support": {
+        "issues": "https://github.com/TYPO3-Initiatives/structured-content/issues",
+        "source": "https://github.com/TYPO3-Initiatives/structured-content"
+    }
+}

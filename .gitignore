@@ -1,0 +1,16 @@
+/.idea
+
+# composer
+/vendor/
+
+# Build stuff
+/.typo3/
+/Build/yarn-error.log
+/Build/.phpunit.result.cache
+/Build/node_modules/
+/Build/testing-docker/.env
+/Build/AcceptanceReports
+/Tests/Acceptance/Support/_generated/
+
+# CGL Fixer
+/.php_cs.cache
