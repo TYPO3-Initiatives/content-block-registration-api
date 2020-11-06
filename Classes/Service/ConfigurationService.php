@@ -15,7 +15,6 @@ use Sci\SciApi\Constants;
 use Sci\SciApi\Validator\ContentBlockValidator;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Yaml\Yaml;
-use TYPO3\CMS\Core\Cache\CacheManager;
 use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\Imaging\IconProvider\BitmapIconProvider;
 use TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider;
@@ -25,15 +24,18 @@ class ConfigurationService
 {
     public static function configuration(): array
     {
-        $cache = GeneralUtility::makeInstance(CacheManager::class)
-            ->getCache(Constants::CACHE);
+        return self::configurationUncached();
 
-        if (false === $configuration = $cache->get(Constants::CACHE_CONFIGURATION_ENTRY)) {
-            $configuration = self::configurationUncached();
-            $cache->set(Constants::CACHE_CONFIGURATION_ENTRY, $configuration, [], 0);
-        }
-
-        return $configuration;
+        // TODO
+        //        $cache = GeneralUtility::makeInstance(CacheManager::class)
+        //            ->getCache(Constants::CACHE);
+        //
+        //        if (false === $configuration = $cache->get(Constants::CACHE_CONFIGURATION_ENTRY)) {
+        //            $configuration = self::configurationUncached();
+        //            $cache->set(Constants::CACHE_CONFIGURATION_ENTRY, $configuration, [], 0);
+        //        }
+        //
+        //        return $configuration;
     }
 
     protected static function configurationUncached(): array
