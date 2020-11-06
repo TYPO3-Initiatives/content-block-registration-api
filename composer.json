@@ -6,6 +6,9 @@
         "GPL-2.0-or-later"
     ],
     "authors": [
+        {
+            "name": "Structured Content Initiative"
+        }
     ],
     "require": {
         "php": "^7.2",
@@ -36,8 +39,7 @@
             "Sci\\SciApi\\": "Classes/"
         }
     },
-    "autoload-dev": {
-    },
+    "autoload-dev": {},
     "prefer-stable": true,
     "scripts": {
         "post-autoload-dump": [
