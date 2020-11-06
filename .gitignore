@@ -6,12 +6,7 @@
 
 # Build stuff
 /.typo3/
-/Build/yarn-error.log
-/Build/.phpunit.result.cache
-/Build/node_modules/
-/Build/testing-docker/.env
-/Build/AcceptanceReports
-/Tests/Acceptance/Support/_generated/
+/Tests/.phpunit.result.cache
 
 # CGL Fixer
 /.php_cs.cache

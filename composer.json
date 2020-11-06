@@ -74,7 +74,11 @@
             "Sci\\SciApi\\": "Classes/"
         }
     },
-    "autoload-dev": {},
+    "autoload-dev": {
+        "psr-4": {
+            "Sci\\SciApi\\Tests\\": "Tests/"
+        }
+    },
     "prefer-stable": true,
     "scripts": {
         "post-autoload-dump": [
@@ -105,7 +109,7 @@
             "composer normalize --no-update-lock --dry-run"
         ],
         "test:unit": [
-            "phpunit -c Build/UnitTests.phpunit.xml"
+            "phpunit -c Tests/UnitTests.phpunit.xml"
         ],
         "typo3:flush": [
             "typo3cms cache:flush"
