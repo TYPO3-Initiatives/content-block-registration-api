@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace Sci\SciApi\Backend;
 
 use Sci\SciApi\Service\ConfigurationService;
+use Sci\SciApi\Generator\FlexFormGenerator;
 
 class Tca
 {
@@ -88,13 +89,13 @@ class Tca
              * Add flexForms for content element configuration
              */
             // var_dump($GLOBALS['TCA']['tt_content']['columns']['content_block']['config']['ds']['default']);
-            $GLOBALS['TCA']['tt_content']['columns']['content_block']['config']['ds'][ $contentBlock['CType'] ] = self::flexFormTemplate($flexFormFieldsConfig);
+            $GLOBALS['TCA']['tt_content']['columns']['content_block']['config']['ds'][ $contentBlock['CType'] ] = FlexFormGenerator::flexFormTemplate($flexFormFieldsConfig);
             // exit;
         }
     }
 
     /** parse single field */
-    private static function createField($field, $cType)
+    private static function createField($field)
     {
         if (!is_array($field)) {
             return '';
@@ -102,120 +103,20 @@ class Tca
         elseif ($field['type'] === 'Collection') {
             $fieldsConfig = '';
             foreach ($field['properties']['fields'] as $CollectionField) {
-                $fieldsConfig = $fieldsConfig . self::createField($CollectionField, $cType);
+                $fieldsConfig = $fieldsConfig . self::createField($CollectionField);
             }
             return $fieldsConfig;
         } else {
             switch ($field['type']) {
                 case 'Text':
-                    return self::createInputField($field, $cType);
+                    return FlexFormGenerator::createInputField($field);
                 case 'TextMultiline':
-                    return self::createTextarea($field, $cType);
+                    return FlexFormGenerator::createTextarea($field);
                 case 'Link':
-                    return self::createTypoLink($field, $cType);
+                    return FlexFormGenerator::createTypoLink($field);
                 default:
                     return '';
             }
         }
-    }
-
-    /** create typolink */
-    private static function createTypoLink($field, $cType)
-    {
-        debug($field);
-        return '
-        <' . $field['identifier'] . '>
-            <TCEforms>
-                <label>TODO: Fill in the right name - Identifier: ' . $field['identifier'] . '</label>
-                <config>
-                    <type>input</type>
-                    <size>' . ($field['properties']['size']  > 0 ? $field['properties']['size'] : '30') . '</size>
-                    <eval>' . ($field['properties']['required'] === true ? 'required, ' : '') . 'trim</eval>
-                    <softref>typolink,typolink_tag,images,url</softref>
-                    <wizards>
-                        <_PADDING>2</_PADDING>
-                        <link>
-                            <type>popup</type>
-                            <title>Link</title>
-                            <module>
-                                <name>wizard_element_browser</name>
-                                <urlParameters>
-                                    <mode>wizard</mode>
-                                </urlParameters>
-                            </module>
-                            <icon>link_popup.gif</icon>
-                            <script>browse_links.php?mode=wizard</script>
-                            <params>
-                                <!--<blindLinkOptions>page,file,folder,url,spec</blindLinkOptions>-->
-                            </params>
-                            <JSopenParams>height=500,width=500,status=0,menubar=0,scrollbars=1</JSopenParams>
-                        </link>
-                    </wizards>
-                </config>
-            </TCEforms>
-        </' . $field['identifier'] . '>
-        ';
-    }
-
-    /** create textfield */
-    private static function createInputField($field, $cType)
-    {
-        debug($field);
-        return '
-        <' . $field['identifier'] . '>
-            <TCEforms>
-                <label>TODO: Fill in the right name - Identifier: ' . $field['identifier'] . '</label>
-                <config>
-                    <type>input</type>
-                    <size>' . ($field['properties']['size'] > 0 ? $field['properties']['size'] : '20') . '</size>
-                    <max>' . ($field['properties']['max']  > 0 ? $field['properties']['max'] : '700') . '</max>
-                    <eval>' . ($field['properties']['required'] === true ? 'required, ' : '') . 'trim</eval>
-                </config>
-            </TCEforms>
-        </' . $field['identifier'] . '>
-        ';
-    }
-
-    /** create textfield */
-    private static function createTextarea($field, $cType)
-    {
-        debug($field);
-        return '
-        <' . $field['identifier'] . '>
-            <TCEforms>
-                <label>TODO: Fill in the right name - Identifier: ' . $field['identifier'] . '</label>
-                <config>
-                    <type>text</type>
-                    <cols>' . ($field['properties']['cols'] === true ? $field['properties']['cols'] : '24') . '</cols>
-                    <rows>' . ($field['properties']['rows'] === true ? $field['properties']['rows'] : '3') . '</rows>
-                    <eval>' . ($field['properties']['required'] === true ? 'required, ' : '') . 'trim</eval>
-                </config>
-            </TCEforms>
-        </' . $field['identifier'] . '>
-        ';
-    }
-
-    protected static function flexFormTemplate($fieldConfig)
-    {
-        return '<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<T3DataStructure>
-    <meta>
-        <langDisable>1</langDisable>
-    </meta>
-    <sheets>
-        <sDEF>
-            <ROOT>
-                <TCEforms>
-                    <sheetTitle>FLEX FORM Text</sheetTitle>
-                </TCEforms>
-                <type>array</type>
-                <el>
-' . $fieldConfig . '
-                </el>
-            </ROOT>
-        </sDEF>
-    </sheets>
-</T3DataStructure>
-';
     }
 }
