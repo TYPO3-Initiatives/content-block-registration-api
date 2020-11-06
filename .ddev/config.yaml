@@ -16,6 +16,7 @@ hooks:
   - exec: rm composer.lock
   - exec: |
       if [[ $(mysql -e "SHOW TABLES" | wc -l) -eq 0 ]]; then
+        rm .typo3/public/typo3conf/LocalConfiguration.php &> /dev/null
         composer install-typo3
       fi
   - composer: install-extensions
