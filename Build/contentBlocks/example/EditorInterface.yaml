@@ -1,0 +1,24 @@
+group: common
+fields:
+    -   identifier: text
+        type: Text
+        properties:
+            autocomplete: true
+            default: 'Default value'
+            max: 15
+            placeholder: 'Placeholder text'
+            size: 20
+            required: false
+            trim: true
+    -   identifier: textarea
+        type: Textarea
+        properties:
+            cols: 40
+            default: 'Default value'
+            enableRichtext: true
+            max: 150
+            placeholder: 'Placeholder text'
+            richtextConfiguration: default
+            rows: 15
+            required: false
+            trim: true

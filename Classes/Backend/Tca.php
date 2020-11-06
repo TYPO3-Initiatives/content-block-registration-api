@@ -1,4 +1,5 @@
-<?php declare(strict_types=1);
+<?php
+declare(strict_types=1);
 
 /*
  * This file is part of the package sci/sci-api.
@@ -16,23 +17,22 @@ class Tca
 
     /**
      * Create the TCA config for all Content Blocks
-    **/
+     **/
     public static function getTca()
     {
         $configuration = ConfigurationService::configuration();
 
         foreach ($configuration as $contentBlock) {
-
             /***************
              * Add Content Element
              */
-            if (!is_array($GLOBALS['TCA']['tt_content']['types'][ $contentBlock['CType'] ])) {
-                $GLOBALS['TCA']['tt_content']['types'][ $contentBlock['CType'] ] = [];
+            if (!is_array($GLOBALS['TCA']['tt_content']['types'][$contentBlock['CType']])) {
+                $GLOBALS['TCA']['tt_content']['types'][$contentBlock['CType']] = [];
             }
 
             /***************
-            * Assign Icon
-            */
+             * Assign Icon
+             */
             $GLOBALS['TCA']['tt_content']['ctrl']['typeicon_classes'][$contentBlock['CType']] = $contentBlock['CType'];
 
             /***************
@@ -44,7 +44,7 @@ class Tca
                 [
                     'Content Element Text',
                     $contentBlock['CType'],
-                    $contentBlock['CType']
+                    $contentBlock['CType'],
                 ],
                 'header',
                 'after'
@@ -57,23 +57,24 @@ class Tca
                 $GLOBALS['TCA']['tt_content']['types'][$contentBlock['CType']],
                 [
                     'showitem' => '
-                    --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:general,
-                        --palette--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:palette.general;general,
-                        --palette--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:palette.headers;headers,
-                        content_block,
-                    --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.appearance,
-                        --palette--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:palette.appearanceLinks;appearanceLinks,
-                    --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:language,
-                        --palette--;;language,
-                    --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access,
-                        --palette--;;hidden,
-                        --palette--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:palette.access;access,
-                    --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:categories,
-                        categories,
-                    --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:notes,
-                        rowDescription,
-                    --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:extended,
-                    '
+                        --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:general,
+                            --palette--;;general,
+                            --palette--;;headers,
+                            content_block,
+                        --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.appearance,
+                            --palette--;;frames,
+                            --palette--;;appearanceLinks,
+                        --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:language,
+                            --palette--;;language,
+                        --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access,
+                            --palette--;;hidden,
+                            --palette--;;access,
+                        --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:categories,
+                            categories,
+                        --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:notes,
+                            rowDescription,
+                        --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:extended,
+                    ',
                 ]
             );
 
