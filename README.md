@@ -10,6 +10,14 @@ See [Content Blocks Registration in TYPO3](https://github.com/TYPO3-Initiatives/
 * TYPO3 v10+
 * needs Fluid based Page (which is default in v10 and will be the only one any ways in v11) module for backend preview
 
+## Installation
+
+<pre>
+composer config repositories.content-block-registration-api vcs https://github.com/TYPO3-Initiatives/content-block-registration-api.git
+composer config minimum-stability dev
+composer req sci/sci-api:dev-master
+</pre>
+
 ## Usage
 
 ## Processes that happen during content block registration
