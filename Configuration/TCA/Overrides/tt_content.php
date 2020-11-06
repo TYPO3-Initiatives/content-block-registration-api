@@ -52,6 +52,4 @@ $temporaryColumns = [
     'content_block'
 );
 
-/*  ---------- */
-
 Sci\SciApi\Backend\Tca::getTca();
