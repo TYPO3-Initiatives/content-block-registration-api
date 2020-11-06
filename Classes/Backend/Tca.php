@@ -119,6 +119,8 @@ class Tca
                     return FlexFormGenerator::createTextarea($field);
                 case 'Link':
                     return FlexFormGenerator::createTypoLink($field);
+                case 'Image':
+                    return FlexFormGenerator::createImageField($field);
                 default:
                     return '';
             }

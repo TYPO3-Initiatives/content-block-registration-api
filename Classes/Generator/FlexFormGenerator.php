@@ -68,6 +68,92 @@ class FlexFormGenerator
         ';
     }
 
+    
+
+    /** create picture */
+    public static function createImageField($field)
+    {
+        return '
+        <' . $field['identifier'] . '>
+            <TCEforms>
+                <label>TODO: Fill in the right name - Identifier: ' . $field['identifier'] . '</label>
+                <config>
+                    
+                    <type>inline</type>
+                    <minItems>' . ($field['properties']['minItems']  > 0 ? $field['properties']['minItems'] : '0') . '</minItems>
+                    <maxitems>' . ($field['properties']['maxitems']  > 0 ? $field['properties']['maxitems'] : '1') . '</maxitems>
+                    <eval>' . ($field['properties']['required'] === true ? 'required' : '') . '</eval>
+                    <foreign_table>sys_file_reference</foreign_table>
+                    <foreign_table_field>tablenames</foreign_table_field>
+                    <foreign_label>uid_local</foreign_label>
+                    <foreign_sortby>sorting_foreign</foreign_sortby>
+                    <foreign_field>uid_foreign</foreign_field>
+                    <foreign_selector>uid_local</foreign_selector>
+                    <foreign_selector_fieldTcaOverride>
+                        <config>
+                            <appearance>
+                                <elementBrowserType>file</elementBrowserType>
+                                <elementBrowserAllowed>gif,jpg,jpeg,png,svg</elementBrowserAllowed>
+                            </appearance>
+                        </config>
+                    </foreign_selector_fieldTcaOverride>
+                    <foreign_types type="array">
+                        <numIndex index="0">
+                            <showitem>--palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,--palette--;;filePalette</showitem>
+                        </numIndex>
+                        <numIndex index="2">
+                            <showitem>--palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,--palette--;;filePalette</showitem>
+                        </numIndex>
+                    </foreign_types>
+                    <foreign_match_fields>
+                        <fieldname>' . $field['identifier'] . '</fieldname> <!-- This is the field name -->
+                    </foreign_match_fields>
+                    <appearance type="array">
+                        <newRecordLinkAddTitle>1</newRecordLinkAddTitle>
+                        <headerThumbnail>
+                            <field>uid_local</field>
+                            <height>64</height>
+                            <width>64</width>
+                        </headerThumbnail>
+                        <enabledControls>
+                            <info>1</info>
+                            <new>0</new>
+                            <dragdrop>0</dragdrop>
+                            <sort>1</sort>
+                            <hide>0</hide>
+                            <delete>1</delete>
+                            <localize>1</localize>
+                        </enabledControls>
+                        <createNewRelationLinkTitle>LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:images.addFileReference</createNewRelationLinkTitle>
+                    </appearance>
+                    <behaviour>
+                        <localizationMode>select</localizationMode>
+                        <localizeChildrenAtParentLocalization>1</localizeChildrenAtParentLocalization>
+                    </behaviour>
+                    <overrideChildTca>
+                        <columns type="array">
+                            <uid_local type="array">
+                                <config type="array">
+                                    <appearance type="array">
+                                        <elementBrowserType>file</elementBrowserType>
+                                        <elementBrowserAllowed>jpg,png,svg,jpeg,gif</elementBrowserAllowed>
+                                    </appearance>
+                                </config>
+                            </uid_local>
+                        </columns>
+                        <types type="array">
+                            <numIndex index="2">
+                                <showitem>--palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,--palette--;;filePalette</showitem>
+                            </numIndex>
+                        </types>
+                    </overrideChildTca>
+
+                </config>
+            </TCEforms>
+        </' . $field['identifier'] . '>
+        ';
+    }
+
     /** create textfield */
     public static function createTextarea($field)
     {
