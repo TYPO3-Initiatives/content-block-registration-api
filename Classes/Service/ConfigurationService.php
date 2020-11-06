@@ -42,18 +42,19 @@ class ConfigurationService
             $_path = $cbDir->getRealPath();
 
             $_composerJsonPath = $_path . DIRECTORY_SEPARATOR . 'composer.json';
-            if (!is_readable($_composerJsonPath)) {
-                throw new \Exception($_composerJsonPath . ' not found');
-            }
 
             $_editorInterfaceYamlPath = $_path . DIRECTORY_SEPARATOR . 'EditorInterface.yaml';
-            if (!is_readable($_composerJsonPath)) {
+            if (!is_readable($_editorInterfaceYamlPath)) {
                 throw new \Exception($_editorInterfaceYamlPath . ' not found');
             }
 
             $_cbIdentifier = $cbDir->getBasename();
 
-            $_composerJson = json_decode(file_get_contents($_composerJsonPath), true);
+            if (!is_readable($_composerJsonPath)) {
+                $_composerJson = null;
+            } else {
+                $_composerJson = json_decode(file_get_contents($_composerJsonPath), true);
+            }
             if (null === $_composerJson) {
                 // fallback: use directory name
                 $_ctype = $cbDir->getBasename();
