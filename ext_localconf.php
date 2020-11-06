@@ -26,8 +26,8 @@ defined('TYPO3_MODE') || die('Access denied.');
             elements {
                 ' . $contentBlock['CType'] . ' {
                     iconIdentifier = ' . $contentBlock['CType'] . '
-                    title = SEE TSCONFING TITLE
-                    description = SEE TSCONFING DESCRIPTION
+                    title = LLL:' . $contentBlock['EditorInterface.xlf'] . ':sci.counter.title
+                    description = LLL:' . $contentBlock['EditorInterface.xlf'] . ':sci.counter.description
                     tt_content_defValues {
                         CType = ' . $contentBlock['CType'] . '
                     }
