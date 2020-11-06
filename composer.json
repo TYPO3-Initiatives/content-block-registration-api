@@ -47,6 +47,10 @@
             "php-cs-fixer --config=.php_cs.dist fix --using-cache=no",
             "composer normalize --no-update-lock"
         ],
+        "install-cbs": [
+            "[ -d .typo3/public/typo3conf/contentBlocks ] || mkdir -p .typo3/public/typo3conf/contentBlocks",
+            "for cb in Build/contentBlocks/*; do ln -snvf \"../../../../$cb\" .typo3/public/typo3conf/contentBlocks/; done"
+        ],
         "install-extensions": [
             "typo3 extension:activate -n sci_api"
         ],
