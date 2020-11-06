@@ -15,16 +15,6 @@ defined('TYPO3_MODE') || die('Access denied.');
     }
 })();
 
-
-
- // ToDo: Remove this part
- /***************
- * PageTS
- */
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig('<INCLUDE_TYPOSCRIPT: source="FILE:EXT:sci_api/Configuration/TsConfig/All.tsconfig">');
-
-
-
 $configuration = Sci\SciApi\Service\ConfigurationService::configuration();
 
 foreach ($configuration as $contentBlock) 
@@ -33,12 +23,12 @@ foreach ($configuration as $contentBlock)
      * Add content element PageTSConfig
      */
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig('
-        mod.wizards.newContentElement.wizardItems.common  {
+        mod.wizards.newContentElement.wizardItems.' . ( $contentBlock['yaml']['group'] ?? 'common' ) . '  {
             elements {
                 ' . $contentBlock['CType'] . ' {
                     iconIdentifier = ' . $contentBlock['CType'] . '
-                    title = SEE TSCONFING TITLE
-                    description = SEE TSCONFING DESCRIPTION
+                    title = LLL:' . $contentBlock['EditorInterface.xlf'] . ':sci.counter.title
+                    description = LLL:' . $contentBlock['EditorInterface.xlf'] . ':sci.counter.description
                     tt_content_defValues {
                         CType = ' . $contentBlock['CType'] . '
                     }
