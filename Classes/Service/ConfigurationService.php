@@ -17,6 +17,8 @@ use Symfony\Component\Finder\Finder;
 use Symfony\Component\Yaml\Yaml;
 use TYPO3\CMS\Core\Cache\CacheManager;
 use TYPO3\CMS\Core\Core\Environment;
+use TYPO3\CMS\Core\Imaging\IconProvider\BitmapIconProvider;
+use TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class ConfigurationService
@@ -56,7 +58,7 @@ class ConfigurationService
         $languageRealPath = $realPath . 'src' . DIRECTORY_SEPARATOR . 'Language' . DIRECTORY_SEPARATOR;
 
         // directory paths (relative to publicPath())
-        $path = Constants::BASEPATH . DIRECTORY_SEPARATOR . $splPath->getBasename() . DIRECTORY_SEPARATOR;
+        $path = Constants::BASEPATH . $splPath->getBasename() . DIRECTORY_SEPARATOR;
         $languagePath = $path . 'src' . DIRECTORY_SEPARATOR . 'Language' . DIRECTORY_SEPARATOR;
 
         // file paths
@@ -102,9 +104,13 @@ class ConfigurationService
 
         // icon
         $iconPath = null;
+        $iconProviderClass = null;
         foreach (['svg', 'png', 'gif'] as $ext) {
             if (is_readable($realPath . 'ContentBlockIcon.' . $ext)) {
                 $iconPath = $path . 'ContentBlockIcon.' . $ext;
+                $iconProviderClass = $ext === 'svg'
+                    ? SvgIconProvider::class
+                    : BitmapIconProvider::class;
                 break;
             }
         }
@@ -117,6 +123,7 @@ class ConfigurationService
         $cbConfiguration = [
             'path' => $realPath,
             'icon' => $iconPath,
+            'iconProviderClass' => $iconProviderClass,
             'CType' => $ctype,
             'EditorInterface.xlf' => $editorInterfaceXlf,
             'Frontend.xlf' => $frontendXlf,
