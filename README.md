@@ -6,6 +6,10 @@ This API provides an easy and reliable way to register content blocks (composer 
 See [Content Blocks Registration in TYPO3](https://github.com/TYPO3-Initiatives/structured-content/blob/master/Documentation/ContentBlocks/ContentBlockRegistration.md)
  for more information about content blocks.
 
+## Requirements
+* TYPO3 v10+
+* needs Fluid based Page (which is default in v10 and will be the only one any ways in v11) module for backend preview
+
 ## Usage
 
 ## Processes that happen during content block registration
