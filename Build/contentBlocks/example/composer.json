@@ -1,0 +1,14 @@
+{
+    "name": "sci/example",
+    "description": "Content block providing examples for all field types.",
+    "type": "typo3-cms-contentblock-fluid",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Structured Content Initiative"
+        }
+    ],
+    "require": {
+        "typo3fluid/fluid": "^2.6"
+    }
+}
