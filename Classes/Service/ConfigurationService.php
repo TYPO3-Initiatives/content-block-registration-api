@@ -14,6 +14,7 @@ namespace Sci\SciApi\Service;
 use Sci\SciApi\Constants;
 use Sci\SciApi\Validator\ContentBlockValidator;
 use Symfony\Component\Finder\Finder;
+use Symfony\Component\Finder\SplFileInfo;
 use Symfony\Component\Yaml\Yaml;
 use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\Imaging\IconProvider\BitmapIconProvider;
@@ -53,10 +54,10 @@ class ConfigurationService
         return $contentBlockConfiguration;
     }
 
-    protected static function configurationForContentBlock(\Symfony\Component\Finder\SplFileInfo $splPath): array
+    protected static function configurationForContentBlock(SplFileInfo $splPath): array
     {
         // directory paths (full)
-        $realPath = $splPath->getRealPath() . DIRECTORY_SEPARATOR;
+        $realPath = $splPath->getPathname() . DIRECTORY_SEPARATOR;
         $languageRealPath = $realPath . 'src' . DIRECTORY_SEPARATOR . 'Language' . DIRECTORY_SEPARATOR;
 
         // directory paths (relative to publicPath())
@@ -87,7 +88,7 @@ class ConfigurationService
         if (!is_readable($editorInterfaceYamlPath)) {
             throw new \Exception($editorInterfaceYamlPath . ' not found');
         }
-        $editorInterfaceYaml = Yaml::parseFile($editorInterfaceYamlPath);
+        $editorInterface = Yaml::parseFile($editorInterfaceYamlPath);
 
         // .xlf
         $editorInterfaceXlf = is_readable($languageRealPath . 'Default.xlf')
@@ -122,14 +123,22 @@ class ConfigurationService
             );
         }
 
+        // EditorPreview.html
+        $editorPreviewHtml = is_readable(
+            $realPath . 'src' . DIRECTORY_SEPARATOR . 'EditorPreview.html'
+        )
+            ? $realPath . 'src' . DIRECTORY_SEPARATOR . 'EditorPreview.html'
+            : false;
+
         $cbConfiguration = [
-            'path' => $realPath,
+            'path' => $path,
             'icon' => $iconPath,
             'iconProviderClass' => $iconProviderClass,
             'CType' => $ctype,
+            'EditorPreview.html' => $editorPreviewHtml,
             'EditorInterface.xlf' => $editorInterfaceXlf,
             'Frontend.xlf' => $frontendXlf,
-            'yaml' => $editorInterfaceYaml,
+            'yaml' => $editorInterface,
         ];
 
         // validate (throws on error)
