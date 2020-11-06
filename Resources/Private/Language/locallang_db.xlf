@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" datatype="plaintext" original="messages" date="2019-06-14UTC21:34:060">
+        <header>
+            <authorName>Structured Content Initative</authorName>
+            <authorEmail></authorEmail>
+        </header>
+        <body>
+            <trans-unit id="tt_content.content_block">
+                <source>Content Block</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
