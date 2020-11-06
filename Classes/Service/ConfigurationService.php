@@ -42,7 +42,7 @@ class ConfigurationService
     protected static function configurationUncached(): array
     {
         $cbsFinder = new Finder();
-        $cbsFinder->directories()->in(Environment::getPublicPath() . Constants::BASEPATH);
+        $cbsFinder->directories()->in(Environment::getPublicPath() . DIRECTORY_SEPARATOR . Constants::BASEPATH);
 
         $contentBlockConfiguration = [];
         foreach ($cbsFinder as $cbDir) {
@@ -78,11 +78,12 @@ class ConfigurationService
         // CType
         if (null === $composerJson) {
             // fallback: use directory name
-            $ctype = 'cb_novendor_' . $splPath->getBasename();
+            $vendor = 'cb_novendor_';
+            $packageName = $splPath->getBasename();
         } else {
             [$vendor, $packageName] = explode('/', $composerJson['name']);
-            $ctype = $vendor . '_' . $packageName;
         }
+        $ctype = $vendor . '_' . $packageName;
 
         // EditorInterface.yaml
         if (!is_readable($editorInterfaceYamlPath)) {
@@ -131,6 +132,8 @@ class ConfigurationService
             : false;
 
         $cbConfiguration = [
+            'vendor' => $vendor,
+            'package' => $packageName,
             'path' => $path,
             'icon' => $iconPath,
             'iconProviderClass' => $iconProviderClass,

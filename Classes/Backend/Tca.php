@@ -31,6 +31,10 @@ class Tca
                 $GLOBALS['TCA']['tt_content']['types'][$contentBlock['CType']] = [];
             }
 
+            // PreviewRenderer
+            $GLOBALS['TCA']['tt_content']['types'][$contentBlock['CType']]['previewRenderer'] =
+                \Sci\SciApi\Backend\Preview\PreviewRenderer::class;
+
             /***************
              * Assign Icon
              */
@@ -43,6 +47,7 @@ class Tca
                 'tt_content',
                 'CType',
                 [
+                    // TODO:
                     'Content Element Text',
                     $contentBlock['CType'],
                     $contentBlock['CType'],
