@@ -62,6 +62,8 @@ class FlexFormGenerator
     /** create textfield */   
     public static function createInputField($field, $contentBlock)
     {
+        $items = '';
+
         $evalFields = ($field['properties']['required'] === true ? 'required' : '') . ($field['properties']['trim'] === true && $field['properties']['required'] === true ? ',  ' : '') . ($field['properties']['trim'] === true ? 'trim ' : '');
         if ( $field['type'] === 'Email' ) $evalFields = $evalFields . (strlen($evalFields) > 0 ? ', ' : '' ) . 'email';
         if ( $field['type'] === 'Integer' ) $evalFields = $evalFields . (strlen($evalFields) > 0 ? ', ' : '' ) . 'int';
@@ -94,7 +96,27 @@ class FlexFormGenerator
             </slider>
             ';
         }
-        else if ( $field['type'] === 'Color' ) $additionlConfig .= '<renderType>colorpicker</renderType>';
+        else if ( $field['type'] === 'Color' ) 
+        {
+            $additionlConfig .= '<renderType>colorpicker</renderType>';
+            $items = '<items type="array">';
+            
+            if ( is_array($field['properties']['valuePicker']['items'] ))
+            {
+                $counter = 0;
+                foreach ($field['properties']['valuePicker']['items'] as $key => $value) {
+                    $items .= '
+                    <numIndex index="' . $counter . '" type="array">
+                        <numIndex index="0">' . $value . '</numIndex>
+                        <numIndex index="1">' . $key . '</numIndex>
+                    </numIndex>';
+                    $counter++;
+                }
+
+            }
+            $items .= '</items>';
+
+        }
         else if ( $field['type'] === 'Date' || $field['type'] === 'DateTime' || $field['type'] === 'Time' ) $additionlConfig .= '<renderType>inputDateTime</renderType>';
 
         if ( $field['properties']['displayAge'] ) $additionlConfig .= '<displayAge>true</displayAge>';
@@ -113,6 +135,7 @@ class FlexFormGenerator
                     <default>' . $field['properties']['default'] . '</default>
                     <autocomplete>' . ($field['properties']['autocomplete'] === true ? 'true ' : 'false') . '</autocomplete>
                     ' . $additionlConfig . '
+                    ' . $items . '
                 </config>
             </TCEforms>
         </' . $field['identifier'] . '>
@@ -210,18 +233,24 @@ class FlexFormGenerator
     public static function createSelections($field, $contentBlock)
     {
         $items = '<items type="array">';
-        foreach ($field['properties']['cols'] as $key => $value) {
-            $items .= '
-            <numIndex index="key" type="array">
-                <numIndex index="0">' . $value . '</numIndex>
-                <numIndex index="1">' . $value . '</numIndex>
-            </numIndex>';
+         if ( is_array($field['properties']['items'] ))
+        {
+            $counter = 0;
+            foreach ($field['properties']['items'] as $key => $value) {
+                $items .= '
+                <numIndex index="' . $counter . '" type="array">
+                    <numIndex index="0">' . $value . '</numIndex>
+                    <numIndex index="1">' . $key . '</numIndex>
+                </numIndex>';
+                $counter++;
+            }
         }
-        $items .= '</items>';
 
         $type = 'select';
         if ( $field['type'] === 'Checkbox' ) $type = 'check';;
-        
+
+        $additionlConfig = '';
+        if ( $field['properties']['cols']  ) $additionlConfig .= '<cols>' . $field['properties']['cols'] . '</cols>';
         
         return '
         <' . $field['identifier'] . '>
@@ -232,6 +261,7 @@ class FlexFormGenerator
                     <type>' . $type . '</type>
                     <default>' . $field['properties']['default']  . '</default>
                     ' . $items . '
+                    ' . $additionlConfig . '
                 </config>
             </TCEforms>
         </' . $field['identifier'] . '>
