@@ -63,17 +63,6 @@ $columns = [
             'eval' => 'trim,num,nospace',
         ]
     ],
-    'password' => [
-        'label' => 'Password',
-        'config' => [
-            'type' => 'input',
-            'default' => 'Default value',
-            'max' => 15,
-            'placeholder' => 'Placeholder text',
-            'size' => 20,
-            'eval' => 'trim,true,password,nospace,saltedPassword',
-        ]
-    ],
     'percent' => [
         'label' => 'Percent',
         'config' => [

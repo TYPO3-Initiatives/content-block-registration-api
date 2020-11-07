@@ -51,17 +51,6 @@ fields:
             size: 20
             required: true
             trim: true
-    -   identifier: password
-        type: Password
-        properties:
-            autocomplete: true
-            default: 'Default value'
-            max: 15
-            placeholder: 'Placeholder text'
-            size: 20
-            salt: true
-            required: true
-            trim: true
     -   identifier: percent
         type: Percent
         properties:
