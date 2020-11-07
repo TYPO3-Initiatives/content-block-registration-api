@@ -1,0 +1,37 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+
+<f:asset.css identifier="{data.CType}" href="CB:call-to-action/dist/EditorPreview.css"/>
+
+<div class="call-to-action">
+    <div class="call-to-action__ctype">
+        <f:translate key="LLL:EXT:sci_api/Resources/Private/Language/locallang_db.xlf:tt_content.content_block" />
+        <em>
+            <f:translate key="{LLL}.title"/>
+        </em>
+    </div>
+
+    <p>
+        {text}
+    </p>
+    <details>
+        <summary class="btn btn-info">
+            show…
+        </summary>
+        <div class="call-to-action__box">
+            <div class="call-to-action__wrapper">
+                <f:for each="{image}" as="i">
+                    <f:image image="{i}" height="200" width="800c"/>
+                </f:for>
+                <div class="call-to-action__overlay">
+                    <div class="call-to-action__text">
+                        <div>{text}</div>
+                        <div class="call-to-action__button">
+                            {buttonText}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </details>
+</div>
+</html>

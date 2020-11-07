@@ -39,6 +39,16 @@ class ConfigurationService
         //        return $configuration;
     }
 
+    public static function contentBlockConfiguration(string $cType): ?array
+    {
+        foreach (self::configuration() as $cbConfiguration) {
+            if ($cbConfiguration['CType'] === $cType) {
+                return $cbConfiguration;
+            }
+        }
+        return null;
+    }
+
     protected static function configurationUncached(): array
     {
         $hostBasePath = Environment::getPublicPath() . DIRECTORY_SEPARATOR . Constants::BASEPATH;
@@ -51,7 +61,7 @@ class ConfigurationService
 
         $contentBlockConfiguration = [];
         foreach ($cbsFinder as $cbDir) {
-            $_cbConfiguration = self::configurationForContentBlock($cbDir);
+            $_cbConfiguration = self::configurationForContentBlockByPath($cbDir);
 
             $contentBlockConfiguration [$_cbConfiguration['CType']] = $_cbConfiguration;
         }
@@ -59,7 +69,7 @@ class ConfigurationService
         return $contentBlockConfiguration;
     }
 
-    protected static function configurationForContentBlock(SplFileInfo $splPath): array
+    protected static function configurationForContentBlockByPath(SplFileInfo $splPath): array
     {
         // directory paths (full)
         $realPath = $splPath->getPathname() . DIRECTORY_SEPARATOR;
@@ -158,6 +168,7 @@ class ConfigurationService
             'frontendTemplatePath' => $frontendTemplatePath,
             'EditorPreview.html' => $editorPreviewHtml,
             'EditorInterface.xlf' => $editorInterfaceXlf,
+            'LLL' => 'LLL:' . $editorInterfaceXlf . ':' . $vendor . '.' . $packageName,
             'Frontend.xlf' => $frontendXlf,
             'yaml' => $editorInterface,
         ];

@@ -1,0 +1,14 @@
+{
+    "name": "sci/call-to-action",
+    "description": "Content block providing a call-to-action image with a button.",
+    "type": "typo3-cms-contentblock",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Structured Content Initiative"
+        }
+    ],
+    "require": {
+        "typo3fluid/fluid": "^2.6"
+    }
+}

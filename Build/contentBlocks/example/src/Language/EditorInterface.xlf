@@ -33,6 +33,48 @@
 			<trans-unit id="sci.example.icon.description" xml:space="preserve">
 				<source>Icon for visualization of the example topic.</source>
 			</trans-unit>
-		</body>
+            <trans-unit id="sci.example.email.label" xml:space="preserve">
+				<source>E-Mail</source>
+			</trans-unit>
+            <trans-unit id="sci.example.integer.label" xml:space="preserve">
+				<source>Integer</source>
+			</trans-unit>
+            <trans-unit id="sci.example.money.label" xml:space="preserve">
+				<source>Money</source>
+			</trans-unit>
+            <trans-unit id="sci.example.number.label" xml:space="preserve">
+				<source>Number</source>
+			</trans-unit>
+            <trans-unit id="sci.example.percent.label" xml:space="preserve">
+				<source>Percentage</source>
+			</trans-unit>
+            <trans-unit id="sci.example.url.label" xml:space="preserve">
+				<source>URL</source>
+			</trans-unit>
+            <trans-unit id="sci.example.tel.label" xml:space="preserve">
+				<source>Telephone</source>
+			</trans-unit>
+            <trans-unit id="sci.example.color.label" xml:space="preserve">
+				<source>Color</source>
+			</trans-unit>
+            <trans-unit id="sci.example.date.label" xml:space="preserve">
+				<source>Date</source>
+			</trans-unit>
+            <trans-unit id="sci.example.datetime.label" xml:space="preserve">
+				<source>Date and Time</source>
+			</trans-unit>
+            <trans-unit id="sci.example.select.label" xml:space="preserve">
+				<source>Select</source>
+			</trans-unit>
+            <trans-unit id="sci.example.selectSideBySide.label" xml:space="preserve">
+				<source>Select Side by Side</source>
+			</trans-unit>
+            <trans-unit id="sci.example.checkboxes.label" xml:space="preserve">
+				<source>Checkboxes</source>
+			</trans-unit>
+            <trans-unit id="sci.example.radioboxes.label" xml:space="preserve">
+				<source>Radioboxes</source>
+			</trans-unit>
+        </body>
 	</file>
 </xliff>

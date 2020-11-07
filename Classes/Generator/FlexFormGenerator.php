@@ -17,7 +17,7 @@ class FlexFormGenerator
     /** create typolink */
     public static function createTypoLink($field, $contentBlock) // sci.slider.slides.label
     {
-        $blindLinkOption = 'page,url,mail,spec,file,folder,telephone'; 
+        $blindLinkOption = 'page,url,mail,spec,file,folder,telephone';
         if ( is_array($field['properties']['linkTypes']) ) {
             foreach ($field['properties']['linkTypes'] as $allowedField ) {
                 $blindLinkOption = str_replace(  str_replace('external', 'url', $allowedField), '', $blindLinkOption);
@@ -26,7 +26,7 @@ class FlexFormGenerator
         else $blindLinkOption = '';
 
 
-        $blindLinkFields = 'target,title,class,params'; 
+        $blindLinkFields = 'target,title,class,params';
         if ( is_array($field['properties']['fieldTypes']) ) {
             foreach ($field['properties']['fieldTypes'] as $allowedField ) {
                 $blindLinkFields = str_replace( $allowedField, '', $blindLinkFields);
@@ -38,8 +38,10 @@ class FlexFormGenerator
         return '
         <' . $field['identifier'] . '>
             <TCEforms>
-                <label>LLL:' . $contentBlock['EditorInterface.xlf'] . ':sci.' . $contentBlock['package'] . '.' . $field['identifier'] . '.label</label>
-                <description>LLL:' . $contentBlock['EditorInterface.xlf'] . ':sci.' . $contentBlock['package'] . '.' . $field['identifier'] . '.description</description>
+                <label>LLL:' . $contentBlock['EditorInterface.xlf'] . ':' . $contentBlock['vendor']
+            . '.' . $contentBlock['package'] . '.' . $field['identifier'] . '.label</label>
+                <description>LLL:' . $contentBlock['EditorInterface.xlf'] . ':' . $contentBlock['vendor']
+            . '.' . $contentBlock['package'] . '.' . $field['identifier'] . '.description</description>
                 <config>
                     <type>input</type>
                     <renderType>inputLink</renderType>
@@ -59,7 +61,7 @@ class FlexFormGenerator
         ';
     }
 
-    /** create textfield */   
+    /** create textfield */
     public static function createInputField($field, $contentBlock)
     {
         $items = '';
@@ -75,31 +77,31 @@ class FlexFormGenerator
         if ( $field['type'] === 'Date' ) $evalFields = $evalFields . (strlen($evalFields) > 0 ? ', ' : '' ) . 'date';
         if ( $field['type'] === 'DateTime' ) $evalFields = $evalFields . (strlen($evalFields) > 0 ? ', ' : '' ) . 'datetime';
         if ( $field['type'] === 'Time' ) $evalFields = $evalFields . (strlen($evalFields) > 0 ? ', ' : '' ) . 'time';
-        
+
 
         $additionlConfig = '';
-        if ( is_array($field['properties']['range']) ) 
+        if ( is_array($field['properties']['range']) )
         {
             $additionlConfig .= '
-            <range> 
+            <range>
                 <lower>' . floatval(($field['properties']['range']['lower'] !== '' ? $field['properties']['range']['lower'] : '0'))  . '</lower>
-                <upper>' . floatval(($field['properties']['range']['upper'] !== '' ? $field['properties']['range']['upper'] : '100'))  . '</upper>  
+                <upper>' . floatval(($field['properties']['range']['upper'] !== '' ? $field['properties']['range']['upper'] : '100'))  . '</upper>
             </range>';
-            
+
         }
         if ( $field['type'] === 'Percent' )
         {
             $additionlConfig .= $additionlConfig . '
-            <slider> 
+            <slider>
                 <step>' . ($field['properties']['slider']['step'] !== '' ? $field['properties']['slider']['step'] : '1') . '</step>
-                <width>' . ($field['properties']['slider']['width'] !== '' ? $field['properties']['slider']['width'] : '100') . '</width>  
+                <width>' . ($field['properties']['slider']['width'] !== '' ? $field['properties']['slider']['width'] : '100') . '</width>
             </slider>
             ';
         }
-        else if ( $field['type'] === 'Color' ) 
+        else if ( $field['type'] === 'Color' )
         {
             $additionlConfig .= '<renderType>colorpicker</renderType>';
-            
+
             if ( is_array($field['properties']['valuePicker']['items'] ))
             {
                 $counter = 0;
@@ -124,8 +126,10 @@ class FlexFormGenerator
         return '
         <' . $field['identifier'] . '>
             <TCEforms>
-                <label>LLL:' . $contentBlock['EditorInterface.xlf'] . ':sci.' . $contentBlock['package'] . '.' . $field['identifier'] . '.label</label>
-                <description>LLL:' . $contentBlock['EditorInterface.xlf'] . ':sci.' . $contentBlock['package'] . '.' . $field['identifier'] . '.description</description>
+                <label>LLL:' . $contentBlock['EditorInterface.xlf'] . ':' . $contentBlock['vendor']
+            . '.' . $contentBlock['package'] . '.' . $field['identifier'] . '.label</label>
+                <description>LLL:' . $contentBlock['EditorInterface.xlf'] . ':' . $contentBlock['vendor']
+            . '.' . $contentBlock['package'] . '.' . $field['identifier'] . '.description</description>
                 <config>
                     <type>input</type>
                     <size>' . ($field['properties']['size'] > 0 ? $field['properties']['size'] : '20') . '</size>
@@ -149,8 +153,10 @@ class FlexFormGenerator
         return '
         <' . $field['identifier'] . '>
             <TCEforms>
-                <label>LLL:' . $contentBlock['EditorInterface.xlf'] . ':sci.' . $contentBlock['package'] . '.' . $field['identifier'] . '.label</label>
-                <description>LLL:' . $contentBlock['EditorInterface.xlf'] . ':sci.' . $contentBlock['package'] . '.' . $field['identifier'] . '.description</description>
+                <label>LLL:' . $contentBlock['EditorInterface.xlf'] . ':' . $contentBlock['vendor']
+            . '.' . $contentBlock['package'] . '.' . $field['identifier'] . '.label</label>
+                <description>LLL:' . $contentBlock['EditorInterface.xlf'] . ':' . $contentBlock['vendor']
+            . '.' . $contentBlock['package'] . '.' . $field['identifier'] . '.description</description>
                 <config>
 
                     <type>inline</type>
@@ -212,8 +218,10 @@ class FlexFormGenerator
         return '
         <' . $field['identifier'] . '>
             <TCEforms>
-                <label>LLL:' . $contentBlock['EditorInterface.xlf'] . ':sci.' . $contentBlock['package'] . '.' . $field['identifier'] . '.label</label>
-                <description>LLL:' . $contentBlock['EditorInterface.xlf'] . ':sci.' . $contentBlock['package'] . '.' . $field['identifier'] . '.description</description>
+                <label>LLL:' . $contentBlock['EditorInterface.xlf'] . ':' . $contentBlock['vendor']
+            . '.' . $contentBlock['package'] . '.' . $field['identifier'] . '.label</label>
+                <description>LLL:' . $contentBlock['EditorInterface.xlf'] . ':' . $contentBlock['vendor']
+            . '.' . $contentBlock['package'] . '.' . $field['identifier'] . '.description</description>
                 <config>
                     <type>text</type>
                     <cols>' . ($field['properties']['cols'] === true ? $field['properties']['cols'] : '24') . '</cols>
@@ -257,12 +265,14 @@ class FlexFormGenerator
 
         if ( $field['properties']['cols']  ) $additionlConfig .= '<cols>' . $field['properties']['cols'] . '</cols>';
         if ( $field['properties']['maxItems']  ) $additionlConfig .= '<maxitems>' . $field['properties']['maxItems'] . '</maxitems>';
-        
+
         return '
         <' . $field['identifier'] . '>
             <TCEforms>
-                <label>LLL:' . $contentBlock['EditorInterface.xlf'] . ':sci.' . $contentBlock['package'] . '.' . $field['identifier'] . '.label</label>
-                <description>LLL:' . $contentBlock['EditorInterface.xlf'] . ':sci.' . $contentBlock['package'] . '.' . $field['identifier'] . '.description</description>
+                <label>LLL:' . $contentBlock['EditorInterface.xlf'] . ':' . $contentBlock['vendor']
+            . '.' . $contentBlock['package'] . '.' . $field['identifier'] . '.label</label>
+                <description>LLL:' . $contentBlock['EditorInterface.xlf'] . ':' . $contentBlock['vendor']
+            . '.' . $contentBlock['package'] . '.' . $field['identifier'] . '.description</description>
                 <config>
                     <type>' . $type . '</type>
                     <default>' . $field['properties']['default']  . '</default>

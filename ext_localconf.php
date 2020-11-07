@@ -26,8 +26,8 @@ defined('TYPO3_MODE') || die('Access denied.');
             elements {
                 ' . $contentBlock['CType'] . ' {
                     iconIdentifier = ' . $contentBlock['CType'] . '
-                    title = LLL:' . $contentBlock['EditorInterface.xlf'] . ':sci.' . $contentBlock['package'] . '.title
-                    description = LLL:' . $contentBlock['EditorInterface.xlf'] . ':sci.' . $contentBlock['package'] . '.description
+                    title = LLL:' . $contentBlock['EditorInterface.xlf'] . ':' . $contentBlock['vendor'] . '.' . $contentBlock['package'] . '.title
+                    description = LLL:' . $contentBlock['EditorInterface.xlf'] . ':' . $contentBlock['vendor'] . '.' . $contentBlock['package'] . '.description
                     tt_content_defValues {
                         CType = ' . $contentBlock['CType'] . '
                     }
@@ -84,7 +84,11 @@ defined('TYPO3_MODE') || die('Access denied.');
     /** Wizard start **/
     /* Add typoscript setup for wizard */
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScriptSetup('
+<<<<<<< HEAD
     module.tx_sciapi{
+=======
+    module.tx_sciapi {
+>>>>>>> 15c82d0212e219c1bb6d6d932f14b3c6a9f49337
         view {
             templateRootPaths.0 = EXT:sci_api/Resources/Private/Wizard/Templates/
             partialRootPaths.0 = EXT:sci_api/Resources/Private/Wizard/Partials/
