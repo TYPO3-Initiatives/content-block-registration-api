@@ -66,7 +66,13 @@ defined('TYPO3_MODE') || die('Access denied.');
         tt_content.' . $contentBlock['CType'] . '{
             templateName = Frontend
             templateRootPaths {
-                0 = ' . $contentBlock['frontendTemplatePath'] . '
+                5 = ' . $contentBlock['frontendTemplatePath'] . '
+            }
+            partialRootPaths {
+                5 = ' . $contentBlock['frontendTemplatePath'] . '
+            }
+            layoutRootPaths {
+                5 = ' . $contentBlock['frontendTemplatePath'] . '
             }
             dataProcessing {
                 10 = Sci\SciApi\DataProcessing\FlexFormProcessor
