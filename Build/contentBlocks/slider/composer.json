@@ -1,7 +1,7 @@
 {
     "name": "sci/slider",
     "description": "Content block with multiple slides switched by autoplay.",
-    "type": "typo3-cms-contentblock-fluid",
+    "type": "typo3-cms-contentblock",
     "license": "GPL-2.0-or-later",
     "authors": [
         {

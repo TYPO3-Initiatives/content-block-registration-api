@@ -1,7 +1,7 @@
 {
     "name": "sci/example",
     "description": "Content block providing examples for all field types.",
-    "type": "typo3-cms-contentblock-fluid",
+    "type": "typo3-cms-contentblock",
     "license": "GPL-2.0-or-later",
     "authors": [
         {

@@ -64,3 +64,66 @@ fields:
                 step: 1
                 width: 100
             trim: true
+    -   identifier: url
+        type: Url
+        properties:
+            autocomplete: true
+            default: 'Default value'
+            linkPopup:
+                allowedExtensions: 'pdf'
+                blindLinkFields: 'target,title'
+                blindLinkOptions: 'folder,spec,telefone,mail'
+                windowOpenParameters: 'height=800,width=600'
+            max: 15
+            placeholder: 'Placeholder text'
+            size: 20
+            required: false
+    -   identifier: tel
+        type: Tel
+        properties:
+            autocomplete: true
+            default: 0
+            size: 20
+            required: false
+    -   identifier: color
+        type: Color
+        properties:
+            autocomplete: true
+            default: '#fff'
+            size: 20
+            required: false
+            valuePicker:
+                items:
+                    '#FF0000': Red
+                    '#008000': Green
+                    '#0000FF': Blue
+    -   identifier: date
+        type: Date
+        properties:
+            default: '@now'
+            displayAge: true
+            size: 20
+            range:
+                lower: '01-01-1970'
+                upper: '31-12-2020'
+            required: false
+    -   identifier: datetime
+        type: DateTime
+        properties:
+            default: '@now'
+            displayAge: true
+            size: 20
+            range:
+                lower: '00:01 01-01-1970'
+                upper: '29:59 31-12-2020'
+            required: false
+    -   identifier: time
+        type:
+        properties:
+            default: '@now'
+            displayAge: true
+            size: 20
+            range:
+                lower: '00:01'
+                upper: '29:59'
+            required: false
