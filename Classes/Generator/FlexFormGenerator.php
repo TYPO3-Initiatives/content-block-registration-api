@@ -99,11 +99,11 @@ class FlexFormGenerator
         else if ( $field['type'] === 'Color' ) 
         {
             $additionlConfig .= '<renderType>colorpicker</renderType>';
-            $items = '<items type="array">';
             
             if ( is_array($field['properties']['valuePicker']['items'] ))
             {
                 $counter = 0;
+                $items = '<items type="array">';
                 foreach ($field['properties']['valuePicker']['items'] as $key => $value) {
                     $items .= '
                     <numIndex index="' . $counter . '" type="array">
@@ -112,9 +112,9 @@ class FlexFormGenerator
                     </numIndex>';
                     $counter++;
                 }
+                $items .= '</items>';
 
             }
-            $items .= '</items>';
 
         }
         else if ( $field['type'] === 'Date' || $field['type'] === 'DateTime' || $field['type'] === 'Time' ) $additionlConfig .= '<renderType>inputDateTime</renderType>';
@@ -232,10 +232,10 @@ class FlexFormGenerator
     /** create selection, checkboxes */
     public static function createSelections($field, $contentBlock)
     {
-        $items = '<items type="array">';
          if ( is_array($field['properties']['items'] ))
         {
             $counter = 0;
+            $items = '<items type="array">';
             foreach ($field['properties']['items'] as $key => $value) {
                 $items .= '
                 <numIndex index="' . $counter . '" type="array">
@@ -244,6 +244,7 @@ class FlexFormGenerator
                 </numIndex>';
                 $counter++;
             }
+            $items = '</items>';
         }
 
         $type = 'select';
