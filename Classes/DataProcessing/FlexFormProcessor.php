@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 /*
  * This file is part of the package sci/sci-api.
@@ -10,6 +11,8 @@ declare(strict_types = 1);
 
 namespace Sci\SciApi\DataProcessing;
 
+use Sci\SciApi\Service\ConfigurationService;
+use TYPO3\CMS\Core\Resource\FileRepository;
 use TYPO3\CMS\Core\Service\FlexFormService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
@@ -39,11 +42,14 @@ class FlexFormProcessor implements DataProcessorInterface
     protected $flexFormService;
 
     /**
-     * Constructor
+     * @var FileRepository
      */
+    protected $fileRepository;
+
     public function __construct()
     {
         $this->flexFormService = GeneralUtility::makeInstance(FlexFormService::class);
+        $this->fileRepository = GeneralUtility::makeInstance(FileRepository::class);
     }
 
     /**
@@ -53,21 +59,31 @@ class FlexFormProcessor implements DataProcessorInterface
      * @param array $processedData Key/value store of processed data (e.g. to be passed to a Fluid View)
      * @return array the processed data as key/value store
      */
-    public function process(ContentObjectRenderer $cObj, array $contentObjectConfiguration, array $processorConfiguration, array $processedData)
-    {
-        $fieldName = 'content_block';
-
-        // Process Flexform
-        $originalValue = $processedData['data'][$fieldName];
+    public function process(
+        ContentObjectRenderer $cObj,
+        array $contentObjectConfiguration,
+        array $processorConfiguration,
+        array $processedData
+    ) {
+        $originalValue = $processedData['data']['content_block'];
         if (!is_string($originalValue)) {
             return $processedData;
         }
+
         $flexformData = $this->flexFormService->convertFlexFormContentToArray($originalValue);
-
-        debug($flexformData);
-
-        // Set the target variable
         $processedData = array_merge($processedData, $flexformData);
+
+        $cbConf = ConfigurationService::configuration()[$processedData['data']['CType']] ?? [];
+
+        foreach ($flexformData as $fieldKey => $val) {
+            if (in_array($fieldKey, $cbConf['relationFields'] ?? [])) {
+                $processedData[$fieldKey] = $this->fileRepository->findByRelation(
+                    'tt_content',
+                    $fieldKey,
+                    $processedData['data']['uid']
+                );
+            }
+        }
 
         return $processedData;
     }

@@ -139,6 +139,14 @@ class ConfigurationService
         // Frontend.html
         $frontendTemplatePath = $path . 'src';
 
+        // relation fields
+        $relationFields = [];
+        foreach ($editorInterface['fields'] ?? [] as $field) {
+            if (in_array($field['type'] ?? '', ['Icon', 'Image'])) {
+                $relationFields[] = $field['identifier'];
+            }
+        }
+
         $cbConfiguration = [
             'vendor' => $vendor,
             'package' => $packageName,
@@ -146,6 +154,7 @@ class ConfigurationService
             'icon' => $iconPath,
             'iconProviderClass' => $iconProviderClass,
             'CType' => $cType,
+            'relationFields' => $relationFields,
             'frontendTemplatePath' => $frontendTemplatePath,
             'EditorPreview.html' => $editorPreviewHtml,
             'EditorInterface.xlf' => $editorInterfaceXlf,

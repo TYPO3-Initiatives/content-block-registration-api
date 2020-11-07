@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 /*
@@ -22,7 +23,7 @@ class FlexFormGenerator
                 <label>TODO: Fill in the right name - Identifier: ' . $field['identifier'] . '</label>
                 <config>
                     <type>input</type>
-                    <size>' . ($field['properties']['size']  > 0 ? $field['properties']['size'] : '30') . '</size>
+                    <size>' . ($field['properties']['size'] > 0 ? $field['properties']['size'] : '30') . '</size>
                     <eval>' . ($field['properties']['required'] === true ? 'required, ' : '') . 'trim</eval>
                     <softref>typolink,typolink_tag,images,url</softref>
                     <wizards>
@@ -60,7 +61,7 @@ class FlexFormGenerator
                 <config>
                     <type>input</type>
                     <size>' . ($field['properties']['size'] > 0 ? $field['properties']['size'] : '20') . '</size>
-                    <max>' . ($field['properties']['max']  > 0 ? $field['properties']['max'] : '700') . '</max>
+                    <max>' . ($field['properties']['max'] > 0 ? $field['properties']['max'] : '700') . '</max>
                     <eval>' . ($field['properties']['required'] === true ? 'required, ' : '') . 'trim</eval>
                 </config>
             </TCEforms>
@@ -68,7 +69,6 @@ class FlexFormGenerator
         ';
     }
 
-    
 
     /** create picture */
     public static function createImageField($field)
@@ -78,10 +78,10 @@ class FlexFormGenerator
             <TCEforms>
                 <label>TODO: Fill in the right name - Identifier: ' . $field['identifier'] . '</label>
                 <config>
-                    
+
                     <type>inline</type>
                     <minItems>' . ($field['properties']['minItems']  > 0 ? $field['properties']['minItems'] : '0') . '</minItems>
-                    <maxitems>' . ($field['properties']['maxItems']  > 0 ? $field['properties']['maxItems'] : '1') . '</maxitems>
+                    <maxItems>' . ($field['properties']['maxItems']  > 0 ? $field['properties']['maxItems'] : '1') . '</maxItems>
                     <eval>' . ($field['properties']['required'] === true ? 'required' : '') . '</eval>
                     <foreign_table>sys_file_reference</foreign_table>
                     <foreign_table_field>tablenames</foreign_table_field>
@@ -89,22 +89,6 @@ class FlexFormGenerator
                     <foreign_sortby>sorting_foreign</foreign_sortby>
                     <foreign_field>uid_foreign</foreign_field>
                     <foreign_selector>uid_local</foreign_selector>
-                    <foreign_selector_fieldTcaOverride>
-                        <config>
-                            <appearance>
-                                <elementBrowserType>file</elementBrowserType>
-                                <elementBrowserAllowed>gif,jpg,jpeg,png,svg</elementBrowserAllowed>
-                            </appearance>
-                        </config>
-                    </foreign_selector_fieldTcaOverride>
-                    <foreign_types type="array">
-                        <numIndex index="0">
-                            <showitem>--palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,--palette--;;filePalette</showitem>
-                        </numIndex>
-                        <numIndex index="2">
-                            <showitem>--palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,--palette--;;filePalette</showitem>
-                        </numIndex>
-                    </foreign_types>
                     <foreign_match_fields>
                         <fieldname>' . $field['identifier'] . '</fieldname> <!-- This is the field name -->
                     </foreign_match_fields>
@@ -141,13 +125,7 @@ class FlexFormGenerator
                                 </config>
                             </uid_local>
                         </columns>
-                        <types type="array">
-                            <numIndex index="2">
-                                <showitem>--palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,--palette--;;filePalette</showitem>
-                            </numIndex>
-                        </types>
                     </overrideChildTca>
-
                 </config>
             </TCEforms>
         </' . $field['identifier'] . '>

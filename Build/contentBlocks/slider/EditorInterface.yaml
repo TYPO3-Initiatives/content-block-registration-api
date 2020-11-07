@@ -8,14 +8,14 @@ fields:
       allowDelete: true
       minItems: 1
       maxItems: 5
-      requied:  true
+      required:  true
       fields:
         - identifier: image
           type: Image
           properties:
             minItems: 1
             maxItems: 1
-            requied:  true
+            required:  true
         - identifier: headline
           type: Text
         - identifier: text

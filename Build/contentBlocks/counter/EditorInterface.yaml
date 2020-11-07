@@ -5,13 +5,13 @@ fields:
     properties:
       defaultValue: 0
       maximum: 100
-      requied:  true
+      required:  true
   - identifier: icon
     type: Icon
     properties:
       allowedExtensions: 'svg'
       minItems: 1
       maxItems: 1
-      requied:  true
+      required:  true
   - identifier: text
     type: Text
