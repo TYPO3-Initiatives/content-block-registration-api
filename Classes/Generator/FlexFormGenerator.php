@@ -248,7 +248,8 @@ class FlexFormGenerator
         }
 
         $type = 'select';
-        if ( $field['type'] === 'Checkbox' ) $type = 'check';;
+        if ( $field['type'] === 'Checkbox' ) $type = 'check';
+        if ( $field['type'] === 'Radiobox' ) $type = 'radio';
 
         $additionlConfig = '';
         if ( $field['type'] === 'Select' ) $additionlConfig = '<renderType>selectSingle</renderType>';

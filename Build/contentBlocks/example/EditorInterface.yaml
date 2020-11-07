@@ -133,12 +133,28 @@ fields:
             items:
                 'one': 'The first'
                 'two': 'The second'
-                'three': 'The third'   
+                'three': 'The third'
     -   identifier: selectSideBySide
         type: MultiSelect
         properties:
             maxItems: 2
             size: 5
+            items:
+                'one': 'The first'
+                'two': 'The second'
+                'three': 'The third'
+    
+    -   identifier: checkboxes
+        type: Checkbox
+        properties:
+            items:
+                'one': 'The first'
+                'two': 'The second'
+                'three': 'The third'
+    
+    -   identifier: radioboxes
+        type: Radiobox
+        properties:
             items:
                 'one': 'The first'
                 'two': 'The second'

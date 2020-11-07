@@ -136,6 +136,7 @@ class Tca
                 case 'Select':
                 case 'Checkbox':
                 case 'MultiSelect':
+                case 'Radiobox':
                     return FlexFormGenerator::createSelections($field, $contentBlock);
                 default:
                     return '';
