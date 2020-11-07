@@ -80,4 +80,20 @@ defined('TYPO3_MODE') || die('Access denied.');
         }
         ');
     }
+
+    /** Wizard start **/
+    /* Add typoscript setup for wizard */
+    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScriptSetup('
+    module.tx_sci_api {
+        view {
+            templateRootPaths.0 = EXT:sci_api/Resources/Private/Wizard/Templates/
+            partialRootPaths.0 = EXT:sci_api/Resources/Private/Wizard/Partials/
+            layoutRootPaths.0 = EXT:sci_api/Resources/Private/Wizard/Layouts/
+        }
+        persistence {
+            storagePid = 0
+        }
+    }
+    ');
+    /** Wizard end **/
 })();

@@ -1,0 +1,20 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" 
+			xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers"
+			xmlns:be="http://typo3.org/ns/TYPO3/CMS/Backend/ViewHelpers"
+			data-namespace-typo3-fluid="true">
+
+	<f:layout name="Default" />
+
+
+	<f:section name="content">
+		<h1>New MyCompanyContact</h1>
+
+		<f:flashMessages />
+
+		<f:render partial="FormErrors" />
+
+		<f:form action="create"  name="newMyCompanyContact" object="{newMyCompanyContact}">
+			<f:form.submit value="Create new" />
+		</f:form>
+	</f:section>
+</html>
