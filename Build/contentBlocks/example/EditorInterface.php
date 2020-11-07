@@ -25,4 +25,70 @@ $columns = [
             'eval' => 'trim',
         ]
     ],
+    'email' => [
+        'label' => 'Email',
+        'config' => [
+            'type' => 'input',
+            'autocomplete' => true,
+            'default' => 'Default value',
+            'placeholder' => 'Placeholder text',
+            'size' => 20,
+            'eval' => 'trim,email,required',
+        ]
+    ],
+    'integer' => [
+        'label' => 'Integer',
+        'config' => [
+            'type' => 'input',
+            'default' => 0,
+            'size' => 20,
+            'eval' => 'trim,int,nospace',
+        ]
+    ],
+    'money' => [
+        'label' => 'Money',
+        'config' => [
+            'type' => 'input',
+            'default' => 0,
+            'size' => 20,
+            'eval' => 'trim,double2,nospace',
+        ]
+    ],
+    'number' => [
+        'label' => 'Number',
+        'config' => [
+            'type' => 'input',
+            'default' => 0,
+            'size' => 20,
+            'eval' => 'trim,num,nospace',
+        ]
+    ],
+    'password' => [
+        'label' => 'Password',
+        'config' => [
+            'type' => 'input',
+            'default' => 'Default value',
+            'max' => 15,
+            'placeholder' => 'Placeholder text',
+            'size' => 20,
+            'eval' => 'trim,true,password,nospace,saltedPassword',
+        ]
+    ],
+    'percent' => [
+        'label' => 'Percent',
+        'config' => [
+            'type' => 'input',
+            'default' => 0,
+            'range' => [
+                'lower' => 0,
+                'upper' => 100,
+            ],
+            'size' => 20,
+            'slider' => [
+                'step' => 1,
+                'width' => 100,
+            ],
+            'eval' => 'trim,double2,nospace',
+        ]
+    ],
 ];
