@@ -47,8 +47,7 @@ class Tca
                 'tt_content',
                 'CType',
                 [
-                    // TODO:
-                    'Content Element Text',
+                    'LLL:' . $contentBlock['EditorInterface.xlf'] . ':sci.' . $contentBlock['package'] . '.title',
                     $contentBlock['CType'],
                     $contentBlock['CType'],
                 ],
@@ -93,9 +92,7 @@ class Tca
             /***************
              * Add flexForms for content element configuration
              */
-            // var_dump($GLOBALS['TCA']['tt_content']['columns']['content_block']['config']['ds']['default']);
             $GLOBALS['TCA']['tt_content']['columns']['content_block']['config']['ds'][ $contentBlock['CType'] ] = FlexFormGenerator::flexFormTemplate($flexFormFieldsConfig);
-            // exit;
         }
     }
 
