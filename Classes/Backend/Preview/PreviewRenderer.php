@@ -51,4 +51,9 @@ class PreviewRenderer extends StandardContentPreviewRenderer
         }
         return '<div class="contentblock-preview">' . $view->render() . '</div>';
     }
+
+    public function wrapPageModulePreview(string $previewHeader, string $previewContent, GridColumnItem $item): string
+    {
+        return $previewHeader . $previewContent;
+    }
 }
