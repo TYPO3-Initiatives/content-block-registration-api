@@ -14,5 +14,8 @@ indent_size = 4
 
 # ReST-Files
 [*.rst]
-indent_style = space
 indent_size = 3
+
+# ReST-Files
+[*.yaml]
+indent_size = 2
