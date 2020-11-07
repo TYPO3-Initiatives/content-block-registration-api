@@ -168,8 +168,9 @@ class ConfigurationService
             'frontendTemplatePath' => $frontendTemplatePath,
             'EditorPreview.html' => $editorPreviewHtml,
             'EditorInterface.xlf' => $editorInterfaceXlf,
-            'LLL' => 'LLL:' . $editorInterfaceXlf . ':' . $vendor . '.' . $packageName,
+            'EditorLLL' => 'LLL:' . $editorInterfaceXlf . ':' . $vendor . '.' . $packageName,
             'Frontend.xlf' => $frontendXlf,
+            'FrontendLLL' => 'LLL:' . $frontendXlf . ':' . $vendor . '.' . $packageName,
             'yaml' => $editorInterface,
         ];
 

@@ -37,7 +37,7 @@ class PreviewRenderer extends StandardContentPreviewRenderer
         $view = GeneralUtility::makeInstance(StandaloneView::class);
         $view->setTemplatePathAndFilename($fluidTemplateFile);
         $view->assign('data', $record);
-        $view->assign('LLL', ConfigurationService::contentBlockConfiguration($record['CType'])['LLL'] ?? false);
+        $view->assign('LLL', ConfigurationService::contentBlockConfiguration($record['CType'])['EditorLLL'] ?? false);
         if (!empty($record['content_block'])) {
             $processedData = ['data' => $record];
             $processedData = GeneralUtility::makeInstance(FlexFormProcessor::class)

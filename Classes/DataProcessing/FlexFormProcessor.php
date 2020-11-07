@@ -58,7 +58,8 @@ class FlexFormProcessor implements DataProcessorInterface
         $flexformData = $this->flexFormService->convertFlexFormContentToArray($originalValue);
         $processedData = array_merge($processedData, $flexformData);
 
-        $cbConf = ConfigurationService::configuration()[$processedData['data']['CType']] ?? [];
+        $cbConf = ConfigurationService::contentBlockConfiguration($processedData['data']['CType']);
+        $processedData['LLL'] = $cbConf['FrontendLLL'];
 
         foreach ($flexformData as $fieldKey => $val) {
             if (in_array($fieldKey, $cbConf['relationFields'] ?? [])) {
