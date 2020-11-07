@@ -1,12 +1,13 @@
-<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers">
-<f:asset.css id="content-block-counter" path="CB:counter/dist/Frontend.css">
-<f:asset.js id="content-block-counter" path="CB:counter/dist/Frontend.js">
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+
+<f:asset.css identifier="content-block-counter" href="CB:counter/dist/Frontend.css"/>
+<f:asset.script identifier="content-block-counter" srcŝ="CB:counter/dist/Frontend.js"/>
 
 <div class="counter">
-  <span class="counter-value">{amount}</span>
-  <span class="counter-icon">
-    <f:image image="{icon}"/>
-  </span>
-  <span class="counter-name">{text}</span>
+    <span class="counter-value">{amount}</span>
+    <span class="counter-icon">
+        <f:image image="{icon}"/>
+    </span>
+    <span class="counter-name">{text}</span>
 </div>
 </html>
