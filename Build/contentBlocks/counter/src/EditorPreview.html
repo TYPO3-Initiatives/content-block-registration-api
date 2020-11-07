@@ -4,9 +4,9 @@
 <div class="counter">
     <span class="counter-value">{amount}</span>
     <span class="counter-icon">
-        <f:if condition="{icon}">
-            <f:image image="{icon}"/>
-        </f:if>
+        <f:for each="{icon}" as="i">
+            <f:image image="{i}"/>
+        </f:for>
     </span>
     <span class="counter-name">{text}</span>
 </div>
