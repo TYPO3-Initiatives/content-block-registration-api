@@ -64,3 +64,31 @@ fields:
                 step: 1
                 width: 100
             trim: true
+    -   identifier: url
+        type: Url
+        properties:
+            autocomplete: true
+            default: 'Default value'
+            linkPopup:
+                allowedExtensions: 'pdf'
+                blindLinkFields: 'target,title'
+                blindLinkOptions: 'folder,spec,telefone,mail'
+                windowOpenParameters: 'height=800,width=600'
+            max: 15
+            placeholder: 'Placeholder text'
+            size: 20
+            required: false
+    -   identifier: tel
+        type: Tel
+        properties:
+            autocomplete: true
+            default: 0
+            size: 20
+            required: false
+    -   identifier: color
+        type: Color
+        properties:
+            autocomplete: true
+            default: '#fff'
+            size: 20
+            required: false
