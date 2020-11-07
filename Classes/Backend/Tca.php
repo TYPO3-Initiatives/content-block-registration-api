@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 /*
@@ -10,8 +11,8 @@ declare(strict_types=1);
 
 namespace Sci\SciApi\Backend;
 
-use Sci\SciApi\Service\ConfigurationService;
 use Sci\SciApi\Generator\FlexFormGenerator;
+use Sci\SciApi\Service\ConfigurationService;
 
 class Tca
 {
@@ -41,13 +42,14 @@ class Tca
             $GLOBALS['TCA']['tt_content']['ctrl']['typeicon_classes'][$contentBlock['CType']] = $contentBlock['CType'];
 
             /***************
-             * Add content element to selector list 
+             * Add content element to selector list
              */
             \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTcaSelectItem(
                 'tt_content',
                 'CType',
                 [
-                    'LLL:' . $contentBlock['EditorInterface.xlf'] . ':sci.' . $contentBlock['package'] . '.title',
+                    'LLL:' . $contentBlock['EditorInterface.xlf'] . ':' . $contentBlock['vendor']
+                    . '.' . $contentBlock['package'] . '.title',
                     $contentBlock['CType'],
                     $contentBlock['CType'],
                 ],
@@ -92,7 +94,9 @@ class Tca
             /***************
              * Add flexForms for content element configuration
              */
-            $GLOBALS['TCA']['tt_content']['columns']['content_block']['config']['ds'][ $contentBlock['CType'] ] = FlexFormGenerator::flexFormTemplate($flexFormFieldsConfig);
+            $GLOBALS['TCA']['tt_content']['columns']['content_block']['config']['ds'][$contentBlock['CType']] = FlexFormGenerator::flexFormTemplate(
+                $flexFormFieldsConfig
+            );
         }
     }
 
@@ -111,18 +115,18 @@ class Tca
         } else {
             switch ($field['type']) {
                 case 'Email':
-                    case 'Integer':
-                    case 'Money':
-                    case 'Number':
-                    case 'Percent':
-                    case 'Text':
-                    case 'Password':
-                    case 'Range':
-                    case 'Tel':
-                    case 'Color':
-                    case 'Date':
-                    case 'DateTime':
-                    case 'Time':
+                case 'Integer':
+                case 'Money':
+                case 'Number':
+                case 'Percent':
+                case 'Text':
+                case 'Password':
+                case 'Range':
+                case 'Tel':
+                case 'Color':
+                case 'Date':
+                case 'DateTime':
+                case 'Time':
                     return FlexFormGenerator::createInputField($field, $contentBlock);
                 case 'Textarea':
                 case 'TextMultiline':
