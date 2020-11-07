@@ -62,6 +62,39 @@ class FlexFormGenerator
     /** create textfield */   
     public static function createInputField($field, $contentBlock)
     {
+        $evalFields = ($field['properties']['required'] === true ? 'required' : '') . ($field['properties']['trim'] === true && $field['properties']['required'] === true ? ',  ' : '') . ($field['properties']['trim'] === true ? 'trim ' : '');
+        if ( $field['type'] === 'Email' ) $evalFields = $evalFields . (strlen($evalFields) > 0 ? ', ' : '' ) . 'email';
+        if ( $field['type'] === 'Integer' ) $evalFields = $evalFields . (strlen($evalFields) > 0 ? ', ' : '' ) . 'int';
+        if ( $field['type'] === 'Money' ) $evalFields = $evalFields . (strlen($evalFields) > 0 ? ', ' : '' ) . 'double2';
+        if ( $field['type'] === 'Number' ) $evalFields = $evalFields . (strlen($evalFields) > 0 ? ', ' : '' ) . 'num';
+        if ( $field['type'] === 'Password' ) $evalFields = $evalFields . (strlen($evalFields) > 0 ? ', ' : '' ) . 'password';
+        if ( $field['type'] === 'Range' ) $evalFields = $evalFields . (strlen($evalFields) > 0 ? ', ' : '' ) . 'trim,int';
+        if ( $field['type'] === 'Tel' ) $evalFields = $evalFields . (strlen($evalFields) > 0 ? ', ' : '' ) . 'alphanum';
+        
+
+        $additionlConfig = '';
+        if ( $field['type'] === 'Percent' ){
+            $additionlConfig = '
+            <range> 
+                <lower>' . ($field['properties']['range']['lower'] !== '' ? $field['properties']['range']['lower'] : '0') . '</lower>
+                <upper>' . ($field['properties']['range']['upper'] !== '' ? $field['properties']['range']['upper'] : '100') . '</upper>  
+            </range>
+            <slider> 
+                <step>' . ($field['properties']['slider']['step'] !== '' ? $field['properties']['slider']['step'] : '1') . '</step>
+                <width>' . ($field['properties']['slider']['width'] !== '' ? $field['properties']['slider']['width'] : '100') . '</width>  
+            </slider>
+            ';
+        }
+        else if ( $field['type'] === 'Range' ){
+            $additionlConfig = '
+            <range> 
+                <lower>' . ($field['properties']['range']['lower'] !== '' ? $field['properties']['range']['lower'] : '-90') . '</lower>
+                <upper>' . ($field['properties']['range']['upper'] !== '' ? $field['properties']['range']['upper'] : '90') . '</upper>  
+            </range>
+            ';
+        }
+        else if ( $field['type'] === 'Color' ) $additionlConfig = '<renderType>colorpicker</renderType>';
+
         return '
         <' . $field['identifier'] . '>
             <TCEforms>
@@ -71,10 +104,11 @@ class FlexFormGenerator
                     <type>input</type>
                     <size>' . ($field['properties']['size'] > 0 ? $field['properties']['size'] : '20') . '</size>
                     <max>' . ($field['properties']['max'] > 0 ? $field['properties']['max'] : '700') . '</max>
-                    <eval>' . ($field['properties']['required'] === true ? 'required' : '') . ($field['properties']['trim'] === true && $field['properties']['required'] === true ? ',  ' : '') . ($field['properties']['trim'] === true ? 'trim ' : '') .'</eval>
+                    <eval>' . $evalFields .'</eval>
                     <placeholder>' . $field['properties']['placeholder'] . '</placeholder>
                     <default>' . $field['properties']['default'] . '</default>
                     <autocomplete>' . ($field['properties']['autocomplete'] === true ? 'true ' : 'false') . '</autocomplete>
+                    ' . $additionlConfig . '
                 </config>
             </TCEforms>
         </' . $field['identifier'] . '>

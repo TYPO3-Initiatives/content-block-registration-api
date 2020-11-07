@@ -110,12 +110,22 @@ class Tca
             return $fieldsConfig;
         } else {
             switch ($field['type']) {
-                case 'Text':
+                case 'Email':
+                    case 'Integer':
+                    case 'Money':
+                    case 'Number':
+                    case 'Percent':
+                    case 'Text':
+                    case 'Password':
+                    case 'Range':
+                    case 'Tel':
+                    case 'Color':
                     return FlexFormGenerator::createInputField($field, $contentBlock);
                 case 'Textarea':
                 case 'TextMultiline':
                     return FlexFormGenerator::createTextarea($field, $contentBlock);
                 case 'Link':
+                case 'Url':
                     return FlexFormGenerator::createTypoLink($field, $contentBlock);
                 case 'Image':
                 case 'Icon':
