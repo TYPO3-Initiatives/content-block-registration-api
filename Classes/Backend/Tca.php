@@ -41,7 +41,7 @@ class Tca
             $GLOBALS['TCA']['tt_content']['ctrl']['typeicon_classes'][$contentBlock['CType']] = $contentBlock['CType'];
 
             /***************
-             * Add content element to selector list
+             * Add content element to selector list 
              */
             \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTcaSelectItem(
                 'tt_content',
@@ -86,7 +86,7 @@ class Tca
             $flexFormFieldsConfig = '';
 
             foreach ($contentBlock['yaml']['fields'] as $field) {
-                $flexFormFieldsConfig = $flexFormFieldsConfig . self::createField($field, $contentBlock['CType']);
+                $flexFormFieldsConfig = $flexFormFieldsConfig . self::createField($field, $contentBlock);
             }
 
             /***************
@@ -97,7 +97,7 @@ class Tca
     }
 
     /** parse single field */
-    private static function createField($field)
+    private static function createField($field, $contentBlock)
     {
         if (!is_array($field)) {
             return '';
@@ -105,20 +105,21 @@ class Tca
         elseif ($field['type'] === 'Collection') {
             $fieldsConfig = '';
             foreach ($field['properties']['fields'] as $CollectionField) {
-                $fieldsConfig = $fieldsConfig . self::createField($CollectionField);
+                $fieldsConfig = $fieldsConfig . self::createField($CollectionField, $contentBlock);
             }
             return $fieldsConfig;
         } else {
             switch ($field['type']) {
                 case 'Text':
-                    return FlexFormGenerator::createInputField($field);
+                    return FlexFormGenerator::createInputField($field, $contentBlock);
+                case 'Textarea':
                 case 'TextMultiline':
-                    return FlexFormGenerator::createTextarea($field);
+                    return FlexFormGenerator::createTextarea($field, $contentBlock);
                 case 'Link':
-                    return FlexFormGenerator::createTypoLink($field);
+                    return FlexFormGenerator::createTypoLink($field, $contentBlock);
                 case 'Image':
                 case 'Icon':
-                    return FlexFormGenerator::createImageField($field);
+                    return FlexFormGenerator::createImageField($field, $contentBlock);
                 default:
                     return '';
             }

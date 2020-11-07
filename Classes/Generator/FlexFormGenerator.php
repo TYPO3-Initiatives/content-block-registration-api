@@ -15,54 +15,66 @@ class FlexFormGenerator
 {
 
     /** create typolink */
-    public static function createTypoLink($field)
+    public static function createTypoLink($field, $contentBlock) // sci.slider.slides.label
     {
+        $blindLinkOption = 'page,url,mail,spec,file,folder,telephone'; 
+        if ( is_array($field['properties']['linkTypes']) ) {
+            foreach ($field['properties']['linkTypes'] as $allowedField ) {
+                $blindLinkOption = str_replace(  str_replace('external', 'url', $allowedField), '', $blindLinkOption);
+            }
+        }
+        else $blindLinkOption = '';
+
+
+        $blindLinkFields = 'target,title,class,params'; 
+        if ( is_array($field['properties']['fieldTypes']) ) {
+            foreach ($field['properties']['fieldTypes'] as $allowedField ) {
+                $blindLinkFields = str_replace( $allowedField, '', $blindLinkFields);
+            }
+        }
+        else $blindLinkFields = '';
+
+
         return '
         <' . $field['identifier'] . '>
             <TCEforms>
-                <label>TODO: Fill in the right name - Identifier: ' . $field['identifier'] . '</label>
+                <label>LLL:' . $contentBlock['EditorInterface.xlf'] . ':sci.' . $contentBlock['package'] . '.' . $field['identifier'] . '.label</label>
+                <description>LLL:' . $contentBlock['EditorInterface.xlf'] . ':sci.' . $contentBlock['package'] . '.' . $field['identifier'] . '.description</description>
                 <config>
                     <type>input</type>
+                    <renderType>inputLink</renderType>
                     <size>' . ($field['properties']['size'] > 0 ? $field['properties']['size'] : '30') . '</size>
                     <eval>' . ($field['properties']['required'] === true ? 'required, ' : '') . 'trim</eval>
-                    <softref>typolink,typolink_tag,images,url</softref>
-                    <wizards>
-                        <_PADDING>2</_PADDING>
-                        <link>
-                            <type>popup</type>
-                            <title>Link</title>
-                            <module>
-                                <name>wizard_element_browser</name>
-                                <urlParameters>
-                                    <mode>wizard</mode>
-                                </urlParameters>
-                            </module>
-                            <icon>link_popup.gif</icon>
-                            <script>browse_links.php?mode=wizard</script>
-                            <params>
-                                <!--<blindLinkOptions>page,file,folder,url,spec</blindLinkOptions>-->
-                            </params>
-                            <JSopenParams>height=500,width=500,status=0,menubar=0,scrollbars=1</JSopenParams>
-                        </link>
-                    </wizards>
+                    <fieldControl>
+                        <linkPopup>
+                            <options>
+                                <blindLinkOptions>' .  $blindLinkOption . '</blindLinkOptions>
+                                <blindLinkFields>' .  $blindLinkFields . '</blindLinkFields>
+                            </options>
+                        </linkPopup>
+                    </fieldControl>
                 </config>
             </TCEforms>
         </' . $field['identifier'] . '>
         ';
     }
 
-    /** create textfield */
-    public static function createInputField($field)
+    /** create textfield */   
+    public static function createInputField($field, $contentBlock)
     {
         return '
         <' . $field['identifier'] . '>
             <TCEforms>
-                <label>TODO: Fill in the right name - Identifier: ' . $field['identifier'] . '</label>
+                <label>LLL:' . $contentBlock['EditorInterface.xlf'] . ':sci.' . $contentBlock['package'] . '.' . $field['identifier'] . '.label</label>
+                <description>LLL:' . $contentBlock['EditorInterface.xlf'] . ':sci.' . $contentBlock['package'] . '.' . $field['identifier'] . '.description</description>
                 <config>
                     <type>input</type>
                     <size>' . ($field['properties']['size'] > 0 ? $field['properties']['size'] : '20') . '</size>
                     <max>' . ($field['properties']['max'] > 0 ? $field['properties']['max'] : '700') . '</max>
-                    <eval>' . ($field['properties']['required'] === true ? 'required, ' : '') . 'trim</eval>
+                    <eval>' . ($field['properties']['required'] === true ? 'required' : '') . ($field['properties']['trim'] === true && $field['properties']['required'] === true ? ',  ' : '') . ($field['properties']['trim'] === true ? 'trim ' : '') .'</eval>
+                    <placeholder>' . $field['properties']['placeholder'] . '</placeholder>
+                    <default>' . $field['properties']['default'] . '</default>
+                    <autocomplete>' . ($field['properties']['autocomplete'] === true ? 'true ' : 'false') . '</autocomplete>
                 </config>
             </TCEforms>
         </' . $field['identifier'] . '>
@@ -71,16 +83,17 @@ class FlexFormGenerator
 
 
     /** create picture */
-    public static function createImageField($field)
+    public static function createImageField($field, $contentBlock)
     {
         return '
         <' . $field['identifier'] . '>
             <TCEforms>
-                <label>TODO: Fill in the right name - Identifier: ' . $field['identifier'] . '</label>
+                <label>LLL:' . $contentBlock['EditorInterface.xlf'] . ':sci.' . $contentBlock['package'] . '.' . $field['identifier'] . '.label</label>
+                <description>LLL:' . $contentBlock['EditorInterface.xlf'] . ':sci.' . $contentBlock['package'] . '.' . $field['identifier'] . '.description</description>
                 <config>
 
                     <type>inline</type>
-                    <minItems>' . ($field['properties']['minItems']  > 0 ? $field['properties']['minItems'] : '0') . '</minItems>
+                    <minItems>' . ($field['properties']['minItems']  > 0 ? $field['properties']['minItems'] : '1') . '</minItems>
                     <maxItems>' . ($field['properties']['maxItems']  > 0 ? $field['properties']['maxItems'] : '1') . '</maxItems>
                     <eval>' . ($field['properties']['required'] === true ? 'required' : '') . '</eval>
                     <foreign_table>sys_file_reference</foreign_table>
@@ -133,17 +146,22 @@ class FlexFormGenerator
     }
 
     /** create textfield */
-    public static function createTextarea($field)
+    public static function createTextarea($field, $contentBlock)
     {
         return '
         <' . $field['identifier'] . '>
             <TCEforms>
-                <label>TODO: Fill in the right name - Identifier: ' . $field['identifier'] . '</label>
+                <label>LLL:' . $contentBlock['EditorInterface.xlf'] . ':sci.' . $contentBlock['package'] . '.' . $field['identifier'] . '.label</label>
+                <description>LLL:' . $contentBlock['EditorInterface.xlf'] . ':sci.' . $contentBlock['package'] . '.' . $field['identifier'] . '.description</description>
                 <config>
                     <type>text</type>
                     <cols>' . ($field['properties']['cols'] === true ? $field['properties']['cols'] : '24') . '</cols>
                     <rows>' . ($field['properties']['rows'] === true ? $field['properties']['rows'] : '3') . '</rows>
-                    <eval>' . ($field['properties']['required'] === true ? 'required, ' : '') . 'trim</eval>
+                    <enableRichtext>' . ($field['properties']['enableRichtext'] === true ? 'true' : 'false') . '</enableRichtext>
+                    <richtextConfiguration>' . $field['properties']['richtextConfiguration']  . '</richtextConfiguration>
+                    <eval>' . ($field['properties']['required'] === true ? 'required' : '') . ($field['properties']['trim'] === true && $field['properties']['required'] === true ? ',  ' : '') . ($field['properties']['trim'] === true ? 'trim ' : '') .'</eval>
+                    <placeholder>' . $field['properties']['placeholder']  . '</placeholder>
+                    <default>' . $field['properties']['default']  . '</default>
                 </config>
             </TCEforms>
         </' . $field['identifier'] . '>
