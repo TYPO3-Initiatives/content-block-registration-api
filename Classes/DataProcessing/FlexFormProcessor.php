@@ -18,22 +18,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\ContentObject\DataProcessorInterface;
 
-/**
- * Minimal TypoScript configuration
- * Process field pi_flexform and overrides the values stored in data
- *
- * 10 = Sci\SciApi\DataProcessing\FlexFormProcessor
- *
- *
- * Advanced TypoScript configuration
- * Process field assigned in fieldName and stores processed data to new key
- *
- * 10 = Sci\SciApi\DataProcessing\FlexFormProcessor
- * 10 {
- *   fieldName = pi_flexform
- *   as = flexform
- * }
- */
 class FlexFormProcessor implements DataProcessorInterface
 {
     /**
