@@ -70,30 +70,34 @@ class FlexFormGenerator
         if ( $field['type'] === 'Password' ) $evalFields = $evalFields . (strlen($evalFields) > 0 ? ', ' : '' ) . 'password';
         if ( $field['type'] === 'Range' ) $evalFields = $evalFields . (strlen($evalFields) > 0 ? ', ' : '' ) . 'trim,int';
         if ( $field['type'] === 'Tel' ) $evalFields = $evalFields . (strlen($evalFields) > 0 ? ', ' : '' ) . 'alphanum';
+        if ( $field['type'] === 'Date' ) $evalFields = $evalFields . (strlen($evalFields) > 0 ? ', ' : '' ) . 'date';
+        if ( $field['type'] === 'DateTime' ) $evalFields = $evalFields . (strlen($evalFields) > 0 ? ', ' : '' ) . 'datetime';
+        if ( $field['type'] === 'Time' ) $evalFields = $evalFields . (strlen($evalFields) > 0 ? ', ' : '' ) . 'time';
         
 
         $additionlConfig = '';
-        if ( $field['type'] === 'Percent' ){
-            $additionlConfig = '
+        if ( is_array($field['properties']['range']) ) 
+        {
+            $additionlConfig .= '
             <range> 
-                <lower>' . ($field['properties']['range']['lower'] !== '' ? $field['properties']['range']['lower'] : '0') . '</lower>
-                <upper>' . ($field['properties']['range']['upper'] !== '' ? $field['properties']['range']['upper'] : '100') . '</upper>  
-            </range>
+                <lower>' . floatval(($field['properties']['range']['lower'] !== '' ? $field['properties']['range']['lower'] : '0'))  . '</lower>
+                <upper>' . floatval(($field['properties']['range']['upper'] !== '' ? $field['properties']['range']['upper'] : '100'))  . '</upper>  
+            </range>';
+            
+        }
+        if ( $field['type'] === 'Percent' )
+        {
+            $additionlConfig .= $additionlConfig . '
             <slider> 
                 <step>' . ($field['properties']['slider']['step'] !== '' ? $field['properties']['slider']['step'] : '1') . '</step>
                 <width>' . ($field['properties']['slider']['width'] !== '' ? $field['properties']['slider']['width'] : '100') . '</width>  
             </slider>
             ';
         }
-        else if ( $field['type'] === 'Range' ){
-            $additionlConfig = '
-            <range> 
-                <lower>' . ($field['properties']['range']['lower'] !== '' ? $field['properties']['range']['lower'] : '-90') . '</lower>
-                <upper>' . ($field['properties']['range']['upper'] !== '' ? $field['properties']['range']['upper'] : '90') . '</upper>  
-            </range>
-            ';
-        }
-        else if ( $field['type'] === 'Color' ) $additionlConfig = '<renderType>colorpicker</renderType>';
+        else if ( $field['type'] === 'Color' ) $additionlConfig .= '<renderType>colorpicker</renderType>';
+        else if ( $field['type'] === 'Date' || $field['type'] === 'DateTime' || $field['type'] === 'Time' ) $additionlConfig .= '<renderType>inputDateTime</renderType>';
+
+        if ( $field['properties']['displayAge'] ) $additionlConfig .= '<displayAge>true</displayAge>';
 
         return '
         <' . $field['identifier'] . '>
@@ -196,6 +200,38 @@ class FlexFormGenerator
                     <eval>' . ($field['properties']['required'] === true ? 'required' : '') . ($field['properties']['trim'] === true && $field['properties']['required'] === true ? ',  ' : '') . ($field['properties']['trim'] === true ? 'trim ' : '') .'</eval>
                     <placeholder>' . $field['properties']['placeholder']  . '</placeholder>
                     <default>' . $field['properties']['default']  . '</default>
+                </config>
+            </TCEforms>
+        </' . $field['identifier'] . '>
+        ';
+    }
+
+    /** create selection, checkboxes */
+    public static function createSelections($field, $contentBlock)
+    {
+        $items = '<items type="array">';
+        foreach ($field['properties']['cols'] as $key => $value) {
+            $items .= '
+            <numIndex index="key" type="array">
+                <numIndex index="0">' . $value . '</numIndex>
+                <numIndex index="1">' . $value . '</numIndex>
+            </numIndex>';
+        }
+        $items .= '</items>';
+
+        $type = 'select';
+        if ( $field['type'] === 'Checkbox' ) $type = 'check';;
+        
+        
+        return '
+        <' . $field['identifier'] . '>
+            <TCEforms>
+                <label>LLL:' . $contentBlock['EditorInterface.xlf'] . ':sci.' . $contentBlock['package'] . '.' . $field['identifier'] . '.label</label>
+                <description>LLL:' . $contentBlock['EditorInterface.xlf'] . ':sci.' . $contentBlock['package'] . '.' . $field['identifier'] . '.description</description>
+                <config>
+                    <type>' . $type . '</type>
+                    <default>' . $field['properties']['default']  . '</default>
+                    ' . $items . '
                 </config>
             </TCEforms>
         </' . $field['identifier'] . '>

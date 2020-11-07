@@ -120,6 +120,9 @@ class Tca
                     case 'Range':
                     case 'Tel':
                     case 'Color':
+                    case 'Date':
+                    case 'DateTime':
+                    case 'Time':
                     return FlexFormGenerator::createInputField($field, $contentBlock);
                 case 'Textarea':
                 case 'TextMultiline':
@@ -129,6 +132,9 @@ class Tca
                     return FlexFormGenerator::createTypoLink($field, $contentBlock);
                 case 'Image':
                 case 'Icon':
+                    return FlexFormGenerator::createImageField($field, $contentBlock);
+                case 'Select':
+                case 'Checkbox':
                     return FlexFormGenerator::createImageField($field, $contentBlock);
                 default:
                     return '';
