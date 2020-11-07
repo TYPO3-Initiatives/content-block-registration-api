@@ -61,6 +61,7 @@ defined('TYPO3_MODE') || die('Access denied.');
 
         /* Add typoscript dynamical */
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScriptSetup('
+        tt_content.' . $contentBlock['CType'] . ' =< lib.contentElement
         tt_content.' . $contentBlock['CType'] . ' = FLUIDTEMPLATE
         tt_content.' . $contentBlock['CType'] . '{
             templateName = Frontend
