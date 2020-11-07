@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace Sci\SciApi\Backend\Preview;
 
 use Sci\SciApi\DataProcessing\FlexFormProcessor;
+use Sci\SciApi\Service\ConfigurationService;
 use TYPO3\CMS\Backend\Preview\StandardContentPreviewRenderer;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Backend\View\BackendLayout\Grid\GridColumnItem;
@@ -36,6 +37,7 @@ class PreviewRenderer extends StandardContentPreviewRenderer
         $view = GeneralUtility::makeInstance(StandaloneView::class);
         $view->setTemplatePathAndFilename($fluidTemplateFile);
         $view->assign('data', $record);
+        $view->assign('LLL', ConfigurationService::contentBlockConfiguration($record['CType'])['LLL'] ?? false);
         if (!empty($record['content_block'])) {
             $processedData = ['data' => $record];
             $processedData = GeneralUtility::makeInstance(FlexFormProcessor::class)
