@@ -62,6 +62,8 @@ class FlexFormProcessor implements DataProcessorInterface
 
         foreach ($flexformData as $fieldKey => $val) {
             if (in_array($fieldKey, $cbConf['relationFields'] ?? [])) {
+                $maybeLocalizedUid = $processedData['data']['_LOCALIZED_UID'] ?? $processedData['data']['uid'];
+
                 // look away now
 
                 // Why are you still looking?!
@@ -80,10 +82,10 @@ class FlexFormProcessor implements DataProcessorInterface
                 }
 
                 // welcome back
-                $processedData[$fieldKey] = GeneralUtility::makeInstance(FileRepository::class)->findByRelation(
+                $processedData[$fieldKey] = $this->fileRepository->findByRelation(
                     'tt_content',
                     $fieldKey,
-                    $processedData['data']['uid']
+                    $maybeLocalizedUid
                 );
 
                 // look away again
