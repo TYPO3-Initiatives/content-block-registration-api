@@ -17,6 +17,7 @@ use TYPO3\CMS\Core\Service\FlexFormService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\ContentObject\DataProcessorInterface;
+use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 class FlexFormProcessor implements DataProcessorInterface
 {
@@ -61,11 +62,34 @@ class FlexFormProcessor implements DataProcessorInterface
 
         foreach ($flexformData as $fieldKey => $val) {
             if (in_array($fieldKey, $cbConf['relationFields'] ?? [])) {
-                $processedData[$fieldKey] = $this->fileRepository->findByRelation(
+                // look away now
+
+                // Why are you still looking?!
+                if (!($GLOBALS['TSFE'] ?? null) instanceof TypoScriptFrontendController) {
+                    /**
+                     * @see \TYPO3\CMS\Core\Resource\FileRepository::findByRelation() requires a configured TCA column
+                     * in backend context. That's impossible for a field inside a FlexForm.
+                     *
+                     * @see \TYPO3\CMS\Core\Resource\AbstractRepository::getEnvironmentMode()
+                     */
+                    $_tsfe = $GLOBALS['TSFE'] ?? null;
+                    $tsfe = unserialize(
+                        'O:58:"TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController":0:{}'
+                    );
+                    $GLOBALS['TSFE'] = $tsfe;
+                }
+
+                // welcome back
+                $processedData[$fieldKey] = GeneralUtility::makeInstance(FileRepository::class)->findByRelation(
                     'tt_content',
                     $fieldKey,
                     $processedData['data']['uid']
                 );
+
+                // look away again
+                if (isset($_tsfe)) {
+                    $GLOBALS['TSFE'] = $_tsfe;
+                }
             }
         }
 
