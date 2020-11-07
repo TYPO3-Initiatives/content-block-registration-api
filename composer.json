@@ -90,6 +90,7 @@
         ],
         "install-cbs": [
             "[ -d .typo3/public/typo3conf/contentBlocks ] || mkdir -p .typo3/public/typo3conf/contentBlocks",
+            "rm .typo3/public/typo3conf/contentBlocks/* &> /dev/null",
             "for cb in Build/contentBlocks/*; do ln -snvf \"../../../../$cb\" .typo3/public/typo3conf/contentBlocks/; done"
         ],
         "install-extensions": [
