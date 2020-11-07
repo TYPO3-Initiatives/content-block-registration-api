@@ -17,23 +17,8 @@ use TYPO3\CMS\Core\Service\FlexFormService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\ContentObject\DataProcessorInterface;
+use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
-/**
- * Minimal TypoScript configuration
- * Process field pi_flexform and overrides the values stored in data
- *
- * 10 = Sci\SciApi\DataProcessing\FlexFormProcessor
- *
- *
- * Advanced TypoScript configuration
- * Process field assigned in fieldName and stores processed data to new key
- *
- * 10 = Sci\SciApi\DataProcessing\FlexFormProcessor
- * 10 {
- *   fieldName = pi_flexform
- *   as = flexform
- * }
- */
 class FlexFormProcessor implements DataProcessorInterface
 {
     /**
@@ -77,11 +62,36 @@ class FlexFormProcessor implements DataProcessorInterface
 
         foreach ($flexformData as $fieldKey => $val) {
             if (in_array($fieldKey, $cbConf['relationFields'] ?? [])) {
+                $maybeLocalizedUid = $processedData['data']['_LOCALIZED_UID'] ?? $processedData['data']['uid'];
+
+                // look away now
+
+                // Why are you still looking?!
+                if (!($GLOBALS['TSFE'] ?? null) instanceof TypoScriptFrontendController) {
+                    /**
+                     * @see \TYPO3\CMS\Core\Resource\FileRepository::findByRelation() requires a configured TCA column
+                     * in backend context. That's impossible for a field inside a FlexForm.
+                     *
+                     * @see \TYPO3\CMS\Core\Resource\AbstractRepository::getEnvironmentMode()
+                     */
+                    $_tsfe = $GLOBALS['TSFE'] ?? null;
+                    $tsfe = unserialize(
+                        'O:58:"TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController":0:{}'
+                    );
+                    $GLOBALS['TSFE'] = $tsfe;
+                }
+
+                // welcome back
                 $processedData[$fieldKey] = $this->fileRepository->findByRelation(
                     'tt_content',
                     $fieldKey,
-                    $processedData['data']['uid']
+                    $maybeLocalizedUid
                 );
+
+                // look away again
+                if (isset($_tsfe)) {
+                    $GLOBALS['TSFE'] = $_tsfe;
+                }
             }
         }
 
