@@ -81,7 +81,7 @@ class FlexFormGenerator
                     
                     <type>inline</type>
                     <minItems>' . ($field['properties']['minItems']  > 0 ? $field['properties']['minItems'] : '0') . '</minItems>
-                    <maxitems>' . ($field['properties']['maxitems']  > 0 ? $field['properties']['maxitems'] : '1') . '</maxitems>
+                    <maxitems>' . ($field['properties']['maxItems']  > 0 ? $field['properties']['maxItems'] : '1') . '</maxitems>
                     <eval>' . ($field['properties']['required'] === true ? 'required' : '') . '</eval>
                     <foreign_table>sys_file_reference</foreign_table>
                     <foreign_table_field>tablenames</foreign_table_field>
