@@ -41,12 +41,7 @@ class ConfigurationService
 
     public static function contentBlockConfiguration(string $cType): ?array
     {
-        foreach (self::configuration() as $cbConfiguration) {
-            if ($cbConfiguration['CType'] === $cType) {
-                return $cbConfiguration;
-            }
-        }
-        return null;
+        return $cbConfiguration[$cType] ?? null;
     }
 
     protected static function configurationUncached(): array
