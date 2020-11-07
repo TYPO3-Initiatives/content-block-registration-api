@@ -127,4 +127,49 @@ $columns = [
             'eval' => 'trim,alphanum'
         ]
     ],
+    'date' => [
+        'label' => 'Date',
+        'config' => [
+            'type' => 'input',
+            'renderType' => 'inputDateTime',
+            'default' => mktime(),
+            'disableAgeDisplay' => false,
+            'size' => 20,
+            'range' => [
+                'lower' => mktime(0, 0, 0, 1, 1, 1970),
+                'upper' => mktime(0, 0, 0, 12, 31, 2020),
+            ],
+            'eval' => 'date'
+        ]
+    ],
+    'datetime' => [
+        'label' => 'DateTime',
+        'config' => [
+            'type' => 'input',
+            'renderType' => 'inputDateTime',
+            'default' => mktime(),
+            'disableAgeDisplay' => false,
+            'size' => 20,
+            'range' => [
+                'lower' => mktime(0, 1, 0, 1, 1, 1970),
+                'upper' => mktime(23, 59, 0, 12, 31, 2020),
+            ],
+            'eval' => 'datetime'
+        ]
+    ],
+    'time' => [
+        'label' => '',
+        'config' => [
+            'type' => 'input',
+            'renderType' => 'inputDateTime',
+            'default' => mktime(),
+            'disableAgeDisplay' => false,
+            'size' => 20,
+            'range' => [
+                'lower' => mktime(0, 1, 0, 0, 0, 0),
+                'upper' => mktime(23, 59, 0,0, 0, 0),
+            ],
+            'eval' => 'time'
+        ]
+    ],
 ];

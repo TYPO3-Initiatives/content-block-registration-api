@@ -92,3 +92,38 @@ fields:
             default: '#fff'
             size: 20
             required: false
+            valuePicker:
+                items:
+                    '#FF0000': Red
+                    '#008000': Green
+                    '#0000FF': Blue
+    -   identifier: date
+        type: Date
+        properties:
+            default: '@now'
+            displayAge: true
+            size: 20
+            range:
+                lower: '01-01-1970'
+                upper: '31-12-2020'
+            required: false
+    -   identifier: datetime
+        type: DateTime
+        properties:
+            default: '@now'
+            displayAge: true
+            size: 20
+            range:
+                lower: '00:01 01-01-1970'
+                upper: '29:59 31-12-2020'
+            required: false
+    -   identifier: time
+        type:
+        properties:
+            default: '@now'
+            displayAge: true
+            size: 20
+            range:
+                lower: '00:01'
+                upper: '29:59'
+            required: false
