@@ -136,6 +136,9 @@ class ConfigurationService
             ? $realPath . 'src' . DIRECTORY_SEPARATOR . 'EditorPreview.html'
             : false;
 
+        // Frontend.html
+        $frontendTemplatePath = $path . 'src';
+
         $cbConfiguration = [
             'vendor' => $vendor,
             'package' => $packageName,
@@ -143,6 +146,7 @@ class ConfigurationService
             'icon' => $iconPath,
             'iconProviderClass' => $iconProviderClass,
             'CType' => $cType,
+            'frontendTemplatePath' => $frontendTemplatePath,
             'EditorPreview.html' => $editorPreviewHtml,
             'EditorInterface.xlf' => $editorInterfaceXlf,
             'Frontend.xlf' => $frontendXlf,
