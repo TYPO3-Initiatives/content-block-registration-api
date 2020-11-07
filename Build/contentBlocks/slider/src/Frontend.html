@@ -1,12 +1,14 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
 
 <f:asset.css identifier="content-block-slider" href="CB:slider/dist/Frontend.css"/>
-<f:asset.js identifier="content-block-slider" src="CB:slider/dist/Frontend.js"/>
+<f:asset.script identifier="content-block-slider" src="CB:slider/dist/Frontend.js"/>
 
 <div class="slider" data-autoplay="{autoplay}">
     <f:for each="{slides}" as="slide" iteration="iteration">
         <div class="slider-item">
-            <f:image image="{slide.image}" width="1170" height="658" alt=""/>
+            <f:if condition="{icon}">
+                <f:image image="{slide.image}" width="1170" height="658" alt=""/>
+            </f:if>
             <f:if condition="{slide.headline}">
                 <h2>{slide.headline}</h2>
             </f:if>
@@ -33,4 +35,6 @@
         </button>
     </div>
 </div>
+
+<f:debug inline="1">{_all}</f:debug>
 </html>
