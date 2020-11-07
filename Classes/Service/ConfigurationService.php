@@ -41,7 +41,7 @@ class ConfigurationService
 
     public static function contentBlockConfiguration(string $cType): ?array
     {
-        return $cbConfiguration[$cType] ?? null;
+        return self::configuration()[$cType] ?? null;
     }
 
     protected static function configurationUncached(): array
