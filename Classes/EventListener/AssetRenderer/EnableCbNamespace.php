@@ -4,13 +4,16 @@ declare(strict_types=1);
 
 namespace Sci\SciApi\EventListener\AssetRenderer;
 
-use TYPO3\CMS\Core\Core\Environment;
+use Sci\SciApi\Constants;
 use TYPO3\CMS\Core\Page\AssetCollector;
 use TYPO3\CMS\Core\Page\Event\AbstractBeforeAssetRenderingEvent;
 use TYPO3\CMS\Core\Page\Event\BeforeJavaScriptsRenderingEvent;
 use TYPO3\CMS\Core\Page\Event\BeforeStylesheetsRenderingEvent;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 
+/**
+ * Rewrites CB:-paths in assets.
+ * Works just like EXT:-paths are handled in @see GeneralUtility::getFileAbsFileName().
+ */
 class EnableCbNamespace
 {
     /**
@@ -34,7 +37,6 @@ class EnableCbNamespace
 
         $this->assetCollector = $event->getAssetCollector();
         $this->event = $event;
-
 
         if (is_a($event, BeforeStylesheetsRenderingEvent::class)) {
             $this->rewriteStylesheets();
@@ -61,10 +63,10 @@ class EnableCbNamespace
 
     protected function mapUri(string $uri): string
     {
-        // TODO
-        $cbPublicPath = 'typo3conf'
-            . DIRECTORY_SEPARATOR . 'contentBlocks' . DIRECTORY_SEPARATOR;
-        $a = preg_replace('#^CB:#', preg_quote($cbPublicPath, '#'), $uri);
-        return preg_replace('#^CB:#', preg_quote($cbPublicPath, '#'), $uri);
+        return preg_replace(
+            '#^CB:#',
+            preg_quote(Constants::BASEPATH, '#'),
+            $uri
+        );
     }
 }

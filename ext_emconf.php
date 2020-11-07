@@ -6,11 +6,8 @@ $EM_CONF[$_EXTKEY] = [
     'category' => 'fe',
     'author' => '',
     'author_email' => '',
-    'state' => 'stable',
-    'internal' => '',
-    'uploadfolder' => '0',
-    'createDirs' => '',
-    'clearCacheOnLoad' => 0,
+    'state' => 'alpha',
+    'clearCacheOnLoad' => 1,
     'version' => '0.1.0',
     'constraints' => [
         'depends' => [
@@ -18,5 +15,10 @@ $EM_CONF[$_EXTKEY] = [
         ],
         'conflicts' => [],
         'suggests' => [],
+    ],
+    'autoload' => [
+        'psr-4' => [
+            "Sci\\SciApi\\" => "Classes"
+        ]
     ],
 ];

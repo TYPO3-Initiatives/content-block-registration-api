@@ -41,8 +41,13 @@ class ConfigurationService
 
     protected static function configurationUncached(): array
     {
+        $hostBasePath = Environment::getPublicPath() . DIRECTORY_SEPARATOR . Constants::BASEPATH;
+
+        // create dir if not existent
+        GeneralUtility::mkdir_deep($hostBasePath);
+
         $cbsFinder = new Finder();
-        $cbsFinder->directories()->in(Environment::getPublicPath() . DIRECTORY_SEPARATOR . Constants::BASEPATH);
+        $cbsFinder->directories()->in($hostBasePath);
 
         $contentBlockConfiguration = [];
         foreach ($cbsFinder as $cbDir) {
@@ -78,16 +83,16 @@ class ConfigurationService
         // CType
         if (null === $composerJson) {
             // fallback: use directory name
-            $vendor = 'cb_novendor_';
+            $vendor = 'cb_noVendor';
             $packageName = $splPath->getBasename();
         } else {
             [$vendor, $packageName] = explode('/', $composerJson['name']);
         }
-        $ctype = $vendor . '_' . $packageName;
+        $cType = $vendor . '_' . $packageName;
 
         // EditorInterface.yaml
         if (!is_readable($editorInterfaceYamlPath)) {
-            throw new \Exception($editorInterfaceYamlPath . ' not found');
+            throw new \Exception(sprintf('%s not found', $editorInterfaceYamlPath));
         }
         $editorInterface = Yaml::parseFile($editorInterfaceYamlPath);
 
@@ -120,7 +125,7 @@ class ConfigurationService
         }
         if ($iconPath === null) {
             throw new \Exception(
-                sprintf('No icon found for content block %s', $ctype)
+                sprintf('No icon found for content block %s', $cType)
             );
         }
 
@@ -137,7 +142,7 @@ class ConfigurationService
             'path' => $path,
             'icon' => $iconPath,
             'iconProviderClass' => $iconProviderClass,
-            'CType' => $ctype,
+            'CType' => $cType,
             'EditorPreview.html' => $editorPreviewHtml,
             'EditorInterface.xlf' => $editorInterfaceXlf,
             'Frontend.xlf' => $frontendXlf,

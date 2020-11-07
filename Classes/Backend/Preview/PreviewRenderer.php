@@ -18,6 +18,10 @@ use TYPO3\CMS\Core\Service\FlexFormService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 
+/**
+ * Uses the Fluid-template defined in mod.web_layout.tt_content.preview.<CType>.
+ * Wraps the backend preview in class="contentblock-preview".
+ */
 class PreviewRenderer extends StandardContentPreviewRenderer
 {
     public function renderPageModulePreviewContent(GridColumnItem $item): string
