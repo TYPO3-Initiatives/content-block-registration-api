@@ -26,8 +26,8 @@ defined('TYPO3_MODE') || die('Access denied.');
             elements {
                 ' . $contentBlock['CType'] . ' {
                     iconIdentifier = ' . $contentBlock['CType'] . '
-                    title = LLL:' . $contentBlock['EditorInterface.xlf'] . ':sci.' . $contentBlock['package'] . '.title
-                    description = LLL:' . $contentBlock['EditorInterface.xlf'] . ':sci.' . $contentBlock['package'] . '.description
+                    title = LLL:' . $contentBlock['EditorInterface.xlf'] . ':' . $contentBlock['vendor'] . '.' . $contentBlock['package'] . '.title
+                    description = LLL:' . $contentBlock['EditorInterface.xlf'] . ':' . $contentBlock['vendor'] . '.' . $contentBlock['package'] . '.description
                     tt_content_defValues {
                         CType = ' . $contentBlock['CType'] . '
                     }
