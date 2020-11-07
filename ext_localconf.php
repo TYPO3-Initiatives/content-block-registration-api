@@ -62,28 +62,14 @@ defined('TYPO3_MODE') || die('Access denied.');
         /* Add typoscript dynamical */
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScriptSetup('
         tt_content.' . $contentBlock['CType'] . ' = FLUIDTEMPLATE
-        tt_content.' . $contentBlock['CType'] . ' {
-            ################
-            ### TEMPLATE ###
-            ################
+        tt_content.' . $contentBlock['CType'] . '{
             templateName = Frontend
             templateRootPaths {
                 0 = ' . $contentBlock['frontendTemplatePath'] . '
             }
-
-            ##########################
-            ### DATA PREPROCESSING ###
-            ##########################
             dataProcessing {
-                1509614342 = TYPO3\CMS\Frontend\DataProcessing\FilesProcessor
-                1509614342 {
-                    references.fieldName = background_image
-                    as = backgroundImage
-                }
                 10 = Sci\SciApi\DataProcessing\FlexFormProcessor
             }
-            
-
         }
         ');
     }
