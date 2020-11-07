@@ -1,0 +1,20 @@
+.new-block input[type=text] {width: 300px;}
+.new-block input[type=checkbox] {margin-right: 15px;}
+
+.new-block .step-4 input, .new-block .step-4 .span {display: none;}
+.new-block .step-4.text input.text, .new-block .step-4.text span.text,
+.new-block .step-4.textarea input.textarea, .new-block .textarea.step-4 span.textarea
+ {display: initial;}
+
+
+.new-block .step {
+    overflow: hidden;
+    max-height: 0;
+    transition: all 0.9s ease-out;
+    border-bottom: 1px solid #aeaeae;
+}
+.new-block .step.open {
+    max-height: 5000px;
+}
+
+.btn.btn-default, .new-block  input {margin-bottom: 5px;}

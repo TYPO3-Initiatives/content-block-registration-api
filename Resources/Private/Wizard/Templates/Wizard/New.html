@@ -7,14 +7,69 @@
 
 
 	<f:section name="content">
-		<h1>New MyCompanyContact</h1>
+		<h1>Content Block Builder Wizard</h1>
 
 		<f:flashMessages />
+		<div class="step-1">
+			<h2>First, define the package name:</h2>
+			<p>(like "teaser", "callToAction1", "contactPerson" or what else...)</p>
+			<input type="text" id="cb-package-name"><br>
+		</div>
 
-		<f:render partial="FormErrors" />
+		<div class="new-block">
+			<div class="step-2 step">
+				<h2>What kind of field?</h2>
+				<button class="btn btn-default" onclick="setupField('text');nextStep(3);">Text (input)</button>
+				<button class="btn btn-default" onclick="setupField('textarea');nextStep(3);">Textarea (normal or with RTE)</button>
+				<button class="btn btn-default" onclick="setupField('image');nextStep(3);">Image</button>
+				<button class="btn btn-default" onclick="setupField('link');nextStep(3);">Link</button>
+				<button class="btn btn-default" onclick="setupField('select-dropdown');nextStep(3);">Select (Dropdown)</button>
+				<button class="btn btn-default" onclick="setupField('select-multible');nextStep(3);">Select multiple (side by side)</button>
+			</div>
+			<div class="step-3 step">
+				<h2>Tell me the identifier:</h2>
+				<p>(like "name", "street", "number", "linktoage" or what else...)</p>
+				<input type="text" id="cb-field-identifier"><br>
+				<p>(You can call me with this identifier later in the template like "{name}")</p>
+				<button class="btn btn-default next-step"  onclick="nextStep(4);">Next step</button>
+			</div>
+			<div class="step-4 step">
+				<h2>Here you can configure your poperties:</h2>
+				<input type="text" id="cb-field-label" 		class="text textarea text-rte image link select-dropdown select-multible" placeholder="Label in the Backend" ><br><br>
+				<input type="text" id="cb-field-description" class="text textarea text-rte image link select-dropdown select-multible" placeholder="Discription in the backend" ><br><br>
 
-		<f:form action="create"  name="newMyCompanyContact" object="{newMyCompanyContact}">
-			<f:form.submit value="Create new" />
+				<br><br><br>
+				<button class="btn btn-default additional-configuration" onclick="nextStep(5);">(show advanced settings)</button>
+				<br><br>
+
+				<!-- EXPORT MODE -->
+				<div class="advanced-settings step-5 step">
+					<br>
+					<p>Expert mode:</p>
+					<input type="text" placeholder="Maximum count"  id="cb-field-max" class="text textarea text-rte image link select-dropdown select-multible" ><br><br>
+					<input type="checkbox"  id="cb-field-required"  	class="text link" >    					<span class=" text link"> Is this field required?</span><br><br>
+					<input type="checkbox"  id="cb-field-trim" 			checked="checked" class="text link" >	<span class=" text link">Trim whitespaces and stuff like that</span><br><br>
+					<input type="checkbox"  id="cb-field-enableRichtext" class="" >								<span class=" textarea">Enable rich text editing?</span><br><br>
+
+					<input type="text"  	id="cb-field-rows" 			placeholder="Rows of the field"  class="textarea" ><br><br>
+
+					<input type="text"  	id="cb-field-size" 			placeholder="Size of the field"  class="text link" ><br><br>
+					<input type="text" placeholder="Default value if needed"  id="cb-field-default" class="text textarea text-rte image link select-dropdown select-multible" ><br><br>
+					<input type="checkbox"  id="cb-field-autocomplete" class="textarea" > activate autocomplete?<br><br>
+					<input type="text"  	id="cb-field-placeholder" 	placeholder="Define a placeholder (optional)"  class="text textarea text-rte" ><br><br>
+				</div>
+				<!-- EXPORT MODE ENDE -->
+				<br>
+				<br>
+			</div>
+		</div>
+		<br><br>
+		<p><button class="btn btn-default" onclick="nextStep(2)">Create new field</button></p>
+
+<br><br>
+		<f:form action="create"  name="Wizard">
+			<f:form.hidden name="contentBlocks" value="" />
+			<f:form.submit value="Write configuration" />
 		</f:form>
 	</f:section>
 </html>
