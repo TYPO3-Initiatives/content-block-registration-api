@@ -127,3 +127,19 @@ fields:
                 lower: '00:01'
                 upper: '29:59'
             required: false
+    -   identifier: select
+        type: Select
+        properties:
+            items:
+                'one': 'The first'
+                'two': 'The second'
+                'three': 'The third'   
+    -   identifier: selectSideBySide
+        type: MultiSelect
+        properties:
+            maxItems: 2
+            size: 5
+            items:
+                'one': 'The first'
+                'two': 'The second'
+                'three': 'The third'

@@ -244,14 +244,18 @@ class FlexFormGenerator
                 </numIndex>';
                 $counter++;
             }
-            $items = '</items>';
+            $items .= '</items>';
         }
 
         $type = 'select';
         if ( $field['type'] === 'Checkbox' ) $type = 'check';;
 
         $additionlConfig = '';
+        if ( $field['type'] === 'Select' ) $additionlConfig = '<renderType>selectSingle</renderType>';
+        if ( $field['type'] === 'MultiSelect' ) $additionlConfig = '<renderType>selectMultipleSideBySide</renderType>';
+
         if ( $field['properties']['cols']  ) $additionlConfig .= '<cols>' . $field['properties']['cols'] . '</cols>';
+        if ( $field['properties']['maxItems']  ) $additionlConfig .= '<maxitems>' . $field['properties']['maxItems'] . '</maxitems>';
         
         return '
         <' . $field['identifier'] . '>

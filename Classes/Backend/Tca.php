@@ -135,7 +135,8 @@ class Tca
                     return FlexFormGenerator::createImageField($field, $contentBlock);
                 case 'Select':
                 case 'Checkbox':
-                    return FlexFormGenerator::createImageField($field, $contentBlock);
+                case 'MultiSelect':
+                    return FlexFormGenerator::createSelections($field, $contentBlock);
                 default:
                     return '';
             }
