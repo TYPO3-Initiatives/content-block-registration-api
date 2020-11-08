@@ -22,7 +22,7 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 /**
  * Uses the Fluid-template defined in mod.web_layout.tt_content.preview.<CType>.
- * Wraps the backend preview in class="contentblock-preview".
+ * Wraps the backend preview in class="cb-editor".
  */
 class PreviewRenderer extends StandardContentPreviewRenderer
 {
@@ -49,7 +49,9 @@ class PreviewRenderer extends StandardContentPreviewRenderer
                 );
             $view->assignMultiple($processedData);
         }
-        return '<div class="contentblock-preview">' . $view->render() . '</div>';
+
+        // TODO the wrapping class should go to a proper Fluid layout
+        return '<div class="cb-editor">' . $view->render() . '</div>';
     }
 
     public function wrapPageModulePreview(string $previewHeader, string $previewContent, GridColumnItem $item): string
