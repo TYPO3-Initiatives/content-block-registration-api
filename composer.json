@@ -108,7 +108,7 @@
             "typo3cms database:updateschema"
         ],
         "install-typo3": [
-            "typo3cms install:setup --admin-user-name=admin --admin-password=adminadmin --no-interaction",
+            "typo3cms install:setup --admin-user-name=admin --admin-password=adminadmin --site-setup-type=site --site-name='Content Block API' --no-interaction",
             "typo3cms install:generatepackagestates"
         ],
         "test": [
