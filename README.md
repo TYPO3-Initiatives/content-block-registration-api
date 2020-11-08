@@ -20,6 +20,7 @@ backend preview
 
 <pre>
 composer config repositories.content-block-registration-api vcs https://github.com/TYPO3-Initiatives/content-block-registration-api.git
+composer config repositories.content-blocks-composer-plugin vcs https://github.com/TYPO3-Initiatives/content-blocks-composer-plugin.git
 composer config minimum-stability dev
 composer req sci/sci-api:dev-master
 </pre>
