@@ -52,7 +52,7 @@ class ConfigurationService
         GeneralUtility::mkdir_deep($hostBasePath);
 
         $cbsFinder = new Finder();
-        $cbsFinder->directories()->in($hostBasePath);
+        $cbsFinder->directories()->depth('== 0')->in($hostBasePath);
 
         $contentBlockConfiguration = [];
         foreach ($cbsFinder as $cbDir) {
