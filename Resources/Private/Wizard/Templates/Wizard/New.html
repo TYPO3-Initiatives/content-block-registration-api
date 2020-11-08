@@ -15,20 +15,22 @@
 		<div class="step-1">
 			<h2>First, define the package name:</h2>
 			<p>(like "teaser", "callToAction1", "contactPerson" or what else...)</p>
-			<input type="text" id="cb-package-name"><br>
+			<input type="text" id="cb-package-name"><br><br>
+			<p>If you give me a name, I write that directly to the translation file for you:</p>
+			<input type="text" id="cb-package-nameTranslation"><br>
 		</div>
 
 		<div class="new-block">
 			<div class="step-2 step">
 				<h2>What kind of field do you need?</h2>
-				<button class="btn btn-default" onclick="resetFields();setupField('Text');nextStep(3);">Text (input)</button>
-				<button class="btn btn-default" onclick="resetFields();setupField('Textarea');nextStep(3);">Textarea (normal or with RTE)</button>
-				<button class="btn btn-default" onclick="resetFields();setupField('Image');nextStep(3);">Image</button>
-				<button class="btn btn-default" onclick="resetFields();setupField('Url');nextStep(3);">Link / URL</button>
-				<button class="btn btn-default" onclick="resetFields();setupField('Select');nextStep(3);">Select (Dropdown)</button>
-				<button class="btn btn-default" onclick="resetFields();setupField('MultiSelect');nextStep(3);">Select multiple (side by side)</button>
-				<button class="btn btn-default" onclick="resetFields();setupField('Checkbox');nextStep(3);">Checkboxes</button>
-				<button class="btn btn-default" onclick="resetFields();setupField('Radiobox');nextStep(3);">Radio boxes</button>
+				<button class="btn btn-default Text" onclick="resetFields();setupField('Text');nextStep(3);">Text (input)</button>
+				<button class="btn btn-default Textarea" onclick="resetFields();setupField('Textarea');nextStep(3);">Textarea (normal or with RTE)</button>
+				<button class="btn btn-default Image" onclick="resetFields();setupField('Image');nextStep(3);">Image</button>
+				<button class="btn btn-default Url" onclick="resetFields();setupField('Url');nextStep(3);">Link / URL</button>
+				<button class="btn btn-default Select" onclick="resetFields();setupField('Select');nextStep(3);">Select (Dropdown)</button>
+				<button class="btn btn-default MultiSelect" onclick="resetFields();setupField('MultiSelect');nextStep(3);">Select multiple (side by side)</button>
+				<button class="btn btn-default Checkbox" onclick="resetFields();setupField('Checkbox');nextStep(3);">Checkboxes</button>
+				<button class="btn btn-default Radiobox" onclick="resetFields();setupField('Radiobox');nextStep(3);">Radio boxes</button>
 				<br>
 			</div>
 			<div class="step-3 step">
@@ -64,12 +66,14 @@
 			<br>
 		</div>
 		<br class="clearfix"><br>
-		<p><button class="btn btn-default" onclick="saveField();resetFields();nextStep(2)">Create new field / create next field</button></p>
+		<p><button class="btn btn-default" onclick="saveField();resetFields();nextStep(2)">Create new field</button> <button class="btn btn-default" onclick="saveField();resetFields();nextStep(2)">Add configuration to field list</button></p>
+		<br> <br>
+		<p>You should only write configuration if you are finished with creaton work. <br> You should see your feelds on the right side.</p>
+		<p><button class="btn btn-default" onclick="subimtData()">Write the new content block to file system</button></p>
 
 <br><br>
-		<f:form action="create"  name="Wizard">
-			<f:form.hidden name="contentBlocks" value="" />
-			<f:form.submit value="Write the new content block to file system" />
+		<f:form action="create"  name="Wizard" id="contenBlockSubmit">
+			<f:form.hidden id="contentBlocksDataField" name="contentBlocks" value="" />
 		</f:form>
 	</f:section>
 </html>

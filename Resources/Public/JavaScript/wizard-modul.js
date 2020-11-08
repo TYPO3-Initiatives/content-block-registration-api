@@ -1,7 +1,7 @@
 /* remember the current fieldtype */
 var currentFieldType = '';
 /* storage for fields */
-var finalContentBlockConfig = [];
+var finalContentBlockConfig = {};
 /* onload, get the input defaults */
 var inputDefaults = [];
 var inputFields = [];
@@ -47,6 +47,7 @@ function nextStep(numberNext) {
 /* init choosen field type */
 function setupField(fieldType){
     document.querySelectorAll('.step-4')[0].classList.add(fieldType);
+    document.querySelectorAll('.step-2 button.' + fieldType)[0].classList.add('btn-green'); 
     currentFieldType = fieldType;
 }
 
@@ -76,6 +77,7 @@ function resetFields(){
         document.querySelectorAll('.step-4')[0].classList.remove(item);
     });
     document.querySelectorAll('.step-4')[0].classList.remove('open');
+    document.querySelectorAll('.step-3')[0].classList.remove('open');
     
     if ( Array.isArray(inputFields)){
         inputFields.forEach(function(item, index, arr){
@@ -85,7 +87,7 @@ function resetFields(){
 
     if ( Array.isArray(checkboxFields)){
         checkboxFields.forEach(function(item, index, arr){
-            (checkboxDefaults[item.id] ? item.checked = "checked" : item.checked = "false" );
+            (checkboxDefaults[item.id] ? item.checked = "checked" : item.checked = false );
         });
     }
 
@@ -94,6 +96,14 @@ function resetFields(){
             (textareaDefaults[item.id] ? item.value = textareaDefaults[item.id] : item.value = "" );
         });
     }
+
+    var fieldButtons = Array.from(document.querySelectorAll('.step-2 button.btn-green'));
+    if ( Array.isArray(fieldButtons)){
+        fieldButtons.forEach(function(button, index, arr){
+            button.classList.remove('btn-green');
+        });
+    }
+    
     
 }
 
@@ -110,9 +120,11 @@ function saveField(){
     }
 
     finalContentBlockConfig['packageName'] = document.getElementById('cb-package-name').value;
-    finalContentBlockConfig [tempIdentifier] = [];
+    finalContentBlockConfig['backendName'] = document.getElementById('cb-package-nameTranslation').value;
+    // finalContentBlockConfig['group'] = 'common'; // TODO: make that configurable in the Wizard 
+    finalContentBlockConfig [tempIdentifier] = {}; 
     finalContentBlockConfig [tempIdentifier]['type'] = currentFieldType;
-    finalContentBlockConfig [tempIdentifier]['properties'] = [];
+    finalContentBlockConfig [tempIdentifier]['properties'] = {};
 
     var elementInputPoperties = Array.from(document.querySelectorAll('.new-block input[type=text].' + currentFieldType));
     if ( Array.isArray(elementInputPoperties)){
@@ -166,8 +178,13 @@ function removeFieldFromList(field)
 {
     field = document.getElementById(field);
     finalContentBlockConfig[field.getAttribute('data-identifier')] = '';
-    finalContentBlockConfig.splice(field.getAttribute('data-identifier'), 1);
     field.remove();
+}
+
+function subimtData() {
+    var formular = document.getElementById('contenBlockSubmit');
+    formular.elements.contentBlocksDataField.value = JSON.stringify(finalContentBlockConfig);
+    formular.submit();
 }
 
 console.log('wiard');
