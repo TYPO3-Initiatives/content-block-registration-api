@@ -14,7 +14,6 @@ namespace Sci\SciApi\Backend\Preview;
 use Sci\SciApi\DataProcessing\FlexFormProcessor;
 use Sci\SciApi\Service\ConfigurationService;
 use TYPO3\CMS\Backend\Preview\StandardContentPreviewRenderer;
-use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Backend\View\BackendLayout\Grid\GridColumnItem;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Fluid\View\StandaloneView;
@@ -30,14 +29,17 @@ class PreviewRenderer extends StandardContentPreviewRenderer
     {
         $record = $item->getRecord();
 
-        $fluidTemplateFile = BackendUtility::getPagesTSconfig($record['pid'])
-            ['mod.']['web_layout.']['tt_content.']['preview.'][$record['CType']]
-            ?? null;
+        $cbConfiguration = ConfigurationService::contentBlockConfiguration($record['CType']);
 
         $view = GeneralUtility::makeInstance(StandaloneView::class);
-        $view->setTemplatePathAndFilename($fluidTemplateFile);
+        $view->setTemplatePathAndFilename($cbConfiguration['EditorPreview.html']);
+
+        // TODO use TypoScript configuration for paths
+        $view->setPartialRootPaths([$cbConfiguration['srcPath']]);
+        $view->setLayoutRootPaths([$cbConfiguration['srcPath']]);
+
         $view->assign('data', $record);
-        $view->assign('EditorLLL', ConfigurationService::contentBlockConfiguration($record['CType'])['EditorLLL'] ?? false);
+        $view->assign('EditorLLL', $cbConfiguration['EditorLLL'] ?? false);
         if (!empty($record['content_block'])) {
             $processedData = ['data' => $record];
             $processedData = GeneralUtility::makeInstance(FlexFormProcessor::class)

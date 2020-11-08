@@ -72,7 +72,9 @@ class ConfigurationService
 
         // directory paths (relative to publicPath())
         $path = Constants::BASEPATH . $splPath->getBasename() . DIRECTORY_SEPARATOR;
-        $languagePath = $path . 'src' . DIRECTORY_SEPARATOR . 'Language' . DIRECTORY_SEPARATOR;
+        $srcPath = $path . 'src' . DIRECTORY_SEPARATOR;
+        $distPath = $path . 'dist' . DIRECTORY_SEPARATOR;
+        $languagePath = $srcPath . 'Language' . DIRECTORY_SEPARATOR;
 
         // file paths
         $composerJsonPath = $realPath . 'composer.json';
@@ -156,6 +158,8 @@ class ConfigurationService
             'vendor' => $vendor,
             'package' => $packageName,
             'path' => $path,
+            'srcPath' => $srcPath,
+            'distPath' => $distPath,
             'icon' => $iconPath,
             'iconProviderClass' => $iconProviderClass,
             'CType' => $cType,
