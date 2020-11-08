@@ -3,7 +3,10 @@ fields:
   - identifier: image
     type: Image
   - identifier: text
-    type: Text
+    type: Textarea
+    properties:
+      enableRichtext: true
+      richtextConfiguration: default
   - identifier: buttonText
     type: Text
   - identifier: link

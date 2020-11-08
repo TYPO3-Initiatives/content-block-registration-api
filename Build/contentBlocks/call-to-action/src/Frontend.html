@@ -8,10 +8,10 @@
     </f:for>
     <div class="call-to-action__overlay">
         <div class="call-to-action__text">
-            <div>{text}</div>
             <f:link.typolink class="call-to-action__button" parameter="{link}">
                 {buttonText}
             </f:link.typolink>
+            <f:format.html>{text}</f:format.html>
         </div>
     </div>
 </div>
