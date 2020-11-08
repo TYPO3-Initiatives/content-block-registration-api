@@ -1,7 +1,7 @@
 {
     "name": "sci/sci-api",
     "type": "typo3-cms-extension",
-    "description": "",
+    "description": "TYPO3 Content Block registration API extension",
     "license": [
         "GPL-2.0-or-later"
     ],
@@ -13,49 +13,49 @@
     "require": {
         "php": "^7.2",
         "ext-json": "*",
-        "typo3/cms-core": "^10.4.0 || dev-master"
+        "typo3/cms-core": "^10.4.0 || ^11.0.0 || dev-master"
     },
     "require-dev": {
-        "ergebnis/composer-normalize": "^2.3",
-        "friendsofphp/php-cs-fixer": "^2.14",
+        "ergebnis/composer-normalize": "^2.9",
+        "friendsofphp/php-cs-fixer": "^2.16",
         "helhum/typo3-console": "^6.3",
         "roave/security-advisories": "dev-master",
-        "typo3/cms-about": "^10.4",
-        "typo3/cms-adminpanel": "^10.4",
-        "typo3/cms-backend": "^10.4",
-        "typo3/cms-belog": "^10.4",
-        "typo3/cms-beuser": "^10.4",
-        "typo3/cms-dashboard": "^10.4",
-        "typo3/cms-extbase": "^10.4",
-        "typo3/cms-extensionmanager": "^10.4",
-        "typo3/cms-felogin": "^10.4",
-        "typo3/cms-filelist": "^10.4",
-        "typo3/cms-filemetadata": "^10.4",
-        "typo3/cms-fluid": "^10.4",
-        "typo3/cms-fluid-styled-content": "^10.4",
-        "typo3/cms-form": "^10.4",
-        "typo3/cms-frontend": "^10.4",
-        "typo3/cms-impexp": "^10.4",
-        "typo3/cms-indexed-search": "^10.4",
-        "typo3/cms-info": "^10.4",
-        "typo3/cms-install": "^10.4",
-        "typo3/cms-linkvalidator": "^10.4",
-        "typo3/cms-lowlevel": "^10.4",
-        "typo3/cms-opendocs": "^10.4",
-        "typo3/cms-recordlist": "^10.4",
-        "typo3/cms-recycler": "^10.4",
-        "typo3/cms-redirects": "^10.4",
-        "typo3/cms-reports": "^10.4",
-        "typo3/cms-rte-ckeditor": "^10.4",
-        "typo3/cms-scheduler": "^10.4",
-        "typo3/cms-seo": "^10.4",
-        "typo3/cms-setup": "^10.4",
-        "typo3/cms-sys-note": "^10.4",
-        "typo3/cms-t3editor": "^10.4",
-        "typo3/cms-tstemplate": "^10.4",
-        "typo3/cms-viewpage": "^10.4",
-        "typo3/cms-workspaces": "^10.4",
-        "typo3/testing-framework": "^6.2"
+        "typo3/cms-about": "^10.4 || ^11.0.0 || dev-master",
+        "typo3/cms-adminpanel": "^10.4 || ^11.0.0 || dev-master",
+        "typo3/cms-backend": "^10.4 || ^11.0.0 || dev-master",
+        "typo3/cms-belog": "^10.4 || ^11.0.0 || dev-master",
+        "typo3/cms-beuser": "^10.4 || ^11.0.0 || dev-master",
+        "typo3/cms-dashboard": "^10.4 || ^11.0.0 || dev-master",
+        "typo3/cms-extbase": "^10.4 || ^11.0.0 || dev-master",
+        "typo3/cms-extensionmanager": "^10.4 || ^11.0.0 || dev-master",
+        "typo3/cms-felogin": "^10.4 || ^11.0.0 || dev-master",
+        "typo3/cms-filelist": "^10.4 || ^11.0.0 || dev-master",
+        "typo3/cms-filemetadata": "^10.4 || ^11.0.0 || dev-master",
+        "typo3/cms-fluid": "^10.4 || ^11.0.0 || dev-master",
+        "typo3/cms-fluid-styled-content": "^10.4 || ^11.0.0 || dev-master",
+        "typo3/cms-form": "^10.4 || ^11.0.0 || dev-master",
+        "typo3/cms-frontend": "^10.4 || ^11.0.0 || dev-master",
+        "typo3/cms-impexp": "^10.4 || ^11.0.0 || dev-master",
+        "typo3/cms-indexed-search": "^10.4 || ^11.0.0 || dev-master",
+        "typo3/cms-info": "^10.4 || ^11.0.0 || dev-master",
+        "typo3/cms-install": "^10.4 || ^11.0.0 || dev-master",
+        "typo3/cms-linkvalidator": "^10.4 || ^11.0.0 || dev-master",
+        "typo3/cms-lowlevel": "^10.4 || ^11.0.0 || dev-master",
+        "typo3/cms-opendocs": "^10.4 || ^11.0.0 || dev-master",
+        "typo3/cms-recordlist": "^10.4 || ^11.0.0 || dev-master",
+        "typo3/cms-recycler": "^10.4 || ^11.0.0 || dev-master",
+        "typo3/cms-redirects": "^10.4 || ^11.0.0 || dev-master",
+        "typo3/cms-reports": "^10.4 || ^11.0.0 || dev-master",
+        "typo3/cms-rte-ckeditor": "^10.4 || ^11.0.0 || dev-master",
+        "typo3/cms-scheduler": "^10.4 || ^11.0.0 || dev-master",
+        "typo3/cms-seo": "^10.4 || ^11.0.0 || dev-master",
+        "typo3/cms-setup": "^10.4 || ^11.0.0 || dev-master",
+        "typo3/cms-sys-note": "^10.4 || ^11.0.0 || dev-master",
+        "typo3/cms-t3editor": "^10.4 || ^11.0.0 || dev-master",
+        "typo3/cms-tstemplate": "^10.4 || ^11.0.0 || dev-master",
+        "typo3/cms-viewpage": "^10.4 || ^11.0.0 || dev-master",
+        "typo3/cms-workspaces": "^10.4 || ^11.0.0 || dev-master",
+        "typo3/testing-framework": "^6.4"
     },
     "config": {
         "bin-dir": ".typo3/bin",
@@ -80,13 +80,23 @@
         }
     },
     "prefer-stable": true,
+    "minimum-stability": "dev",
     "scripts": {
         "post-autoload-dump": [
             "[ -L .typo3/public/typo3conf/ext/sci_api ] || ln -snvf ../../../../. .typo3/public/typo3conf/ext/sci_api"
         ],
+        "fix-staged:cgl:php-cs": [
+            "php-cs-fixer --config=.php_cs.dist fix -v --using-cache=no `git diff --cached --name-only '*.php'`"
+        ],
         "fix:cgl": [
-            "php-cs-fixer --config=.php_cs.dist fix --using-cache=no",
+            "@fix:cgl:php-cs",
+            "@fix:cgl:composer"
+        ],
+        "fix:cgl:composer": [
             "composer normalize --no-update-lock"
+        ],
+        "fix:cgl:php-cs": [
+            "php-cs-fixer --config=.php_cs.dist fix --using-cache=no"
         ],
         "install-cbs": [
             "[ -d .typo3/public/typo3conf/contentBlocks ] || mkdir -p .typo3/public/typo3conf/contentBlocks",
@@ -98,19 +108,39 @@
             "typo3cms database:updateschema"
         ],
         "install-typo3": [
-            "typo3cms install:setup --admin-user-name=admin --admin-password=adminadmin --no-interaction",
+            "typo3cms install:setup --admin-user-name=admin --admin-password=adminadmin --site-setup-type=site --site-name='Content Block API' --no-interaction",
             "typo3cms install:generatepackagestates"
         ],
         "test": [
             "@test:cgl",
             "@test:unit"
         ],
+        "test-staged": [
+            "@test-staged:cgl",
+            "@test:unit"
+        ],
+        "test-staged:cgl": [
+            "@test-staged:cgl:php-cs",
+            "@test:cgl:composer"
+        ],
+        "test-staged:cgl:php-cs": [
+            "php-cs-fixer --config=.php_cs.dist fix -v --using-cache=no --dry-run `git diff --cached --name-only '*.php'`"
+        ],
         "test:cgl": [
-            "php-cs-fixer --config=.php_cs.dist fix -v --using-cache=no --dry-run",
+            "@test:cgl:php-cs",
+            "@test:cgl:composer"
+        ],
+        "test:cgl:composer": [
             "composer normalize --no-update-lock --dry-run"
+        ],
+        "test:cgl:php-cs": [
+            "php-cs-fixer --config=.php_cs.dist fix -v --using-cache=no --dry-run"
         ],
         "test:unit": [
             "phpunit -c Tests/UnitTests.phpunit.xml"
+        ],
+        "tests-for:ci": [
+            "@test"
         ],
         "typo3:flush": [
             "typo3cms cache:flush"

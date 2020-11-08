@@ -38,14 +38,6 @@ defined('TYPO3_MODE') || die('Access denied.');
     '
         );
 
-        // Backend Preview PageTS
-        if ($contentBlock['EditorPreview.html']) {
-            \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig(
-                '
-            mod.web_layout.tt_content.preview.' . $contentBlock['CType'] . ' = ' . $contentBlock['EditorPreview.html']
-            );
-        }
-
         /***************
          * Register Icons
          */

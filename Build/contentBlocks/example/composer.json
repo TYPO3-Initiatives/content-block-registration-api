@@ -7,8 +7,5 @@
         {
             "name": "Structured Content Initiative"
         }
-    ],
-    "require": {
-        "typo3fluid/fluid": "^2.6"
-    }
+    ]
 }

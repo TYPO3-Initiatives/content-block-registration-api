@@ -1,33 +1,33 @@
-<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers"
+    data-namespace-typo3-fluid="true"
+>
 
 <f:asset.css identifier="{data.CType}" href="CB:call-to-action/dist/EditorPreview.css"/>
-
 <div class="call-to-action">
-    <div class="call-to-action__ctype">
-        <f:translate key="LLL:EXT:sci_api/Resources/Private/Language/locallang_db.xlf:tt_content.content_block" />
-        <em>
-            <f:translate key="{EditorLLL}.title"/>
-        </em>
-    </div>
-
     <p>
-        {text}
+        <f:format.stripTags>{text}</f:format.stripTags>
     </p>
+
     <details>
-        <summary class="btn btn-info">
-            show…
+        <summary class="btn btn-default">
+            <f:translate key="LLL:EXT:sci_api/Resources/Private/Language/locallang_db.xlf:tt_content.content_block"/>
+            <b>
+                <f:translate key="{EditorLLL}.title"/>
+            </b>
+            <core:icon identifier="apps-pagetree-expand"/>
         </summary>
         <div class="call-to-action__box">
             <div class="call-to-action__wrapper">
                 <f:for each="{image}" as="i">
-                    <f:image image="{i}" height="200" width="800c"/>
+                    <f:image image="{i}" height="120c" width="500"/>
                 </f:for>
                 <div class="call-to-action__overlay">
                     <div class="call-to-action__text">
-                        <div>{text}</div>
                         <div class="call-to-action__button">
                             {buttonText}
                         </div>
+                        <f:format.html>{text}</f:format.html>
                     </div>
                 </div>
             </div>

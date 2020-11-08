@@ -15,20 +15,18 @@
     padding: 10px 12px;
 }
 
+.call-to-action__overlay p {
+    margin: 0;
+}
+
 .call-to-action__button {
     float: right;
-    display: inline-block;
-    margin-bottom: 0;
-    font-weight: 400;
-    font-size: 100%;
     text-decoration: none;
     text-align: center;
     white-space: nowrap;
-    vertical-align: middle;
     touch-action: manipulation;
     border: 1px solid #fab546;
     padding: 6px 16px;
-    margin-top: 5px;
     line-height: 1.5;
     border-radius: 2px;
     user-select: none;
@@ -36,6 +34,7 @@
     background-color: #f49700;
     transition: background-color 0.2s ease-out, border-color 0.1s ease-out;
 }
+
 .call-to-action__button:hover, .call-to-action__button:focus {
     background-color: #bc790f;
     border-color: #c48313;

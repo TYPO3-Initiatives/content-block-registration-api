@@ -16,7 +16,10 @@
 				<source>Image</source>
 			</trans-unit>
             <trans-unit id="sci.call-to-action.link.label" xml:space="preserve">
-				<source>Link</source>
+				<source>Button Link</source>
+			</trans-unit>
+            <trans-unit id="sci.call-to-action.text.label" xml:space="preserve">
+				<source>Text</source>
 			</trans-unit>
             <trans-unit id="sci.call-to-action.buttonText.label" xml:space="preserve">
 				<source>Button Text</source>
