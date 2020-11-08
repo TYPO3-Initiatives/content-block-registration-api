@@ -7,7 +7,9 @@
 
 
 	<f:section name="content">
-		<h1>Content Block Builder Wizard</h1>
+		<h1>Content Block Builder</h1>
+		<p>This wizard is actually just a demo and tries to let you do the basic stuff.</p>
+		<br>
 
 		<f:flashMessages />
 		<div class="step-1">
@@ -18,58 +20,56 @@
 
 		<div class="new-block">
 			<div class="step-2 step">
-				<h2>What kind of field?</h2>
-				<button class="btn btn-default" onclick="setupField('text');nextStep(3);">Text (input)</button>
-				<button class="btn btn-default" onclick="setupField('textarea');nextStep(3);">Textarea (normal or with RTE)</button>
-				<button class="btn btn-default" onclick="setupField('image');nextStep(3);">Image</button>
-				<button class="btn btn-default" onclick="setupField('link');nextStep(3);">Link</button>
-				<button class="btn btn-default" onclick="setupField('select-dropdown');nextStep(3);">Select (Dropdown)</button>
-				<button class="btn btn-default" onclick="setupField('select-multible');nextStep(3);">Select multiple (side by side)</button>
+				<h2>What kind of field do you need?</h2>
+				<button class="btn btn-default" onclick="resetFields();setupField('Text');nextStep(3);">Text (input)</button>
+				<button class="btn btn-default" onclick="resetFields();setupField('Textarea');nextStep(3);">Textarea (normal or with RTE)</button>
+				<button class="btn btn-default" onclick="resetFields();setupField('Image');nextStep(3);">Image</button>
+				<button class="btn btn-default" onclick="resetFields();setupField('Url');nextStep(3);">Link / URL</button>
+				<button class="btn btn-default" onclick="resetFields();setupField('Select');nextStep(3);">Select (Dropdown)</button>
+				<button class="btn btn-default" onclick="resetFields();setupField('MultiSelect');nextStep(3);">Select multiple (side by side)</button>
+				<button class="btn btn-default" onclick="resetFields();setupField('Checkbox');nextStep(3);">Checkboxes</button>
+				<button class="btn btn-default" onclick="resetFields();setupField('Radiobox');nextStep(3);">Radio boxes</button>
+				<br>
 			</div>
 			<div class="step-3 step">
 				<h2>Tell me the identifier:</h2>
 				<p>(like "name", "street", "number", "linktoage" or what else...)</p>
 				<input type="text" id="cb-field-identifier"><br>
-				<p>(You can call me with this identifier later in the template like "{name}")</p>
+				<p>(You can call me with this identifier later in the template like  "&#123;name&#125;" )</p>
 				<button class="btn btn-default next-step"  onclick="nextStep(4);">Next step</button>
+				<br> <br>
 			</div>
 			<div class="step-4 step">
 				<h2>Here you can configure your poperties:</h2>
-				<input type="text" id="cb-field-label" 		class="text textarea text-rte image link select-dropdown select-multible" placeholder="Label in the Backend" ><br><br>
-				<input type="text" id="cb-field-description" class="text textarea text-rte image link select-dropdown select-multible" placeholder="Discription in the backend" ><br><br>
 
-				<br><br><br>
+				<!-- The label for default translation --->
+				<input type="text" id="cb-field-translationLabel" class="Text Textarea Image Url Select MultiSelect Checkbox Radiobox" placeholder="Label in the Backend" ><br><br>
+
+				<!-- ITEMS -->
+				<f:render partial="Properties/Textarea" arguments="{fieldID: 'cb-field-items', label='Insert here your combinations of value and labels for your editors:' , selectorClasses: 'Select MultiSelect Checkbox Radiobox'}" section="content" />
+			
+				<br>
 				<button class="btn btn-default additional-configuration" onclick="nextStep(5);">(show advanced settings)</button>
-				<br><br>
+				<br>
 
 				<!-- EXPORT MODE -->
-				<div class="advanced-settings step-5 step">
-					<br>
-					<p>Expert mode:</p>
-					<input type="text" placeholder="Maximum count"  id="cb-field-max" class="text textarea text-rte image link select-dropdown select-multible" ><br><br>
-					<input type="checkbox"  id="cb-field-required"  	class="text link" >    					<span class=" text link"> Is this field required?</span><br><br>
-					<input type="checkbox"  id="cb-field-trim" 			checked="checked" class="text link" >	<span class=" text link">Trim whitespaces and stuff like that</span><br><br>
-					<input type="checkbox"  id="cb-field-enableRichtext" class="" >								<span class=" textarea">Enable rich text editing?</span><br><br>
-
-					<input type="text"  	id="cb-field-rows" 			placeholder="Rows of the field"  class="textarea" ><br><br>
-
-					<input type="text"  	id="cb-field-size" 			placeholder="Size of the field"  class="text link" ><br><br>
-					<input type="text" placeholder="Default value if needed"  id="cb-field-default" class="text textarea text-rte image link select-dropdown select-multible" ><br><br>
-					<input type="checkbox"  id="cb-field-autocomplete" class="textarea" > activate autocomplete?<br><br>
-					<input type="text"  	id="cb-field-placeholder" 	placeholder="Define a placeholder (optional)"  class="text textarea text-rte" ><br><br>
-				</div>
-				<!-- EXPORT MODE ENDE -->
+				<f:render partial="ExpertMode" section="content" arguments="{_all}" />
 				<br>
-				<br>
+				
 			</div>
 		</div>
-		<br><br>
-		<p><button class="btn btn-default" onclick="nextStep(2)">Create new field</button></p>
+		<div class="field-list">
+			<br>
+			<p><strong>Listing your fields:</strong></p>
+			<br>
+		</div>
+		<br class="clearfix"><br>
+		<p><button class="btn btn-default" onclick="saveField();resetFields();nextStep(2)">Create new field / create next field</button></p>
 
 <br><br>
 		<f:form action="create"  name="Wizard">
 			<f:form.hidden name="contentBlocks" value="" />
-			<f:form.submit value="Write configuration" />
+			<f:form.submit value="Write the new content block to file system" />
 		</f:form>
 	</f:section>
 </html>

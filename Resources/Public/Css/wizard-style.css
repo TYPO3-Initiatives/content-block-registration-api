@@ -1,20 +1,63 @@
+.clearfix {clear:both;}
+.new-block { margin-bottom: 30px;width: 75%;float: left;}
+.field-list {margin-bottom: 30px; width: 22%;float: left;padding: 0 1%;display: none; border-left: 1px solid #aeaeae;margin-left: 1%;padding-bottom: 15px;}
+.field-list.open {display: block;}
+.btn-default.btn.btn-green {background-color: #87f987;}
+
 .new-block input[type=text] {width: 300px;}
 .new-block input[type=checkbox] {margin-right: 15px;}
+textarea#cb-field-items {width: 430px; height: 150px;}
 
-.new-block .step-4 input, .new-block .step-4 .span {display: none;}
-.new-block .step-4.text input.text, .new-block .step-4.text span.text,
-.new-block .step-4.textarea input.textarea, .new-block .textarea.step-4 span.textarea
+
+
+.advanced-settings-optional {display: none;}
+
+.step-4.Text .advanced-settings-optional.Text, 
+.step-4.Textarea .advanced-settings-optional.Textarea, 
+.step-4.Image .advanced-settings-optional.Image,
+.step-4.Url .advanced-settings-optional.Url, 
+.step-4.Select .advanced-settings-optional.Select, 
+.step-4.MultiSelect .advanced-settings-optional.MultiSelect,
+.step-4.Checkbox .advanced-settings-optional.Checkbox, 
+.step-4.Radiobox .advanced-settings-optional.Radiobox
  {display: initial;}
 
+ .advanced-settings {padding:0 15px;background-color: #eee;}
+.advanced-settings.open {border-bottom: none; padding: 0 15px;}
 
 .new-block .step {
     overflow: hidden;
     max-height: 0;
-    transition: all 0.9s ease-out;
-    border-bottom: 1px solid #aeaeae;
+    transition: all 1.9s ease-out;
+    border-bottom: 1px solid #fff;
 }
 .new-block .step.open {
-    max-height: 5000px;
+    max-height: 700px;
+    border-bottom: 1px solid #aeaeae;
 }
 
 .btn.btn-default, .new-block  input {margin-bottom: 5px;}
+
+
+
+.blob-error {
+	box-shadow: 0 0 0 0 rgba(255, 0, 0, 1);
+	transform: scale(1);
+	animation: pulse-red 2s infinite;
+}
+@keyframes pulse-red {
+	0% {
+		transform: scale(0.95);
+		box-shadow: 0 0 0 0 rgba(222, 0, 0, 0.7);
+	}
+	
+	70% {
+		transform: scale(1);
+		box-shadow: 0 0 0 10px rgba(255, 0, 0, 0);
+	}
+	
+	100% {
+		transform: scale(0.95);
+		box-shadow: 0 0 0 0 rgba(255, 0, 0, 0);
+	}
+}
