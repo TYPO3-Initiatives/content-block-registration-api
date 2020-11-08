@@ -2,28 +2,18 @@
     "name": "sci/sci-api",
     "type": "typo3-cms-extension",
     "description": "TYPO3 Content Block registration API extension",
-    "license": [
-        "GPL-2.0-or-later"
-    ],
     "keywords": [
         "typo3",
         "content-blocks"
+    ],
+    "license": [
+        "GPL-2.0-or-later"
     ],
     "authors": [
         {
             "name": "Structured Content Initiative"
         }
     ],
-    "repositories": {
-        "local": {
-            "type": "path",
-            "url": "Build/packages/*"
-        },
-        "content-blocks-composer-plugin": {
-            "type": "vcs",
-            "url": "https://github.com/TYPO3-Initiatives/content-blocks-composer-plugin.git"
-        }
-    },
     "require": {
         "php": "^7.2",
         "ext-json": "*",
@@ -99,8 +89,18 @@
             "Sci\\SciApi\\Tests\\": "Tests/"
         }
     },
-    "prefer-stable": true,
+    "repositories": {
+        "local": {
+            "type": "path",
+            "url": "Build/packages/*"
+        },
+        "content-blocks-composer-plugin": {
+            "type": "vcs",
+            "url": "https://github.com/TYPO3-Initiatives/content-blocks-composer-plugin.git"
+        }
+    },
     "minimum-stability": "dev",
+    "prefer-stable": true,
     "scripts": {
         "post-autoload-dump": [
             "[ -L .typo3/public/typo3conf/ext/sci_api ] || ( mkdir -p .typo3/public/typo3conf/ext/ && ln -snvf ../../../../. .typo3/public/typo3conf/ext/sci_api )"
