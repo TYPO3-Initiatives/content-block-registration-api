@@ -27,6 +27,7 @@ yarn.lock export-ignore
 *.rst text eol=lf
 *.md text eol=lf
 *.yml text eol=lf
+*.yaml text eol=lf
 *.ts text eol=lf
 *.xlf text eol=lf
 *.sql text eol=lf
