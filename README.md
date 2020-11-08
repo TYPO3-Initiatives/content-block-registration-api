@@ -8,15 +8,25 @@ See [Content Blocks Registration in TYPO3](https://github.com/TYPO3-Initiatives/
 
 ## Requirements
 * TYPO3 v10+
-* needs Fluid based Page (which is default in v10 and will be the only one any ways in v11) module for backend preview
+* [Fluid based Page module](https://docs.typo3.org/c/typo3/cms-core/master/en-us/Changelog/10.3/Feature-90348-NewFluid-basedReplacementForPageLayoutView.html) (which is default in v10 and will be the only one in v11) is needed for
+backend preview
 
-## Installation
+## For developing this API
+1) clone this repository
+2) `ddev launch /typo3`
+   This will set up a TYPO3 v10, install the API extension and enable some example Content Blocks.
+
+## For using Content Blocks: Installation of the API extension into your TYPO3
 
 <pre>
 composer config repositories.content-block-registration-api vcs https://github.com/TYPO3-Initiatives/content-block-registration-api.git
 composer config minimum-stability dev
 composer req sci/sci-api:dev-master
 </pre>
+
+### Shortcomings
+* Currently, Content Blocks are not installable via composer. You need to create a directory `typo3conf/contentBlocks`
+  and add your Content Blocks there manually.
 
 ## Usage
 
