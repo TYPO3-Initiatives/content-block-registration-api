@@ -5,21 +5,39 @@
     "license": [
         "GPL-2.0-or-later"
     ],
+    "keywords": [
+        "typo3",
+        "content-blocks"
+    ],
     "authors": [
         {
             "name": "Structured Content Initiative"
         }
     ],
+    "repositories": {
+        "content-block-registration-api": {
+            "type": "vcs",
+            "url": "https://github.com/TYPO3-Initiatives/content-blocks-composer-plugin.git"
+        },
+        "local": {
+            "type": "path",
+            "url": "Build/packages/*"
+        }
+    },
     "require": {
         "php": "^7.2",
         "ext-json": "*",
+        "sci/content-blocks-composer-plugin": "dev-master",
         "typo3/cms-core": "^10.4.0 || ^11.0.0 || dev-master"
     },
     "require-dev": {
-        "ergebnis/composer-normalize": "^2.9",
         "friendsofphp/php-cs-fixer": "^2.16",
         "helhum/typo3-console": "^6.3",
         "roave/security-advisories": "dev-master",
+        "sci/call-to-action": "@dev",
+        "sci/counter": "@dev",
+        "sci/example": "@dev",
+        "sci/slider": "@dev",
         "typo3/cms-about": "^10.4 || ^11.0.0 || dev-master",
         "typo3/cms-adminpanel": "^10.4 || ^11.0.0 || dev-master",
         "typo3/cms-backend": "^10.4 || ^11.0.0 || dev-master",
@@ -83,7 +101,7 @@
     "minimum-stability": "dev",
     "scripts": {
         "post-autoload-dump": [
-            "[ -L .typo3/public/typo3conf/ext/sci_api ] || ln -snvf ../../../../. .typo3/public/typo3conf/ext/sci_api"
+            "[ -L .typo3/public/typo3conf/ext/sci_api ] || ( mkdir -p .typo3/public/typo3conf/ext/ && ln -snvf ../../../../. .typo3/public/typo3conf/ext/sci_api )"
         ],
         "fix-staged:cgl:php-cs": [
             "php-cs-fixer --config=.php_cs.dist fix -v --using-cache=no `git diff --cached --name-only '*.php'`"
@@ -97,11 +115,6 @@
         ],
         "fix:cgl:php-cs": [
             "php-cs-fixer --config=.php_cs.dist fix --using-cache=no"
-        ],
-        "install-cbs": [
-            "[ -d .typo3/public/typo3conf/contentBlocks ] || mkdir -p .typo3/public/typo3conf/contentBlocks",
-            "for link in .typo3/public/typo3conf/contentBlocks/*; do [ -L \"$link\" ] && rm \"$link\"; done || true",
-            "[ -e Build/contentBlocks/* ] && for cb in Build/contentBlocks/*; do ln -snvf \"../../../../$cb\" .typo3/public/typo3conf/contentBlocks/; done || true"
         ],
         "install-extensions": [
             "typo3 extension:activate -n sci_api",
