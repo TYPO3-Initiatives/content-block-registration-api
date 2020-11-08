@@ -38,6 +38,7 @@
         "sci/counter": "@dev",
         "sci/example": "@dev",
         "sci/slider": "@dev",
+        "sci/text": "@dev",
         "typo3/cms-about": "^10.4 || ^11.0.0 || dev-master",
         "typo3/cms-adminpanel": "^10.4 || ^11.0.0 || dev-master",
         "typo3/cms-backend": "^10.4 || ^11.0.0 || dev-master",
