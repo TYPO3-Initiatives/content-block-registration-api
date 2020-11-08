@@ -3,7 +3,7 @@
 	<file datatype="plaintext"
 		  original="messages"
 		  source-language="en"
-		  product-name="slider">
+		  product-name="text">
 		<header/>
 		<body>
 			<trans-unit id="sci.text.title" xml:space="preserve">
