@@ -20,7 +20,7 @@ use TYPO3\CMS\Fluid\View\StandaloneView;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 /**
- * Uses the Fluid-template defined in mod.web_layout.tt_content.preview.<CType>.
+ * Sets up Fluid and applies the same DataProcessor as the frontend to the data record.
  * Wraps the backend preview in class="cb-editor".
  */
 class PreviewRenderer extends StandardContentPreviewRenderer
