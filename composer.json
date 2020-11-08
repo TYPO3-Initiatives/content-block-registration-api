@@ -15,19 +15,19 @@
         }
     ],
     "repositories": {
-        "content-block-registration-api": {
-            "type": "vcs",
-            "url": "https://github.com/TYPO3-Initiatives/content-blocks-composer-plugin.git"
-        },
         "local": {
             "type": "path",
             "url": "Build/packages/*"
+        },
+        "content-blocks-composer-plugin": {
+            "type": "vcs",
+            "url": "https://github.com/TYPO3-Initiatives/content-blocks-composer-plugin.git"
         }
     },
     "require": {
         "php": "^7.2",
         "ext-json": "*",
-        "sci/content-blocks-composer-plugin": "dev-master",
+        "sci/content-blocks-composer-plugin": "@dev",
         "typo3/cms-core": "^10.4.0 || ^11.0.0 || dev-master"
     },
     "require-dev": {
