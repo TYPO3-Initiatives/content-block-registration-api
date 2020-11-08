@@ -100,8 +100,8 @@
         ],
         "install-cbs": [
             "[ -d .typo3/public/typo3conf/contentBlocks ] || mkdir -p .typo3/public/typo3conf/contentBlocks",
-            "rm .typo3/public/typo3conf/contentBlocks/* &> /dev/null",
-            "for cb in Build/contentBlocks/*; do ln -snvf \"../../../../$cb\" .typo3/public/typo3conf/contentBlocks/; done"
+            "for link in .typo3/public/typo3conf/contentBlocks/*; do [ -L \"$link\" ] && rm \"$link\"; done || true",
+            "[ -e Build/contentBlocks/* ] && for cb in Build/contentBlocks/*; do ln -snvf \"../../../../$cb\" .typo3/public/typo3conf/contentBlocks/; done || true"
         ],
         "install-extensions": [
             "typo3 extension:activate -n sci_api",
