@@ -25,11 +25,11 @@
         "friendsofphp/php-cs-fixer": "^2.16",
         "helhum/typo3-console": "^6.3",
         "roave/security-advisories": "dev-master",
-        "sci/call-to-action": "@dev",
-        "sci/counter": "@dev",
-        "sci/example": "@dev",
-        "sci/slider": "@dev",
-        "sci/text": "@dev",
+        "sci/call-to-action-local": "@dev",
+        "sci/counter-local": "@dev",
+        "sci/example-local": "@dev",
+        "sci/slider-local": "@dev",
+        "sci/text-local": "@dev",
         "typo3/cms-about": "^10.4 || ^11.0.0 || dev-master",
         "typo3/cms-adminpanel": "^10.4 || ^11.0.0 || dev-master",
         "typo3/cms-backend": "^10.4 || ^11.0.0 || dev-master",
@@ -94,7 +94,7 @@
             "type": "path",
             "url": "Build/packages/*"
         },
-        "content-blocks-composer-plugin": {
+        "cb-composer-plugin": {
             "type": "vcs",
             "url": "https://github.com/TYPO3-Initiatives/content-blocks-composer-plugin.git"
         }
