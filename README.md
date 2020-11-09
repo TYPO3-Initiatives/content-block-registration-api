@@ -53,6 +53,8 @@ composer config repositories.cb-examples vcs https://github.com/TYPO3-Initiative
 composer req sci/call-to-action-example:dev-master
 </pre>
 
+For using custom content blocks in your project we recommend a [local "path" composer repository](https://getcomposer.org/doc/05-repositories.md#path).
+
 #### Wizard
 
 There is a wizard module that kickstarts Content Blocks for you.
