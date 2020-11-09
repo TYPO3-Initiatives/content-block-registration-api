@@ -22,7 +22,7 @@ It is a quickstart to explore the feature, too.
 1) clone this repository
 2) `ddev launch /typo3`
 
-It includes example Content Blocks in a local composer that are installed by default.
+It includes example Content Blocks in a local composer repository that are installed by default.
 
 ### For using Content Blocks
 
