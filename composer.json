@@ -108,7 +108,7 @@
             "php-cs-fixer --config=.php_cs.dist fix -v --using-cache=no `git diff --cached --name-only '*.php'`"
         ],
         "fix:cgl": [
-            "@fix:cgl:php-cs",
+            "@fix:cgl:php-cs"
         ],
         "fix:cgl:php-cs": [
             "php-cs-fixer --config=.php_cs.dist fix --using-cache=no"
@@ -130,13 +130,13 @@
             "@test:unit"
         ],
         "test-staged:cgl": [
-            "@test-staged:cgl:php-cs",
+            "@test-staged:cgl:php-cs"
         ],
         "test-staged:cgl:php-cs": [
             "php-cs-fixer --config=.php_cs.dist fix -v --using-cache=no --dry-run `git diff --cached --name-only '*.php'`"
         ],
         "test:cgl": [
-            "@test:cgl:php-cs",
+            "@test:cgl:php-cs"
         ],
         "test:cgl:php-cs": [
             "php-cs-fixer --config=.php_cs.dist fix -v --using-cache=no --dry-run"
