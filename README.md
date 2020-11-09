@@ -25,9 +25,8 @@ composer config minimum-stability dev
 composer req sci/sci-api:dev-master
 </pre>
 
-### Shortcomings
-* Currently, Content Blocks are not installable via composer. You need to create a directory `typo3conf/contentBlocks`
-  and add your Content Blocks there manually.
+* Add new database fields: (Backend) `Maintenance` › `Analyze Database Structure`
+* Use composer to install Content Block packages or add them manually to `typo3conf/contentBlocks`
 
 ## Usage
 
