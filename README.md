@@ -52,7 +52,7 @@ composer req typo3-contentblocks/contentblocks-reg-api:dev-master
 [This is an example repo](https://github.com/TYPO3-Initiatives/content-block-examples) with a content block
 <pre>
 composer config repositories.cb-examples vcs https://github.com/TYPO3-Initiatives/content-block-examples.git
-composer req typo3-contentblocks/call-to-action-example:dev-master
+composer req typo3-contentblocks/call-to-action:dev-master
 </pre>
 
 For using custom content blocks in your project we recommend a [local "path" composer repository](https://getcomposer.org/doc/05-repositories.md#path).
