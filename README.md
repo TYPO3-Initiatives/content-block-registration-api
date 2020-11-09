@@ -22,6 +22,8 @@ It is a quickstart to explore the feature, too.
 1) clone this repository
 2) `ddev launch /typo3`
 
+The TYPO3 backend user is "admin", password "adminadmin".
+
 It includes example Content Blocks in a local composer repository that are installed by default.
 
 ### For using Content Blocks
