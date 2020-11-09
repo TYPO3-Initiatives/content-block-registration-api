@@ -17,7 +17,6 @@
     "require": {
         "php": "^7.2",
         "ext-json": "*",
-        "sci/call-to-action": "dev-master",
         "typo3-contentblocks/content-blocks-composer-plugin": "@dev",
         "typo3/cms-core": "^10.4.0 || ^11.0.0 || dev-master"
     },
