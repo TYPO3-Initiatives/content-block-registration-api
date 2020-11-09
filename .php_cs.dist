@@ -21,7 +21,7 @@ if (PHP_SAPI !== 'cli') {
 }
 
 $header = <<<EOF
-This file is part of the package sci/sci-api.
+This file is part of the package typo3-contentblocks/contentblocks-reg-api.
 
 For the full copyright and license information, please read the
 LICENSE file that was distributed with this source code.

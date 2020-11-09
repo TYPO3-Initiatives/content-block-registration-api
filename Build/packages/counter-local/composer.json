@@ -1,0 +1,11 @@
+{
+    "name": "typo3-contentblocks/counter-local",
+    "description": "Content block providing animated counter.",
+    "type": "typo3-cms-contentblock",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Structured Content Initiative"
+        }
+    ]
+}

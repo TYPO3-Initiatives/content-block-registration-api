@@ -1,5 +1,5 @@
 services:
-    Sci\SciApi\EventListener\AssetRenderer\EnableCbNamespace:
+    Typo3Contentblocks\ContentblocksRegApi\EventListener\AssetRenderer\EnableCbNamespace:
         tags:
             -   name: event.listener
                 event: TYPO3\CMS\Core\Page\Event\BeforeJavaScriptsRenderingEvent

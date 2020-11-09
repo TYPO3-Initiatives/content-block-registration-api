@@ -1,8 +1,8 @@
 <?php
-namespace Sci\SciApi\Backend\Controller;
+namespace Typo3Contentblocks\ContentblocksRegApi\Backend\Controller;
 
-use Sci\SciApi\Constants;
-use Sci\SciApi\Validator\ContentBlockValidator;
+use Typo3Contentblocks\ContentblocksRegApi\Constants;
+use Typo3Contentblocks\ContentblocksRegApi\Validator\ContentBlockValidator;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 use Symfony\Component\Yaml\Yaml;
@@ -10,7 +10,7 @@ use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\Imaging\IconProvider\BitmapIconProvider;
 use TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use Sci\SciApi\Service\ConfigurationService;
+use Typo3Contentblocks\ContentblocksRegApi\Service\ConfigurationService;
 
 /***
  *
@@ -28,7 +28,7 @@ class WizardController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 {
     /**
      * action new
-     * 
+     *
      * @return void
      */
     public function newAction()
@@ -38,7 +38,7 @@ class WizardController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 
     /**
      * action create
-     * 
+     *
      * @var string $contentBlocks
      * @return void
      */
@@ -51,7 +51,7 @@ class WizardController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
             $this->addFlashMessage('I have not written anything, because there was no configuration.', '', \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR);
             $this->redirect('new');
         }
-        
+
         // create the content block
         $contentBlock = json_decode($contentBlockFromWizard, true);
 
@@ -68,6 +68,9 @@ class WizardController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
         // make shure, package name is lowercase
         $contentBlock['packageName'] = strtolower($contentBlock['packageName']);
 
+        //TODO
+        $contentBlock['vendor'] = 'typo3-contentblocks';
+
         $cbBasePath = Environment::getPublicPath() . DIRECTORY_SEPARATOR . Constants::BASEPATH . $contentBlock['packageName'];
 
         /***  check if directory exists, if so, stop. */
@@ -76,7 +79,7 @@ class WizardController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
             $this->redirect('new');
         }
 
-        
+
         /* create directory */
         mkdir($cbBasePath);
         $cbBasePath .= '/';
@@ -116,10 +119,10 @@ class WizardController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
             $tempField['properties'] = [];
 
             foreach ($value['properties'] as $property => $propertyVal) {
-                
+
                 if( $property === 'translationLabel' ) {
                     $fieldsForXLF .= '
-            <trans-unit id="sci.' . $contentBlock['packageName'] .'.' . $tempField['identifier'] .'.label" xml:space="preserve">
+            <trans-unit id="' . $contentBlock['vendor'] . '.' . $contentBlock['packageName'] .'.' . $tempField['identifier'] .'.label" xml:space="preserve">
                 <source>' . $propertyVal.'</source>
             </trans-unit>
                     ';
@@ -127,13 +130,13 @@ class WizardController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
                 }
                 if($property === 'translationDescription' ) {
                     $fieldsForXLF .= '
-            <trans-unit id="sci.' . $contentBlock['packageName'] .'.' . $tempField['identifier'] .'.description" xml:space="preserve">
+            <trans-unit id="' . $contentBlock['vendor'] . '.' . $contentBlock['packageName'] .'.' . $tempField['identifier'] .'.description" xml:space="preserve">
                 <source>' . $propertyVal.'</source>
             </trans-unit>
                     ';
                     continue;
                 }
-                
+
                 if ($property === 'items'){
 
                     $tempItemsArrExploded = \explode(PHP_EOL, $propertyVal);
@@ -142,7 +145,7 @@ class WizardController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
                         $tempItem = \explode(':', $value);
                         $tempField['properties'][$property][ $tempItem[0] ] = $tempItem[1];
                     }
-                    
+
                 }
 
                 else $tempField['properties'][$property] = $propertyVal;
@@ -170,10 +173,10 @@ class WizardController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
     ' . $fieldsForTemplate .'
 </div>
 
-</html>  
+</html>
         ');
 
-        
+
         /* +++++  Frontend.html  +++++ */
 
         file_put_contents($cbBasePath. 'src/Frontend.html', '
@@ -186,7 +189,7 @@ class WizardController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
     ' . $fieldsForTemplate .'
 </div>
 
-</html>  
+</html>
         ');
 
         /* +++++  Default.xlf  +++++ */
@@ -199,33 +202,33 @@ class WizardController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
             product-name="text">
         <header/>
         <body>
-            <trans-unit id="sci.' . $contentBlock['packageName'] .'.title" xml:space="preserve">
+            <trans-unit id="' . $contentBlock['vendor'] . '.' . $contentBlock['packageName'] .'.title" xml:space="preserve">
                 <source>' . $contentBlock['backendName'] .'</source>
             </trans-unit>
-            <trans-unit id="sci.' . $contentBlock['packageName'] .'.description" xml:space="preserve">
+            <trans-unit id="' . $contentBlock['vendor'] . '.' . $contentBlock['packageName'] .'.description" xml:space="preserve">
                 <source>' . $contentBlock['backendName'] . ' - ' . $contentBlock['packageName'] . ' created by Content Block Builder.</source>
             </trans-unit>
 ' . $fieldsForXLF . '
         </body>
     </file>
-</xliff>  
+</xliff>
         ');
 
         file_put_contents($cbBasePath. 'ContentBlockIcon.svg', '<svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 9h-4v4h-2v-4H9V9h4V5h2v4h4v2z"/></svg>');
-        
+
         /* write composer.json */
         $composerJson = [
-            "name" => 'sci/' . $contentBlock['packageName'],
+            "name" => 'typo3-contentblocks/' . $contentBlock['packageName'],
             "description" => "Content block created by Content Block Builder.",
             "type" => "typo3-cms-contentblock",
             "license" => "GPL-2.0-or-later",
             "authors" =>  [ array("name" => "Structured Content Initiative") ],
         ];
         file_put_contents($cbBasePath . 'composer.json', json_encode($composerJson, JSON_UNESCAPED_SLASHES));
-        
+
         $this->addFlashMessage('The content block was created.', '', \TYPO3\CMS\Core\Messaging\AbstractMessage::OK);
         $this->addFlashMessage('Please clear all caches bevor you use the new content block.', '', \TYPO3\CMS\Core\Messaging\AbstractMessage::WARNING);
-        
+
         $this->redirect('new');
     }
 

@@ -1,0 +1,5 @@
+{
+    "name": "typo3-contentblocks/text-local",
+    "type": "typo3-cms-contentblock",
+    "license": "GPL-2.0-or-later"
+}

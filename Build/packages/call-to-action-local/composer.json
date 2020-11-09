@@ -1,0 +1,11 @@
+{
+    "name": "typo3-contentblocks/call-to-action-local",
+    "description": "Content block providing a call-to-action image with a button.",
+    "type": "typo3-cms-contentblock",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Structured Content Initiative"
+        }
+    ]
+}

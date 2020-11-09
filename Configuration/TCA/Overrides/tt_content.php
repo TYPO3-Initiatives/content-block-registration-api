@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 
 /*
- * This file is part of the package sci/sci-api.
+ * This file is part of the package typo3-contentblocks/contentblocks-reg-api.
  *
  * For the full copyright and license information, please read the
  * LICENSE file that was distributed with this source code.
@@ -14,7 +14,7 @@ defined('TYPO3_MODE') or die();
 $temporaryColumns = [
         'content_block' => [
                 'exclude' => 0,
-                'label' => 'LLL:EXT:sci_api/Resources/Private/Language/locallang_db.xlf:tt_content.content_block',
+                'label' => 'LLL:EXT:contentblocks_reg_api/Resources/Private/Language/locallang_db.xlf:tt_content.content_block',
                 'config' => [
                     'type' => 'flex',
                     'ds_pointerField' => 'CType',
@@ -52,4 +52,4 @@ $temporaryColumns = [
     'content_block'
 );
 
-Sci\SciApi\Backend\Tca::getTca();
+Typo3Contentblocks\ContentblocksRegApi\Backend\Tca::getTca();

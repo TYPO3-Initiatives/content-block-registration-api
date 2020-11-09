@@ -3,16 +3,16 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the package sci/sci-api.
+ * This file is part of the package typo3-contentblocks/contentblocks-reg-api.
  *
  * For the full copyright and license information, please read the
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Sci\SciApi\Backend;
+namespace Typo3Contentblocks\ContentblocksRegApi\Backend;
 
-use Sci\SciApi\Generator\FlexFormGenerator;
-use Sci\SciApi\Service\ConfigurationService;
+use Typo3Contentblocks\ContentblocksRegApi\Generator\FlexFormGenerator;
+use Typo3Contentblocks\ContentblocksRegApi\Service\ConfigurationService;
 
 class Tca
 {
@@ -34,7 +34,7 @@ class Tca
 
             // PreviewRenderer
             $GLOBALS['TCA']['tt_content']['types'][$contentBlock['CType']]['previewRenderer'] =
-                \Sci\SciApi\Backend\Preview\PreviewRenderer::class;
+                \Typo3Contentblocks\ContentblocksRegApi\Backend\Preview\PreviewRenderer::class;
 
             /***************
              * Assign Icon

@@ -3,15 +3,15 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the package sci/sci-api.
+ * This file is part of the package typo3-contentblocks/contentblocks-reg-api.
  *
  * For the full copyright and license information, please read the
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Sci\SciApi\EventListener\AssetRenderer;
+namespace Typo3Contentblocks\ContentblocksRegApi\EventListener\AssetRenderer;
 
-use Sci\SciApi\Constants;
+use Typo3Contentblocks\ContentblocksRegApi\Constants;
 use TYPO3\CMS\Core\Page\AssetCollector;
 use TYPO3\CMS\Core\Page\Event\AbstractBeforeAssetRenderingEvent;
 use TYPO3\CMS\Core\Page\Event\BeforeJavaScriptsRenderingEvent;

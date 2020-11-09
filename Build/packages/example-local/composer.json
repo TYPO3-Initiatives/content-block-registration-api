@@ -1,0 +1,11 @@
+{
+    "name": "typo3-contentblocks/example-local",
+    "description": "Content block providing examples for all field types.",
+    "type": "typo3-cms-contentblock",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Structured Content Initiative"
+        }
+    ]
+}

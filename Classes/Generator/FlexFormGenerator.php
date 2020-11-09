@@ -3,19 +3,19 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the package sci/sci-api.
+ * This file is part of the package typo3-contentblocks/contentblocks-reg-api.
  *
  * For the full copyright and license information, please read the
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Sci\SciApi\Generator;
+namespace Typo3Contentblocks\ContentblocksRegApi\Generator;
 
 class FlexFormGenerator
 {
 
     /** create typolink */
-    public static function createTypoLink($field, $contentBlock) // sci.slider.slides.label
+    public static function createTypoLink($field, $contentBlock) // typo3-contentblocks.slider-local.slides.label
     {
         $blindLinkOption = 'page,url,mail,spec,file,folder,telephone';
         if ( is_array($field['properties']['linkTypes']) ) {

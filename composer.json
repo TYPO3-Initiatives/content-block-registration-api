@@ -1,5 +1,5 @@
 {
-    "name": "sci/sci-api",
+    "name": "typo3-contentblocks/contentblocks-reg-api",
     "type": "typo3-cms-extension",
     "description": "TYPO3 Content Block registration API extension",
     "keywords": [
@@ -17,7 +17,8 @@
     "require": {
         "php": "^7.2",
         "ext-json": "*",
-        "sci/content-blocks-composer-plugin": "@dev",
+        "sci/call-to-action": "dev-master",
+        "typo3-contentblocks/content-blocks-composer-plugin": "@dev",
         "typo3/cms-core": "^10.4.0 || ^11.0.0 || dev-master"
     },
     "require-dev": {
@@ -25,11 +26,6 @@
         "friendsofphp/php-cs-fixer": "^2.16",
         "helhum/typo3-console": "^6.3",
         "roave/security-advisories": "dev-master",
-        "sci/call-to-action-local": "@dev",
-        "sci/counter-local": "@dev",
-        "sci/example-local": "@dev",
-        "sci/slider-local": "@dev",
-        "sci/text-local": "@dev",
         "typo3/cms-about": "^10.4 || ^11.0.0 || dev-master",
         "typo3/cms-adminpanel": "^10.4 || ^11.0.0 || dev-master",
         "typo3/cms-backend": "^10.4 || ^11.0.0 || dev-master",
@@ -65,7 +61,12 @@
         "typo3/cms-tstemplate": "^10.4 || ^11.0.0 || dev-master",
         "typo3/cms-viewpage": "^10.4 || ^11.0.0 || dev-master",
         "typo3/cms-workspaces": "^10.4 || ^11.0.0 || dev-master",
-        "typo3/testing-framework": "^6.4"
+        "typo3/testing-framework": "^6.4",
+        "typo3-contentblocks/call-to-action-local": "@dev",
+        "typo3-contentblocks/counter-local": "@dev",
+        "typo3-contentblocks/example-local": "@dev",
+        "typo3-contentblocks/slider-local": "@dev",
+        "typo3-contentblocks/text-local": "@dev"
     },
     "config": {
         "bin-dir": ".typo3/bin",
@@ -74,22 +75,26 @@
     },
     "extra": {
         "typo3/cms": {
-            "extension-key": "sci_api",
+            "extension-key": "contentblocks_reg_api",
             "web-dir": ".typo3/public",
             "app-dir": ".typo3"
         }
     },
     "autoload": {
         "psr-4": {
-            "Sci\\SciApi\\": "Classes/"
+            "Typo3Contentblocks\\ContentblocksRegApi\\": "Classes/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Sci\\SciApi\\Tests\\": "Tests/"
+            "Typo3Contentblocks\\ContentblocksRegApi\\Tests\\": "Tests/"
         }
     },
     "repositories": {
+        "cb-examples": {
+            "type": "vcs",
+            "url": "https://github.com/TYPO3-Initiatives/content-block-examples.git"
+        },
         "local": {
             "type": "path",
             "url": "Build/packages/*"
@@ -103,7 +108,7 @@
     "prefer-stable": true,
     "scripts": {
         "post-autoload-dump": [
-            "[ -L .typo3/public/typo3conf/ext/sci_api ] || ( mkdir -p .typo3/public/typo3conf/ext/ && ln -snvf ../../../../. .typo3/public/typo3conf/ext/sci_api )"
+            "[ -L .typo3/public/typo3conf/ext/contentblocks_reg_api ] || ( mkdir -p .typo3/public/typo3conf/ext/ && ln -snvf ../../../../. .typo3/public/typo3conf/ext/contentblocks_reg_api )"
         ],
         "fix-staged:cgl:php-cs": [
             "php-cs-fixer --config=.php_cs.dist fix -v --using-cache=no `git diff --cached --name-only '*.php'`"
@@ -119,7 +124,7 @@
             "php-cs-fixer --config=.php_cs.dist fix --using-cache=no"
         ],
         "install-extensions": [
-            "typo3 extension:activate -n sci_api",
+            "typo3 extension:activate -n contentblocks_reg_api",
             "typo3cms database:updateschema"
         ],
         "install-typo3": [

@@ -35,10 +35,10 @@ It consists of 2 composer packages: an API extension and a composer plugin.
 
 #### Installation steps
 <pre>
-composer config repositories.cb-api vcs https://github.com/TYPO3-Initiatives/content-block-registration-api.git
+composer config repositories.cb-reg-api vcs https://github.com/TYPO3-Initiatives/content-block-registration-api.git
 composer config repositories.cb-composer-plugin vcs https://github.com/TYPO3-Initiatives/content-blocks-composer-plugin.git
 composer config minimum-stability dev
-composer req sci/sci-api:dev-master
+composer req typo3-contentblocks/contentblocks-reg-api:dev-master
 </pre>
 
 * Add new database fields: (Backend) `Maintenance` › `Analyze Database Structure`
@@ -50,7 +50,7 @@ composer req sci/sci-api:dev-master
 [This is an example repo](https://github.com/TYPO3-Initiatives/content-block-examples) with a content block
 <pre>
 composer config repositories.cb-examples vcs https://github.com/TYPO3-Initiatives/content-block-examples.git
-composer req sci/call-to-action-example:dev-master
+composer req typo3-contentblocks/call-to-action-example:dev-master
 </pre>
 
 For using custom content blocks in your project we recommend a [local "path" composer repository](https://getcomposer.org/doc/05-repositories.md#path).

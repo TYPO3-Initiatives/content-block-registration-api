@@ -2,19 +2,19 @@
 
 defined('TYPO3_MODE') || die('Access denied.');
 
-(static function ($_EXTKEY = 'sci_api') {
-    if (!is_array($GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations'][\Sci\SciApi\Constants::CACHE])) {
-        $GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations'][\Sci\SciApi\Constants::CACHE] = [
+(static function ($_EXTKEY = 'contentblocks_reg_api') {
+    if (!is_array($GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations'][\Typo3Contentblocks\ContentblocksRegApi\Constants::CACHE])) {
+        $GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations'][\Typo3Contentblocks\ContentblocksRegApi\Constants::CACHE] = [
             'groups' => ['system'],
         ];
     }
 
-    if (!isset($GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations'][\Sci\SciApi\Constants::CACHE]['frontend'])) {
-        $GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations'][\Sci\SciApi\Constants::CACHE]['frontend'] =
+    if (!isset($GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations'][\Typo3Contentblocks\ContentblocksRegApi\Constants::CACHE]['frontend'])) {
+        $GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations'][\Typo3Contentblocks\ContentblocksRegApi\Constants::CACHE]['frontend'] =
             \TYPO3\CMS\Core\Cache\Frontend\VariableFrontend::class;
     }
 
-    $contentBlocks = Sci\SciApi\Service\ConfigurationService::configuration();
+    $contentBlocks = Typo3Contentblocks\ContentblocksRegApi\Service\ConfigurationService::configuration();
 
     foreach ($contentBlocks as $contentBlock) {
         /***************
@@ -67,7 +67,7 @@ defined('TYPO3_MODE') || die('Access denied.');
                 5 = ' . $contentBlock['frontendTemplatePath'] . '
             }
             dataProcessing {
-                10 = Sci\SciApi\DataProcessing\FlexFormProcessor
+                10 = Typo3Contentblocks\ContentblocksRegApi\DataProcessing\FlexFormProcessor
             }
         }
         ');
@@ -76,11 +76,11 @@ defined('TYPO3_MODE') || die('Access denied.');
     /** Wizard start **/
     /* Add typoscript setup for wizard */
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScriptSetup('
-    module.tx_sciapi {
+    module.tx_contentblocksregapi {
         view {
-            templateRootPaths.0 = EXT:sci_api/Resources/Private/Wizard/Templates/
-            partialRootPaths.0 = EXT:sci_api/Resources/Private/Wizard/Partials/
-            layoutRootPaths.0 = EXT:sci_api/Resources/Private/Wizard/Layouts/
+            templateRootPaths.0 = EXT:contentblocks_reg_api/Resources/Private/Wizard/Templates/
+            partialRootPaths.0 = EXT:contentblocks_reg_api/Resources/Private/Wizard/Partials/
+            layoutRootPaths.0 = EXT:contentblocks_reg_api/Resources/Private/Wizard/Layouts/
         }
         persistence {
             storagePid = 0

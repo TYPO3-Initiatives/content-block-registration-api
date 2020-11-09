@@ -3,16 +3,16 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the package sci/sci-api.
+ * This file is part of the package typo3-contentblocks/contentblocks-reg-api.
  *
  * For the full copyright and license information, please read the
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Sci\SciApi\Backend\Preview;
+namespace Typo3Contentblocks\ContentblocksRegApi\Backend\Preview;
 
-use Sci\SciApi\DataProcessing\FlexFormProcessor;
-use Sci\SciApi\Service\ConfigurationService;
+use Typo3Contentblocks\ContentblocksRegApi\DataProcessing\FlexFormProcessor;
+use Typo3Contentblocks\ContentblocksRegApi\Service\ConfigurationService;
 use TYPO3\CMS\Backend\Preview\StandardContentPreviewRenderer;
 use TYPO3\CMS\Backend\View\BackendLayout\Grid\GridColumnItem;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
