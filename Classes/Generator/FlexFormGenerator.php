@@ -18,22 +18,22 @@ class FlexFormGenerator
     public static function createTypoLink($field, $contentBlock) // typo3-contentblocks.slider-local.slides.label
     {
         $blindLinkOption = 'page,url,mail,spec,file,folder,telephone';
-        if ( is_array($field['properties']['linkTypes']) ) {
-            foreach ($field['properties']['linkTypes'] as $allowedField ) {
-                $blindLinkOption = str_replace(  str_replace('external', 'url', $allowedField), '', $blindLinkOption);
+        if (is_array($field['properties']['linkTypes'])) {
+            foreach ($field['properties']['linkTypes'] as $allowedField) {
+                $blindLinkOption = str_replace(str_replace('external', 'url', $allowedField), '', $blindLinkOption);
             }
+        } else {
+            $blindLinkOption = '';
         }
-        else $blindLinkOption = '';
-
 
         $blindLinkFields = 'target,title,class,params';
-        if ( is_array($field['properties']['fieldTypes']) ) {
-            foreach ($field['properties']['fieldTypes'] as $allowedField ) {
-                $blindLinkFields = str_replace( $allowedField, '', $blindLinkFields);
+        if (is_array($field['properties']['fieldTypes'])) {
+            foreach ($field['properties']['fieldTypes'] as $allowedField) {
+                $blindLinkFields = str_replace($allowedField, '', $blindLinkFields);
             }
+        } else {
+            $blindLinkFields = '';
         }
-        else $blindLinkFields = '';
-
 
         return '
         <' . $field['identifier'] . '>
@@ -50,8 +50,8 @@ class FlexFormGenerator
                     <fieldControl>
                         <linkPopup>
                             <options>
-                                <blindLinkOptions>' .  $blindLinkOption . '</blindLinkOptions>
-                                <blindLinkFields>' .  $blindLinkFields . '</blindLinkFields>
+                                <blindLinkOptions>' . $blindLinkOption . '</blindLinkOptions>
+                                <blindLinkFields>' . $blindLinkFields . '</blindLinkFields>
                             </options>
                         </linkPopup>
                     </fieldControl>
@@ -67,43 +67,56 @@ class FlexFormGenerator
         $items = '';
 
         $evalFields = ($field['properties']['required'] === true ? 'required' : '') . ($field['properties']['trim'] === true && $field['properties']['required'] === true ? ',  ' : '') . ($field['properties']['trim'] === true ? 'trim ' : '');
-        if ( $field['type'] === 'Email' ) $evalFields = $evalFields . (strlen($evalFields) > 0 ? ', ' : '' ) . 'email';
-        if ( $field['type'] === 'Integer' ) $evalFields = $evalFields . (strlen($evalFields) > 0 ? ', ' : '' ) . 'int';
-        if ( $field['type'] === 'Money' ) $evalFields = $evalFields . (strlen($evalFields) > 0 ? ', ' : '' ) . 'double2';
-        if ( $field['type'] === 'Number' ) $evalFields = $evalFields . (strlen($evalFields) > 0 ? ', ' : '' ) . 'num';
-        if ( $field['type'] === 'Password' ) $evalFields = $evalFields . (strlen($evalFields) > 0 ? ', ' : '' ) . 'password';
-        if ( $field['type'] === 'Range' ) $evalFields = $evalFields . (strlen($evalFields) > 0 ? ', ' : '' ) . 'trim,int';
-        if ( $field['type'] === 'Tel' ) $evalFields = $evalFields . (strlen($evalFields) > 0 ? ', ' : '' ) . 'alphanum';
-        if ( $field['type'] === 'Date' ) $evalFields = $evalFields . (strlen($evalFields) > 0 ? ', ' : '' ) . 'date';
-        if ( $field['type'] === 'DateTime' ) $evalFields = $evalFields . (strlen($evalFields) > 0 ? ', ' : '' ) . 'datetime';
-        if ( $field['type'] === 'Time' ) $evalFields = $evalFields . (strlen($evalFields) > 0 ? ', ' : '' ) . 'time';
-
+        if ($field['type'] === 'Email') {
+            $evalFields = $evalFields . (strlen($evalFields) > 0 ? ', ' : '') . 'email';
+        }
+        if ($field['type'] === 'Integer') {
+            $evalFields = $evalFields . (strlen($evalFields) > 0 ? ', ' : '') . 'int';
+        }
+        if ($field['type'] === 'Money') {
+            $evalFields = $evalFields . (strlen($evalFields) > 0 ? ', ' : '') . 'double2';
+        }
+        if ($field['type'] === 'Number') {
+            $evalFields = $evalFields . (strlen($evalFields) > 0 ? ', ' : '') . 'num';
+        }
+        if ($field['type'] === 'Password') {
+            $evalFields = $evalFields . (strlen($evalFields) > 0 ? ', ' : '') . 'password';
+        }
+        if ($field['type'] === 'Range') {
+            $evalFields = $evalFields . (strlen($evalFields) > 0 ? ', ' : '') . 'trim,int';
+        }
+        if ($field['type'] === 'Tel') {
+            $evalFields = $evalFields . (strlen($evalFields) > 0 ? ', ' : '') . 'alphanum';
+        }
+        if ($field['type'] === 'Date') {
+            $evalFields = $evalFields . (strlen($evalFields) > 0 ? ', ' : '') . 'date';
+        }
+        if ($field['type'] === 'DateTime') {
+            $evalFields = $evalFields . (strlen($evalFields) > 0 ? ', ' : '') . 'datetime';
+        }
+        if ($field['type'] === 'Time') {
+            $evalFields = $evalFields . (strlen($evalFields) > 0 ? ', ' : '') . 'time';
+        }
 
         $additionlConfig = '';
-        if ( is_array($field['properties']['range']) )
-        {
+        if (is_array($field['properties']['range'])) {
             $additionlConfig .= '
             <range>
-                <lower>' . floatval(($field['properties']['range']['lower'] !== '' ? $field['properties']['range']['lower'] : '0'))  . '</lower>
-                <upper>' . floatval(($field['properties']['range']['upper'] !== '' ? $field['properties']['range']['upper'] : '100'))  . '</upper>
+                <lower>' . floatval(($field['properties']['range']['lower'] !== '' ? $field['properties']['range']['lower'] : '0')) . '</lower>
+                <upper>' . floatval(($field['properties']['range']['upper'] !== '' ? $field['properties']['range']['upper'] : '100')) . '</upper>
             </range>';
-
         }
-        if ( $field['type'] === 'Percent' )
-        {
+        if ($field['type'] === 'Percent') {
             $additionlConfig .= $additionlConfig . '
             <slider>
                 <step>' . ($field['properties']['slider']['step'] !== '' ? $field['properties']['slider']['step'] : '1') . '</step>
                 <width>' . ($field['properties']['slider']['width'] !== '' ? $field['properties']['slider']['width'] : '100') . '</width>
             </slider>
             ';
-        }
-        else if ( $field['type'] === 'Color' )
-        {
+        } elseif ($field['type'] === 'Color') {
             $additionlConfig .= '<renderType>colorpicker</renderType>';
 
-            if ( is_array($field['properties']['valuePicker']['items'] ))
-            {
+            if (is_array($field['properties']['valuePicker']['items'])) {
                 $counter = 0;
                 $items = '<items type="array">';
                 foreach ($field['properties']['valuePicker']['items'] as $key => $value) {
@@ -115,13 +128,14 @@ class FlexFormGenerator
                     $counter++;
                 }
                 $items .= '</items>';
-
             }
-
+        } elseif ($field['type'] === 'Date' || $field['type'] === 'DateTime' || $field['type'] === 'Time') {
+            $additionlConfig .= '<renderType>inputDateTime</renderType>';
         }
-        else if ( $field['type'] === 'Date' || $field['type'] === 'DateTime' || $field['type'] === 'Time' ) $additionlConfig .= '<renderType>inputDateTime</renderType>';
 
-        if ( $field['properties']['displayAge'] ) $additionlConfig .= '<displayAge>true</displayAge>';
+        if ($field['properties']['displayAge']) {
+            $additionlConfig .= '<displayAge>true</displayAge>';
+        }
 
         return '
         <' . $field['identifier'] . '>
@@ -134,7 +148,7 @@ class FlexFormGenerator
                     <type>input</type>
                     <size>' . ($field['properties']['size'] > 0 ? $field['properties']['size'] : '20') . '</size>
                     <max>' . ($field['properties']['max'] > 0 ? $field['properties']['max'] : '700') . '</max>
-                    <eval>' . $evalFields .'</eval>
+                    <eval>' . $evalFields . '</eval>
                     <placeholder>' . $field['properties']['placeholder'] . '</placeholder>
                     <default>' . $field['properties']['default'] . '</default>
                     <autocomplete>' . ($field['properties']['autocomplete'] === true ? 'true ' : 'false') . '</autocomplete>
@@ -145,7 +159,6 @@ class FlexFormGenerator
         </' . $field['identifier'] . '>
         ';
     }
-
 
     /** create picture */
     public static function createImageField($field, $contentBlock)
@@ -227,10 +240,10 @@ class FlexFormGenerator
                     <cols>' . ($field['properties']['cols'] === true ? $field['properties']['cols'] : '24') . '</cols>
                     <rows>' . ($field['properties']['rows'] === true ? $field['properties']['rows'] : '3') . '</rows>
                     <enableRichtext>' . ($field['properties']['enableRichtext'] === true ? 'true' : 'false') . '</enableRichtext>
-                    <richtextConfiguration>' . $field['properties']['richtextConfiguration']  . '</richtextConfiguration>
-                    <eval>' . ($field['properties']['required'] === true ? 'required' : '') . ($field['properties']['trim'] === true && $field['properties']['required'] === true ? ',  ' : '') . ($field['properties']['trim'] === true ? 'trim ' : '') .'</eval>
-                    <placeholder>' . $field['properties']['placeholder']  . '</placeholder>
-                    <default>' . $field['properties']['default']  . '</default>
+                    <richtextConfiguration>' . $field['properties']['richtextConfiguration'] . '</richtextConfiguration>
+                    <eval>' . ($field['properties']['required'] === true ? 'required' : '') . ($field['properties']['trim'] === true && $field['properties']['required'] === true ? ',  ' : '') . ($field['properties']['trim'] === true ? 'trim ' : '') . '</eval>
+                    <placeholder>' . $field['properties']['placeholder'] . '</placeholder>
+                    <default>' . $field['properties']['default'] . '</default>
                 </config>
             </TCEforms>
         </' . $field['identifier'] . '>
@@ -240,8 +253,7 @@ class FlexFormGenerator
     /** create selection, checkboxes */
     public static function createSelections($field, $contentBlock)
     {
-         if ( is_array($field['properties']['items'] ))
-        {
+        if (is_array($field['properties']['items'])) {
             $counter = 0;
             $items = '<items type="array">';
             foreach ($field['properties']['items'] as $key => $value) {
@@ -256,15 +268,27 @@ class FlexFormGenerator
         }
 
         $type = 'select';
-        if ( $field['type'] === 'Checkbox' ) $type = 'check';
-        if ( $field['type'] === 'Radiobox' ) $type = 'radio';
+        if ($field['type'] === 'Checkbox') {
+            $type = 'check';
+        }
+        if ($field['type'] === 'Radiobox') {
+            $type = 'radio';
+        }
 
         $additionlConfig = '';
-        if ( $field['type'] === 'Select' ) $additionlConfig = '<renderType>selectSingle</renderType>';
-        if ( $field['type'] === 'MultiSelect' ) $additionlConfig = '<renderType>selectMultipleSideBySide</renderType>';
+        if ($field['type'] === 'Select') {
+            $additionlConfig = '<renderType>selectSingle</renderType>';
+        }
+        if ($field['type'] === 'MultiSelect') {
+            $additionlConfig = '<renderType>selectMultipleSideBySide</renderType>';
+        }
 
-        if ( $field['properties']['cols']  ) $additionlConfig .= '<cols>' . $field['properties']['cols'] . '</cols>';
-        if ( $field['properties']['maxItems']  ) $additionlConfig .= '<maxitems>' . $field['properties']['maxItems'] . '</maxitems>';
+        if ($field['properties']['cols']) {
+            $additionlConfig .= '<cols>' . $field['properties']['cols'] . '</cols>';
+        }
+        if ($field['properties']['maxItems']) {
+            $additionlConfig .= '<maxitems>' . $field['properties']['maxItems'] . '</maxitems>';
+        }
 
         return '
         <' . $field['identifier'] . '>
@@ -275,7 +299,7 @@ class FlexFormGenerator
             . '.' . $contentBlock['package'] . '.' . $field['identifier'] . '.description</description>
                 <config>
                     <type>' . $type . '</type>
-                    <default>' . $field['properties']['default']  . '</default>
+                    <default>' . $field['properties']['default'] . '</default>
                     ' . $items . '
                     ' . $additionlConfig . '
                 </config>

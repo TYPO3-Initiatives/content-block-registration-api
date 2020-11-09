@@ -11,8 +11,6 @@ declare(strict_types=1);
 
 namespace Typo3Contentblocks\ContentblocksRegApi\Service;
 
-use Typo3Contentblocks\ContentblocksRegApi\Constants;
-use Typo3Contentblocks\ContentblocksRegApi\Validator\ContentBlockValidator;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 use Symfony\Component\Yaml\Yaml;
@@ -20,6 +18,8 @@ use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\Imaging\IconProvider\BitmapIconProvider;
 use TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use Typo3Contentblocks\ContentblocksRegApi\Constants;
+use Typo3Contentblocks\ContentblocksRegApi\Validator\ContentBlockValidator;
 
 class ConfigurationService
 {

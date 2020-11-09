@@ -1,4 +1,12 @@
-<?php
+<?php declare(strict_types=1);
+
+/*
+ * This file is part of the package typo3-contentblocks/contentblocks-reg-api.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
+
 $columns = [
     'text' => [
         'label' => 'Text',
@@ -167,7 +175,7 @@ $columns = [
             'size' => 20,
             'range' => [
                 'lower' => mktime(0, 1, 0, 0, 0, 0),
-                'upper' => mktime(23, 59, 0,0, 0, 0),
+                'upper' => mktime(23, 59, 0, 0, 0, 0),
             ],
             'eval' => 'time'
         ]

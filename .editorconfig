@@ -12,10 +12,8 @@ insert_final_newline = true
 trim_trailing_whitespace = true
 indent_size = 4
 
-# ReST-Files
 [*.rst]
 indent_size = 3
 
-# ReST-Files
-[*.yaml]
+[{*.yaml, *.xlf}]
 indent_size = 2

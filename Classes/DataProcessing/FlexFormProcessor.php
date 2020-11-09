@@ -11,13 +11,13 @@ declare(strict_types=1);
 
 namespace Typo3Contentblocks\ContentblocksRegApi\DataProcessing;
 
-use Typo3Contentblocks\ContentblocksRegApi\Service\ConfigurationService;
 use TYPO3\CMS\Core\Resource\FileRepository;
 use TYPO3\CMS\Core\Service\FlexFormService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\ContentObject\DataProcessorInterface;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
+use Typo3Contentblocks\ContentblocksRegApi\Service\ConfigurationService;
 
 class FlexFormProcessor implements DataProcessorInterface
 {

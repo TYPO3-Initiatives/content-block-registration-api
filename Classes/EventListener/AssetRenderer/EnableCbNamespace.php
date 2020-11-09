@@ -11,11 +11,11 @@ declare(strict_types=1);
 
 namespace Typo3Contentblocks\ContentblocksRegApi\EventListener\AssetRenderer;
 
-use Typo3Contentblocks\ContentblocksRegApi\Constants;
 use TYPO3\CMS\Core\Page\AssetCollector;
 use TYPO3\CMS\Core\Page\Event\AbstractBeforeAssetRenderingEvent;
 use TYPO3\CMS\Core\Page\Event\BeforeJavaScriptsRenderingEvent;
 use TYPO3\CMS\Core\Page\Event\BeforeStylesheetsRenderingEvent;
+use Typo3Contentblocks\ContentblocksRegApi\Constants;
 
 /**
  * Rewrites CB:-paths in assets.
