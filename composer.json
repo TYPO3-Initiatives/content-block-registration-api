@@ -21,7 +21,6 @@
         "typo3/cms-core": "^10.4.0 || ^11.0.0 || dev-master"
     },
     "require-dev": {
-        "ergebnis/composer-normalize": "2.7.0",
         "friendsofphp/php-cs-fixer": "^2.16",
         "helhum/typo3-console": "^6.3",
         "roave/security-advisories": "dev-master",
@@ -90,10 +89,6 @@
         }
     },
     "repositories": {
-        "cb-examples": {
-            "type": "vcs",
-            "url": "https://github.com/TYPO3-Initiatives/content-block-examples.git"
-        },
         "local": {
             "type": "path",
             "url": "Build/packages/*"
@@ -114,10 +109,6 @@
         ],
         "fix:cgl": [
             "@fix:cgl:php-cs",
-            "@fix:cgl:composer"
-        ],
-        "fix:cgl:composer": [
-            "composer normalize --no-update-lock"
         ],
         "fix:cgl:php-cs": [
             "php-cs-fixer --config=.php_cs.dist fix --using-cache=no"
@@ -140,17 +131,12 @@
         ],
         "test-staged:cgl": [
             "@test-staged:cgl:php-cs",
-            "@test:cgl:composer"
         ],
         "test-staged:cgl:php-cs": [
             "php-cs-fixer --config=.php_cs.dist fix -v --using-cache=no --dry-run `git diff --cached --name-only '*.php'`"
         ],
         "test:cgl": [
             "@test:cgl:php-cs",
-            "@test:cgl:composer"
-        ],
-        "test:cgl:composer": [
-            "composer normalize --no-update-lock --dry-run"
         ],
         "test:cgl:php-cs": [
             "php-cs-fixer --config=.php_cs.dist fix -v --using-cache=no --dry-run"
