@@ -4,9 +4,10 @@
 /vendor/
 /composer.lock
 
-# Build stuff
+# dev
 /.typo3/
 /Tests/.phpunit.result.cache
-
-# CGL Fixer
 /.php_cs.cache
+
+# That's where you would checkout the composer-plugin for local development
+/Build/packages/content-blocks-composer-plugin/
