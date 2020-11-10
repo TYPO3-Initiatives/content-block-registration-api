@@ -1,5 +1,8 @@
 {
     "name": "typo3-contentblocks/text-local",
     "type": "typo3-cms-contentblock",
-    "license": "GPL-2.0-or-later"
+    "license": "GPL-2.0-or-later",
+    "require": {
+        "typo3-contentblocks/contentblocks-reg-api": "*"
+    }
 }
