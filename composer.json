@@ -17,7 +17,7 @@
     "require": {
         "php": "^7.2",
         "ext-json": "*",
-        "typo3-contentblocks/composer-plugin": "dev-master",
+        "typo3-contentblocks/composer-plugin": "*",
         "typo3/cms-core": "^10.4.0 || ^11.0.0 || dev-master"
     },
     "require-dev": {
@@ -96,6 +96,10 @@
         "cb-composer-plugin": {
             "type": "vcs",
             "url": "https://github.com/TYPO3-Initiatives/content-blocks-composer-plugin.git"
+        },
+        "cb-examples": {
+            "type": "vcs",
+            "url": "https://github.com/TYPO3-Initiatives/content-block-examples.git"
         }
     },
     "minimum-stability": "dev",
