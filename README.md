@@ -43,6 +43,7 @@ composer config minimum-stability dev
 composer req typo3-contentblocks/contentblocks-reg-api:dev-master
 </pre>
 
+* Activate the extension `contentblocks_reg_api`
 * Add new database fields: (Backend) `Maintenance` › `Analyze Database Structure`
 
 ### Getting/Creating new content blocks
