@@ -222,8 +222,9 @@ class WizardController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
             'type' => 'typo3-cms-contentblock',
             'license' => 'GPL-2.0-or-later',
             'authors' =>  [ ['name' => 'Structured Content Initiative'] ],
+            'require' =>  ['typo3-contentblocks/contentblocks-reg-api' => '*'] ,
         ];
-        file_put_contents($cbBasePath . 'composer.json', json_encode($composerJson, JSON_UNESCAPED_SLASHES));
+        file_put_contents($cbBasePath . 'composer.json', json_encode($composerJson, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
 
         $this->addFlashMessage('The content block was created.', '', \TYPO3\CMS\Core\Messaging\AbstractMessage::OK);
         $this->addFlashMessage('Please clear all caches bevor you use the new content block.', '', \TYPO3\CMS\Core\Messaging\AbstractMessage::WARNING);
