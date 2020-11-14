@@ -181,13 +181,19 @@ class WizardController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
         file_put_contents($cbBasePath . 'src/Frontend.html', '
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
 
-<f:asset.css identifier="content-block-' . $contentBlock['packageName'] . '-be" href="CB:' . $contentBlock['packageName'] . '/dist/EditorPreview.css"/>
-<f:asset.css identifier="content-block-' . $contentBlock['packageName'] . '" href="CB:' . $contentBlock['packageName'] . '/dist/Frontend.css"/>
-<f:asset.script identifier="content-block-' . $contentBlock['packageName'] . '" src="CB:' . $contentBlock['packageName'] . '/dist/Frontend.js"/>
-<div class="' . $contentBlock['packageName'] . '">
-    ' . $fieldsForTemplate . '
-</div>
+<f:layout name="Default" />
 
+<f:section name="Main">
+
+    <f:asset.css identifier="content-block-' . $contentBlock['packageName'] . '-be" href="CB:' . $contentBlock['packageName'] . '/dist/EditorPreview.css"/>
+    <f:asset.css identifier="content-block-' . $contentBlock['packageName'] . '" href="CB:' . $contentBlock['packageName'] . '/dist/Frontend.css"/>
+    <f:asset.script identifier="content-block-' . $contentBlock['packageName'] . '" src="CB:' . $contentBlock['packageName'] . '/dist/Frontend.js"/>
+    
+    <div class="' . $contentBlock['packageName'] . '">
+        ' . $fieldsForTemplate . '
+    </div>
+
+</f:section>
 </html>
         ');
 
