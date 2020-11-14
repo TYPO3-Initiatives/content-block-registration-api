@@ -13,6 +13,13 @@ defined('TYPO3_MODE') || die('Access denied.');
         ];
     }
 
+    // include lib.contentElement in order to have it available for the CBs to inherit from
+    if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('fluid_styled_content')) {
+        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScriptSetup(
+            "@import 'EXT:fluid_styled_content/Configuration/TypoScript/Helper/ContentElement.typoscript'"
+        );
+    }
+
     // contentBlocks
     $contentBlocks = Typo3Contentblocks\ContentblocksRegApi\Service\ConfigurationService::configuration();
     foreach ($contentBlocks as $contentBlock) {
