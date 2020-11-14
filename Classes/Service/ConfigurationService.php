@@ -144,7 +144,11 @@ class ConfigurationService
             : false;
 
         // Frontend.html
-        $frontendTemplatePath = $path . 'src';
+        $frontendTemplatesPath = $path . 'src';
+        // Partials
+        $frontendPartialsPath = $frontendTemplatesPath . DIRECTORY_SEPARATOR . 'Partials';
+        // Layouts
+        $frontendLayoutsPath = $frontendTemplatesPath . DIRECTORY_SEPARATOR . 'Layouts';
 
         // relation fields
         $relationFields = [];
@@ -164,7 +168,9 @@ class ConfigurationService
             'iconProviderClass' => $iconProviderClass,
             'CType' => $cType,
             'relationFields' => $relationFields,
-            'frontendTemplatePath' => $frontendTemplatePath,
+            'frontendTemplatesPath' => $frontendTemplatesPath,
+            'frontendPartialsPath' => $frontendPartialsPath,
+            'frontendLayoutsPath' => $frontendLayoutsPath,
             'EditorPreview.html' => $editorPreviewHtml,
             'EditorInterface.xlf' => $editorInterfaceXlf,
             'EditorLLL' => 'LLL:' . $editorInterfaceXlf . ':' . $vendor . '.' . $packageName,
