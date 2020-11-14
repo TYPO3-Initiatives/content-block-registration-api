@@ -11,9 +11,12 @@ declare(strict_types=1);
 
 namespace Typo3Contentblocks\ContentblocksRegApi\Service;
 
+use LogicException;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 use Symfony\Component\Yaml\Yaml;
+use TYPO3\CMS\Core\Cache\CacheManager;
+use TYPO3\CMS\Core\Cache\Exception\NoSuchCacheException;
 use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\Imaging\IconProvider\BitmapIconProvider;
 use TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider;
@@ -25,18 +28,19 @@ class ConfigurationService
 {
     public static function configuration(): array
     {
-        return self::configurationUncached();
+        try {
+            $cache = GeneralUtility::makeInstance(CacheManager::class)
+                ->getCache(Constants::CACHE);
 
-        // TODO
-        //        $cache = GeneralUtility::makeInstance(CacheManager::class)
-        //            ->getCache(Constants::CACHE);
-        //
-        //        if (false === $configuration = $cache->get(Constants::CACHE_CONFIGURATION_ENTRY)) {
-        //            $configuration = self::configurationUncached();
-        //            $cache->set(Constants::CACHE_CONFIGURATION_ENTRY, $configuration, [], 0);
-        //        }
-        //
-        //        return $configuration;
+            if (false === $configuration = $cache->get(Constants::CACHE_CONFIGURATION_ENTRY)) {
+                $configuration = self::configurationUncached();
+                $cache->set(Constants::CACHE_CONFIGURATION_ENTRY, $configuration, [], 0);
+            }
+        } catch (LogicException | NoSuchCacheException $e) { // if unconfigured or in ext_localconf.php
+            $configuration = self::configurationUncached();
+        }
+
+        return $configuration;
     }
 
     public static function contentBlockConfiguration(string $cType): ?array
