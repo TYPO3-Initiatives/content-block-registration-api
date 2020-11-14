@@ -239,8 +239,8 @@ class FlexFormGenerator
                     <type>text</type>
                     <cols>' . ($field['properties']['cols'] === true ? $field['properties']['cols'] : '24') . '</cols>
                     <rows>' . ($field['properties']['rows'] === true ? $field['properties']['rows'] : '3') . '</rows>
-                    <enableRichtext>' . ($field['properties']['enableRichtext'] === true ? 'true' : 'false') . '</enableRichtext>
-                    <richtextConfiguration>' . $field['properties']['richtextConfiguration'] . '</richtextConfiguration>
+                    ' . ($field['properties']['enableRichtext'] === true ? '<enableRichtext>true</enableRichtext>' : '') . '
+                    ' . (strlen($field['properties']['richtextConfiguration'] . '') > 0 ? '<richtextConfiguration>' . $field['properties']['richtextConfiguration'] . '</richtextConfiguration>' : '') . '
                     <eval>' . ($field['properties']['required'] === true ? 'required' : '') . ($field['properties']['trim'] === true && $field['properties']['required'] === true ? ',  ' : '') . ($field['properties']['trim'] === true ? 'trim ' : '') . '</eval>
                     <placeholder>' . $field['properties']['placeholder'] . '</placeholder>
                     <default>' . $field['properties']['default'] . '</default>
