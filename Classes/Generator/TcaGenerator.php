@@ -9,18 +9,49 @@ declare(strict_types=1);
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Typo3Contentblocks\ContentblocksRegApi\Backend;
+namespace Typo3Contentblocks\ContentblocksRegApi\Generator;
 
-use Typo3Contentblocks\ContentblocksRegApi\Generator\FlexFormGenerator;
 use Typo3Contentblocks\ContentblocksRegApi\Service\ConfigurationService;
 
-class Tca
+class TcaGenerator
 {
+    public static function contentBlockFlexformColumnTca()
+    {
+        return [
+            'exclude' => 0,
+            'label' => 'LLL:EXT:contentblocks_reg_api/Resources/Private/Language/locallang_db.xlf:tt_content.content_block',
+            'config' => [
+                'type' => 'flex',
+                'ds_pointerField' => 'CType',
+                'ds' => [
+                    'default' => '
+<T3DataStructure>
+  <ROOT>
+    <type>array</type>
+    <el>
+        <!-- Repeat an element like "xmlTitle" beneath for as many elements you like. Remember to name them uniquely  -->
+      <xmlTitle>
+        <TCEforms>
+            <label>The Title:</label>
+            <config>
+                <type>input</type>
+                <size>48</size>
+            </config>
+        </TCEforms>
+      </xmlTitle>
+    </el>
+  </ROOT>
+</T3DataStructure>
+'
+                ]
+            ]
+        ];
+    }
 
     /**
      * Create the TCA config for all Content Blocks
      **/
-    public static function getTca()
+    public static function setTca()
     {
         $configuration = ConfigurationService::configuration();
 

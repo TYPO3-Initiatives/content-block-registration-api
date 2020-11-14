@@ -1,0 +1,11 @@
+module.tx_contentblocksregapi {
+    view {
+        templateRootPaths.0 = EXT:contentblocks_reg_api/Resources/Private/Wizard/Templates/
+        partialRootPaths.0 = EXT:contentblocks_reg_api/Resources/Private/Wizard/Partials/
+        layoutRootPaths.0 = EXT:contentblocks_reg_api/Resources/Private/Wizard/Layouts/
+    }
+
+    persistence {
+        storagePid = 0
+    }
+}
