@@ -13,12 +13,14 @@ namespace Typo3Contentblocks\ContentblocksRegApi\DataProcessing;
 
 use TYPO3\CMS\Core\Resource\FileRepository;
 use TYPO3\CMS\Core\Service\FlexFormService;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\ContentObject\DataProcessorInterface;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 use Typo3Contentblocks\ContentblocksRegApi\Service\ConfigurationService;
 
+/**
+ * Processes the FlexForm field and puts all entries as variables to the top level.
+ */
 class FlexFormProcessor implements DataProcessorInterface
 {
     /**
@@ -31,10 +33,10 @@ class FlexFormProcessor implements DataProcessorInterface
      */
     protected $fileRepository;
 
-    public function __construct()
+    public function __construct(FlexFormService $flexFormService, FileRepository $fileRepository)
     {
-        $this->flexFormService = GeneralUtility::makeInstance(FlexFormService::class);
-        $this->fileRepository = GeneralUtility::makeInstance(FileRepository::class);
+        $this->flexFormService = $flexFormService;
+        $this->fileRepository = $fileRepository;
     }
 
     /**
@@ -58,21 +60,22 @@ class FlexFormProcessor implements DataProcessorInterface
         $flexformData = $this->flexFormService->convertFlexFormContentToArray($originalValue);
         $processedData = array_merge($processedData, $flexformData);
 
-        $cbConf = ConfigurationService::contentBlockConfiguration($processedData['data']['CType']);
-        $processedData['LLL'] = $cbConf['FrontendLLL'];
+        $cType = $processedData['data']['CType'];
+        $relationFields = ConfigurationService::cbRelationFields($cType);
 
-        foreach ($flexformData as $fieldKey => $val) {
-            if (in_array($fieldKey, $cbConf['relationFields'] ?? [])) {
-                $maybeLocalizedUid = $processedData['data']['_LOCALIZED_UID'] ?? $processedData['data']['uid'];
+        foreach ($flexformData as $fieldIdentifier => $val) {
+            if (in_array($fieldIdentifier, $relationFields)) {
+                $maybeLocalizedUid = $processedData['data']['_LOCALIZED_UID']
+                    ?? $processedData['data']['uid'];
 
                 // look away now
 
                 // Why are you still looking?!
                 if (!($GLOBALS['TSFE'] ?? null) instanceof TypoScriptFrontendController) {
                     /**
-                     * @see \TYPO3\CMS\Core\Resource\FileRepository::findByRelation() requires a configured TCA column
-                     * in backend context. That's impossible for a field inside a FlexForm.
-                     *
+                     * @see \TYPO3\CMS\Core\Resource\FileRepository::findByRelation() requires
+                     * a configured TCA column in backend context.
+                     * That's impossible for a field inside a FlexForm.
                      * @see \TYPO3\CMS\Core\Resource\AbstractRepository::getEnvironmentMode()
                      */
                     $_tsfe = $GLOBALS['TSFE'] ?? null;
@@ -83,11 +86,18 @@ class FlexFormProcessor implements DataProcessorInterface
                 }
 
                 // welcome back
-                $processedData[$fieldKey] = $this->fileRepository->findByRelation(
+                $processedData[$fieldIdentifier] = $this->fileRepository->findByRelation(
                     'tt_content',
-                    $fieldKey,
+                    $fieldIdentifier,
                     $maybeLocalizedUid
                 );
+
+                // Deliver a single file if the field is configured as maxItems=1
+                $fieldConf = ConfigurationService::cbField($cType, $fieldIdentifier);
+                $maxItems = (int) ($fieldConf['properties']['maxItems'] ?? 1);
+                if ($maxItems === 1) {
+                    $processedData[$fieldIdentifier] = $processedData[$fieldIdentifier][0] ?? null;
+                }
 
                 // look away again
                 if (isset($_tsfe)) {

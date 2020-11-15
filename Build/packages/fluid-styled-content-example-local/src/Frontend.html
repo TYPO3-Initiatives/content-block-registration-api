@@ -3,15 +3,13 @@
 <f:layout name="Default"/>
 
 <f:section name="Main">
-    <f:asset.css identifier="content-block-counter" href="CB:counter-local/dist/Frontend.css"/>
-    <f:asset.script identifier="content-block-counter" src="CB:counter-local/dist/Frontend.js"/>
+    <f:asset.css identifier="cb-{cb.key}" href="CB:{cb.key}/dist/Frontend.css"/>
+    <f:asset.script identifier="cb-{cb.key}" src="CB:{cb.key}/dist/Frontend.js"/>
 
     <div class="counter">
         <span class="counter-value">{amount}</span>
         <span class="counter-icon">
-            <f:for each="{icon}" as="i">
-                <f:image image="{i}"/>
-            </f:for>
+            <f:image image="{icon}"/>
         </span>
         <span class="counter-name">{text}</span>
     </div>

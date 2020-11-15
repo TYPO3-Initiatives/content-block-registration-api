@@ -1,7 +1,7 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
 
-<f:asset.css identifier="content-block-slider" href="CB:slider-local/dist/Frontend.css"/>
-<f:asset.script identifier="content-block-slider" src="CB:slider-local/dist/Frontend.js"/>
+<f:asset.css identifier="cb-{cb.key}" href="CB:{cb.key}/dist/Frontend.css"/>
+<f:asset.script identifier="cb-{cb.key}" src="CB:{cb.key}/dist/Frontend.js"/>
 
 <div class="slider" data-autoplay="{autoplay}">
     <f:for each="{slides}" as="slide" iteration="iteration">
