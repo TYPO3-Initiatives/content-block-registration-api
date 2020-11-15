@@ -34,10 +34,10 @@ class FlexFormProcessor implements DataProcessorInterface
      */
     protected $fileRepository;
 
-    public function __construct()
+    public function __construct(FlexFormService $flexFormService, FileRepository $fileRepository)
     {
-        $this->flexFormService = GeneralUtility::makeInstance(FlexFormService::class);
-        $this->fileRepository = GeneralUtility::makeInstance(FileRepository::class);
+        $this->flexFormService = $flexFormService;
+        $this->fileRepository = $fileRepository;
     }
 
     /**

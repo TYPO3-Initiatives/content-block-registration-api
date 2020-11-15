@@ -26,6 +26,31 @@ use Typo3Contentblocks\ContentblocksRegApi\Service\ConfigurationService;
  */
 class PreviewRenderer extends StandardContentPreviewRenderer
 {
+    /**
+     * @var FlexFormProcessor
+     */
+    protected $flexFormProcessor;
+
+    /**
+     * @var CbProcessor
+     */
+    protected $cbProcessor;
+
+    /**
+     * @var ContentObjectRenderer
+     */
+    protected $cObj;
+
+    public function __construct(
+        ContentObjectRenderer $cObj,
+        FlexFormProcessor $flexFormProcessor,
+        CbProcessor $cbProcessor
+    ) {
+        $this->cObj = $cObj;
+        $this->flexFormProcessor = $flexFormProcessor;
+        $this->cbProcessor = $cbProcessor;
+    }
+
     public function renderPageModulePreviewContent(GridColumnItem $item): string
     {
         $record = $item->getRecord();
@@ -45,18 +70,18 @@ class PreviewRenderer extends StandardContentPreviewRenderer
         $processedData = ['data' => $record];
         // Flexform
         if (!empty($record['content_block'])) {
-            $processedData = GeneralUtility::makeInstance(FlexFormProcessor::class)
+            $processedData = $this->flexFormProcessor
                 ->process(
-                    GeneralUtility::makeInstance(ContentObjectRenderer::class),
+                    $this->cObj,
                     [],
                     [],
                     $processedData
                 );
         }
         // CB configuration
-        $processedData = GeneralUtility::makeInstance(CbProcessor::class)
+        $processedData = $this->cbProcessor
             ->process(
-                GeneralUtility::makeInstance(ContentObjectRenderer::class),
+                $this->cObj,
                 [],
                 [],
                 $processedData

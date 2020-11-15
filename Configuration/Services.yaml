@@ -1,7 +1,19 @@
 services:
-    Typo3Contentblocks\ContentblocksRegApi\EventListener\AssetRenderer\EnableCbNamespace:
-        tags:
-            -   name: event.listener
-                event: TYPO3\CMS\Core\Page\Event\BeforeJavaScriptsRenderingEvent
-            -   name: event.listener
-                event: TYPO3\CMS\Core\Page\Event\BeforeStylesheetsRenderingEvent
+  Typo3Contentblocks\ContentblocksRegApi\EventListener\AssetRenderer\EnableCbNamespace:
+    tags:
+      - name: event.listener
+        event: TYPO3\CMS\Core\Page\Event\BeforeJavaScriptsRenderingEvent
+      - name: event.listener
+        event: TYPO3\CMS\Core\Page\Event\BeforeStylesheetsRenderingEvent
+  Typo3Contentblocks\ContentblocksRegApi\DataProcessing\FlexFormProcessor:
+    autowire: true
+    autoconfigure: false
+    public: true
+  Typo3Contentblocks\ContentblocksRegApi\DataProcessing\CbProcessor:
+    autowire: true
+    autoconfigure: false
+    public: true
+  Typo3Contentblocks\ContentblocksRegApi\Backend\Preview\PreviewRenderer:
+    autowire: true
+    autoconfigure: false
+    public: true
