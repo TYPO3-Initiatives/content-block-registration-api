@@ -195,9 +195,9 @@ class FlexFormGenerator
                         <enabledControls>
                             <info>1</info>
                             <new>0</new>
-                            <dragdrop>0</dragdrop>
+                            <dragdrop>1</dragdrop>
                             <sort>1</sort>
-                            <hide>0</hide>
+                            <hide>1</hide>
                             <delete>1</delete>
                             <localize>1</localize>
                         </enabledControls>
