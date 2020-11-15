@@ -27,6 +27,14 @@ defined('TYPO3_MODE') || die('Access denied.');
         );
     }
 
+    // register custom typoscript setup
+    if ( strlen($GLOBALS['TYPO3_CONF_VARS']['EXTENSIONS'][$_EXTKEY]['additionalTypoScriptFile'] . '') > 0 )
+    {
+        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScriptSetup(
+            "@import 'EXT:" . $GLOBALS['TYPO3_CONF_VARS']['EXTENSIONS'][$_EXTKEY]['additionalTypoScriptFile'] . "'"
+        );
+    }
+
     // contentBlocks
     $contentBlocks = Typo3Contentblocks\ContentblocksRegApi\Service\ConfigurationService::configuration();
     foreach ($contentBlocks as $contentBlock) {
