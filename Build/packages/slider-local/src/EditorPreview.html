@@ -1,6 +1,6 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
 
-<f:asset.css identifier="content-block-slider-be" href="CB:slider-local/dist/EditorPreview.css"/>
+<f:asset.css identifier="cb-{cb.key}" href="CB:{cb.key}/dist/EditorPreview.css"/>
 <div class="slider">
     <f:for each="{slides}" as="slide" iteration="iteration">
         <div class="slider-item">

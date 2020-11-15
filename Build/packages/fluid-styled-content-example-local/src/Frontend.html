@@ -3,8 +3,8 @@
 <f:layout name="Default"/>
 
 <f:section name="Main">
-    <f:asset.css identifier="content-block-counter" href="CB:counter-local/dist/Frontend.css"/>
-    <f:asset.script identifier="content-block-counter" src="CB:counter-local/dist/Frontend.js"/>
+    <f:asset.css identifier="cb-{cb.key}" href="CB:{cb.key}/dist/Frontend.css"/>
+    <f:asset.script identifier="cb-{cb.key}" src="CB:{cb.key}/dist/Frontend.js"/>
 
     <div class="counter">
         <span class="counter-value">{amount}</span>
