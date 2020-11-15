@@ -24,6 +24,12 @@
         "friendsofphp/php-cs-fixer": "^2.16",
         "helhum/typo3-console": "^6.3",
         "roave/security-advisories": "dev-master",
+        "typo3-contentblocks/call-to-action-local": "@dev",
+        "typo3-contentblocks/counter-local": "@dev",
+        "typo3-contentblocks/example-local": "@dev",
+        "typo3-contentblocks/fluid-styled-content-example-local": "@dev",
+        "typo3-contentblocks/slider-local": "@dev",
+        "typo3-contentblocks/text-local": "@dev",
         "typo3/cms-about": "^10.4 || ^11.0.0 || dev-master",
         "typo3/cms-adminpanel": "^10.4 || ^11.0.0 || dev-master",
         "typo3/cms-backend": "^10.4 || ^11.0.0 || dev-master",
@@ -59,12 +65,7 @@
         "typo3/cms-tstemplate": "^10.4 || ^11.0.0 || dev-master",
         "typo3/cms-viewpage": "^10.4 || ^11.0.0 || dev-master",
         "typo3/cms-workspaces": "^10.4 || ^11.0.0 || dev-master",
-        "typo3/testing-framework": "^6.4",
-        "typo3-contentblocks/call-to-action-local": "@dev",
-        "typo3-contentblocks/counter-local": "@dev",
-        "typo3-contentblocks/example-local": "@dev",
-        "typo3-contentblocks/slider-local": "@dev",
-        "typo3-contentblocks/text-local": "@dev"
+        "typo3/testing-framework": "^6.4"
     },
     "config": {
         "bin-dir": ".typo3/bin",
