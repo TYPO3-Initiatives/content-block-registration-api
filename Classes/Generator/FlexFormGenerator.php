@@ -11,6 +11,8 @@ declare(strict_types=1);
 
 namespace Typo3Contentblocks\ContentblocksRegApi\Generator;
 
+use TYPO3\CMS\Core\Resource\File;
+
 class FlexFormGenerator
 {
 
@@ -102,8 +104,18 @@ class FlexFormGenerator
         if (is_array($field['properties']['range'])) {
             $additionlConfig .= '
             <range>
-                <lower>' . floatval(($field['properties']['range']['lower'] !== '' ? $field['properties']['range']['lower'] : '0')) . '</lower>
-                <upper>' . floatval(($field['properties']['range']['upper'] !== '' ? $field['properties']['range']['upper'] : '100')) . '</upper>
+                <lower>' . floatval(
+                    ($field['properties']['range']['lower'] !== ''
+                        ? $field['properties']['range']['lower']
+                        : '0'
+                    )
+                ) . '</lower>
+                <upper>' . floatval(
+                    ($field['properties']['range']['upper'] !== ''
+                        ? $field['properties']['range']['upper']
+                        : '100'
+                    )
+                ) . '</upper>
             </range>';
         }
         if ($field['type'] === 'Percent') {
@@ -173,8 +185,8 @@ class FlexFormGenerator
                 <config>
 
                     <type>inline</type>
-                    <minItems>' . ($field['properties']['minItems']  > 0 ? $field['properties']['minItems'] : '1') . '</minItems>
-                    <maxItems>' . ($field['properties']['maxItems']  > 0 ? $field['properties']['maxItems'] : '1') . '</maxItems>
+                    <minItems>' . ($field['properties']['minItems'] > 0 ? $field['properties']['minItems'] : '1') . '</minItems>
+                    <maxItems>' . ($field['properties']['maxItems'] > 0 ? $field['properties']['maxItems'] : '1') . '</maxItems>
                     <eval>' . ($field['properties']['required'] === true ? 'required' : '') . '</eval>
                     <foreign_table>sys_file_reference</foreign_table>
                     <foreign_table_field>tablenames</foreign_table_field>
@@ -218,6 +230,23 @@ class FlexFormGenerator
                                 </config>
                             </uid_local>
                         </columns>
+                        <types type="array">
+                            <numIndex index="' . File::FILETYPE_UNKNOWN . '" type="array">
+                                <showitem>
+                                    --palette--;;imageoverlayPalette, --palette--;;filePalette
+                                </showitem>
+                            </numIndex>
+                            <numIndex index="' . File::FILETYPE_TEXT . '" type="array">
+                                <showitem>
+                                    --palette--;;imageoverlayPalette, --palette--;;filePalette
+                                </showitem>
+                            </numIndex>
+                            <numIndex index="' . File::FILETYPE_IMAGE . '" type="array">
+                                <showitem>
+                                    --palette--;;imageoverlayPalette, --palette--;;filePalette
+                                </showitem>
+                            </numIndex>
+                        </types>
                     </overrideChildTca>
                 </config>
             </TCEforms>
@@ -240,7 +269,12 @@ class FlexFormGenerator
                     <cols>' . ($field['properties']['cols'] === true ? $field['properties']['cols'] : '24') . '</cols>
                     <rows>' . ($field['properties']['rows'] === true ? $field['properties']['rows'] : '3') . '</rows>
                     ' . ($field['properties']['enableRichtext'] === true ? '<enableRichtext>true</enableRichtext>' : '') . '
-                    ' . (strlen($field['properties']['richtextConfiguration'] . '') > 0 ? '<richtextConfiguration>' . $field['properties']['richtextConfiguration'] . '</richtextConfiguration>' : '') . '
+                    ' . (
+            strlen(
+                $field['properties']['richtextConfiguration'] . ''
+            ) > 0
+                ? '<richtextConfiguration>' . $field['properties']['richtextConfiguration'] . '</richtextConfiguration>'
+                : '') . '
                     <eval>' . ($field['properties']['required'] === true ? 'required' : '') . ($field['properties']['trim'] === true && $field['properties']['required'] === true ? ',  ' : '') . ($field['properties']['trim'] === true ? 'trim ' : '') . '</eval>
                     <placeholder>' . $field['properties']['placeholder'] . '</placeholder>
                     <default>' . $field['properties']['default'] . '</default>
