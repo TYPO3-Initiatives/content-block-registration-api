@@ -7,10 +7,10 @@
 		<header/>
 		<body>
 			<trans-unit id="typo3-contentblocks.fluid-styled-content-example-local.title" xml:space="preserve">
-				<source>Counter</source>
+				<source>Fluid Styled Content Testbed</source>
 			</trans-unit>
 			<trans-unit id="typo3-contentblocks.fluid-styled-content-example-local.description" xml:space="preserve">
-				<source>An element that counts up to given number using animation.</source>
+				<source>Testbed for fsc-integration.</source>
 			</trans-unit>
 			<trans-unit id="typo3-contentblocks.fluid-styled-content-example-local.amount.label" xml:space="preserve">
 				<source>Number/ amount</source>
