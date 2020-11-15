@@ -61,12 +61,11 @@ class FlexFormProcessor implements DataProcessorInterface
         $flexformData = $this->flexFormService->convertFlexFormContentToArray($originalValue);
         $processedData = array_merge($processedData, $flexformData);
 
-        $relationFields = ConfigurationService::contentBlockConfiguration(
-                $processedData['data']['CType']
-            )['relationFields'] ?? [];
+        $cType = $processedData['data']['CType'];
+        $relationFields = ConfigurationService::cbRelationFields($cType);
 
-        foreach ($flexformData as $fieldKey => $val) {
-            if (in_array($fieldKey, $relationFields)) {
+        foreach ($flexformData as $fieldIdentifier => $val) {
+            if (in_array($fieldIdentifier, $relationFields)) {
                 $maybeLocalizedUid = $processedData['data']['_LOCALIZED_UID']
                     ?? $processedData['data']['uid'];
 
@@ -75,9 +74,9 @@ class FlexFormProcessor implements DataProcessorInterface
                 // Why are you still looking?!
                 if (!($GLOBALS['TSFE'] ?? null) instanceof TypoScriptFrontendController) {
                     /**
-                     * @see \TYPO3\CMS\Core\Resource\FileRepository::findByRelation() requires a configured TCA column
-                     * in backend context. That's impossible for a field inside a FlexForm.
-                     *
+                     * @see \TYPO3\CMS\Core\Resource\FileRepository::findByRelation() requires
+                     * a configured TCA column in backend context.
+                     * That's impossible for a field inside a FlexForm.
                      * @see \TYPO3\CMS\Core\Resource\AbstractRepository::getEnvironmentMode()
                      */
                     $_tsfe = $GLOBALS['TSFE'] ?? null;
@@ -88,11 +87,18 @@ class FlexFormProcessor implements DataProcessorInterface
                 }
 
                 // welcome back
-                $processedData[$fieldKey] = $this->fileRepository->findByRelation(
+                $processedData[$fieldIdentifier] = $this->fileRepository->findByRelation(
                     'tt_content',
-                    $fieldKey,
+                    $fieldIdentifier,
                     $maybeLocalizedUid
                 );
+
+                // Deliver a single file if the field is configured as maxItems=1
+                $fieldConf = ConfigurationService::cbField($cType, $fieldIdentifier);
+                $maxItems = (int) ($fieldConf['properties']['maxItems'] ?? 1);
+                if ($maxItems === 1) {
+                    $processedData[$fieldIdentifier] = $processedData[$fieldIdentifier][0] ?? null;
+                }
 
                 // look away again
                 if (isset($_tsfe)) {

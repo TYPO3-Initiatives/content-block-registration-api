@@ -3,9 +3,9 @@
 <f:asset.css identifier="cb-{cb.key}" href="CB:{cb.key}/dist/Frontend.css"/>
 
 <div class="call-to-action__wrapper">
-    <f:for each="{image}" as="i">
-        <f:image image="{i}" height="200" width="800c"/>
-    </f:for>
+    <f:if condition="{image}">
+        <f:image image="{image}" height="200" width="800c"/>
+    </f:if>
     <div class="call-to-action__overlay">
         <div class="call-to-action__text">
             <f:link.typolink class="call-to-action__button" parameter="{link}">

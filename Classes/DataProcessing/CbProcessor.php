@@ -34,7 +34,7 @@ class CbProcessor implements DataProcessorInterface
         array $processorConfiguration,
         array $processedData
     ) {
-        $cbConf = ConfigurationService::contentBlockConfiguration($processedData['data']['CType']);
+        $cbConf = ConfigurationService::cbConfiguration($processedData['data']['CType']);
         $processedData['cb'] = $cbConf;
 
         return $processedData;

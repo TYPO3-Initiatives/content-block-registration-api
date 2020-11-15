@@ -2,14 +2,7 @@
 
 <f:asset.css identifier="cb-{cb.key}" href="CB:{cb.key}/dist/EditorPreview.css"/>
 <div class="counter">
-    <span class="counter-value">{amount}</span>
-    <span class="counter-icon">
-        <f:for each="{icon}" as="i">
-            <f:image image="{i}" maxWidth="200"/>
-        </f:for>
-    </span>
-    <span class="counter-name">{text}</span>
+    <f:debug inline="1">{_all}</f:debug>
 </div>
 
-<f:debug inline="1">{_all}</f:debug>
 </html>

@@ -30,7 +30,7 @@ class PreviewRenderer extends StandardContentPreviewRenderer
     {
         $record = $item->getRecord();
 
-        $cbConfiguration = ConfigurationService::contentBlockConfiguration($record['CType']);
+        $cbConfiguration = ConfigurationService::cbConfiguration($record['CType']);
 
         $view = GeneralUtility::makeInstance(StandaloneView::class);
         $view->setTemplatePathAndFilename($cbConfiguration['EditorPreview.html']);

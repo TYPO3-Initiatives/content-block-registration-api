@@ -5,9 +5,9 @@
 <div class="counter">
     <span class="counter-value">{amount}</span>
     <span class="counter-icon">
-        <f:for each="{icon}" as="i">
-            <f:image image="{i}" maxWidth="200"/>
-        </f:for>
+        <f:if condition="{icon}">
+            <f:image image="{icon}" maxWidth="200"/>
+        </f:if>
     </span>
     <span class="counter-name">{text}</span>
 </div>

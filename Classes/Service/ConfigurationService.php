@@ -43,7 +43,7 @@ class ConfigurationService
         return $configuration;
     }
 
-    public static function contentBlockConfiguration(string $cType): ?array
+    public static function cbConfiguration(string $cType): ?array
     {
         return self::configuration()[$cType] ?? null;
     }
@@ -60,7 +60,7 @@ class ConfigurationService
 
         $contentBlockConfiguration = [];
         foreach ($cbsFinder as $cbDir) {
-            $_cbConfiguration = self::configurationForContentBlockByPath($cbDir);
+            $_cbConfiguration = self::byPath($cbDir);
 
             $contentBlockConfiguration [$_cbConfiguration['CType']] = $_cbConfiguration;
         }
@@ -68,7 +68,12 @@ class ConfigurationService
         return $contentBlockConfiguration;
     }
 
-    protected static function configurationForContentBlockByPath(SplFileInfo $splPath): array
+    /**
+     * @param SplFileInfo $splPath
+     * @return array<string, mixed>
+     * @throws \Exception
+     */
+    protected static function byPath(SplFileInfo $splPath): array
     {
         $cbKey = $splPath->getBasename();
 
@@ -192,5 +197,34 @@ class ConfigurationService
             ->validate($cbConfiguration);
 
         return $cbConfiguration;
+    }
+
+    /**
+     * @param string $cType
+     * @return array<string>
+     */
+    public static function cbRelationFields(string $cType): array
+    {
+        return self::cbConfiguration($cType)['relationFields'] ?? [];
+    }
+
+    /**
+     * @param string $cType
+     * @return array<string, array<string, mixed>> associative field configurations with field
+     * identifier as key
+     */
+    public static function cbFields(string $cType): array
+    {
+        $fields = [];
+        $i = 0;
+        foreach (self::cbConfiguration($cType)['yaml']['fields'] ?? [] as $f) {
+            $fields[$f['identifier'] ?? $i++] = $f;
+        }
+        return $fields;
+    }
+
+    public static function cbField(string $cType, string $fieldIdentifier): ?array
+    {
+        return self::cbFields($cType)[$fieldIdentifier] ?? null;
     }
 }
