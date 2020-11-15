@@ -4,7 +4,8 @@
 >
 
 <f:asset.css identifier="cb-{cb.key}" href="CB:{cb.key}/dist/EditorPreview.css"/>
-<div class="call-to-action">
+
+<div class="cb-call-to-action">
     <p>
         <f:format.stripTags>{text}</f:format.stripTags>
     </p>
@@ -19,9 +20,9 @@
         </summary>
         <div class="call-to-action__box">
             <div class="call-to-action__wrapper">
-                <f:for each="{image}" as="i">
-                    <f:image image="{i}" height="120c" width="500"/>
-                </f:for>
+                <f:if condition="{image}">
+                    <f:image image="{image}" height="120c" width="500"/>
+                </f:if>
                 <div class="call-to-action__overlay">
                     <div class="call-to-action__text">
                         <div class="call-to-action__button">

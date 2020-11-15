@@ -1,9 +1,9 @@
-.cb-editor .call-to-action {
+.cb-editor .cb-call-to-action {
     position: relative;
     min-height: 20px;
 }
 
-.cb-editor .call-to-action summary {
+.cb-editor .cb-call-to-action summary {
     position: absolute;
     right: -10px;
     bottom: -10px;
@@ -17,17 +17,17 @@
     border-width: 1px 0 0 1px;
 }
 
-.cb-editor .call-to-action details {
+.cb-editor .cb-call-to-action details {
     height: 0;
     transition: height 0.2s ease-out;
     overflow: hidden;
 }
 
-.cb-editor .call-to-action details[open] {
+.cb-editor .cb-call-to-action details[open] {
     height: 140px;
 }
 
-.cb-editor .call-to-action details[open] summary .icon-markup {
+.cb-editor .cb-call-to-action details[open] summary .icon-markup {
     transform: rotate(180deg);
 }
 
