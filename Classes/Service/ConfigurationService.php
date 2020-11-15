@@ -70,12 +70,14 @@ class ConfigurationService
 
     protected static function configurationForContentBlockByPath(SplFileInfo $splPath): array
     {
+        $cbKey = $splPath->getBasename();
+
         // directory paths (full)
         $realPath = $splPath->getPathname() . DIRECTORY_SEPARATOR;
         $languageRealPath = $realPath . 'src' . DIRECTORY_SEPARATOR . 'Language' . DIRECTORY_SEPARATOR;
 
         // directory paths (relative to publicPath())
-        $path = Constants::BASEPATH . $splPath->getBasename() . DIRECTORY_SEPARATOR;
+        $path = Constants::BASEPATH . $cbKey . DIRECTORY_SEPARATOR;
         $srcPath = $path . 'src' . DIRECTORY_SEPARATOR;
         $distPath = $path . 'dist' . DIRECTORY_SEPARATOR;
         $languagePath = $srcPath . 'Language' . DIRECTORY_SEPARATOR;
@@ -163,8 +165,10 @@ class ConfigurationService
         }
 
         $cbConfiguration = [
+            '__warning' => 'Contents of this "cb" configuration are not API yet and might change!',
             'vendor' => $vendor,
             'package' => $packageName,
+            'key' => $cbKey,
             'path' => $path,
             'srcPath' => $srcPath,
             'distPath' => $distPath,

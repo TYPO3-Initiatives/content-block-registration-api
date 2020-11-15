@@ -16,6 +16,7 @@ use TYPO3\CMS\Backend\View\BackendLayout\Grid\GridColumnItem;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
+use Typo3Contentblocks\ContentblocksRegApi\DataProcessing\CbProcessor;
 use Typo3Contentblocks\ContentblocksRegApi\DataProcessing\FlexFormProcessor;
 use Typo3Contentblocks\ContentblocksRegApi\Service\ConfigurationService;
 
@@ -39,9 +40,11 @@ class PreviewRenderer extends StandardContentPreviewRenderer
         $view->setLayoutRootPaths([$cbConfiguration['srcPath']]);
 
         $view->assign('data', $record);
-        $view->assign('EditorLLL', $cbConfiguration['EditorLLL'] ?? false);
+        $view->assign('cb', $cbConfiguration);
+
+        $processedData = ['data' => $record];
+        // Flexform
         if (!empty($record['content_block'])) {
-            $processedData = ['data' => $record];
             $processedData = GeneralUtility::makeInstance(FlexFormProcessor::class)
                 ->process(
                     GeneralUtility::makeInstance(ContentObjectRenderer::class),
@@ -49,15 +52,27 @@ class PreviewRenderer extends StandardContentPreviewRenderer
                     [],
                     $processedData
                 );
-            $view->assignMultiple($processedData);
         }
+        // CB configuration
+        $processedData = GeneralUtility::makeInstance(CbProcessor::class)
+            ->process(
+                GeneralUtility::makeInstance(ContentObjectRenderer::class),
+                [],
+                [],
+                $processedData
+            );
+
+        $view->assignMultiple($processedData);
 
         // TODO the wrapping class should go to a proper Fluid layout
         return '<div class="cb-editor">' . $view->render() . '</div>';
     }
 
-    public function wrapPageModulePreview(string $previewHeader, string $previewContent, GridColumnItem $item): string
-    {
+    public function wrapPageModulePreview(
+        string $previewHeader,
+        string $previewContent,
+        GridColumnItem $item
+    ): string {
         return $previewHeader . $previewContent;
     }
 }

@@ -19,6 +19,9 @@ use TYPO3\CMS\Frontend\ContentObject\DataProcessorInterface;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 use Typo3Contentblocks\ContentblocksRegApi\Service\ConfigurationService;
 
+/**
+ * Processes the FlexForm field and puts all entries as variables to the top level.
+ */
 class FlexFormProcessor implements DataProcessorInterface
 {
     /**
@@ -58,12 +61,14 @@ class FlexFormProcessor implements DataProcessorInterface
         $flexformData = $this->flexFormService->convertFlexFormContentToArray($originalValue);
         $processedData = array_merge($processedData, $flexformData);
 
-        $cbConf = ConfigurationService::contentBlockConfiguration($processedData['data']['CType']);
-        $processedData['LLL'] = $cbConf['FrontendLLL'];
+        $relationFields = ConfigurationService::contentBlockConfiguration(
+                $processedData['data']['CType']
+            )['relationFields'] ?? [];
 
         foreach ($flexformData as $fieldKey => $val) {
-            if (in_array($fieldKey, $cbConf['relationFields'] ?? [])) {
-                $maybeLocalizedUid = $processedData['data']['_LOCALIZED_UID'] ?? $processedData['data']['uid'];
+            if (in_array($fieldKey, $relationFields)) {
+                $maybeLocalizedUid = $processedData['data']['_LOCALIZED_UID']
+                    ?? $processedData['data']['uid'];
 
                 // look away now
 

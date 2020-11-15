@@ -32,6 +32,7 @@ tt_content.' . $contentBlock['CType'] . '{
     }
     dataProcessing {
         10 = Typo3Contentblocks\ContentblocksRegApi\DataProcessing\FlexFormProcessor
+        20 = Typo3Contentblocks\ContentblocksRegApi\DataProcessing\CbProcessor
     }
 }
 ';
