@@ -138,7 +138,7 @@
             "@test-staged:cgl:php-cs"
         ],
         "test-staged:cgl:php-cs": [
-            "php-cs-fixer --config=.php_cs.dist fix -v --using-cache=no --dry-run `git diff --cached --name-only '*.php'`"
+            "if [ `git diff --cached --name-only '*.php' | wc -l` -ne 0 ]; then php-cs-fixer --config=.php_cs.dist.php fix -v --using-cache=no --dry-run `git diff --cached --name-only --relative '*.php'`; else true; fi"
         ],
         "test:cgl": [
             "@test:cgl:php-cs"
