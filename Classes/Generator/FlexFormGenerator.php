@@ -38,12 +38,12 @@ class FlexFormGenerator
         }
 
         return '
-        <' . $field['identifier'] . '>
+        <' . $field['_identifier'] . '>
             <TCEforms>
                 <label>LLL:' . $contentBlock['EditorInterface.xlf'] . ':' . $contentBlock['vendor']
-            . '.' . $contentBlock['package'] . '.' . $field['identifier'] . '.label</label>
+            . '.' . $contentBlock['package'] . '.' . $field['_identifier'] . '.label</label>
                 <description>LLL:' . $contentBlock['EditorInterface.xlf'] . ':' . $contentBlock['vendor']
-            . '.' . $contentBlock['package'] . '.' . $field['identifier'] . '.description</description>
+            . '.' . $contentBlock['package'] . '.' . $field['_identifier'] . '.description</description>
                 <config>
                     <type>input</type>
                     <renderType>inputLink</renderType>
@@ -59,7 +59,7 @@ class FlexFormGenerator
                     </fieldControl>
                 </config>
             </TCEforms>
-        </' . $field['identifier'] . '>
+        </' . $field['_identifier'] . '>
         ';
     }
 
@@ -150,12 +150,12 @@ class FlexFormGenerator
         }
 
         return '
-        <' . $field['identifier'] . '>
+        <' . $field['_identifier'] . '>
             <TCEforms>
                 <label>LLL:' . $contentBlock['EditorInterface.xlf'] . ':' . $contentBlock['vendor']
-            . '.' . $contentBlock['package'] . '.' . $field['identifier'] . '.label</label>
+            . '.' . $contentBlock['package'] . '.' . $field['_identifier'] . '.label</label>
                 <description>LLL:' . $contentBlock['EditorInterface.xlf'] . ':' . $contentBlock['vendor']
-            . '.' . $contentBlock['package'] . '.' . $field['identifier'] . '.description</description>
+            . '.' . $contentBlock['package'] . '.' . $field['_identifier'] . '.description</description>
                 <config>
                     <type>input</type>
                     <size>' . ($field['properties']['size'] > 0 ? $field['properties']['size'] : '20') . '</size>
@@ -168,7 +168,7 @@ class FlexFormGenerator
                     ' . $items . '
                 </config>
             </TCEforms>
-        </' . $field['identifier'] . '>
+        </' . $field['_identifier'] . '>
         ';
     }
 
@@ -176,12 +176,12 @@ class FlexFormGenerator
     public static function createImageField($field, $contentBlock)
     {
         return '
-        <' . $field['identifier'] . '>
+        <' . $field['_identifier'] . '>
             <TCEforms>
                 <label>LLL:' . $contentBlock['EditorInterface.xlf'] . ':' . $contentBlock['vendor']
-            . '.' . $contentBlock['package'] . '.' . $field['identifier'] . '.label</label>
+            . '.' . $contentBlock['package'] . '.' . $field['_identifier'] . '.label</label>
                 <description>LLL:' . $contentBlock['EditorInterface.xlf'] . ':' . $contentBlock['vendor']
-            . '.' . $contentBlock['package'] . '.' . $field['identifier'] . '.description</description>
+            . '.' . $contentBlock['package'] . '.' . $field['_identifier'] . '.description</description>
                 <config>
 
                     <type>inline</type>
@@ -195,7 +195,7 @@ class FlexFormGenerator
                     <foreign_field>uid_foreign</foreign_field>
                     <foreign_selector>uid_local</foreign_selector>
                     <foreign_match_fields>
-                        <fieldname>' . $field['identifier'] . '</fieldname> <!-- This is the field name -->
+                        <fieldname>' . $field['_identifier'] . '</fieldname> <!-- This is the field name -->
                     </foreign_match_fields>
                     <appearance type="array">
                         <newRecordLinkAddTitle>1</newRecordLinkAddTitle>
@@ -250,7 +250,7 @@ class FlexFormGenerator
                     </overrideChildTca>
                 </config>
             </TCEforms>
-        </' . $field['identifier'] . '>
+        </' . $field['_identifier'] . '>
         ';
     }
 
@@ -258,12 +258,12 @@ class FlexFormGenerator
     public static function createTextarea($field, $contentBlock)
     {
         return '
-        <' . $field['identifier'] . '>
+        <' . $field['_identifier'] . '>
             <TCEforms>
                 <label>LLL:' . $contentBlock['EditorInterface.xlf'] . ':' . $contentBlock['vendor']
-            . '.' . $contentBlock['package'] . '.' . $field['identifier'] . '.label</label>
+            . '.' . $contentBlock['package'] . '.' . $field['_identifier'] . '.label</label>
                 <description>LLL:' . $contentBlock['EditorInterface.xlf'] . ':' . $contentBlock['vendor']
-            . '.' . $contentBlock['package'] . '.' . $field['identifier'] . '.description</description>
+            . '.' . $contentBlock['package'] . '.' . $field['_identifier'] . '.description</description>
                 <config>
                     <type>text</type>
                     <cols>' . ($field['properties']['cols'] === true ? $field['properties']['cols'] : '24') . '</cols>
@@ -280,7 +280,7 @@ class FlexFormGenerator
                     <default>' . $field['properties']['default'] . '</default>
                 </config>
             </TCEforms>
-        </' . $field['identifier'] . '>
+        </' . $field['_identifier'] . '>
         ';
     }
 
@@ -292,13 +292,13 @@ class FlexFormGenerator
         foreach ($field['properties']['fields'] as $collectionField) {
             if ($collectionField['type'] === 'Collection') {
                 $fieldsConfig = $fieldsConfig . self::createCollection($collectionField, $contentBlock);
-            } 
+            }
             else {
                 $fieldsConfig .= self::createField($collectionField, $contentBlock);
             }
         }
 
-        $GLOBALS['TCA']['tx_contentblocks_reg_api_collection']['columns']['content_block_data']['config']['ds'][ $field['identifier'] ] ='<T3DataStructure>
+        $GLOBALS['TCA']['tx_contentblocks_reg_api_collection']['columns']['content_block_data']['config']['ds'][ $field['_identifier'] ] ='<T3DataStructure>
                 <meta>
                     <langDisable>1</langDisable>
                 </meta>
@@ -307,7 +307,7 @@ class FlexFormGenerator
                         <ROOT>
                             <TCEforms>
                                 <sheetTitle>LLL:' . $contentBlock['EditorInterface.xlf'] . ':' . $contentBlock['vendor']
-                                . '.' . $contentBlock['package'] . '.' . $field['identifier'] . '.label</sheetTitle>
+                                . '.' . $contentBlock['package'] . '.' . $field['_identifier'] . '.label</sheetTitle>
                             </TCEforms>
                             <type>array</type>
                             <el>
@@ -317,19 +317,19 @@ class FlexFormGenerator
                     </sDEF>
                 </sheets>
             </T3DataStructure>';
-        
-        return '<' . $field['identifier'] . '>
+
+        return '<' . $field['_identifier'] . '>
             <TCEforms>
                 <label>LLL:' . $contentBlock['EditorInterface.xlf'] . ':' . $contentBlock['vendor']
-                . '.' . $contentBlock['package'] . '.' . $field['identifier'] . '.label</label>
+                . '.' . $contentBlock['package'] . '.' . $field['_identifier'] . '.label</label>
                 <config>
                     <label>LLL:' . $contentBlock['EditorInterface.xlf'] . ':' . $contentBlock['vendor']
-                    . '.' . $contentBlock['package'] . '.' . $field['identifier'] . '.label</label>
+                    . '.' . $contentBlock['package'] . '.' . $field['_identifier'] . '.label</label>
                     <type>inline</type>
                     <foreign_table>tx_contentblocks_reg_api_collection</foreign_table>
                     <foreign_field>content_block_foreign_field</foreign_field>
                     <foreign_table_field>content_block_foreign_table_field</foreign_table_field>
-                    
+
                     <appearance type="array">
                         <enabledControls type="array">
                             <delete>1</delete>
@@ -347,19 +347,19 @@ class FlexFormGenerator
                             <content_block_field_identifier type="array">
                                 <label>Do not touch!</label>
                                 <config type="array">
-                                    <default>' . $field['identifier'] . '</default>
+                                    <default>' . $field['_identifier'] . '</default>
                                 </config>
                             </content_block_field_identifier>
                             <content_block_data type="array">
                                 <label>LLL:' . $contentBlock['EditorInterface.xlf'] . ':' . $contentBlock['vendor']
-                                . '.' . $contentBlock['package'] . '.' . $field['identifier'] . '.label</label>
+                                . '.' . $contentBlock['package'] . '.' . $field['_identifier'] . '.label</label>
                             </content_block_data>
                         </columns>
                     </overrideChildTca>
 
                 </config>
             </TCEforms>
-        </' . $field['identifier'] . '>';
+        </' . $field['_identifier'] . '>';
     }
 
     /** create selection, checkboxes */
@@ -406,12 +406,12 @@ class FlexFormGenerator
         }
 
         return '
-        <' . $field['identifier'] . '>
+        <' . $field['_identifier'] . '>
             <TCEforms>
                 <label>LLL:' . $contentBlock['EditorInterface.xlf'] . ':' . $contentBlock['vendor']
-            . '.' . $contentBlock['package'] . '.' . $field['identifier'] . '.label</label>
+            . '.' . $contentBlock['package'] . '.' . $field['_identifier'] . '.label</label>
                 <description>LLL:' . $contentBlock['EditorInterface.xlf'] . ':' . $contentBlock['vendor']
-            . '.' . $contentBlock['package'] . '.' . $field['identifier'] . '.description</description>
+            . '.' . $contentBlock['package'] . '.' . $field['_identifier'] . '.description</description>
                 <config>
                     <type>' . $type . '</type>
                     <default>' . $field['properties']['default'] . '</default>
@@ -419,7 +419,7 @@ class FlexFormGenerator
                     ' . $additionlConfig . '
                 </config>
             </TCEforms>
-        </' . $field['identifier'] . '>
+        </' . $field['_identifier'] . '>
         ';
     }
 
@@ -524,7 +524,7 @@ class FlexFormGenerator
                 $messageContent .= 'Actually it is not allowed or not technical possible to use images/icons inside a collection, since we render a collection as a flexform section.
                                 We know that issue and working hard to fix it.';
                 break;
-            
+
             default:
                 $messageContent .= 'Something went wrong with your field, but anyone forgot to create a usefull error message on that.';
                 break;
