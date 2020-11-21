@@ -298,7 +298,7 @@ class FlexFormGenerator
             }
         }
 
-        $GLOBALS['TCA']['tx_contentblocks_reg_api_collection']['columns']['content_block']['config']['ds'][ $field['_identifier'] ] ='<T3DataStructure>
+        $GLOBALS['TCA']['tx_contentblocks_reg_api_collection']['columns']['content_block']['config']['ds'][$contentBlock['CType'] . '_' . $field['_identifier']] = '<T3DataStructure>
                 <meta>
                     <langDisable>1</langDisable>
                 </meta>
@@ -347,7 +347,7 @@ class FlexFormGenerator
                             <content_block_field_identifier type="array">
                                 <label>Do not touch!</label>
                                 <config type="array">
-                                    <default>' . $field['_identifier'] . '</default>
+                                    <default>' . $contentBlock['CType'] . '_' . $field['_identifier'] . '</default>
                                 </config>
                             </content_block_field_identifier>
                             <content_block type="array">
