@@ -285,13 +285,13 @@ class FlexFormGenerator
     }
 
     /** create section */
-    public static function createSection($field, $contentBlock)
+    public static function createCollection($field, $contentBlock)
     {
         // get the fields in the collections
         $fieldsConfig = '';
         foreach ($field['properties']['fields'] as $collectionField) {
             if ($collectionField['type'] === 'Collection') {
-                $fieldsConfig = $fieldsConfig . self::createSection($collectionField, $contentBlock);
+                $fieldsConfig = $fieldsConfig . self::createCollection($collectionField, $contentBlock);
             } 
             else {
                 $fieldsConfig .= self::createField($collectionField, $contentBlock);
@@ -467,7 +467,7 @@ class FlexFormGenerator
             return '';
         } // if no array given, return
         elseif ($field['type'] === 'Collection') {
-            return self::createSection($field, $contentBlock);
+            return self::createCollection($field, $contentBlock);
         } else {
             switch ($field['type']) {
                 case 'Email':

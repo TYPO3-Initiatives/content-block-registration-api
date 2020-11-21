@@ -15,7 +15,7 @@ if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('lang')) {
 
 return [
     'ctrl' => [
-        'label' => 'header',
+        'label' => 'content_block_data',
         'sortby' => 'sorting',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
@@ -42,8 +42,7 @@ return [
     'interface' => [
         'showRecordFieldList' => '
             hidden,
-            tt_content,
-            header
+            content_block_data
         ',
     ],
     'types' => [
@@ -79,18 +78,6 @@ return [
         ],
     ],
     'columns' => [
-        'tt_content' => [
-            'exclude' => true,
-            'label' => 'LLL:EXT:bootstrap_package/Resources/Private/Language/Backend.xlf:card_group_item.tt_content',
-            'config' => [
-                'type' => 'select',
-                'renderType' => 'selectSingle',
-                'foreign_table' => 'tt_content',
-                'foreign_table_where' => 'AND tt_content.pid=###CURRENT_PID### AND tt_content.CType="card_group"',
-                'maxitems' => 1,
-                'default' => 0,
-            ],
-        ],
         'hidden' => [
             'exclude' => true,
             'label' => 'LLL:' . $generalLanguageFile . ':LGL.hidden',
@@ -164,8 +151,8 @@ return [
                         0
                     ]
                 ],
-                'foreign_table' => 'tx_bootstrappackage_card_group_item',
-                'foreign_table_where' => 'AND tx_bootstrappackage_card_group_item.pid=###CURRENT_PID### AND tx_bootstrappackage_card_group_item.sys_language_uid IN (-1,0)',
+                'foreign_table' => 'tx_contentblocks_reg_api_collection',
+                'foreign_table_where' => 'AND tx_contentblocks_reg_api_collection.pid=###CURRENT_PID### AND tx_contentblocks_reg_api_collection.sys_language_uid IN (-1,0)',
                 'default' => 0
             ]
         ],
