@@ -16,8 +16,11 @@ use TYPO3\CMS\Core\Resource\File;
 class FlexFormGenerator
 {
 
-    /** create typolink */
-    public static function createTypoLink($field, $contentBlock) // typo3-contentblocks.slider-local.slides.label
+    /** 
+     * Create a flexform typolink 
+     * 
+    */
+    protected function createTypoLink(array $field, array $contentBlock) :string
     {
         $blindLinkOption = 'page,url,mail,spec,file,folder,telephone';
         if (is_array($field['properties']['linkTypes'])) {
@@ -63,8 +66,11 @@ class FlexFormGenerator
         ';
     }
 
-    /** create textfield */
-    public static function createInputField($field, $contentBlock)
+    /** 
+     * Create a input field with several renderings: Mail, Integer,  Monay, Number, Range, Telephone, Date, Time, DateTime
+     * 
+    */
+    protected function createInputField(array $field, array $contentBlock) :string
     {
         $items = '';
 
@@ -172,8 +178,10 @@ class FlexFormGenerator
         ';
     }
 
-    /** create picture */
-    public static function createImageField($field, $contentBlock)
+    /**  
+     * Create an flexform inline field for pictures (Image or Icon) 
+    */
+    protected function createImageField(array $field, array $contentBlock) :string
     {
         return '
         <' . $field['_identifier'] . '>
@@ -254,8 +262,10 @@ class FlexFormGenerator
         ';
     }
 
-    /** create textfield */
-    public static function createTextarea($field, $contentBlock)
+    /** 
+     * Create flexform textfields like textarea, rte fields
+     */
+    protected function createTextarea(array $field, array $contentBlock) :string
     {
         return '
         <' . $field['_identifier'] . '>
@@ -284,17 +294,20 @@ class FlexFormGenerator
         ';
     }
 
-    /** create section */
-    public static function createCollection($field, $contentBlock)
+    /** 
+     * Create inline field for a collection.
+     * It overrides the TCA array directly.
+     */
+    protected function createCollection(array $field, array $contentBlock) :string
     {
         // get the fields in the collections
         $fieldsConfig = '';
         foreach ($field['properties']['fields'] as $collectionField) {
             if ($collectionField['type'] === 'Collection') {
-                $fieldsConfig = $fieldsConfig . self::createCollection($collectionField, $contentBlock);
+                $fieldsConfig = $fieldsConfig . $this->createCollection($collectionField, $contentBlock);
             }
             else {
-                $fieldsConfig .= self::createField($collectionField, $contentBlock);
+                $fieldsConfig .= $this->createField($collectionField, $contentBlock);
             }
         }
 
@@ -362,8 +375,10 @@ class FlexFormGenerator
         </' . $field['_identifier'] . '>';
     }
 
-    /** create selection, checkboxes */
-    public static function createSelections($field, $contentBlock)
+    /** 
+     * Create selection, checkboxes, singel select, radio boxes, multi select side by side, toggles.
+     */
+    protected function createSelections($field, $contentBlock)
     {
         if (is_array($field['properties']['items'])) {
             $counter = 0;
@@ -423,23 +438,28 @@ class FlexFormGenerator
         ';
     }
 
-    /** create flexform */
-    public static function createFlexform($contentBlock)
+    /** 
+     * Public function to create flexform settings. 
+     * Register the flexform directly to the TCA array.
+     */
+    public function createFlexform(array $contentBlock) :void
     {
         $flexFormFieldsConfig = '';
 
         foreach ($contentBlock['yaml']['fields'] as $field) {
-            $flexFormFieldsConfig = $flexFormFieldsConfig . self::createField($field, $contentBlock);
+            $flexFormFieldsConfig .= $this->createField($field, $contentBlock);
         }
 
         /***************
          * Add flexForms for content element configuration
          */
-        $GLOBALS['TCA']['tt_content']['columns']['content_block']['config']['ds'][$contentBlock['CType']] = self::flexFormTemplate($flexFormFieldsConfig);
+        $GLOBALS['TCA']['tt_content']['columns']['content_block']['config']['ds'][$contentBlock['CType']] = $this->flexFormTemplate($flexFormFieldsConfig);
     }
 
-    /** generate Flexform wrapping structure */
-    public static function flexFormTemplate($fieldConfig)
+    /** 
+     * Basic generate Flexform wraping structure surrounding.
+     */
+    protected function flexFormTemplate(string $fieldConfig) :string
     {
         return '<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
             <T3DataStructure>
@@ -463,14 +483,17 @@ class FlexFormGenerator
             ';
     }
 
-    /** parse single field */
-    private static function createField($field, $contentBlock)
+    /** 
+     * Parse every single field.
+     * Make a decision which method should be used. Mapping the symphony types and special types to what it is in flexform.   
+     */
+    protected function createField(array $field, array $contentBlock) :string
     {
         if (!is_array($field)) {
             return '';
         } // if no array given, return
         elseif ($field['type'] === 'Collection') {
-            return self::createCollection($field, $contentBlock);
+            return $this->createCollection($field, $contentBlock);
         } else {
             switch ($field['type']) {
                 case 'Email':
@@ -506,32 +529,6 @@ class FlexFormGenerator
                     return '';
             }
         }
-    }
-    /* Give some usefull hints to the user, if we actually do not support it */
-    private static function errorMessageToFlexform($message, $identifier){
-        $messageContent='
-        <' .$identifier .'>
-                <TCEforms>
-                    <label>Error on field with identifier ' .$identifier .'</label>
-                    <description>';
-
-        switch ($message) {
-            case 'Image':
-                $messageContent .= 'Actually it is not allowed or not technical possible to use images inside a collection, since we render a collection as a flexform section.
-                                We know that issue and working hard to fix it.';
-                break;
-            case 'Icon':
-                $messageContent .= 'Actually it is not allowed or not technical possible to use images/icons inside a collection, since we render a collection as a flexform section.
-                                We know that issue and working hard to fix it.';
-                break;
-
-            default:
-                $messageContent .= 'Something went wrong with your field, but anyone forgot to create a usefull error message on that.';
-                break;
-        }
-
-        $messageContent .= '</description>  </TCEforms>  </' .$identifier .'>';
-        return $messageContent;
     }
 }
 

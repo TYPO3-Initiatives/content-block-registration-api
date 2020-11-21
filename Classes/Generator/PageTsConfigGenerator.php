@@ -13,7 +13,7 @@ namespace Typo3Contentblocks\ContentblocksRegApi\Generator;
 
 class PageTsConfigGenerator
 {
-    public static function pageTsConfigForContentBlock(array $contentBlock): string
+    public function pageTsConfigForContentBlock(array $contentBlock): string
     {
         return '
 mod.wizards.newContentElement.wizardItems.common  {

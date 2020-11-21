@@ -13,7 +13,7 @@ namespace Typo3Contentblocks\ContentblocksRegApi\Generator;
 
 class TypoScriptGenerator
 {
-    public static function typoScriptForContentBlock(array $contentBlock): string
+    public function typoScriptForContentBlock(array $contentBlock): string
     {
         return '
 tt_content.' . $contentBlock['CType'] . ' < lib.contentElement

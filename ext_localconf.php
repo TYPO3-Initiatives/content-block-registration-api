@@ -40,9 +40,8 @@ defined('TYPO3_MODE') || die('Access denied.');
     foreach ($contentBlocks as $contentBlock) {
         // PageTsConfig
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig(
-            \Typo3Contentblocks\ContentblocksRegApi\Generator\PageTsConfigGenerator::pageTsConfigForContentBlock(
-                $contentBlock
-            )
+            TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\Typo3Contentblocks\ContentblocksRegApi\Generator\PageTsConfigGenerator::class)
+                ->pageTsConfigForContentBlock( $contentBlock )
         );
 
         // Icons
@@ -57,9 +56,8 @@ defined('TYPO3_MODE') || die('Access denied.');
 
         // TypoScript
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScriptSetup(
-            \Typo3Contentblocks\ContentblocksRegApi\Generator\TypoScriptGenerator::typoScriptForContentBlock(
-                $contentBlock
-            )
+            TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\Typo3Contentblocks\ContentblocksRegApi\Generator\TypoScriptGenerator::class)  
+                ->typoScriptForContentBlock(  $contentBlock )
         );
     }
 
