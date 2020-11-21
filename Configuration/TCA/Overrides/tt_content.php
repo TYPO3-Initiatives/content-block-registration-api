@@ -10,11 +10,11 @@ declare(strict_types=1);
  */
 
 (static function ($_EXTKEY = 'contentblocks_reg_api') {
+    $tcaGenerator =  TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(Typo3Contentblocks\ContentblocksRegApi\Generator\TcaGenerator::class);
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns(
         'tt_content',
         [
-            'content_block' =>
-                Typo3Contentblocks\ContentblocksRegApi\Generator\TcaGenerator::contentBlockFlexformColumnTca(),
+            'content_block' => $tcaGenerator->contentBlockFlexformColumnTca(),
         ]
     );
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes(
@@ -22,5 +22,5 @@ declare(strict_types=1);
         'content_block'
     );
 
-    Typo3Contentblocks\ContentblocksRegApi\Generator\TcaGenerator::setTca();
+    $tcaGenerator->setTca();
 })();

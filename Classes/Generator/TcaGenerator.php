@@ -21,7 +21,7 @@ class TcaGenerator
      * Get default flexform configuration of the tt_content.content_block field
      * 
     */
-    public static function contentBlockFlexformColumnTca() :array
+    public function contentBlockFlexformColumnTca() :array
     {
         return [
             'exclude' => 0,
@@ -57,7 +57,7 @@ class TcaGenerator
     /**
      * Create the TCA config for all Content Blocks
      **/
-    public static function setTca() :void
+    public function setTca() :void
     {
         $configuration = ConfigurationService::configuration();
 
