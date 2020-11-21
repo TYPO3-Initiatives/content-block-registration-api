@@ -14,4 +14,5 @@ class Constants
     const BASEPATH = 'typo3conf/contentBlocks/';
     const CACHE = 'contentblocks_reg_api_configuration';
     const CACHE_CONFIGURATION_ENTRY = 'contentBlocks';
+    const COLLECTION_TABLE = 'tx_contentblocks_reg_api_collection';
 }

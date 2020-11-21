@@ -11,11 +11,15 @@ declare(strict_types=1);
 
 namespace Typo3Contentblocks\ContentblocksRegApi\DataProcessing;
 
+use TYPO3\CMS\Core\Database\Connection;
+use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Resource\FileRepository;
 use TYPO3\CMS\Core\Service\FlexFormService;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\ContentObject\DataProcessorInterface;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
+use Typo3Contentblocks\ContentblocksRegApi\Constants;
 use Typo3Contentblocks\ContentblocksRegApi\Service\ConfigurationService;
 
 /**
@@ -61,10 +65,60 @@ class FlexFormProcessor implements DataProcessorInterface
         $processedData = array_merge($processedData, $flexformData);
 
         $cType = $processedData['data']['CType'];
-        $relationFields = ConfigurationService::cbRelationFields($cType);
-
+        $collectionFields = ConfigurationService::cbCollectionFields($cType);
         foreach ($flexformData as $fieldIdentifier => $val) {
-            if (in_array($fieldIdentifier, $relationFields)) {
+            if (in_array($fieldIdentifier, $collectionFields)) {
+                $maybeLocalizedUid = $processedData['data']['_LOCALIZED_UID']
+                    ?? $processedData['data']['uid'];
+
+                $q = GeneralUtility::makeInstance(ConnectionPool::class)
+                    ->getConnectionForTable(Constants::COLLECTION_TABLE)
+                    ->createQueryBuilder();
+                $q->select('uid', 'content_block')
+                    ->from(Constants::COLLECTION_TABLE)
+                    ->where(
+                        $q->expr()->eq(
+                            'content_block_foreign_field',
+                            $q->createNamedParameter($maybeLocalizedUid, Connection::PARAM_INT)
+                        )
+                    )->andWhere(
+                        $q->expr()->eq(
+                            'content_block_field_identifier',
+                            $q->createNamedParameter($cType . '_' . $fieldIdentifier)
+                        )
+                    );
+                $relations = $q->execute()->fetchAllAssociative();
+                foreach ($relations as &$r) {
+//                    $_processedData = [
+//                        'data' => $processedData['data'],
+//                    ];
+//                    $_processedData['data']['content_block'] = $r['content_block'];
+
+//                    $_ff = $this->process(
+//                        $cObj,
+//                        $contentObjectConfiguration,
+//                        $processorConfiguration,
+//                        $_processedData
+//                    );
+//                    $r = $_ff[$fieldIdentifier] ?? [];
+                    $_ff = $this->flexFormService->convertFlexFormContentToArray($r['content_block']);
+                    $r = $_ff[$fieldIdentifier] ?? [];
+                }
+
+                $processedData[$fieldIdentifier] = $relations;
+
+                // Deliver a single Collection if the field is configured as maxItems=1
+                $fieldConf = ConfigurationService::cbField($cType, $fieldIdentifier);
+                $maxItems = (int)($fieldConf['properties']['maxItems'] ?? 1);
+                if ($maxItems === 1) {
+                    $processedData[$fieldIdentifier] = $processedData[$fieldIdentifier][0] ?? null;
+                }
+            }
+        }
+
+        $fileFields = ConfigurationService::cbFileFields($cType);
+        foreach ($flexformData as $fieldIdentifier => $val) {
+            if (in_array($fieldIdentifier, $fileFields)) {
                 $maybeLocalizedUid = $processedData['data']['_LOCALIZED_UID']
                     ?? $processedData['data']['uid'];
 
@@ -94,7 +148,7 @@ class FlexFormProcessor implements DataProcessorInterface
 
                 // Deliver a single file if the field is configured as maxItems=1
                 $fieldConf = ConfigurationService::cbField($cType, $fieldIdentifier);
-                $maxItems = (int) ($fieldConf['properties']['maxItems'] ?? 1);
+                $maxItems = (int)($fieldConf['properties']['maxItems'] ?? 1);
                 if ($maxItems === 1) {
                     $processedData[$fieldIdentifier] = $processedData[$fieldIdentifier][0] ?? null;
                 }

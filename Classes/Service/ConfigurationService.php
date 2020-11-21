@@ -163,10 +163,20 @@ class ConfigurationService
         $frontendLayoutsPath = $frontendTemplatesPath . DIRECTORY_SEPARATOR . 'Layouts';
 
         // relation fields
-        $relationFields = [];
+        // TODO: search recursively
+        $fileFields = [];
         foreach ($editorInterface['fields'] ?? [] as $field) {
             if (in_array($field['type'] ?? '', ['Icon', 'Image'])) {
-                $relationFields[] = $field['identifier'];
+                $fileFields[] = $field['_identifier'];
+            }
+        }
+
+        // relation fields
+        // TODO: search recursively
+        $collectionFields = [];
+        foreach ($editorInterface['fields'] ?? [] as $field) {
+            if (($field['type'] ?? '') === 'Collection') {
+                $collectionFields[] = $field['_identifier'];
             }
         }
 
@@ -181,7 +191,8 @@ class ConfigurationService
             'icon' => $iconPath,
             'iconProviderClass' => $iconProviderClass,
             'CType' => $cType,
-            'relationFields' => $relationFields,
+            'collectionFields' => $collectionFields,
+            'fileFields' => $fileFields,
             'frontendTemplatesPath' => $frontendTemplatesPath,
             'frontendPartialsPath' => $frontendPartialsPath,
             'frontendLayoutsPath' => $frontendLayoutsPath,
@@ -204,9 +215,18 @@ class ConfigurationService
      * @param string $cType
      * @return array<string>
      */
-    public static function cbRelationFields(string $cType): array
+    public static function cbFileFields(string $cType): array
     {
-        return self::cbConfiguration($cType)['relationFields'] ?? [];
+        return self::cbConfiguration($cType)['fileFields'] ?? [];
+    }
+
+    /**
+     * @param string $cType
+     * @return array<string>
+     */
+    public static function cbCollectionFields(string $cType): array
+    {
+        return self::cbConfiguration($cType)['collectionFields'] ?? [];
     }
 
     /**
@@ -229,7 +249,7 @@ class ConfigurationService
         return self::cbFields($cType)[$fieldIdentifier] ?? null;
     }
 
-    public static function fieldIdentifiers(array $fields, $parents = []): array
+    public static function fieldIdentifiers(array $fields, array $parents = []): array
     {
         foreach ($fields as &$f) {
             $identifier = $parents;
