@@ -15,7 +15,7 @@ if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('lang')) {
 
 return [
     'ctrl' => [
-        'label' => 'content_block_data',
+        'label' => 'content_block',
         'sortby' => 'sorting',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
@@ -42,13 +42,13 @@ return [
     'interface' => [
         'showRecordFieldList' => '
             hidden,
-            content_block_data
+            content_block
         ',
     ],
     'types' => [
         '1' => [
             'showitem' => '
-                content_block_data,
+                content_block,
                 --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,
                 --palette--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:palette.visibility;visibility,
                 --palette--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:palette.access;access,
@@ -74,7 +74,7 @@ return [
         // hidden but needs to be included all the time, so sys_language_uid is set correctly
         'hiddenLanguagePalette' => [
             'showitem' => 'sys_language_uid, l10n_parent, content_block_field_identifier',
-            'isHiddenPalette' => false,
+            'isHiddenPalette' => true,
         ],
     ],
     'columns' => [
@@ -161,7 +161,7 @@ return [
                 'type' => 'passthrough'
             ]
         ],
-        'content_block_data' => [
+        'content_block' => [
             'label' => 'Content Block Data',
             'config' => [
                 'type' => 'flex',

@@ -13,7 +13,7 @@ CREATE TABLE tx_contentblocks_reg_api_collection (
     uid int(11) unsigned NOT NULL auto_increment,
     pid int(11) DEFAULT '0' NOT NULL,
 
-    content_block_data text,
+    content_block text,
     content_block_foreign_field text,
     content_block_foreign_table_field text,
     content_block_field_identifier text,

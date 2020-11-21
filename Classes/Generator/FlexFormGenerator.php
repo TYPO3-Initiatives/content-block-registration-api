@@ -298,7 +298,7 @@ class FlexFormGenerator
             }
         }
 
-        $GLOBALS['TCA']['tx_contentblocks_reg_api_collection']['columns']['content_block_data']['config']['ds'][ $field['_identifier'] ] ='<T3DataStructure>
+        $GLOBALS['TCA']['tx_contentblocks_reg_api_collection']['columns']['content_block']['config']['ds'][ $field['_identifier'] ] ='<T3DataStructure>
                 <meta>
                     <langDisable>1</langDisable>
                 </meta>
@@ -350,10 +350,10 @@ class FlexFormGenerator
                                     <default>' . $field['_identifier'] . '</default>
                                 </config>
                             </content_block_field_identifier>
-                            <content_block_data type="array">
+                            <content_block type="array">
                                 <label>LLL:' . $contentBlock['EditorInterface.xlf'] . ':' . $contentBlock['vendor']
                                 . '.' . $contentBlock['package'] . '.' . $field['_identifier'] . '.label</label>
-                            </content_block_data>
+                            </content_block>
                         </columns>
                     </overrideChildTca>
 
