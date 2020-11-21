@@ -4,7 +4,9 @@
 <div class="slider">
     <f:for each="{slides}" as="slide" iteration="iteration">
         <div class="slider-item">
-            <f:image image="{slide.image}" width="500" height="250" alt=""/>
+            <f:if condition="{slide.image}">
+                <f:image image="{slide.image}" width="500" height="250" alt=""/>
+            </f:if>
             <f:if condition="{slide.headline}">
                 <h2>{slide.headline}</h2>
             </f:if>
