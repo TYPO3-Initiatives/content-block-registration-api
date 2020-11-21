@@ -25,6 +25,11 @@ call_user_func(
                 ]
             );
 
+            /***************
+             * Allow Custom Records on Standard Pages
+             */
+            \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_contentblocks_reg_api_collection');
+
         }
 
     }

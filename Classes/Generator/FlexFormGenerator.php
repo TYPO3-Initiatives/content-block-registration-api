@@ -287,39 +287,79 @@ class FlexFormGenerator
     /** create section */
     public static function createSection($field, $contentBlock)
     {
-        // Section wrapping
-        $fieldsConfig = '<' . $field['identifier'] . '> 
-                            <title>LLL:' . $contentBlock['EditorInterface.xlf'] . ':' . $contentBlock['vendor']
-                            . '.' . $contentBlock['package'] . '.' . $field['identifier'] . '.label</title> 
-                            <type>array</type> 
-                            <section>1</section> 
-                            <el>
-                                <container_' . $field['identifier'] . '>
-                                    <type>array</type>
-                                    <title>LLL:' . $contentBlock['EditorInterface.xlf'] . ':' . $contentBlock['vendor']
-                                    . '.' . $contentBlock['package'] . '.' . $field['identifier'] . '.label</title>
-                                    <el>';
-
-        // field renderings
+        // get the fields in the collections
+        $fieldsConfig = '';
         foreach ($field['properties']['fields'] as $collectionField) {
             if ($collectionField['type'] === 'Collection') {
-                $fieldsConfig = $fieldsConfig . self::createField($collectionField, $contentBlock);
+                $fieldsConfig = $fieldsConfig . self::createSection($collectionField, $contentBlock);
             } 
-            elseif ($collectionField['type'] === 'Image' || $collectionField['type'] === 'Icon'){
-                $fieldsConfig .= self::errorMessageToFlexform($collectionField['type'], $collectionField['identifier']);
-            }
             else {
                 $fieldsConfig .= self::createField($collectionField, $contentBlock);
             }
         }
-        
-        // End section wrapping
-        $fieldsConfig .= '</el>
-                        </container_' . $field['identifier'] . '>
-                    </el>
-                </' . $field['identifier'] . '>';
 
-        return $fieldsConfig;
+        $GLOBALS['TCA']['tx_contentblocks_reg_api_collection']['columns']['content_block_data']['config']['ds'][ $field['identifier'] ] ='<T3DataStructure>
+                <meta>
+                    <langDisable>1</langDisable>
+                </meta>
+                <sheets>
+                    <sDEF>
+                        <ROOT>
+                            <TCEforms>
+                                <sheetTitle>LLL:' . $contentBlock['EditorInterface.xlf'] . ':' . $contentBlock['vendor']
+                                . '.' . $contentBlock['package'] . '.' . $field['identifier'] . '.label</sheetTitle>
+                            </TCEforms>
+                            <type>array</type>
+                            <el>
+                                ' . $fieldsConfig . '
+                            </el>
+                        </ROOT>
+                    </sDEF>
+                </sheets>
+            </T3DataStructure>';
+        
+        return '<' . $field['identifier'] . '>
+            <TCEforms>
+                <label>LLL:' . $contentBlock['EditorInterface.xlf'] . ':' . $contentBlock['vendor']
+                . '.' . $contentBlock['package'] . '.' . $field['identifier'] . '.label</label>
+                <config>
+                    <label>LLL:' . $contentBlock['EditorInterface.xlf'] . ':' . $contentBlock['vendor']
+                    . '.' . $contentBlock['package'] . '.' . $field['identifier'] . '.label</label>
+                    <type>inline</type>
+                    <foreign_table>tx_contentblocks_reg_api_collection</foreign_table>
+                    <foreign_field>content_block_foreign_field</foreign_field>
+                    <foreign_table_field>content_block_foreign_table_field</foreign_table_field>
+                    
+                    <appearance type="array">
+                        <enabledControls type="array">
+                            <delete>1</delete>
+                            <dragdrop>1</dragdrop>
+                            <new>1</new>
+                            <hide>1</hide>
+                            <info>1</info>
+                            <localize>1</localize>
+                        </enabledControls>
+                        <useSortable>1</useSortable>
+                    </appearance>
+
+                    <overrideChildTca>
+                        <columns type="array">
+                            <content_block_field_identifier type="array">
+                                <label>Do not touch!</label>
+                                <config type="array">
+                                    <default>' . $field['identifier'] . '</default>
+                                </config>
+                            </content_block_field_identifier>
+                            <content_block_data type="array">
+                                <label>LLL:' . $contentBlock['EditorInterface.xlf'] . ':' . $contentBlock['vendor']
+                                . '.' . $contentBlock['package'] . '.' . $field['identifier'] . '.label</label>
+                            </content_block_data>
+                        </columns>
+                    </overrideChildTca>
+
+                </config>
+            </TCEforms>
+        </' . $field['identifier'] . '>';
     }
 
     /** create selection, checkboxes */

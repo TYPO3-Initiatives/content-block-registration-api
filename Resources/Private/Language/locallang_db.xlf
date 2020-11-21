@@ -6,6 +6,11 @@
             <authorEmail></authorEmail>
         </header>
         <body>
+        
+            <trans-unit id="contentblocks_reg_api.tx_contentblocks_reg_api_collection">
+                <source>Content Block Collection</source>
+            </trans-unit>
+
             <trans-unit id="tt_content.content_block">
                 <source>Content Block</source>
             </trans-unit>
