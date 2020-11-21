@@ -1,0 +1,14 @@
+{
+    "name": "typo3-contentblocks/slider-in-slider-local",
+    "description": "Content block with multiple slides switched by autoplay.",
+    "type": "typo3-cms-contentblock",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Structured Content Initiative"
+        }
+    ],
+    "require": {
+        "typo3-contentblocks/contentblocks-reg-api": "*"
+    }
+}

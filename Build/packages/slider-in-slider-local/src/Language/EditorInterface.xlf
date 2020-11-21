@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<xliff version="1.0">
+	<file datatype="plaintext"
+		  original="messages"
+		  source-language="en"
+		  product-name="slider">
+		<header/>
+		<body>
+			<trans-unit id="typo3-contentblocks.slider-in-slider-local.title" xml:space="preserve">
+				<source>Slider: Slides in Slides</source>
+			</trans-unit>
+			<trans-unit id="typo3-contentblocks.slider-in-slider-local.description" xml:space="preserve">
+				<source>A slider element with collection in collection.</source>
+			</trans-unit>
+			<trans-unit id="typo3-contentblocks.slider-in-slider-local.slides.label" xml:space="preserve">
+				<source>Slide</source>
+			</trans-unit>
+			<trans-unit id="typo3-contentblocks.slider-in-slider-local.slides.description" xml:space="preserve">
+				<source>Creates a slide element with different properties.</source>
+			</trans-unit>
+			<trans-unit id="typo3-contentblocks.slider-in-slider-local.headline.label" xml:space="preserve">
+				<source>Headline</source>
+			</trans-unit>
+			<trans-unit id="typo3-contentblocks.slider-in-slider-local.text.label" xml:space="preserve">
+				<source>Text</source>
+			</trans-unit>
+			<trans-unit id="typo3-contentblocks.slider-in-slider-local.buttonCaption.label" xml:space="preserve">
+				<source>Link label</source>
+			</trans-unit>
+			<trans-unit id="typo3-contentblocks.slider-in-slider-local.buttonCaption.description" xml:space="preserve">
+				<source>This text is displayed on the button.</source>
+			</trans-unit>
+			<trans-unit id="typo3-contentblocks.slider-in-slider-local.buttonLink.label" xml:space="preserve">
+				<source>Link target</source>
+			</trans-unit>
+			<trans-unit id="typo3-contentblocks.slider-in-slider-local.buttonLink.description" xml:space="preserve">
+				<source>Use the link wizard to provide a link to an internal or external page.</source>
+			</trans-unit>
+			<trans-unit id="typo3-contentblocks.slider-in-slider-local.autoplay.label" xml:space="preserve">
+				<source>Autoplay</source>
+			</trans-unit>
+			<trans-unit id="typo3-contentblocks.slider-in-slider-local.autoplay.description" xml:space="preserve">
+				<source>Toggles the autoplay.</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

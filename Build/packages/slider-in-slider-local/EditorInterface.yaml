@@ -1,0 +1,53 @@
+group: common
+fields:
+  - identifier: slides2
+    type: Collection
+    properties:
+      allowAdd: true
+      allowMove: true
+      allowDelete: true
+      minItems: 1
+      maxItems: 5
+      required:  true
+      fields:
+        - identifier: image2
+          type: Image
+          properties:
+            minItems: 1
+            maxItems: 1
+            required:  true
+        - identifier: headline2
+          type: Text
+        - identifier: buttonLink
+          type: Link
+          properties:
+            linkTypes: [page, external]
+        - identifier: slidesinline2
+          type: Collection
+          properties:
+            allowAdd: true
+            allowMove: true
+            allowDelete: true
+            minItems: 1
+            maxItems: 5
+            required:  true
+            fields:
+              - identifier: image
+                type: Image
+                properties:
+                  minItems: 1
+                  maxItems: 1
+                  required:  true
+              - identifier: headline
+                type: Text
+              - identifier: buttonCaption
+                type: Text
+                properties:
+                  required: true
+              - identifier: buttonLink
+                type: Link
+                properties:
+                  linkTypes: [page, external]
+  - identifier: autoplay
+    type: Toggle
+    defaultValue: true
