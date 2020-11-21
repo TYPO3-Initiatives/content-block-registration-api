@@ -284,6 +284,45 @@ class FlexFormGenerator
         ';
     }
 
+    /** create section */
+    public static function createSection($field, $contentBlock)
+    {
+        // Section wrapping
+        $fieldsConfig = '<' . $field['identifier'] . '> 
+                            <title>LLL:' . $contentBlock['EditorInterface.xlf'] . ':' . $contentBlock['vendor']
+                            . '.' . $contentBlock['package'] . '.' . $field['identifier'] . '.label</title> 
+                            <type>array</type> 
+                            <section>1</section> 
+                            <el>
+                                <container_' . $field['identifier'] . '>
+                                    <type>array</type>
+                                    <title>LLL:' . $contentBlock['EditorInterface.xlf'] . ':' . $contentBlock['vendor']
+                                    . '.' . $contentBlock['package'] . '.' . $field['identifier'] . '.label</title>
+                                    <el>';
+
+        // field renderings
+        foreach ($field['properties']['fields'] as $collectionField) {
+            if ($collectionField['type'] === 'Collection') {
+                $fieldsConfig = $fieldsConfig . self::createField($collectionField, $contentBlock);
+            } 
+            else {
+                if ( $collectionField['type'] === 'Image'){
+                    $fieldsConfig .= self::errorMessageToFlexform($collectionField['type'], $collectionField['identifier']);
+                } else {
+                    $fieldsConfig .= self::createField($collectionField, $contentBlock);
+                }
+            }
+        }
+        
+        // End section wrapping
+        $fieldsConfig .= '</el>
+                        </container_' . $field['identifier'] . '>
+                    </el>
+                </' . $field['identifier'] . '>';
+
+        return $fieldsConfig;
+    }
+
     /** create selection, checkboxes */
     public static function createSelections($field, $contentBlock)
     {
@@ -342,6 +381,21 @@ class FlexFormGenerator
         ';
     }
 
+    /** create flexform */
+    public static function createFlexform($contentBlock)
+    {
+        $flexFormFieldsConfig = '';
+
+        foreach ($contentBlock['yaml']['fields'] as $field) {
+            $flexFormFieldsConfig = $flexFormFieldsConfig . self::createField($field, $contentBlock);
+        }
+
+        /***************
+         * Add flexForms for content element configuration
+         */
+        $GLOBALS['TCA']['tt_content']['columns']['content_block']['config']['ds'][$contentBlock['CType']] = self::flexFormTemplate($flexFormFieldsConfig);
+    }
+
     /** generate Flexform wrapping structure */
     public static function flexFormTemplate($fieldConfig)
     {
@@ -366,4 +420,71 @@ class FlexFormGenerator
             </T3DataStructure>
             ';
     }
+
+    /** parse single field */
+    private static function createField($field, $contentBlock)
+    {
+        if (!is_array($field)) {
+            return '';
+        } // if no array given, return
+        elseif ($field['type'] === 'Collection') {
+            return self::createSection($field, $contentBlock);
+        } else {
+            switch ($field['type']) {
+                case 'Email':
+                case 'Integer':
+                case 'Money':
+                case 'Number':
+                case 'Percent':
+                case 'Text':
+                case 'Password':
+                case 'Range':
+                case 'Tel':
+                case 'Color':
+                case 'Date':
+                case 'DateTime':
+                case 'Time':
+                    return FlexFormGenerator::createInputField($field, $contentBlock);
+                case 'Textarea':
+                case 'TextMultiline':
+                    return FlexFormGenerator::createTextarea($field, $contentBlock);
+                case 'Link':
+                case 'Url':
+                    return FlexFormGenerator::createTypoLink($field, $contentBlock);
+                case 'Image':
+                case 'Icon':
+                    return FlexFormGenerator::createImageField($field, $contentBlock);
+                case 'Select':
+                case 'Checkbox':
+                case 'MultiSelect':
+                case 'Radiobox':
+                    return FlexFormGenerator::createSelections($field, $contentBlock);
+                default:
+                    return '';
+            }
+        }
+    }
+    /* Give some usefull hints to the user, if we actually do not support it */
+    private static function errorMessageToFlexform($message, $identifier){
+        $messageContent='
+        <' .$identifier .'>
+                <TCEforms>
+                    <label>Error on field with identifier ' .$identifier .'</label>
+                    <description>';
+
+        switch ($message) {
+            case 'Image':
+                $messageContent .= 'Actually it is not allowed or not technical possible to use images inside a collection, since we render a collection as a flexform section.
+                                We know that issue and working hard to fix it.';
+                break;
+            
+            default:
+                $messageContent .= 'Something went wrong with your field, but anyone forgot to create a usefull error message on that.';
+                break;
+        }
+
+        $messageContent .= '</description>  </TCEforms>  </' .$identifier .'>';
+        return $messageContent;
+    }
 }
+

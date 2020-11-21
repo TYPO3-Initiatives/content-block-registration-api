@@ -115,67 +115,11 @@ class TcaGenerator
                     ',
                 ]
             );
-
-            $flexFormFieldsConfig = '';
-
-            foreach ($contentBlock['yaml']['fields'] as $field) {
-                $flexFormFieldsConfig = $flexFormFieldsConfig . self::createField($field, $contentBlock);
-            }
-
+            
             /***************
              * Add flexForms for content element configuration
              */
-            $GLOBALS['TCA']['tt_content']['columns']['content_block']['config']['ds'][$contentBlock['CType']] = FlexFormGenerator::flexFormTemplate(
-                $flexFormFieldsConfig
-            );
-        }
-    }
-
-    /** parse single field */
-    private static function createField($field, $contentBlock)
-    {
-        if (!is_array($field)) {
-            return '';
-        } // if no array given, return
-        elseif ($field['type'] === 'Collection') {
-            $fieldsConfig = '';
-            foreach ($field['properties']['fields'] as $CollectionField) {
-                $fieldsConfig = $fieldsConfig . self::createField($CollectionField, $contentBlock);
-            }
-            return $fieldsConfig;
-        } else {
-            switch ($field['type']) {
-                case 'Email':
-                case 'Integer':
-                case 'Money':
-                case 'Number':
-                case 'Percent':
-                case 'Text':
-                case 'Password':
-                case 'Range':
-                case 'Tel':
-                case 'Color':
-                case 'Date':
-                case 'DateTime':
-                case 'Time':
-                    return FlexFormGenerator::createInputField($field, $contentBlock);
-                case 'Textarea':
-                case 'TextMultiline':
-                    return FlexFormGenerator::createTextarea($field, $contentBlock);
-                case 'Link':
-                case 'Url':
-                    return FlexFormGenerator::createTypoLink($field, $contentBlock);
-                case 'Image':
-                case 'Icon':
-                    return FlexFormGenerator::createImageField($field, $contentBlock);
-                case 'Select':
-                case 'Checkbox':
-                case 'MultiSelect':
-                case 'Radiobox':
-                    return FlexFormGenerator::createSelections($field, $contentBlock);
-                default:
-                    return '';
-            }
+            FlexFormGenerator::createFlexform($contentBlock );
         }
     }
 }
