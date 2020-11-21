@@ -64,7 +64,6 @@ class ConfigurationService
 
             $contentBlockConfiguration [$_cbConfiguration['CType']] = $_cbConfiguration;
         }
-
         return $contentBlockConfiguration;
     }
 
@@ -113,6 +112,8 @@ class ConfigurationService
             throw new \Exception(sprintf('%s not found', $editorInterfaceYamlPath));
         }
         $editorInterface = Yaml::parseFile($editorInterfaceYamlPath);
+
+        $editorInterface['fields'] = self::fieldIdentifiers($editorInterface['fields']);
 
         // .xlf
         $editorInterfaceXlf = is_readable($languageRealPath . 'Default.xlf')
@@ -218,7 +219,7 @@ class ConfigurationService
         $fields = [];
         $i = 0;
         foreach (self::cbConfiguration($cType)['yaml']['fields'] ?? [] as $f) {
-            $fields[$f['identifier'] ?? $i++] = $f;
+            $fields[$f['_identifier'] ?? $i++] = $f;
         }
         return $fields;
     }
@@ -226,5 +227,22 @@ class ConfigurationService
     public static function cbField(string $cType, string $fieldIdentifier): ?array
     {
         return self::cbFields($cType)[$fieldIdentifier] ?? null;
+    }
+
+    public static function fieldIdentifiers(array $fields, $parents = []): array
+    {
+        foreach ($fields as &$f) {
+            $identifier = $parents;
+            $identifier[] = $f['identifier'];
+            $f['_parents'] = $parents;
+            $f['_identifier'] = implode('.', $identifier);
+            if (isset($f['properties']['fields'])) {
+                $f['properties']['fields'] = self::fieldIdentifiers(
+                    $f['properties']['fields'],
+                    $identifier
+                );
+            }
+        }
+        return $fields;
     }
 }

@@ -20,5 +20,6 @@ class ContentBlockValidator
     public function validate(array $cbConfiguration): void
     {
         // TODO
+        // we should check that there are no fields 'data' or 'cb' defined since these would clash
     }
 }
