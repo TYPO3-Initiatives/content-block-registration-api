@@ -305,12 +305,11 @@ class FlexFormGenerator
             if ($collectionField['type'] === 'Collection') {
                 $fieldsConfig = $fieldsConfig . self::createField($collectionField, $contentBlock);
             } 
+            elseif ($collectionField['type'] === 'Image' || $collectionField['type'] === 'Icon'){
+                $fieldsConfig .= self::errorMessageToFlexform($collectionField['type'], $collectionField['identifier']);
+            }
             else {
-                if ( $collectionField['type'] === 'Image'){
-                    $fieldsConfig .= self::errorMessageToFlexform($collectionField['type'], $collectionField['identifier']);
-                } else {
-                    $fieldsConfig .= self::createField($collectionField, $contentBlock);
-                }
+                $fieldsConfig .= self::createField($collectionField, $contentBlock);
             }
         }
         
@@ -475,6 +474,10 @@ class FlexFormGenerator
         switch ($message) {
             case 'Image':
                 $messageContent .= 'Actually it is not allowed or not technical possible to use images inside a collection, since we render a collection as a flexform section.
+                                We know that issue and working hard to fix it.';
+                break;
+            case 'Icon':
+                $messageContent .= 'Actually it is not allowed or not technical possible to use images/icons inside a collection, since we render a collection as a flexform section.
                                 We know that issue and working hard to fix it.';
                 break;
             
