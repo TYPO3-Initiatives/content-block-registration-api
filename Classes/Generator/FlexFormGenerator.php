@@ -380,7 +380,7 @@ class FlexFormGenerator
         }
 
         $type = 'select';
-        if ($field['type'] === 'Checkbox') {
+        if ($field['type'] === 'Checkbox' || $field['type'] === 'Toggle') {
             $type = 'check';
         }
         if ($field['type'] === 'Radiobox') {
@@ -393,6 +393,9 @@ class FlexFormGenerator
         }
         if ($field['type'] === 'MultiSelect') {
             $additionlConfig = '<renderType>selectMultipleSideBySide</renderType>';
+        }
+        if ($field['type'] === 'Toggle') {
+            $additionlConfig = '<renderType>checkboxToggle</renderType>';
         }
 
         if ($field['properties']['cols']) {
@@ -497,6 +500,7 @@ class FlexFormGenerator
                 case 'Checkbox':
                 case 'MultiSelect':
                 case 'Radiobox':
+                case 'Toggle':
                     return FlexFormGenerator::createSelections($field, $contentBlock);
                 default:
                     return '';
