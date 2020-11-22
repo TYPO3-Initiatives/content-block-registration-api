@@ -50,4 +50,12 @@ class DataService implements SingletonInterface
     {
         return implode('.', $path);
     }
+
+    public function uniqueCombinedIdentifier(string $cType, string $combinedIdentifier): string {
+        return $cType . '|' . $combinedIdentifier;
+    }
+
+    public function splitUniqueCombinedIdentifier($uniqueCombinedIdentifier): array {
+        return explode('|', $uniqueCombinedIdentifier);
+    }
 }

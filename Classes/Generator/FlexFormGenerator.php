@@ -13,9 +13,18 @@ namespace Typo3Contentblocks\ContentblocksRegApi\Generator;
 
 use TYPO3\CMS\Core\Resource\File;
 use Typo3Contentblocks\ContentblocksRegApi\Constants;
+use Typo3Contentblocks\ContentblocksRegApi\Service\DataService;
 
 class FlexFormGenerator
 {
+    /**
+     * @var DataService
+     */
+    protected $dataService;
+
+    public function __construct(DataService $dataService) {
+        $this->dataService = $dataService;
+    }
 
     /**
      * Create a flexform typolink
@@ -312,7 +321,9 @@ class FlexFormGenerator
             }
         }
 
-        $GLOBALS['TCA']['tx_contentblocks_reg_api_collection']['columns'][Constants::FLEXFORM_FIELD]['config']['ds'][$contentBlock['CType'] . '_' . $field['_identifier']] = '<T3DataStructure>
+        $GLOBALS['TCA']['tx_contentblocks_reg_api_collection']['columns'][Constants::FLEXFORM_FIELD]
+        ['config']['ds']
+        [$this->dataService->uniqueCombinedIdentifier($contentBlock['CType'], $field['_identifier'])] = '<T3DataStructure>
                 <meta>
                     <langDisable>1</langDisable>
                 </meta>
@@ -344,7 +355,9 @@ class FlexFormGenerator
                     <foreign_field>content_block_foreign_field</foreign_field>
                     <foreign_table_field>content_block_foreign_table_field</foreign_table_field>
                     <foreign_match_fields>
-                        <content_block_field_identifier>' . $contentBlock['CType'] . '_' . $field['_identifier'] . '</content_block_field_identifier>
+                        <content_block_field_identifier>'
+            . $this->dataService->uniqueCombinedIdentifier($contentBlock['CType'], $field['_identifier'])
+            . '</content_block_field_identifier>
                     </foreign_match_fields>
 
                     <appearance type="array">
@@ -364,7 +377,9 @@ class FlexFormGenerator
                             <content_block_field_identifier type="array">
                                 <label>Do not touch!</label>
                                 <config type="array">
-                                    <default>' . $contentBlock['CType'] . '_' . $field['_identifier'] . '</default>
+                                    <default>'
+            . $this->dataService->uniqueCombinedIdentifier($contentBlock['CType'], $field['_identifier'])
+            . '</default>
                                 </config>
                             </content_block_field_identifier>
                             <content_block type="array">
