@@ -16,9 +16,9 @@ use TYPO3\CMS\Core\Resource\File;
 class FlexFormGenerator
 {
 
-    /** 
-     * Create a flexform typolink 
-     * 
+    /**
+     * Create a flexform typolink
+     *
     */
     protected function createTypoLink(array $field, array $contentBlock) :string
     {
@@ -66,9 +66,9 @@ class FlexFormGenerator
         ';
     }
 
-    /** 
+    /**
      * Create a input field with several renderings: Mail, Integer,  Monay, Number, Range, Telephone, Date, Time, DateTime
-     * 
+     *
     */
     protected function createInputField(array $field, array $contentBlock) :string
     {
@@ -178,8 +178,8 @@ class FlexFormGenerator
         ';
     }
 
-    /**  
-     * Create an flexform inline field for pictures (Image or Icon) 
+    /**
+     * Create an flexform inline field for pictures (Image or Icon)
     */
     protected function createImageField(array $field, array $contentBlock) :string
     {
@@ -262,7 +262,7 @@ class FlexFormGenerator
         ';
     }
 
-    /** 
+    /**
      * Create flexform textfields like textarea, rte fields
      */
     protected function createTextarea(array $field, array $contentBlock) :string
@@ -294,7 +294,7 @@ class FlexFormGenerator
         ';
     }
 
-    /** 
+    /**
      * Create inline field for a collection.
      * It overrides the TCA array directly.
      */
@@ -342,6 +342,9 @@ class FlexFormGenerator
                     <foreign_table>tx_contentblocks_reg_api_collection</foreign_table>
                     <foreign_field>content_block_foreign_field</foreign_field>
                     <foreign_table_field>content_block_foreign_table_field</foreign_table_field>
+                    <foreign_match_fields>
+                        <content_block_field_identifier>' . $contentBlock['CType'] . '_' . $field['_identifier'] . '</content_block_field_identifier>
+                    </foreign_match_fields>
 
                     <appearance type="array">
                         <enabledControls type="array">
@@ -375,7 +378,7 @@ class FlexFormGenerator
         </' . $field['_identifier'] . '>';
     }
 
-    /** 
+    /**
      * Create selection, checkboxes, singel select, radio boxes, multi select side by side, toggles.
      */
     protected function createSelections($field, $contentBlock)
@@ -438,8 +441,8 @@ class FlexFormGenerator
         ';
     }
 
-    /** 
-     * Public function to create flexform settings. 
+    /**
+     * Public function to create flexform settings.
      * Register the flexform directly to the TCA array.
      */
     public function createFlexform(array $contentBlock) :void
@@ -456,7 +459,7 @@ class FlexFormGenerator
         $GLOBALS['TCA']['tt_content']['columns']['content_block']['config']['ds'][$contentBlock['CType']] = $this->flexFormTemplate($flexFormFieldsConfig);
     }
 
-    /** 
+    /**
      * Basic generate Flexform wraping structure surrounding.
      */
     protected function flexFormTemplate(string $fieldConfig) :string
@@ -483,9 +486,9 @@ class FlexFormGenerator
             ';
     }
 
-    /** 
+    /**
      * Parse every single field.
-     * Make a decision which method should be used. Mapping the symphony types and special types to what it is in flexform.   
+     * Make a decision which method should be used. Mapping the symphony types and special types to what it is in flexform.
      */
     protected function createField(array $field, array $contentBlock) :string
     {
