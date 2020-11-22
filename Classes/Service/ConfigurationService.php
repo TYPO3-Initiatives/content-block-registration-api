@@ -112,8 +112,12 @@ class ConfigurationService
             throw new \Exception(sprintf('%s not found', $editorInterfaceYamlPath));
         }
         $editorInterface = Yaml::parseFile($editorInterfaceYamlPath);
+        if (!is_array($editorInterface['fields'])) {
+            throw new \Exception(sprintf('Key ‹fields› must be an array in %s', $editorInterfaceYamlPath));
+        }
 
-        $editorInterface['fields'] = self::fieldIdentifiers($editorInterface['fields']);
+        // add combined '_identifier' and '_parents'
+        self::_addFieldIdentifiers($editorInterface['fields']);
 
         // .xlf
         $editorInterfaceXlf = is_readable($languageRealPath . 'Default.xlf')
@@ -162,23 +166,11 @@ class ConfigurationService
         // Layouts
         $frontendLayoutsPath = $frontendTemplatesPath . DIRECTORY_SEPARATOR . 'Layouts';
 
-        // relation fields
-        // TODO: search recursively
-        $fileFields = [];
-        foreach ($editorInterface['fields'] ?? [] as $field) {
-            if (in_array($field['type'] ?? '', ['Icon', 'Image'])) {
-                $fileFields[] = $field['_identifier'];
-            }
-        }
+        // file fields
+        $fileFields = self::_fieldsByTypes($editorInterface['fields'] ?? [], ['Icon', 'Image']);
 
-        // relation fields
-        // TODO: search recursively
-        $collectionFields = [];
-        foreach ($editorInterface['fields'] ?? [] as $field) {
-            if (($field['type'] ?? '') === 'Collection') {
-                $collectionFields[] = $field['_identifier'];
-            }
-        }
+        // collection fields
+        $collectionFields = self::_fieldsByTypes($editorInterface['fields'] ?? [], ['Collection']);
 
         $cbConfiguration = [
             '__warning' => 'Contents of this "cb" configuration are not API yet and might change!',
@@ -249,20 +241,34 @@ class ConfigurationService
         return self::cbFields($cType)[$fieldIdentifier] ?? null;
     }
 
-    public static function fieldIdentifiers(array $fields, array $parents = []): array
+    protected static function _addFieldIdentifiers(array &$fields, array $parents = []): void
     {
         foreach ($fields as &$f) {
             $identifier = $parents;
             $identifier[] = $f['identifier'];
-            $f['_parents'] = $parents;
+            $f['_path'] = $identifier;
+            // TODO use DataService
             $f['_identifier'] = implode('.', $identifier);
             if (isset($f['properties']['fields'])) {
-                $f['properties']['fields'] = self::fieldIdentifiers(
+                self::_addFieldIdentifiers(
                     $f['properties']['fields'],
                     $identifier
                 );
             }
         }
-        return $fields;
+    }
+
+    protected static function _fieldsByTypes(array $fields, array $types): array
+    {
+        $matchingFields = [];
+        foreach ($fields as &$f) {
+            if (in_array($f['type'] ?? '', $types)) {
+                $matchingFields[$f['_identifier']] = $f;
+            }
+            if (isset($f['properties']['fields'])) {
+                $matchingFields += self::_fieldsByTypes($f['properties']['fields'], $types);
+            }
+        }
+        return $matchingFields;
     }
 }
