@@ -358,8 +358,18 @@ class FlexFormGenerator
                         <content_block_field_identifier>'
             . $this->dataService->uniqueCombinedIdentifier($contentBlock['CType'], $field['_identifier'])
             . '</content_block_field_identifier>
-                    </foreign_match_fields>
-
+                    </foreign_match_fields>'
+            . (
+            ($field['properties']['minItems'] ?? false)
+                ? '<minItems>' . $field['properties']['minItems'] . '</minItems>'
+                : ''
+            )
+            . (
+            ($field['properties']['maxItems'] ?? false)
+                ? '<maxItems>' . $field['properties']['maxItems'] . '</maxItems>'
+                : ''
+            )
+            . '
                     <appearance type="array">
                         <enabledControls type="array">
                             <delete>1</delete>
