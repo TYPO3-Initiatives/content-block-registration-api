@@ -19,6 +19,7 @@ fields:
   - identifier: collection2
     type: Collection
     properties:
+      maxItems: 1
       fields:
         - identifier: image
           type: Image

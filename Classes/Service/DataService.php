@@ -15,6 +15,11 @@ use TYPO3\CMS\Core\SingletonInterface;
 
 class DataService implements SingletonInterface
 {
+    /**
+     * @param array $data
+     * @param array $path
+     * @return mixed|null
+     */
     public function extractData(array $data, array $path)
     {
         $data = $data[array_shift($path)] ?? null;
@@ -29,16 +34,12 @@ class DataService implements SingletonInterface
 
     public function setData(array &$data, array $path, array $value): void
     {
-        $current = &$data;
+        $currentRef = &$data;
         while (!empty($path)) {
             $next = array_shift($path);
-//            // do not set paths with non-existing parents
-//            if (!isset($current[$next])) {
-//                return;
-//            }
-            $current = &$current[$next];
+            $currentRef = &$currentRef[$next];
         }
-        $current = $value;
+        $currentRef = $value;
     }
 
     public function combinedIdentifierToArray(string $combinedIdentifier): array
@@ -51,11 +52,13 @@ class DataService implements SingletonInterface
         return implode('.', $path);
     }
 
-    public function uniqueCombinedIdentifier(string $cType, string $combinedIdentifier): string {
+    public function uniqueCombinedIdentifier(string $cType, string $combinedIdentifier): string
+    {
         return $cType . '|' . $combinedIdentifier;
     }
 
-    public function splitUniqueCombinedIdentifier($uniqueCombinedIdentifier): array {
+    public function splitUniqueCombinedIdentifier($uniqueCombinedIdentifier): array
+    {
         return explode('|', $uniqueCombinedIdentifier);
     }
 }

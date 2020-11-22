@@ -205,7 +205,7 @@ class ConfigurationService
 
     /**
      * @param string $cType
-     * @return array<string>
+     * @return array<string, array>
      */
     public static function cbFileFields(string $cType): array
     {
@@ -214,11 +214,28 @@ class ConfigurationService
 
     /**
      * @param string $cType
-     * @return array<string>
+     * @return array<string, array>
      */
     public static function cbCollectionFields(string $cType): array
     {
         return self::cbConfiguration($cType)['collectionFields'] ?? [];
+    }
+
+    /**
+     * @param string $cType
+     * @param array $path
+     * @return array<string, array>
+     */
+    public static function cbCollectionFieldsAtPath(string $cType, array $path): array
+    {
+        return array_filter(
+            self::cbCollectionFields($cType),
+            function ($e) use ($path) {
+                $fieldParentPath = $e['_path'];
+                array_pop($fieldParentPath);
+                return $fieldParentPath === $path;
+            }
+        );
     }
 
     /**

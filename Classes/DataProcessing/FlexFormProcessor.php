@@ -15,6 +15,7 @@ use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Resource\FileRepository;
 use TYPO3\CMS\Core\Service\FlexFormService;
+use TYPO3\CMS\Core\Utility\ArrayUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\ContentObject\DataProcessorInterface;
@@ -52,7 +53,6 @@ class FlexFormProcessor implements DataProcessorInterface
      * @var array
      */
     protected $record;
-
 
     public function __construct(
         FlexFormService $flexFormService,
@@ -95,61 +95,13 @@ class FlexFormProcessor implements DataProcessorInterface
 
     protected function _processCollections(array &$cbData): void
     {
-        $collectionFields = ConfigurationService::cbCollectionFields($this->cType);
+        $maybeLocalizedUid = (int)(
+            $this->record['_LOCALIZED_UID'] ?? $this->record['uid']
+        );
 
-        foreach ($collectionFields as $combinedFieldIdentifier => $fieldConf) {
-            $maybeLocalizedUid = $this->record['_LOCALIZED_UID']
-                ?? $this->record['uid'];
+        $collections = $this->_collections('tt_content', $maybeLocalizedUid);
 
-            $parentUid = $maybeLocalizedUid;
-            $parentTable = count($fieldConf['_path']) > 2
-                ? Constants::COLLECTION_FOREIGN_TABLE
-                : 'tt_content';
-
-            $q = GeneralUtility::makeInstance(ConnectionPool::class)
-                ->getConnectionForTable(Constants::COLLECTION_FOREIGN_TABLE)
-                ->createQueryBuilder();
-            $stmt = $q->select(
-                'uid',
-                Constants::COLLECTION_FOREIGN_FIELD,
-                Constants::COLLECTION_FOREIGN_TABLE_FIELD,
-                Constants::FLEXFORM_FIELD
-            )
-                ->from(Constants::COLLECTION_FOREIGN_TABLE)
-                ->where(
-                    $q->expr()->eq(
-                        Constants::COLLECTION_FOREIGN_FIELD,
-                        $q->createNamedParameter($parentUid, Connection::PARAM_INT)
-                    )
-                )->andWhere(
-                    $q->expr()->eq(
-                        Constants::COLLECTION_FOREIGN_MATCH_FIELD,
-                        $q->createNamedParameter($this->cType . '_' . $combinedFieldIdentifier)
-                    )
-                )->andWhere(
-                    $q->expr()->eq(
-                        Constants::COLLECTION_FOREIGN_TABLE_FIELD,
-                        $q->createNamedParameter($parentTable)
-                    )
-                )->orderBy('sorting')
-                ->execute();
-
-            $fieldData = [];
-            while ($r = $stmt->fetchAssociative()) {
-                $_flexformData = $this->flexFormService->convertFlexFormContentToArray(
-                        $r[Constants::FLEXFORM_FIELD]
-                    )[$fieldConf['identifier']] ?? [];
-                $fieldData[] = $_flexformData;
-            }
-
-            // Deliver a single Collection if the field is configured as maxItems=1
-            $maxItems = (int)($fieldConf['properties']['maxItems'] ?? null);
-            if ($maxItems === 1) {
-                $fieldData = $fieldData[0] ?? null;
-            }
-
-            $this->dataService->setData($cbData, $fieldConf['_path'], $fieldData);
-        }
+        ArrayUtility::mergeRecursiveWithOverrule($cbData, $collections);
     }
 
     protected function _processFiles(array &$cbData): void
@@ -168,6 +120,7 @@ class FlexFormProcessor implements DataProcessorInterface
                      * @see \TYPO3\CMS\Core\Resource\FileRepository::findByRelation() requires
                      * a configured TCA column in backend context.
                      * That's impossible for a field inside a FlexForm.
+                     * Yet because it is so incredibly convenient, we want to use it anyways...
                      * @see \TYPO3\CMS\Core\Resource\AbstractRepository::getEnvironmentMode()
                      */
                     $_tsfe = $GLOBALS['TSFE'] ?? null;
@@ -177,7 +130,7 @@ class FlexFormProcessor implements DataProcessorInterface
                     $GLOBALS['TSFE'] = $tsfe;
                 }
 
-                // welcome back
+                // welcome back. Isn't that pretty?
                 $processedData[$fieldIdentifier] = $this->fileRepository->findByRelation(
                     'tt_content',
                     $fieldIdentifier,
@@ -197,5 +150,77 @@ class FlexFormProcessor implements DataProcessorInterface
                 }
             }
         }
+    }
+
+    protected function _collections(
+        string $parentTable,
+        int $parentUid,
+        array $parentPath = []
+    ): array {
+        $collectionFields = ConfigurationService::cbCollectionFields($this->cType);
+        $q = GeneralUtility::makeInstance(ConnectionPool::class)
+            ->getConnectionForTable(Constants::COLLECTION_FOREIGN_TABLE)
+            ->createQueryBuilder();
+        $stmt = $q->select(
+            'uid',
+            Constants::COLLECTION_FOREIGN_FIELD,
+            Constants::COLLECTION_FOREIGN_TABLE_FIELD,
+            Constants::COLLECTION_FOREIGN_MATCH_FIELD,
+            Constants::FLEXFORM_FIELD
+        )
+            ->from(Constants::COLLECTION_FOREIGN_TABLE)
+            ->where(
+                $q->expr()->eq(
+                    Constants::COLLECTION_FOREIGN_FIELD,
+                    $q->createNamedParameter($parentUid, Connection::PARAM_INT)
+                )
+            )->andWhere(
+                $q->expr()->eq(
+                    Constants::COLLECTION_FOREIGN_TABLE_FIELD,
+                    $q->createNamedParameter($parentTable)
+                )
+            )->orderBy('sorting')
+            ->execute();
+
+        $collections = [];
+        // initialize collection fields
+        foreach (ConfigurationService::cbCollectionFieldsAtPath($this->cType, $parentPath) as $fieldConf) {
+            $collections[end($fieldConf['_path'])] = [];
+        }
+
+        while ($r = $stmt->fetchAssociative()) {
+            [$cType, $combinedIdentifier] = $this->dataService->splitUniqueCombinedIdentifier(
+                $r[Constants::COLLECTION_FOREIGN_MATCH_FIELD]
+            );
+
+            // dangling relation
+            if ($cType !== $this->cType) {
+                continue;
+            }
+
+            // dangling data structure
+            if (!in_array($combinedIdentifier, array_keys($collectionFields))) {
+                continue;
+            }
+
+            $path = $this->dataService->combinedIdentifierToArray($combinedIdentifier);
+            $identifier = end($path);
+
+            $fieldData = $this->flexFormService->convertFlexFormContentToArray(
+                $r[Constants::FLEXFORM_FIELD]
+            );
+            $fieldData = $this->dataService->extractData($fieldData, $path) ?? [];
+
+            $subCollections = $this->_collections(
+                Constants::COLLECTION_FOREIGN_TABLE,
+                $r['uid'],
+                $path
+            );
+
+            ArrayUtility::mergeRecursiveWithOverrule($fieldData, $subCollections);
+            $collections[$identifier][] = $fieldData;
+        }
+
+        return $collections;
     }
 }
