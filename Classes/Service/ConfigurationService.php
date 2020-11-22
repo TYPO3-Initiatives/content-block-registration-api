@@ -167,6 +167,9 @@ class ConfigurationService
         $frontendLayoutsPath = $frontendTemplatesPath . DIRECTORY_SEPARATOR . 'Layouts';
 
         // file fields
+        $fields = self::_fields($editorInterface['fields'] ?? []);
+
+        // file fields
         $fileFields = self::_fieldsByTypes($editorInterface['fields'] ?? [], ['Icon', 'Image']);
 
         // collection fields
@@ -183,6 +186,7 @@ class ConfigurationService
             'icon' => $iconPath,
             'iconProviderClass' => $iconProviderClass,
             'CType' => $cType,
+            'fields' => $fields,
             'collectionFields' => $collectionFields,
             'fileFields' => $fileFields,
             'frontendTemplatesPath' => $frontendTemplatesPath,
@@ -238,6 +242,24 @@ class ConfigurationService
         );
     }
 
+
+    /**
+     * @param string $cType
+     * @param array $path
+     * @return array<string, array>
+     */
+    public static function cbFileFieldsAtPath(string $cType, array $path): array
+    {
+        return array_filter(
+            self::cbFileFields($cType),
+            function ($e) use ($path) {
+                $fieldParentPath = $e['_path'];
+                array_pop($fieldParentPath);
+                return $fieldParentPath === $path;
+            }
+        );
+    }
+
     /**
      * @param string $cType
      * @return array<string, array<string, mixed>> associative field configurations with field
@@ -245,12 +267,7 @@ class ConfigurationService
      */
     public static function cbFields(string $cType): array
     {
-        $fields = [];
-        $i = 0;
-        foreach (self::cbConfiguration($cType)['yaml']['fields'] ?? [] as $f) {
-            $fields[$f['_identifier'] ?? $i++] = $f;
-        }
-        return $fields;
+        return self::_fields(self::cbConfiguration($cType)['yaml']['fields'] ?? []);
     }
 
     public static function cbField(string $cType, string $fieldIdentifier): ?array
@@ -273,6 +290,18 @@ class ConfigurationService
                 );
             }
         }
+    }
+
+    protected static function _fields(array $fields): array
+    {
+        $matchingFields = [];
+        foreach ($fields as &$f) {
+            $matchingFields[$f['_identifier']] = $f;
+            if (isset($f['properties']['fields'])) {
+                $matchingFields += self::_fields($f['properties']['fields']);
+            }
+        }
+        return $matchingFields;
     }
 
     protected static function _fieldsByTypes(array $fields, array $types): array

@@ -13,6 +13,7 @@ namespace Typo3Contentblocks\ContentblocksRegApi\DataProcessing;
 
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Resource\FileReference;
 use TYPO3\CMS\Core\Resource\FileRepository;
 use TYPO3\CMS\Core\Service\FlexFormService;
 use TYPO3\CMS\Core\Utility\ArrayUtility;
@@ -86,8 +87,16 @@ class FlexFormProcessor implements DataProcessorInterface
 
         $cbData = $this->flexFormService->convertFlexFormContentToArray($cbDataFlexForm);
 
+        $maybeLocalizedUid = $processedData['data']['_LOCALIZED_UID']
+            ?? $this->record['uid'];
+
+        // process Images on highest level (tt_content)
+        foreach (ConfigurationService::cbFileFieldsAtPath($this->cType, []) as $fieldConf) {
+            $files = $this->_files('tt_content', $maybeLocalizedUid, $fieldConf['_identifier']);
+            $cbData[end($fieldConf['_path'])] = $files;
+        }
+
         $this->_processCollections($cbData);
-        $this->_processFiles($cbData);
 
         $processedData = array_merge($processedData, $cbData);
         return $processedData;
@@ -104,54 +113,6 @@ class FlexFormProcessor implements DataProcessorInterface
         ArrayUtility::mergeRecursiveWithOverrule($cbData, $collections);
     }
 
-    protected function _processFiles(array &$cbData): void
-    {
-        $fileFields = ConfigurationService::cbFileFields($this->cType);
-        foreach ($cbData as $fieldIdentifier => $val) {
-            if (in_array($fieldIdentifier, $fileFields)) {
-                $maybeLocalizedUid = $processedData['data']['_LOCALIZED_UID']
-                    ?? $this->record['uid'];
-
-                // look away now
-
-                // Why are you still looking?!
-                if (!($GLOBALS['TSFE'] ?? null) instanceof TypoScriptFrontendController) {
-                    /**
-                     * @see \TYPO3\CMS\Core\Resource\FileRepository::findByRelation() requires
-                     * a configured TCA column in backend context.
-                     * That's impossible for a field inside a FlexForm.
-                     * Yet because it is so incredibly convenient, we want to use it anyways...
-                     * @see \TYPO3\CMS\Core\Resource\AbstractRepository::getEnvironmentMode()
-                     */
-                    $_tsfe = $GLOBALS['TSFE'] ?? null;
-                    $tsfe = unserialize(
-                        'O:58:"TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController":0:{}'
-                    );
-                    $GLOBALS['TSFE'] = $tsfe;
-                }
-
-                // welcome back. Isn't that pretty?
-                $processedData[$fieldIdentifier] = $this->fileRepository->findByRelation(
-                    'tt_content',
-                    $fieldIdentifier,
-                    $maybeLocalizedUid
-                );
-
-                // Deliver a single file if the field is configured as maxItems=1
-                $fieldConf = ConfigurationService::cbField($this->cType, $fieldIdentifier);
-                $maxItems = (int)($fieldConf['properties']['maxItems'] ?? 1);
-                if ($maxItems === 1) {
-                    $processedData[$fieldIdentifier] = $processedData[$fieldIdentifier][0] ?? null;
-                }
-
-                // look away again
-                if (isset($_tsfe)) {
-                    $GLOBALS['TSFE'] = $_tsfe;
-                }
-            }
-        }
-    }
-
     protected function _collections(
         string $parentTable,
         int $parentUid,
@@ -163,8 +124,6 @@ class FlexFormProcessor implements DataProcessorInterface
             ->createQueryBuilder();
         $stmt = $q->select(
             'uid',
-            Constants::COLLECTION_FOREIGN_FIELD,
-            Constants::COLLECTION_FOREIGN_TABLE_FIELD,
             Constants::COLLECTION_FOREIGN_MATCH_FIELD,
             Constants::FLEXFORM_FIELD
         )
@@ -182,8 +141,8 @@ class FlexFormProcessor implements DataProcessorInterface
             )->orderBy('sorting')
             ->execute();
 
-        $collections = [];
         // initialize collection fields
+        $collections = [];
         foreach (ConfigurationService::cbCollectionFieldsAtPath($this->cType, $parentPath) as $fieldConf) {
             $collections[end($fieldConf['_path'])] = [];
         }
@@ -211,6 +170,16 @@ class FlexFormProcessor implements DataProcessorInterface
             );
             $fieldData = $this->dataService->extractData($fieldData, $path) ?? [];
 
+            // process Images on this level
+            foreach (ConfigurationService::cbFileFieldsAtPath($this->cType, $path) as $fieldConf) {
+                $files = $this->_files(
+                    Constants::COLLECTION_FOREIGN_TABLE,
+                    $r['uid'],
+                    $fieldConf['_identifier']
+                );
+                $fieldData[end($fieldConf['_path'])] = $files;
+            }
+
             $subCollections = $this->_collections(
                 Constants::COLLECTION_FOREIGN_TABLE,
                 $r['uid'],
@@ -222,5 +191,53 @@ class FlexFormProcessor implements DataProcessorInterface
         }
 
         return $collections;
+    }
+
+    /**
+     * @param string $parentTable
+     * @param int $parentUid
+     * @param string $combinedIdentifier
+     * @return array<FileReference>|FileReference|null
+     */
+    protected function _files(string $parentTable, int $parentUid, string $combinedIdentifier)
+    {
+        // look away now
+
+        // Why are you still looking?!
+        if (!($GLOBALS['TSFE'] ?? null) instanceof TypoScriptFrontendController) {
+            /**
+             * @see \TYPO3\CMS\Core\Resource\FileRepository::findByRelation() requires
+             * a configured TCA column in backend context.
+             * That's impossible for a field inside a FlexForm.
+             * Yet because it is so incredibly convenient, we want to use it anyways...
+             * @see \TYPO3\CMS\Core\Resource\AbstractRepository::getEnvironmentMode()
+             */
+            $_tsfe = $GLOBALS['TSFE'] ?? null;
+            $tsfe = unserialize(
+                'O:58:"TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController":0:{}'
+            );
+            $GLOBALS['TSFE'] = $tsfe;
+        }
+
+        // welcome back. Isn't that pretty?
+        $files = $this->fileRepository->findByRelation(
+            $parentTable,
+            $combinedIdentifier,
+            $parentUid
+        );
+
+        // Deliver a single file if the field is configured as maxItems=1
+        $fieldConf = ConfigurationService::cbField($this->cType, $combinedIdentifier);
+        $maxItems = (int)($fieldConf['properties']['maxItems'] ?? 1);
+        if ($maxItems === 1) {
+            $files = $files[0] ?? null;
+        }
+
+        // look away again
+        if (isset($_tsfe)) {
+            $GLOBALS['TSFE'] = $_tsfe;
+        }
+
+        return $files;
     }
 }

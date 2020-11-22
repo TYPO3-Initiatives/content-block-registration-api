@@ -25,6 +25,7 @@ fields:
           type: Image
         - identifier: headline
           type: Text
-  - identifier: autoplay
-    type: Toggle
-    defaultValue: true
+  - identifier: image
+    type: Image
+    properties:
+      maxItems: 2

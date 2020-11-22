@@ -39,6 +39,9 @@
       <trans-unit id="typo3-contentblocks.collections-images-local.collection2.headline.label" xml:space="preserve">
 				<source>collection2.headline</source>
 			</trans-unit>
+      <trans-unit id="typo3-contentblocks.collections-images-local.image.label" xml:space="preserve">
+				<source>image</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
