@@ -1,5 +1,5 @@
 {
-    "name": "typo3-contentblocks/slider-in-slider-local",
+    "name": "typo3-contentblocks/collections-images-local",
     "description": "Content block with multiple slides switched by autoplay.",
     "type": "typo3-cms-contentblock",
     "license": "GPL-2.0-or-later",

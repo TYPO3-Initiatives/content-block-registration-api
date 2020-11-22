@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<xliff version="1.0">
+	<file datatype="plaintext"
+		  original="messages"
+		  source-language="en"
+		  product-name="collections-images">
+		<header/>
+		<body>
+			<trans-unit id="typo3-contentblocks.collections-images-local.title" xml:space="preserve">
+				<source>Collections and Images</source>
+			</trans-unit>
+			<trans-unit id="typo3-contentblocks.slider-in-slider-local.description" xml:space="preserve">
+				<source>Contains multi-level collections and images.</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>
