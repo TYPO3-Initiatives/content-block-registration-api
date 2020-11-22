@@ -65,21 +65,19 @@ class PreviewRenderer extends StandardContentPreviewRenderer
         $view->setLayoutRootPaths([$cbConfiguration['srcPath']]);
 
         $view->assign('data', $record);
-        $view->assign('cb', $cbConfiguration);
 
         $processedData = ['data' => $record];
-        // Flexform
-        if (!empty($record['content_block'])) {
-            $processedData = $this->flexFormProcessor
-                ->process(
-                    $this->cObj,
-                    [],
-                    [],
-                    $processedData
-                );
-        }
+        // TODO use TypoScript configuration for DataProcessors
         // CB configuration
         $processedData = $this->cbProcessor
+            ->process(
+                $this->cObj,
+                [],
+                [],
+                $processedData
+            );
+        // Flexform
+        $processedData = $this->flexFormProcessor
             ->process(
                 $this->cObj,
                 [],

@@ -31,8 +31,8 @@ tt_content.' . $contentBlock['CType'] . '{
         20 = ' . $contentBlock['frontendLayoutsPath'] . '
     }
     dataProcessing {
-        10 = Typo3Contentblocks\ContentblocksRegApi\DataProcessing\FlexFormProcessor
-        20 = Typo3Contentblocks\ContentblocksRegApi\DataProcessing\CbProcessor
+        10 = Typo3Contentblocks\ContentblocksRegApi\DataProcessing\CbProcessor
+        20 = Typo3Contentblocks\ContentblocksRegApi\DataProcessing\FlexFormProcessor
     }
 }
 ';
