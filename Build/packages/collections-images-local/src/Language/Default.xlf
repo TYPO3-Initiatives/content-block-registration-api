@@ -9,8 +9,35 @@
 			<trans-unit id="typo3-contentblocks.collections-images-local.title" xml:space="preserve">
 				<source>Collections and Images</source>
 			</trans-unit>
-			<trans-unit id="typo3-contentblocks.collections-images-local.description" xml:space="preserve">
+      <trans-unit id="typo3-contentblocks.collections-images-local.description" xml:space="preserve">
 				<source>Contains multi-level collections and images.</source>
+			</trans-unit>
+      <trans-unit id="typo3-contentblocks.collections-images-local.collection1.label" xml:space="preserve">
+				<source>collection1</source>
+			</trans-unit>
+      <trans-unit id="typo3-contentblocks.collections-images-local.collection1.image.label" xml:space="preserve">
+				<source>collection1.image</source>
+			</trans-unit>
+      <trans-unit id="typo3-contentblocks.collections-images-local.collection1.headline.label" xml:space="preserve">
+				<source>collection1.headline</source>
+			</trans-unit>
+      <trans-unit id="typo3-contentblocks.collections-images-local.collection1.collection.label" xml:space="preserve">
+				<source>collection1.collection</source>
+			</trans-unit>
+      <trans-unit id="typo3-contentblocks.collections-images-local.collection1.collection.image.label" xml:space="preserve">
+				<source>collection1.collection.image</source>
+			</trans-unit>
+      <trans-unit id="typo3-contentblocks.collections-images-local.collection1.collection.headline.label" xml:space="preserve">
+				<source>collection1.collection.headline</source>
+			</trans-unit>
+      <trans-unit id="typo3-contentblocks.collections-images-local.collection2.label" xml:space="preserve">
+				<source>collection2</source>
+			</trans-unit>
+      <trans-unit id="typo3-contentblocks.collections-images-local.collection2.image.label" xml:space="preserve">
+				<source>collection2.image</source>
+			</trans-unit>
+      <trans-unit id="typo3-contentblocks.collections-images-local.collection2.headline.label" xml:space="preserve">
+				<source>collection2.headline</source>
 			</trans-unit>
 		</body>
 	</file>
