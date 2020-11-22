@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace Typo3Contentblocks\ContentblocksRegApi\Generator;
 
 use TYPO3\CMS\Core\Resource\File;
+use Typo3Contentblocks\ContentblocksRegApi\Constants;
 
 class FlexFormGenerator
 {
@@ -311,7 +312,7 @@ class FlexFormGenerator
             }
         }
 
-        $GLOBALS['TCA']['tx_contentblocks_reg_api_collection']['columns']['content_block']['config']['ds'][$contentBlock['CType'] . '_' . $field['_identifier']] = '<T3DataStructure>
+        $GLOBALS['TCA']['tx_contentblocks_reg_api_collection']['columns'][Constants::FLEXFORM_FIELD]['config']['ds'][$contentBlock['CType'] . '_' . $field['_identifier']] = '<T3DataStructure>
                 <meta>
                     <langDisable>1</langDisable>
                 </meta>
@@ -456,7 +457,7 @@ class FlexFormGenerator
         /***************
          * Add flexForms for content element configuration
          */
-        $GLOBALS['TCA']['tt_content']['columns']['content_block']['config']['ds'][$contentBlock['CType']] = $this->flexFormTemplate($flexFormFieldsConfig);
+        $GLOBALS['TCA']['tt_content']['columns'][Constants::FLEXFORM_FIELD]['config']['ds'][$contentBlock['CType']] = $this->flexFormTemplate($flexFormFieldsConfig);
     }
 
     /**
