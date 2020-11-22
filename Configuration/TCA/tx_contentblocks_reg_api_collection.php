@@ -36,7 +36,7 @@ return [
             'endtime' => 'endtime',
         ],
         'typeicon_classes' => [
-            'default' => 'EXT:contentblocks_reg_api/Resources/Public/Icons/Extension.svg'
+            'default' => 'ext-contentblocks_reg_api'
         ],
     ],
     'interface' => [

@@ -35,6 +35,16 @@ defined('TYPO3_MODE') || die('Access denied.');
         );
     }
 
+    // Icons
+    $iconRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+        \TYPO3\CMS\Core\Imaging\IconRegistry::class
+    );
+    $iconRegistry->registerIcon(
+        'ext-contentblocks_reg_api',
+        \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
+        ['source' => 'EXT:contentblocks_reg_api/Resources/Public/Icons/Extension.svg']
+    );
+
     // contentBlocks
     $contentBlocks = Typo3Contentblocks\ContentblocksRegApi\Service\ConfigurationService::configuration();
     foreach ($contentBlocks as $contentBlock) {
@@ -45,9 +55,6 @@ defined('TYPO3_MODE') || die('Access denied.');
         );
 
         // Icons
-        $iconRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
-            \TYPO3\CMS\Core\Imaging\IconRegistry::class
-        );
         $iconRegistry->registerIcon(
             $contentBlock['CType'],
             $contentBlock['iconProviderClass'],
@@ -56,7 +63,7 @@ defined('TYPO3_MODE') || die('Access denied.');
 
         // TypoScript
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScriptSetup(
-            TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\Typo3Contentblocks\ContentblocksRegApi\Generator\TypoScriptGenerator::class)  
+            TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\Typo3Contentblocks\ContentblocksRegApi\Generator\TypoScriptGenerator::class)
                 ->typoScriptForContentBlock(  $contentBlock )
         );
     }
