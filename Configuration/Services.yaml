@@ -5,6 +5,10 @@ services:
         event: TYPO3\CMS\Core\Page\Event\BeforeJavaScriptsRenderingEvent
       - name: event.listener
         event: TYPO3\CMS\Core\Page\Event\BeforeStylesheetsRenderingEvent
+  Typo3Contentblocks\ContentblocksRegApi\Service\DataService:
+    autowire: true
+    autoconfigure: false
+    public: true
   Typo3Contentblocks\ContentblocksRegApi\DataProcessing\FlexFormProcessor:
     autowire: true
     autoconfigure: false
