@@ -1,4 +1,5 @@
 # Registration API for Content Blocks
+![CGL & unit tests](https://github.com/TYPO3-Initiatives/content-block-registration-api/workflows/CGL%20&%20unit%20tests/badge.svg?branch=master)
 
 ## Introduction
 
