@@ -242,7 +242,6 @@ class ConfigurationService
         );
     }
 
-
     /**
      * @param string $cType
      * @param array $path

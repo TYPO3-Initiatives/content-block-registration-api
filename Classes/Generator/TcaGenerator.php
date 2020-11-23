@@ -11,15 +11,14 @@ declare(strict_types=1);
 
 namespace Typo3Contentblocks\ContentblocksRegApi\Generator;
 
-use Typo3Contentblocks\ContentblocksRegApi\Service\ConfigurationService;
-use Typo3Contentblocks\ContentblocksRegApi\Generator\FlexFormGenerator;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use Typo3Contentblocks\ContentblocksRegApi\Service\ConfigurationService;
 
 class TcaGenerator
 {
     /**
      * Get default flexform configuration of the tt_content.content_block field
-     * 
+     *
     */
     public function contentBlockFlexformColumnTca() :array
     {
@@ -125,8 +124,8 @@ class TcaGenerator
             /***************
              * Add flexForms for content element configuration
              */
-            $flexFormGenerator = GeneralUtility::makeInstance(FlexFormGenerator::class)
-                ->createFlexform($contentBlock );
+            GeneralUtility::makeInstance(FlexFormGenerator::class)
+                ->createFlexform($contentBlock);
         }
     }
 }

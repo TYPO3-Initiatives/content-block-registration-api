@@ -1,7 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 /*
- * This file is part of the package bk2k/bootstrap-package.
+ * This file is part of the package typo3-contentblocks/contentblocks-reg-api.
  *
  * For the full copyright and license information, please read the
  * LICENSE file that was distributed with this source code.
@@ -36,7 +38,7 @@ return [
             'endtime' => 'endtime',
         ],
         'typeicon_classes' => [
-            'default' => 'ext-contentblocks_reg_api'
+            'default' => 'ext-contentblocks_reg_api',
         ],
     ],
     'interface' => [
@@ -53,23 +55,23 @@ return [
                 --palette--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:palette.visibility;visibility,
                 --palette--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:palette.access;access,
                 --palette--;;hiddenLanguagePalette,
-            '
+            ',
         ],
     ],
     'palettes' => [
         '1' => [
-            'showitem' => ''
+            'showitem' => '',
         ],
         'access' => [
             'showitem' => '
                 starttime;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:starttime_formlabel,
                 endtime;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:endtime_formlabel
-            '
+            ',
         ],
         'visibility' => [
             'showitem' => '
                 hidden;LLL:EXT:bootstrap_package/Resources/Private/Language/Backend.xlf:card_group_item
-            '
+            ',
         ],
         // hidden but needs to be included all the time, so sys_language_uid is set correctly
         'hiddenLanguagePalette' => [
@@ -88,10 +90,10 @@ return [
                     [
                         0 => '',
                         1 => '',
-                        'invertStateDisplay' => true
-                    ]
+                        'invertStateDisplay' => true,
+                    ],
                 ],
-            ]
+            ],
         ],
         'starttime' => [
             'exclude' => true,
@@ -100,10 +102,10 @@ return [
                 'type' => 'input',
                 'renderType' => 'inputDateTime',
                 'eval' => 'datetime',
-                'default' => 0
+                'default' => 0,
             ],
             'l10n_mode' => 'exclude',
-            'l10n_display' => 'defaultAsReadonly'
+            'l10n_display' => 'defaultAsReadonly',
         ],
         'endtime' => [
             'exclude' => true,
@@ -114,11 +116,11 @@ return [
                 'eval' => 'datetime',
                 'default' => 0,
                 'range' => [
-                    'upper' => mktime(0, 0, 0, 1, 1, 2038)
-                ]
+                    'upper' => mktime(0, 0, 0, 1, 1, 2038),
+                ],
             ],
             'l10n_mode' => 'exclude',
-            'l10n_display' => 'defaultAsReadonly'
+            'l10n_display' => 'defaultAsReadonly',
         ],
         'sys_language_uid' => [
             'exclude' => 1,
@@ -131,15 +133,15 @@ return [
                 'items' => [
                     [
                         'LLL:' . $generalLanguageFile . ':LGL.allLanguages',
-                        -1
+                        -1,
                     ],
                     [
                         'LLL:' . $generalLanguageFile . ':LGL.default_value',
-                        0
-                    ]
+                        0,
+                    ],
                 ],
                 'allowNonIdValues' => true,
-            ]
+            ],
         ],
         'l10n_parent' => [
             'displayCond' => 'FIELD:sys_language_uid:>:0',
@@ -151,18 +153,18 @@ return [
                 'items' => [
                     [
                         '',
-                        0
-                    ]
+                        0,
+                    ],
                 ],
                 'foreign_table' => 'tx_contentblocks_reg_api_collection',
                 'foreign_table_where' => 'AND tx_contentblocks_reg_api_collection.pid=###CURRENT_PID### AND tx_contentblocks_reg_api_collection.sys_language_uid IN (-1,0)',
-                'default' => 0
-            ]
+                'default' => 0,
+            ],
         ],
         'l10n_diffsource' => [
             'config' => [
-                'type' => 'passthrough'
-            ]
+                'type' => 'passthrough',
+            ],
         ],
         'content_block' => [
             'label' => 'Content Block Data',
@@ -197,6 +199,6 @@ return [
                 'type' => 'input',
                 'size' => 500,
             ],
-        ]
+        ],
     ],
 ];

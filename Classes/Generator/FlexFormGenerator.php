@@ -22,7 +22,8 @@ class FlexFormGenerator
      */
     protected $dataService;
 
-    public function __construct(DataService $dataService) {
+    public function __construct(DataService $dataService)
+    {
         $this->dataService = $dataService;
     }
 
@@ -121,17 +122,19 @@ class FlexFormGenerator
             $additionlConfig .= '
             <range>
                 <lower>' . floatval(
-                    ($field['properties']['range']['lower'] !== ''
+                (
+                    $field['properties']['range']['lower'] !== ''
                         ? $field['properties']['range']['lower']
                         : '0'
-                    )
-                ) . '</lower>
+                )
+            ) . '</lower>
                 <upper>' . floatval(
-                    ($field['properties']['range']['upper'] !== ''
+                (
+                    $field['properties']['range']['upper'] !== ''
                         ? $field['properties']['range']['upper']
                         : '100'
-                    )
-                ) . '</upper>
+                )
+            ) . '</upper>
             </range>';
         }
         if ($field['type'] === 'Percent') {
@@ -290,11 +293,12 @@ class FlexFormGenerator
                     <rows>' . ($field['properties']['rows'] === true ? $field['properties']['rows'] : '3') . '</rows>
                     ' . ($field['properties']['enableRichtext'] === true ? '<enableRichtext>true</enableRichtext>' : '') . '
                     ' . (
-            strlen(
-                $field['properties']['richtextConfiguration'] . ''
-            ) > 0
+                strlen(
+                    $field['properties']['richtextConfiguration'] . ''
+                ) > 0
                 ? '<richtextConfiguration>' . $field['properties']['richtextConfiguration'] . '</richtextConfiguration>'
-                : '') . '
+                : ''
+            ) . '
                     <eval>' . ($field['properties']['required'] === true ? 'required' : '') . ($field['properties']['trim'] === true && $field['properties']['required'] === true ? ',  ' : '') . ($field['properties']['trim'] === true ? 'trim ' : '') . '</eval>
                     <placeholder>' . $field['properties']['placeholder'] . '</placeholder>
                     <default>' . $field['properties']['default'] . '</default>
@@ -315,8 +319,7 @@ class FlexFormGenerator
         foreach ($field['properties']['fields'] as $collectionField) {
             if ($collectionField['type'] === 'Collection') {
                 $fieldsConfig = $fieldsConfig . $this->createCollection($collectionField, $contentBlock);
-            }
-            else {
+            } else {
                 $fieldsConfig .= $this->createField($collectionField, $contentBlock);
             }
         }
@@ -360,12 +363,12 @@ class FlexFormGenerator
             . '</content_block_field_identifier>
                     </foreign_match_fields>'
             . (
-            ($field['properties']['minItems'] ?? false)
+                ($field['properties']['minItems'] ?? false)
                 ? '<minItems>' . $field['properties']['minItems'] . '</minItems>'
                 : ''
             )
             . (
-            ($field['properties']['maxItems'] ?? false)
+                ($field['properties']['maxItems'] ?? false)
                 ? '<maxItems>' . $field['properties']['maxItems'] . '</maxItems>'
                 : ''
             )
@@ -538,26 +541,25 @@ class FlexFormGenerator
                 case 'Date':
                 case 'DateTime':
                 case 'Time':
-                    return FlexFormGenerator::createInputField($field, $contentBlock);
+                    return $this->createInputField($field, $contentBlock);
                 case 'Textarea':
                 case 'TextMultiline':
-                    return FlexFormGenerator::createTextarea($field, $contentBlock);
+                    return $this->createTextarea($field, $contentBlock);
                 case 'Link':
                 case 'Url':
-                    return FlexFormGenerator::createTypoLink($field, $contentBlock);
+                    return $this->createTypoLink($field, $contentBlock);
                 case 'Image':
                 case 'Icon':
-                    return FlexFormGenerator::createImageField($field, $contentBlock);
+                    return $this->createImageField($field, $contentBlock);
                 case 'Select':
                 case 'Checkbox':
                 case 'MultiSelect':
                 case 'Radiobox':
                 case 'Toggle':
-                    return FlexFormGenerator::createSelections($field, $contentBlock);
+                    return $this->createSelections($field, $contentBlock);
                 default:
                     return '';
             }
         }
     }
 }
-
