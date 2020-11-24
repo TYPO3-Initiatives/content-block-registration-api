@@ -1,5 +1,9 @@
+[![CGL & unit tests](https://github.com/TYPO3-Initiatives/content-block-registration-api/workflows/CGL%20&%20unit%20tests/badge.svg?branch=master)](https://github.com/TYPO3-Initiatives/content-block-registration-api/actions)
+[![Latest Stable Version](https://poser.pugx.org/typo3-contentblocks/contentblocks-reg-api/v)](//packagist.org/packages/typo3-contentblocks/contentblocks-reg-api)
+[![Latest Unstable Version](https://poser.pugx.org/typo3-contentblocks/contentblocks-reg-api/v/unstable)](//packagist.org/packages/typo3-contentblocks/contentblocks-reg-api)
+[![License](https://poser.pugx.org/typo3-contentblocks/contentblocks-reg-api/license)](//packagist.org/packages/typo3-contentblocks/contentblocks-reg-api)
+
 # Registration API for Content Blocks
-![CGL & unit tests](https://github.com/TYPO3-Initiatives/content-block-registration-api/workflows/CGL%20&%20unit%20tests/badge.svg?branch=master)
 
 ## Introduction
 
