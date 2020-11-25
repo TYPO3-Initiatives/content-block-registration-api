@@ -11,8 +11,11 @@ declare(strict_types=1);
 
 namespace Typo3Contentblocks\ContentblocksRegApi\DataProcessing;
 
+use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Database\Query\Restriction\WorkspaceRestriction;
+use TYPO3\CMS\Core\Domain\Repository\PageRepository;
 use TYPO3\CMS\Core\Resource\FileReference;
 use TYPO3\CMS\Core\Resource\FileRepository;
 use TYPO3\CMS\Core\Service\FlexFormService;
@@ -122,11 +125,8 @@ class FlexFormProcessor implements DataProcessorInterface
         $q = GeneralUtility::makeInstance(ConnectionPool::class)
             ->getConnectionForTable(Constants::COLLECTION_FOREIGN_TABLE)
             ->createQueryBuilder();
-        $stmt = $q->select(
-            'uid',
-            Constants::COLLECTION_FOREIGN_MATCH_FIELD,
-            Constants::FLEXFORM_FIELD
-        )
+        $q->getRestrictions()->add(GeneralUtility::makeInstance(WorkspaceRestriction::class));
+        $stmt = $q->select('*')
             ->from(Constants::COLLECTION_FOREIGN_TABLE)
             ->where(
                 $q->expr()->eq(
@@ -148,6 +148,19 @@ class FlexFormProcessor implements DataProcessorInterface
         }
 
         while ($r = $stmt->fetchAssociative()) {
+            // overlay workspaces
+            if ($this->_isFrontend()) {
+                GeneralUtility::makeInstance(PageRepository::class)
+                    ->versionOL(Constants::COLLECTION_FOREIGN_TABLE, $r);
+                if (false === $r) {
+                    continue;
+                }
+            } else {
+                BackendUtility::workspaceOL(Constants::COLLECTION_FOREIGN_TABLE, $r);
+                if (false === $r) {
+                    continue;
+                }
+            }
             [$cType, $combinedIdentifier] = $this->dataService->splitUniqueCombinedIdentifier(
                 $r[Constants::COLLECTION_FOREIGN_MATCH_FIELD]
             );
@@ -204,7 +217,7 @@ class FlexFormProcessor implements DataProcessorInterface
         // look away now
 
         // Why are you still looking?!
-        if (!($GLOBALS['TSFE'] ?? null) instanceof TypoScriptFrontendController) {
+        if (!$this->_isFrontend()) {
             /**
              * @see \TYPO3\CMS\Core\Resource\FileRepository::findByRelation() requires
              * a configured TCA column in backend context.
@@ -239,5 +252,10 @@ class FlexFormProcessor implements DataProcessorInterface
         }
 
         return $files;
+    }
+
+    protected function _isFrontend()
+    {
+        return ($GLOBALS['TSFE'] ?? null) instanceof TypoScriptFrontendController;
     }
 }
