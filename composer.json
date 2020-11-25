@@ -18,7 +18,8 @@
         "php": "^7.2",
         "ext-json": "*",
         "typo3-contentblocks/composer-plugin": "*",
-        "typo3/cms-core": "^10.4.0 || ^11.0.0 || dev-master"
+        "typo3/cms-core": "^10.4.0 || ^11.0.0 || dev-master",
+        "typo3/cms-filelist": "^10.4 || ^11.0.0 || dev-master"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.16",
@@ -40,7 +41,6 @@
         "typo3/cms-extbase": "^10.4 || ^11.0.0 || dev-master",
         "typo3/cms-extensionmanager": "^10.4 || ^11.0.0 || dev-master",
         "typo3/cms-felogin": "^10.4 || ^11.0.0 || dev-master",
-        "typo3/cms-filelist": "^10.4 || ^11.0.0 || dev-master",
         "typo3/cms-filemetadata": "^10.4 || ^11.0.0 || dev-master",
         "typo3/cms-fluid": "^10.4 || ^11.0.0 || dev-master",
         "typo3/cms-fluid-styled-content": "^10.4 || ^11.0.0 || dev-master",
