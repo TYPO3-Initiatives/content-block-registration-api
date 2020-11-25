@@ -70,12 +70,13 @@ return [
         ],
         'visibility' => [
             'showitem' => '
-                hidden;LLL:EXT:bootstrap_package/Resources/Private/Language/Backend.xlf:card_group_item
+                hidden;LLL:' . $generalLanguageFile . ':LGL.hidden, 
+                l10n_parent;LLL:' . $generalLanguageFile . ':LGL.l18n_parent
             ',
         ],
         // hidden but needs to be included all the time, so sys_language_uid is set correctly
         'hiddenLanguagePalette' => [
-            'showitem' => 'sys_language_uid, l10n_parent, content_block_field_identifier',
+            'showitem' => 'sys_language_uid, content_block_field_identifier',
             'isHiddenPalette' => true,
         ],
     ],
