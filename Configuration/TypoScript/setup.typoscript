@@ -1,11 +1,12 @@
-module.tx_contentblocksregapi {
-    view {
-        templateRootPaths.0 = EXT:contentblocks_reg_api/Resources/Private/Wizard/Templates/
-        partialRootPaths.0 = EXT:contentblocks_reg_api/Resources/Private/Wizard/Partials/
-        layoutRootPaths.0 = EXT:contentblocks_reg_api/Resources/Private/Wizard/Layouts/
+lib.contentBlock = FLUIDTEMPLATE
+lib.contentBlock {
+    layoutRootPaths {
+        # TODO: currently for inter-operability with fluid_styled_content
+        -5 = EXT:contentblocks_reg_api/Resources/Private/Layouts/
     }
 
-    persistence {
-        storagePid = 0
+    dataProcessing {
+        10 = Typo3Contentblocks\ContentblocksRegApi\DataProcessing\CbProcessor
+        20 = Typo3Contentblocks\ContentblocksRegApi\DataProcessing\FlexFormProcessor
     }
 }

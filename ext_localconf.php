@@ -5,33 +5,14 @@ defined('TYPO3_MODE') || die('Access denied.');
 (static function ($_EXTKEY = 'contentblocks_reg_api') {
     // cache
     if (!is_array(
-        $GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations'][\Typo3Contentblocks\ContentblocksRegApi\Constants::CACHE]
+        $GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations']
+        [\Typo3Contentblocks\ContentblocksRegApi\Constants::CACHE]
     )) {
-        $GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations'][\Typo3Contentblocks\ContentblocksRegApi\Constants::CACHE] = [
+        $GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations']
+        [\Typo3Contentblocks\ContentblocksRegApi\Constants::CACHE] = [
             'groups' => ['system'],
             'frontend' => \TYPO3\CMS\Core\Cache\Frontend\VariableFrontend::class,
         ];
-    }
-
-    // include lib.contentElement in order to have it available for the CBs to inherit from fluid styled content
-    if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('fluid_styled_content')) {
-        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScriptSetup(
-            "@import 'EXT:fluid_styled_content/Configuration/TypoScript/Helper/ContentElement.typoscript'"
-        );
-    }
-
-    // include lib.contentElement in order to have it available for the CBs to inherit from bootstrap package
-    if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('bootstrap_package')) {
-        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScriptSetup(
-            "@import 'EXT:bootstrap_package/Configuration/TypoScript/ContentElement/Helper/ContentElement.typoscript'"
-        );
-    }
-
-    // register custom typoscript setup
-    if (strlen($GLOBALS['TYPO3_CONF_VARS']['EXTENSIONS'][$_EXTKEY]['additionalTypoScriptFile'] . '') > 0) {
-        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScriptSetup(
-            "@import 'EXT:" . $GLOBALS['TYPO3_CONF_VARS']['EXTENSIONS'][$_EXTKEY]['additionalTypoScriptFile'] . "'"
-        );
     }
 
     // Icons
@@ -42,6 +23,11 @@ defined('TYPO3_MODE') || die('Access denied.');
         'ext-contentblocks_reg_api',
         \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
         ['source' => 'EXT:contentblocks_reg_api/Resources/Public/Icons/Extension.svg']
+    );
+
+    // TypoScript
+    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScriptSetup(
+        "@import 'EXT:contentblocks_reg_api/Configuration/TypoScript/setup.typoscript'"
     );
 
     // contentBlocks
@@ -65,7 +51,7 @@ defined('TYPO3_MODE') || die('Access denied.');
             ['source' => $contentBlock['icon']]
         );
 
-        // TypoScript
+        // CB TypoScript
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScriptSetup(
             TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
                 \Typo3Contentblocks\ContentblocksRegApi\Generator\TypoScriptGenerator::class
@@ -74,8 +60,8 @@ defined('TYPO3_MODE') || die('Access denied.');
         );
     }
 
-    // Module: Wizard TypoScript
+    // module TypoScript
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScriptSetup(
-        "@import 'EXT:contentblocks_reg_api/Configuration/TypoScript/setup.typoscript'"
+        "@import 'EXT:contentblocks_reg_api/Configuration/TypoScript/module/setup.typoscript'"
     );
 })();

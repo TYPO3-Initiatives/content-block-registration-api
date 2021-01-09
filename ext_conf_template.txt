@@ -1,2 +1,0 @@
-# cat=Configuration; type=string; label=Add typoscript file: To add your own sitepackage lib.contentElement definition you can register your typoscript setup like this my_sitepackage/Configuration/TypoScript/setup.typoscript
-additionalTypoScriptFile =

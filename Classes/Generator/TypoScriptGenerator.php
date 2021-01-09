@@ -16,8 +16,7 @@ class TypoScriptGenerator
     public function typoScriptForContentBlock(array $contentBlock): string
     {
         return '
-tt_content.' . $contentBlock['CType'] . ' < lib.contentElement
-tt_content.' . $contentBlock['CType'] . ' = FLUIDTEMPLATE
+tt_content.' . $contentBlock['CType'] . ' < lib.contentBlock
 tt_content.' . $contentBlock['CType'] . '{
     templateName = Frontend
     templateRootPaths {
@@ -27,12 +26,7 @@ tt_content.' . $contentBlock['CType'] . '{
         20 = ' . $contentBlock['frontendPartialsPath'] . '
     }
     layoutRootPaths {
-        -5 = EXT:contentblocks_reg_api/Resources/Private/Layouts/
         20 = ' . $contentBlock['frontendLayoutsPath'] . '
-    }
-    dataProcessing {
-        10 = Typo3Contentblocks\ContentblocksRegApi\DataProcessing\CbProcessor
-        20 = Typo3Contentblocks\ContentblocksRegApi\DataProcessing\FlexFormProcessor
     }
 }
 ';
