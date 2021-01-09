@@ -22,6 +22,17 @@ use Typo3Contentblocks\ContentblocksRegApi\Service\ConfigurationService;
 class CbProcessor implements DataProcessorInterface
 {
     /**
+     * @var ConfigurationService
+     */
+    protected $configurationService;
+
+    public function __construct(
+        ConfigurationService $configurationService
+    ) {
+        $this->configurationService = $configurationService;
+    }
+
+    /**
      * @param ContentObjectRenderer $cObj The data of the content element or page
      * @param array $contentObjectConfiguration The configuration of Content Object
      * @param array $processorConfiguration The configuration of this processor
@@ -34,7 +45,7 @@ class CbProcessor implements DataProcessorInterface
         array $processorConfiguration,
         array $processedData
     ) {
-        $cbConf = ConfigurationService::cbConfiguration($processedData['data']['CType']);
+        $cbConf = $this->configurationService->cbConfiguration($processedData['data']['CType']);
         $processedData['cb'] = $cbConf;
 
         return $processedData;

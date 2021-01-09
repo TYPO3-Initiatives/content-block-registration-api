@@ -28,8 +28,7 @@ defined('TYPO3_MODE') || die('Access denied.');
     }
 
     // register custom typoscript setup
-    if ( strlen($GLOBALS['TYPO3_CONF_VARS']['EXTENSIONS'][$_EXTKEY]['additionalTypoScriptFile'] . '') > 0 )
-    {
+    if (strlen($GLOBALS['TYPO3_CONF_VARS']['EXTENSIONS'][$_EXTKEY]['additionalTypoScriptFile'] . '') > 0) {
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScriptSetup(
             "@import 'EXT:" . $GLOBALS['TYPO3_CONF_VARS']['EXTENSIONS'][$_EXTKEY]['additionalTypoScriptFile'] . "'"
         );
@@ -46,12 +45,17 @@ defined('TYPO3_MODE') || die('Access denied.');
     );
 
     // contentBlocks
-    $contentBlocks = Typo3Contentblocks\ContentblocksRegApi\Service\ConfigurationService::configuration();
+    $contentBlocks = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+        Typo3Contentblocks\ContentblocksRegApi\Service\ConfigurationService::class
+    )
+        ->configuration();
     foreach ($contentBlocks as $contentBlock) {
         // PageTsConfig
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig(
-            TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\Typo3Contentblocks\ContentblocksRegApi\Generator\PageTsConfigGenerator::class)
-                ->pageTsConfigForContentBlock( $contentBlock )
+            TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+                \Typo3Contentblocks\ContentblocksRegApi\Generator\PageTsConfigGenerator::class
+            )
+                ->pageTsConfigForContentBlock($contentBlock)
         );
 
         // Icons
@@ -63,8 +67,10 @@ defined('TYPO3_MODE') || die('Access denied.');
 
         // TypoScript
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScriptSetup(
-            TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\Typo3Contentblocks\ContentblocksRegApi\Generator\TypoScriptGenerator::class)
-                ->typoScriptForContentBlock(  $contentBlock )
+            TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+                \Typo3Contentblocks\ContentblocksRegApi\Generator\TypoScriptGenerator::class
+            )
+                ->typoScriptForContentBlock($contentBlock)
         );
     }
 

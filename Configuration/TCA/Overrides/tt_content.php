@@ -10,7 +10,9 @@ declare(strict_types=1);
  */
 
 (static function ($_EXTKEY = 'contentblocks_reg_api') {
-    $tcaGenerator =  TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(Typo3Contentblocks\ContentblocksRegApi\Generator\TcaGenerator::class);
+    $tcaGenerator = TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+        Typo3Contentblocks\ContentblocksRegApi\Generator\TcaGenerator::class
+    );
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns(
         'tt_content',
         [

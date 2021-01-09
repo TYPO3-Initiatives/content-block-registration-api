@@ -20,35 +20,36 @@ use TYPO3\CMS\Core\Cache\Exception\NoSuchCacheException;
 use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\Imaging\IconProvider\BitmapIconProvider;
 use TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider;
+use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use Typo3Contentblocks\ContentblocksRegApi\Constants;
 use Typo3Contentblocks\ContentblocksRegApi\Validator\ContentBlockValidator;
 
-class ConfigurationService
+class ConfigurationService implements SingletonInterface
 {
-    public static function configuration(): array
+    public function configuration(): array
     {
         try {
             $cache = GeneralUtility::makeInstance(CacheManager::class)
                 ->getCache(Constants::CACHE);
 
             if (false === $configuration = $cache->get(Constants::CACHE_CONFIGURATION_ENTRY)) {
-                $configuration = self::configurationUncached();
+                $configuration = $this->configurationUncached();
                 $cache->set(Constants::CACHE_CONFIGURATION_ENTRY, $configuration, [], 0);
             }
         } catch (LogicException | NoSuchCacheException $e) { // if unconfigured or in ext_localconf.php
-            $configuration = self::configurationUncached();
+            $configuration = $this->configurationUncached();
         }
 
         return $configuration;
     }
 
-    public static function cbConfiguration(string $cType): ?array
+    public function cbConfiguration(string $cType): ?array
     {
-        return self::configuration()[$cType] ?? null;
+        return $this->configuration()[$cType] ?? null;
     }
 
-    protected static function configurationUncached(): array
+    protected function configurationUncached(): array
     {
         $hostBasePath = Environment::getPublicPath() . DIRECTORY_SEPARATOR . Constants::BASEPATH;
 
@@ -60,7 +61,7 @@ class ConfigurationService
 
         $contentBlockConfiguration = [];
         foreach ($cbsFinder as $cbDir) {
-            $_cbConfiguration = self::byPath($cbDir);
+            $_cbConfiguration = $this->byPath($cbDir);
 
             $contentBlockConfiguration [$_cbConfiguration['CType']] = $_cbConfiguration;
         }
@@ -72,7 +73,7 @@ class ConfigurationService
      * @return array<string, mixed>
      * @throws \Exception
      */
-    protected static function byPath(SplFileInfo $splPath): array
+    protected function byPath(SplFileInfo $splPath): array
     {
         $cbKey = $splPath->getBasename();
 
@@ -117,7 +118,7 @@ class ConfigurationService
         }
 
         // add combined '_identifier' and '_parents'
-        self::_addFieldIdentifiers($editorInterface['fields']);
+        $this->_addFieldIdentifiers($editorInterface['fields']);
 
         // .xlf
         $editorInterfaceXlf = is_readable($languageRealPath . 'Default.xlf')
@@ -167,13 +168,13 @@ class ConfigurationService
         $frontendLayoutsPath = $frontendTemplatesPath . DIRECTORY_SEPARATOR . 'Layouts';
 
         // file fields
-        $fields = self::_fields($editorInterface['fields'] ?? []);
+        $fields = $this->_fields($editorInterface['fields'] ?? []);
 
         // file fields
-        $fileFields = self::_fieldsByTypes($editorInterface['fields'] ?? [], ['Icon', 'Image']);
+        $fileFields = $this->_fieldsByTypes($editorInterface['fields'] ?? [], ['Icon', 'Image']);
 
         // collection fields
-        $collectionFields = self::_fieldsByTypes($editorInterface['fields'] ?? [], ['Collection']);
+        $collectionFields = $this->_fieldsByTypes($editorInterface['fields'] ?? [], ['Collection']);
 
         $cbConfiguration = [
             '__warning' => 'Contents of this "cb" configuration are not API yet and might change!',
@@ -211,18 +212,18 @@ class ConfigurationService
      * @param string $cType
      * @return array<string, array>
      */
-    public static function cbFileFields(string $cType): array
+    public function cbFileFields(string $cType): array
     {
-        return self::cbConfiguration($cType)['fileFields'] ?? [];
+        return $this->cbConfiguration($cType)['fileFields'] ?? [];
     }
 
     /**
      * @param string $cType
      * @return array<string, array>
      */
-    public static function cbCollectionFields(string $cType): array
+    public function cbCollectionFields(string $cType): array
     {
-        return self::cbConfiguration($cType)['collectionFields'] ?? [];
+        return $this->cbConfiguration($cType)['collectionFields'] ?? [];
     }
 
     /**
@@ -230,10 +231,10 @@ class ConfigurationService
      * @param array $path
      * @return array<string, array>
      */
-    public static function cbCollectionFieldsAtPath(string $cType, array $path): array
+    public function cbCollectionFieldsAtPath(string $cType, array $path): array
     {
         return array_filter(
-            self::cbCollectionFields($cType),
+            $this->cbCollectionFields($cType),
             function ($e) use ($path) {
                 $fieldParentPath = $e['_path'];
                 array_pop($fieldParentPath);
@@ -247,10 +248,10 @@ class ConfigurationService
      * @param array $path
      * @return array<string, array>
      */
-    public static function cbFileFieldsAtPath(string $cType, array $path): array
+    public function cbFileFieldsAtPath(string $cType, array $path): array
     {
         return array_filter(
-            self::cbFileFields($cType),
+            $this->cbFileFields($cType),
             function ($e) use ($path) {
                 $fieldParentPath = $e['_path'];
                 array_pop($fieldParentPath);
@@ -264,17 +265,17 @@ class ConfigurationService
      * @return array<string, array<string, mixed>> associative field configurations with field
      * identifier as key
      */
-    public static function cbFields(string $cType): array
+    public function cbFields(string $cType): array
     {
-        return self::_fields(self::cbConfiguration($cType)['yaml']['fields'] ?? []);
+        return $this->_fields($this->cbConfiguration($cType)['yaml']['fields'] ?? []);
     }
 
-    public static function cbField(string $cType, string $fieldIdentifier): ?array
+    public function cbField(string $cType, string $fieldIdentifier): ?array
     {
-        return self::cbFields($cType)[$fieldIdentifier] ?? null;
+        return $this->cbFields($cType)[$fieldIdentifier] ?? null;
     }
 
-    protected static function _addFieldIdentifiers(array &$fields, array $parents = []): void
+    protected function _addFieldIdentifiers(array &$fields, array $parents = []): void
     {
         foreach ($fields as &$f) {
             $identifier = $parents;
@@ -283,7 +284,7 @@ class ConfigurationService
             // TODO use DataService
             $f['_identifier'] = implode('.', $identifier);
             if (isset($f['properties']['fields'])) {
-                self::_addFieldIdentifiers(
+                $this->_addFieldIdentifiers(
                     $f['properties']['fields'],
                     $identifier
                 );
@@ -291,19 +292,19 @@ class ConfigurationService
         }
     }
 
-    protected static function _fields(array $fields): array
+    protected function _fields(array $fields): array
     {
         $matchingFields = [];
         foreach ($fields as &$f) {
             $matchingFields[$f['_identifier']] = $f;
             if (isset($f['properties']['fields'])) {
-                $matchingFields += self::_fields($f['properties']['fields']);
+                $matchingFields += $this->_fields($f['properties']['fields']);
             }
         }
         return $matchingFields;
     }
 
-    protected static function _fieldsByTypes(array $fields, array $types): array
+    protected function _fieldsByTypes(array $fields, array $types): array
     {
         $matchingFields = [];
         foreach ($fields as &$f) {
@@ -311,7 +312,7 @@ class ConfigurationService
                 $matchingFields[$f['_identifier']] = $f;
             }
             if (isset($f['properties']['fields'])) {
-                $matchingFields += self::_fieldsByTypes($f['properties']['fields'], $types);
+                $matchingFields += $this->_fieldsByTypes($f['properties']['fields'], $types);
             }
         }
         return $matchingFields;

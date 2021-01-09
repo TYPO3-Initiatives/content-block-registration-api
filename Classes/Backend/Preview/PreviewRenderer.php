@@ -41,21 +41,28 @@ class PreviewRenderer extends StandardContentPreviewRenderer
      */
     protected $cObj;
 
+    /**
+     * @var ConfigurationService
+     */
+    protected $configurationService;
+
     public function __construct(
         ContentObjectRenderer $cObj,
         FlexFormProcessor $flexFormProcessor,
-        CbProcessor $cbProcessor
+        CbProcessor $cbProcessor,
+        ConfigurationService $configurationService
     ) {
         $this->cObj = $cObj;
         $this->flexFormProcessor = $flexFormProcessor;
         $this->cbProcessor = $cbProcessor;
+        $this->configurationService = $configurationService;
     }
 
     public function renderPageModulePreviewContent(GridColumnItem $item): string
     {
         $record = $item->getRecord();
 
-        $cbConfiguration = ConfigurationService::cbConfiguration($record['CType']);
+        $cbConfiguration = $this->configurationService->cbConfiguration($record['CType']);
 
         $view = GeneralUtility::makeInstance(StandaloneView::class);
         $view->setTemplatePathAndFilename($cbConfiguration['EditorPreview.html']);

@@ -13,6 +13,14 @@ services:
     autowire: true
     autoconfigure: false
     public: true
+  Typo3Contentblocks\ContentblocksRegApi\Service\ConfigurationService:
+    autowire: true
+    autoconfigure: false
+    public: true
+  Typo3Contentblocks\ContentblocksRegApi\Generator\TcaGenerator:
+    autowire: true
+    autoconfigure: false
+    public: true
   Typo3Contentblocks\ContentblocksRegApi\DataProcessing\FlexFormProcessor:
     autowire: true
     autoconfigure: false

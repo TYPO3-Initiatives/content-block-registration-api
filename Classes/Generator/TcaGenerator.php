@@ -17,6 +17,16 @@ use Typo3Contentblocks\ContentblocksRegApi\Service\ConfigurationService;
 class TcaGenerator
 {
     /**
+     * @var ConfigurationService
+     */
+    protected $configurationService;
+
+    public function __construct(ConfigurationService $configurationService)
+    {
+        $this->configurationService = $configurationService;
+    }
+
+    /**
      * Get default flexform configuration of the tt_content.content_block field
      *
     */
@@ -58,7 +68,7 @@ class TcaGenerator
      **/
     public function setTca() :void
     {
-        $configuration = ConfigurationService::configuration();
+        $configuration = $this->configurationService->configuration();
 
         foreach ($configuration as $contentBlock) {
             /***************

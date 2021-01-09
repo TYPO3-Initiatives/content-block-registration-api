@@ -34,9 +34,14 @@ use Typo3Contentblocks\ContentblocksRegApi\Service\DataService;
 class FlexFormProcessor implements DataProcessorInterface
 {
     /**
-     * @var FlexFormService
+     * @var ConfigurationService
      */
-    protected $flexFormService;
+    protected $configurationService;
+
+    /**
+     * @var DataService
+     */
+    protected $dataService;
 
     /**
      * @var FileRepository
@@ -44,9 +49,9 @@ class FlexFormProcessor implements DataProcessorInterface
     protected $fileRepository;
 
     /**
-     * @var DataService
+     * @var FlexFormService
      */
-    protected $dataService;
+    protected $flexFormService;
 
     /**
      * @var string
@@ -61,11 +66,13 @@ class FlexFormProcessor implements DataProcessorInterface
     public function __construct(
         FlexFormService $flexFormService,
         FileRepository $fileRepository,
-        DataService $dataService
+        DataService $dataService,
+        ConfigurationService $configurationService
     ) {
         $this->flexFormService = $flexFormService;
         $this->fileRepository = $fileRepository;
         $this->dataService = $dataService;
+        $this->configurationService = $configurationService;
     }
 
     /**
@@ -94,7 +101,7 @@ class FlexFormProcessor implements DataProcessorInterface
             ?? $this->record['uid'];
 
         // process Images on highest level (tt_content)
-        foreach (ConfigurationService::cbFileFieldsAtPath($this->cType, []) as $fieldConf) {
+        foreach ($this->configurationService->cbFileFieldsAtPath($this->cType, []) as $fieldConf) {
             $files = $this->_files('tt_content', $maybeLocalizedUid, $fieldConf['_identifier']);
             $cbData[end($fieldConf['_path'])] = $files;
         }
@@ -121,7 +128,7 @@ class FlexFormProcessor implements DataProcessorInterface
         int $parentUid,
         array $parentPath = []
     ): array {
-        $collectionFields = ConfigurationService::cbCollectionFields($this->cType);
+        $collectionFields = $this->configurationService->cbCollectionFields($this->cType);
         $q = GeneralUtility::makeInstance(ConnectionPool::class)
             ->getConnectionForTable(Constants::COLLECTION_FOREIGN_TABLE)
             ->createQueryBuilder();
@@ -143,7 +150,7 @@ class FlexFormProcessor implements DataProcessorInterface
 
         // initialize collection fields
         $collections = [];
-        foreach (ConfigurationService::cbCollectionFieldsAtPath($this->cType, $parentPath) as $fieldConf) {
+        foreach ($this->configurationService->cbCollectionFieldsAtPath($this->cType, $parentPath) as $fieldConf) {
             $collections[end($fieldConf['_path'])] = [];
         }
 
@@ -184,7 +191,7 @@ class FlexFormProcessor implements DataProcessorInterface
             $fieldData = $this->dataService->extractData($fieldData, $path) ?? [];
 
             // process Images on this level
-            foreach (ConfigurationService::cbFileFieldsAtPath($this->cType, $path) as $fieldConf) {
+            foreach ($this->configurationService->cbFileFieldsAtPath($this->cType, $path) as $fieldConf) {
                 $files = $this->_files(
                     Constants::COLLECTION_FOREIGN_TABLE,
                     $r['uid'],
@@ -240,7 +247,7 @@ class FlexFormProcessor implements DataProcessorInterface
         );
 
         // Deliver a single file if the field is configured as maxItems=1
-        $fieldConf = ConfigurationService::cbField($this->cType, $combinedIdentifier);
+        $fieldConf = $this->configurationService->cbField($this->cType, $combinedIdentifier);
         $maxItems = (int)($fieldConf['properties']['maxItems'] ?? 1);
         if ($maxItems === 1) {
             $files = $files[0] ?? null;
