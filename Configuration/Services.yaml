@@ -5,23 +5,7 @@ services:
         event: TYPO3\CMS\Core\Page\Event\BeforeJavaScriptsRenderingEvent
       - name: event.listener
         event: TYPO3\CMS\Core\Page\Event\BeforeStylesheetsRenderingEvent
-  Typo3Contentblocks\ContentblocksRegApi\Generator\FlexFormGenerator:
-    autowire: true
-    autoconfigure: false
-    public: true
-  Typo3Contentblocks\ContentblocksRegApi\Service\DataService:
-    autowire: true
-    autoconfigure: false
-    public: true
-  Typo3Contentblocks\ContentblocksRegApi\Service\ConfigurationService:
-    autowire: true
-    autoconfigure: false
-    public: true
-  Typo3Contentblocks\ContentblocksRegApi\Generator\TcaGenerator:
-    autowire: true
-    autoconfigure: false
-    public: true
-  Typo3Contentblocks\ContentblocksRegApi\DataProcessing\FlexFormProcessor:
+  Typo3Contentblocks\ContentblocksRegApi\Backend\Preview\PreviewRenderer:
     autowire: true
     autoconfigure: false
     public: true
@@ -29,7 +13,27 @@ services:
     autowire: true
     autoconfigure: false
     public: true
-  Typo3Contentblocks\ContentblocksRegApi\Backend\Preview\PreviewRenderer:
+  Typo3Contentblocks\ContentblocksRegApi\DataProcessing\FlexFormProcessor:
+    autowire: true
+    autoconfigure: false
+    public: true
+  Typo3Contentblocks\ContentblocksRegApi\Generator\FlexFormGenerator:
+    autowire: true
+    autoconfigure: false
+    public: true
+  Typo3Contentblocks\ContentblocksRegApi\Generator\TcaGenerator:
+    autowire: true
+    autoconfigure: false
+    public: true
+  Typo3Contentblocks\ContentblocksRegApi\Service\ConfigurationService:
+    autowire: true
+    autoconfigure: false
+    public: true
+  Typo3Contentblocks\ContentblocksRegApi\Service\DataService:
+    autowire: true
+    autoconfigure: false
+    public: true
+  Typo3Contentblocks\ContentblocksRegApi\Validator\ContentBlockValidator:
     autowire: true
     autoconfigure: false
     public: true

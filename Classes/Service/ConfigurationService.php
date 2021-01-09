@@ -27,6 +27,17 @@ use Typo3Contentblocks\ContentblocksRegApi\Validator\ContentBlockValidator;
 
 class ConfigurationService implements SingletonInterface
 {
+    /**
+     * @var ContentBlockValidator
+     */
+    protected $contentBlockValidator;
+
+    public function __construct(
+        ContentBlockValidator $contentBlockValidator
+    ) {
+        $this->contentBlockValidator = $contentBlockValidator;
+    }
+
     public function configuration(): array
     {
         try {
