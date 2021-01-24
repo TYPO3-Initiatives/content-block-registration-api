@@ -118,9 +118,8 @@ fields:
         upper: '29:59 31-12-2020'
       required: false
   - identifier: time
-    type:
+    type: Time
     properties:
-      default: '@now'
       displayAge: true
       size: 20
       range:
