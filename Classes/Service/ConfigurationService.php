@@ -205,9 +205,9 @@ class ConfigurationService implements SingletonInterface
             'frontendPartialsPath' => $frontendPartialsPath,
             'frontendLayoutsPath' => $frontendLayoutsPath,
             'EditorPreview.html' => $editorPreviewHtml,
-            'EditorInterface.xlf' => $editorInterfaceXlf,
+            'EditorInterfaceXlf' => $editorInterfaceXlf,
             'EditorLLL' => 'LLL:' . $editorInterfaceXlf . ':' . $vendor . '.' . $packageName,
-            'Frontend.xlf' => $frontendXlf,
+            'FrontendXlf' => $frontendXlf,
             'FrontendLLL' => 'LLL:' . $frontendXlf . ':' . $vendor . '.' . $packageName,
             'yaml' => $editorInterface,
         ];

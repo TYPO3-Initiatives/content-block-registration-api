@@ -1,0 +1,19 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+
+<f:variable name="collectionValues" value="{values.{field.identifier}}"/>
+
+<f:for each="{collectionValues}" as="collectionValue">
+    <ul style="border: 1px solid #bbb; margin: 2px">
+        <f:for each="{field.properties.fields}" as="collectionField">
+            <li>
+                <em>
+                    <f:render partial="Backend/FieldName" arguments="{field: collectionField, cb: cb}"/>
+                </em>
+                <f:render partial="Backend/FieldValue/{collectionField.type}"
+                    arguments="{field: collectionField, values: collectionValue, cb: cb}"/>
+            </li>
+        </f:for>
+    </ul>
+</f:for>
+
+</html>

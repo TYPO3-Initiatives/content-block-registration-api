@@ -54,9 +54,9 @@ class FlexFormGenerator
         return '
         <' . $field['_identifier'] . '>
             <TCEforms>
-                <label>LLL:' . $contentBlock['EditorInterface.xlf'] . ':' . $contentBlock['vendor']
+                <label>LLL:' . $contentBlock['EditorInterfaceXlf'] . ':' . $contentBlock['vendor']
             . '.' . $contentBlock['package'] . '.' . $field['_identifier'] . '.label</label>
-                <description>LLL:' . $contentBlock['EditorInterface.xlf'] . ':' . $contentBlock['vendor']
+                <description>LLL:' . $contentBlock['EditorInterfaceXlf'] . ':' . $contentBlock['vendor']
             . '.' . $contentBlock['package'] . '.' . $field['_identifier'] . '.description</description>
                 <config>
                     <type>input</type>
@@ -171,9 +171,9 @@ class FlexFormGenerator
         return '
         <' . $field['_identifier'] . '>
             <TCEforms>
-                <label>LLL:' . $contentBlock['EditorInterface.xlf'] . ':' . $contentBlock['vendor']
+                <label>LLL:' . $contentBlock['EditorInterfaceXlf'] . ':' . $contentBlock['vendor']
             . '.' . $contentBlock['package'] . '.' . $field['_identifier'] . '.label</label>
-                <description>LLL:' . $contentBlock['EditorInterface.xlf'] . ':' . $contentBlock['vendor']
+                <description>LLL:' . $contentBlock['EditorInterfaceXlf'] . ':' . $contentBlock['vendor']
             . '.' . $contentBlock['package'] . '.' . $field['_identifier'] . '.description</description>
                 <config>
                     <type>input</type>
@@ -199,9 +199,9 @@ class FlexFormGenerator
         return '
         <' . $field['_identifier'] . '>
             <TCEforms>
-                <label>LLL:' . $contentBlock['EditorInterface.xlf'] . ':' . $contentBlock['vendor']
+                <label>LLL:' . $contentBlock['EditorInterfaceXlf'] . ':' . $contentBlock['vendor']
             . '.' . $contentBlock['package'] . '.' . $field['_identifier'] . '.label</label>
-                <description>LLL:' . $contentBlock['EditorInterface.xlf'] . ':' . $contentBlock['vendor']
+                <description>LLL:' . $contentBlock['EditorInterfaceXlf'] . ':' . $contentBlock['vendor']
             . '.' . $contentBlock['package'] . '.' . $field['_identifier'] . '.description</description>
                 <config>
 
@@ -283,9 +283,9 @@ class FlexFormGenerator
         return '
         <' . $field['_identifier'] . '>
             <TCEforms>
-                <label>LLL:' . $contentBlock['EditorInterface.xlf'] . ':' . $contentBlock['vendor']
+                <label>LLL:' . $contentBlock['EditorInterfaceXlf'] . ':' . $contentBlock['vendor']
             . '.' . $contentBlock['package'] . '.' . $field['_identifier'] . '.label</label>
-                <description>LLL:' . $contentBlock['EditorInterface.xlf'] . ':' . $contentBlock['vendor']
+                <description>LLL:' . $contentBlock['EditorInterfaceXlf'] . ':' . $contentBlock['vendor']
             . '.' . $contentBlock['package'] . '.' . $field['_identifier'] . '.description</description>
                 <config>
                     <type>text</type>
@@ -334,7 +334,7 @@ class FlexFormGenerator
                     <sDEF>
                         <ROOT>
                             <TCEforms>
-                                <sheetTitle>LLL:' . $contentBlock['EditorInterface.xlf'] . ':' . $contentBlock['vendor']
+                                <sheetTitle>LLL:' . $contentBlock['EditorInterfaceXlf'] . ':' . $contentBlock['vendor']
                                 . '.' . $contentBlock['package'] . '.' . $field['_identifier'] . '.label</sheetTitle>
                             </TCEforms>
                             <type>array</type>
@@ -348,10 +348,10 @@ class FlexFormGenerator
 
         return '<' . $field['_identifier'] . '>
             <TCEforms>
-                <label>LLL:' . $contentBlock['EditorInterface.xlf'] . ':' . $contentBlock['vendor']
+                <label>LLL:' . $contentBlock['EditorInterfaceXlf'] . ':' . $contentBlock['vendor']
                 . '.' . $contentBlock['package'] . '.' . $field['_identifier'] . '.label</label>
                 <config>
-                    <label>LLL:' . $contentBlock['EditorInterface.xlf'] . ':' . $contentBlock['vendor']
+                    <label>LLL:' . $contentBlock['EditorInterfaceXlf'] . ':' . $contentBlock['vendor']
                     . '.' . $contentBlock['package'] . '.' . $field['_identifier'] . '.label</label>
                     <type>inline</type>
                     <foreign_table>tx_contentblocks_reg_api_collection</foreign_table>
@@ -396,7 +396,7 @@ class FlexFormGenerator
                                 </config>
                             </content_block_field_identifier>
                             <content_block type="array">
-                                <label>LLL:' . $contentBlock['EditorInterface.xlf'] . ':' . $contentBlock['vendor']
+                                <label>LLL:' . $contentBlock['EditorInterfaceXlf'] . ':' . $contentBlock['vendor']
                                 . '.' . $contentBlock['package'] . '.' . $field['_identifier'] . '.label</label>
                             </content_block>
                         </columns>
@@ -455,9 +455,9 @@ class FlexFormGenerator
         return '
         <' . $field['_identifier'] . '>
             <TCEforms>
-                <label>LLL:' . $contentBlock['EditorInterface.xlf'] . ':' . $contentBlock['vendor']
+                <label>LLL:' . $contentBlock['EditorInterfaceXlf'] . ':' . $contentBlock['vendor']
             . '.' . $contentBlock['package'] . '.' . $field['_identifier'] . '.label</label>
-                <description>LLL:' . $contentBlock['EditorInterface.xlf'] . ':' . $contentBlock['vendor']
+                <description>LLL:' . $contentBlock['EditorInterfaceXlf'] . ':' . $contentBlock['vendor']
             . '.' . $contentBlock['package'] . '.' . $field['_identifier'] . '.description</description>
                 <config>
                     <type>' . $type . '</type>

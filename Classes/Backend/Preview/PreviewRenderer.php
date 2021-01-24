@@ -67,9 +67,20 @@ class PreviewRenderer extends StandardContentPreviewRenderer
         $view = GeneralUtility::makeInstance(StandaloneView::class);
         $view->setTemplatePathAndFilename($cbConfiguration['EditorPreview.html']);
 
-        // TODO use TypoScript configuration for paths
-        $view->setPartialRootPaths([$cbConfiguration['srcPath']]);
-        $view->setLayoutRootPaths([$cbConfiguration['srcPath']]);
+        // TODO: use TypoScript configuration for paths
+        // TODO: add partialRootPath to cbConf
+        $view->setPartialRootPaths(
+            [
+                'EXT:contentblocks_reg_api/Resources/Private/Partials/',
+                $cbConfiguration['srcPath'],
+            ]
+        );
+        $view->setLayoutRootPaths(
+            [
+                'EXT:contentblocks_reg_api/Resources/Private/Layouts/',
+                $cbConfiguration['srcPath'],
+            ]
+        );
 
         $view->assign('data', $record);
 

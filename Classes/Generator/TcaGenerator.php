@@ -94,7 +94,7 @@ class TcaGenerator
                 'tt_content',
                 'CType',
                 [
-                    'LLL:' . $contentBlock['EditorInterface.xlf'] . ':' . $contentBlock['vendor']
+                    'LLL:' . $contentBlock['EditorInterfaceXlf'] . ':' . $contentBlock['vendor']
                     . '.' . $contentBlock['package'] . '.title',
                     $contentBlock['CType'],
                     $contentBlock['CType'],

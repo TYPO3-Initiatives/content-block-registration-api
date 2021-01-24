@@ -2,7 +2,7 @@
 
 <f:asset.css identifier="cb-{cb.key}" href="CB:{cb.key}/dist/EditorPreview.css"/>
 <div class="counter">
-    <f:debug inline="1">{_all}</f:debug>
+    <f:render partial="Backend/Fields" arguments="{fields: cb.yaml.fields, values: _all, cb: cb}"/>
 </div>
 
 </html>

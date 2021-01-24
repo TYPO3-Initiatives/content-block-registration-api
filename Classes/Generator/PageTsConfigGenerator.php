@@ -20,8 +20,8 @@ mod.wizards.newContentElement.wizardItems.common  {
     elements {
         ' . $contentBlock['CType'] . ' {
             iconIdentifier = ' . $contentBlock['CType'] . '
-            title = LLL:' . $contentBlock['EditorInterface.xlf'] . ':' . $contentBlock['vendor'] . '.' . $contentBlock['package'] . '.title
-            description = LLL:' . $contentBlock['EditorInterface.xlf'] . ':' . $contentBlock['vendor'] . '.' . $contentBlock['package'] . '.description
+            title = LLL:' . $contentBlock['EditorInterfaceXlf'] . ':' . $contentBlock['vendor'] . '.' . $contentBlock['package'] . '.title
+            description = LLL:' . $contentBlock['EditorInterfaceXlf'] . ':' . $contentBlock['vendor'] . '.' . $contentBlock['package'] . '.description
             tt_content_defValues {
                 CType = ' . $contentBlock['CType'] . '
             }

@@ -5,6 +5,10 @@ lib.contentBlock {
         -5 = EXT:contentblocks_reg_api/Resources/Private/Layouts/
     }
 
+    partialRootPaths {
+        0 = EXT:contentblocks_reg_api/Resources/Private/Partials/
+    }
+
     dataProcessing {
         10 = Typo3Contentblocks\ContentblocksRegApi\DataProcessing\CbProcessor
         20 = Typo3Contentblocks\ContentblocksRegApi\DataProcessing\FlexFormProcessor
