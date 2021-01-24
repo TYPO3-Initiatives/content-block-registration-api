@@ -26,7 +26,6 @@
         "helhum/typo3-console": "^6.3",
         "roave/security-advisories": "dev-master",
         "typo3-contentblocks/call-to-action-local": "@dev",
-        "typo3-contentblocks/collections-images-local": "@dev",
         "typo3-contentblocks/counter-local": "@dev",
         "typo3-contentblocks/example-local": "@dev",
         "typo3-contentblocks/fluid-styled-content-example-local": "@dev",
