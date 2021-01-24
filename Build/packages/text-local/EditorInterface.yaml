@@ -1,4 +1,0 @@
-group: common
-fields:
-  - identifier: text
-    type: Text
