@@ -206,8 +206,8 @@ class FlexFormGenerator
                 <config>
 
                     <type>inline</type>
-                    <minItems>' . ($field['properties']['minItems'] > 0 ? $field['properties']['minItems'] : '1') . '</minItems>
-                    <maxItems>' . ($field['properties']['maxItems'] > 0 ? $field['properties']['maxItems'] : '1') . '</maxItems>
+                    <minitems>' . ($field['properties']['minItems'] ?? '1') . '</minitems>
+                    <maxitems>' . ($field['properties']['maxItems'] ?? '1') . '</maxitems>
                     <eval>' . ($field['properties']['required'] === true ? 'required' : '') . '</eval>
                     <foreign_table>sys_file_reference</foreign_table>
                     <foreign_table_field>tablenames</foreign_table_field>
@@ -364,12 +364,12 @@ class FlexFormGenerator
                     </foreign_match_fields>'
             . (
                 ($field['properties']['minItems'] ?? false)
-                ? '<minItems>' . $field['properties']['minItems'] . '</minItems>'
+                ? '<minitems>' . $field['properties']['minItems'] . '</minitems>'
                 : ''
             )
             . (
                 ($field['properties']['maxItems'] ?? false)
-                ? '<maxItems>' . $field['properties']['maxItems'] . '</maxItems>'
+                ? '<maxitems>' . $field['properties']['maxItems'] . '</maxitems>'
                 : ''
             )
             . '

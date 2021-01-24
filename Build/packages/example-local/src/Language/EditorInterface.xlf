@@ -1,80 +1,95 @@
 <?xml version="1.0"?>
 <xliff version="1.0">
-	<file datatype="plaintext"
-		  original="messages"
-		  source-language="en"
-		  product-name="example">
-		<header/>
-		<body>
-			<trans-unit id="typo3-contentblocks.example-local.title" xml:space="preserve">
+  <file datatype="plaintext"
+        original="messages"
+        source-language="en"
+        product-name="example">
+    <header/>
+    <body>
+      <trans-unit id="typo3-contentblocks.example-local.title" xml:space="preserve">
 				<source>Example</source>
 			</trans-unit>
-			<trans-unit id="typo3-contentblocks.example-local.description" xml:space="preserve">
+      <trans-unit id="typo3-contentblocks.example-local.description" xml:space="preserve">
 				<source>An element that provides examples for all field types.</source>
 			</trans-unit>
-			<trans-unit id="typo3-contentblocks.example-local.text.label" xml:space="preserve">
+      <trans-unit id="typo3-contentblocks.example-local.text.label" xml:space="preserve">
 				<source>Text</source>
 			</trans-unit>
-			<trans-unit id="typo3-contentblocks.example-local.text.description" xml:space="preserve">
+      <trans-unit id="typo3-contentblocks.example-local.text.description" xml:space="preserve">
 				<source>Simple text field.</source>
 			</trans-unit>
-            <trans-unit id="typo3-contentblocks.example-local.textarea.label" xml:space="preserve">
+      <trans-unit id="typo3-contentblocks.example-local.textarea.label" xml:space="preserve">
                 <source>Textarea</source>
             </trans-unit>
-            <trans-unit id="typo3-contentblocks.example-local.textarea.description" xml:space="preserve">
+      <trans-unit id="typo3-contentblocks.example-local.textarea.description" xml:space="preserve">
                 <source>Simple text area.</source>
             </trans-unit>
-			<trans-unit id="typo3-contentblocks.example-local.amount.label" xml:space="preserve">
+      <trans-unit id="typo3-contentblocks.example-local.amount.label" xml:space="preserve">
 				<source>Number/ amount</source>
 			</trans-unit>
-			<trans-unit id="typo3-contentblocks.example-local.icon.label" xml:space="preserve">
+      <trans-unit id="typo3-contentblocks.example-local.icon.label" xml:space="preserve">
 				<source>Icon</source>
 			</trans-unit>
-			<trans-unit id="typo3-contentblocks.example-local.icon.description" xml:space="preserve">
+      <trans-unit id="typo3-contentblocks.example-local.icon.description" xml:space="preserve">
 				<source>Icon for visualization of the example topic.</source>
 			</trans-unit>
-            <trans-unit id="typo3-contentblocks.example-local.email.label" xml:space="preserve">
+      <trans-unit id="typo3-contentblocks.example-local.email.label" xml:space="preserve">
 				<source>E-Mail</source>
 			</trans-unit>
-            <trans-unit id="typo3-contentblocks.example-local.integer.label" xml:space="preserve">
+      <trans-unit id="typo3-contentblocks.example-local.integer.label" xml:space="preserve">
 				<source>Integer</source>
 			</trans-unit>
-            <trans-unit id="typo3-contentblocks.example-local.money.label" xml:space="preserve">
+      <trans-unit id="typo3-contentblocks.example-local.money.label" xml:space="preserve">
 				<source>Money</source>
 			</trans-unit>
-            <trans-unit id="typo3-contentblocks.example-local.number.label" xml:space="preserve">
+      <trans-unit id="typo3-contentblocks.example-local.number.label" xml:space="preserve">
 				<source>Number</source>
 			</trans-unit>
-            <trans-unit id="typo3-contentblocks.example-local.percent.label" xml:space="preserve">
+      <trans-unit id="typo3-contentblocks.example-local.percent.label" xml:space="preserve">
 				<source>Percentage</source>
 			</trans-unit>
-            <trans-unit id="typo3-contentblocks.example-local.url.label" xml:space="preserve">
+      <trans-unit id="typo3-contentblocks.example-local.url.label" xml:space="preserve">
 				<source>URL</source>
 			</trans-unit>
-            <trans-unit id="typo3-contentblocks.example-local.tel.label" xml:space="preserve">
+      <trans-unit id="typo3-contentblocks.example-local.tel.label" xml:space="preserve">
 				<source>Telephone</source>
 			</trans-unit>
-            <trans-unit id="typo3-contentblocks.example-local.color.label" xml:space="preserve">
+      <trans-unit id="typo3-contentblocks.example-local.color.label" xml:space="preserve">
 				<source>Color</source>
 			</trans-unit>
-            <trans-unit id="typo3-contentblocks.example-local.date.label" xml:space="preserve">
+      <trans-unit id="typo3-contentblocks.example-local.date.label" xml:space="preserve">
 				<source>Date</source>
 			</trans-unit>
-            <trans-unit id="typo3-contentblocks.example-local.datetime.label" xml:space="preserve">
+      <trans-unit id="typo3-contentblocks.example-local.datetime.label" xml:space="preserve">
 				<source>Date and Time</source>
 			</trans-unit>
-            <trans-unit id="typo3-contentblocks.example-local.select.label" xml:space="preserve">
+      <trans-unit id="typo3-contentblocks.example-local.select.label" xml:space="preserve">
 				<source>Select</source>
 			</trans-unit>
-            <trans-unit id="typo3-contentblocks.example-local.selectSideBySide.label" xml:space="preserve">
+      <trans-unit id="typo3-contentblocks.example-local.selectSideBySide.label" xml:space="preserve">
 				<source>Select Side by Side</source>
 			</trans-unit>
-            <trans-unit id="typo3-contentblocks.example-local.checkboxes.label" xml:space="preserve">
+      <trans-unit id="typo3-contentblocks.example-local.checkboxes.label" xml:space="preserve">
 				<source>Checkboxes</source>
 			</trans-unit>
-            <trans-unit id="typo3-contentblocks.example-local.radioboxes.label" xml:space="preserve">
+      <trans-unit id="typo3-contentblocks.example-local.radioboxes.label" xml:space="preserve">
 				<source>Radioboxes</source>
 			</trans-unit>
-        </body>
-	</file>
+      <trans-unit id="typo3-contentblocks.example-local.image.label" xml:space="preserve">
+				<source>Image</source>
+			</trans-unit>
+      <trans-unit id="typo3-contentblocks.example-local.collection.label" xml:space="preserve">
+				<source>Collection</source>
+			</trans-unit>
+      <trans-unit id="typo3-contentblocks.example-local.collection.text.label" xml:space="preserve">
+				<source>Text in Collection</source>
+			</trans-unit>
+      <trans-unit id="typo3-contentblocks.example-local.collection.collection.label" xml:space="preserve">
+				<source>Collection in Collection</source>
+			</trans-unit>
+      <trans-unit id="typo3-contentblocks.example-local.collection.collection.text.label" xml:space="preserve">
+				<source>Text in Collection in Collection</source>
+			</trans-unit>
+    </body>
+  </file>
 </xliff>

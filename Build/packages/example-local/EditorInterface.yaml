@@ -1,161 +1,175 @@
 group: common
 fields:
-    -   identifier: text
-        type: Text
-        properties:
-            autocomplete: true
-            default: 'Default value'
-            max: 15
-            placeholder: 'Placeholder text'
-            size: 20
-            required: false
-            trim: true
-    -   identifier: textarea
-        type: Textarea
-        properties:
-            cols: 40
-            default: 'Default value'
-            enableRichtext: true
-            max: 150
-            placeholder: 'Placeholder text'
-            richtextConfiguration: default
-            rows: 15
-            required: false
-            trim: true
-    -   identifier: email
-        type: Email
-        properties:
-            autocomplete: true
-            default: 'Default value'
-            placeholder: 'Placeholder text'
-            size: 20
-            required: true
-            trim: true
-    -   identifier: integer
-        type: Integer
-        properties:
-            default: 0
-            size: 20
-            required: true
-            trim: true
-    -   identifier: money
-        type: Money
-        properties:
-            size: 20
-            required: true
-            trim: true
-    -   identifier: number
-        type: Number
-        properties:
-            default: 0
-            size: 20
-            required: true
-            trim: true
-    -   identifier: percent
-        type: Percent
-        properties:
-            default: 0
-            range:
-                lower: 0
-                upper: 100
-            required: true
-            size: 20
-            slider:
-                step: 1
-                width: 100
-            trim: true
-    -   identifier: url
-        type: Url
-        properties:
-            autocomplete: true
-            default: 'Default value'
-            linkPopup:
-                allowedExtensions: 'pdf'
-                blindLinkFields: 'target,title'
-                blindLinkOptions: 'folder,spec,telefone,mail'
-                windowOpenParameters: 'height=800,width=600'
-            max: 15
-            placeholder: 'Placeholder text'
-            size: 20
-            required: false
-    -   identifier: tel
-        type: Tel
-        properties:
-            autocomplete: true
-            default: 0
-            size: 20
-            required: false
-    -   identifier: color
-        type: Color
-        properties:
-            autocomplete: true
-            default: '#fff'
-            size: 20
-            required: false
-            valuePicker:
-                items:
-                    '#FF0000': Red
-                    '#008000': Green
-                    '#0000FF': Blue
-    -   identifier: date
-        type: Date
-        properties:
-            default: '@now'
-            displayAge: true
-            size: 20
-            range:
-                lower: '01-01-1970'
-                upper: '31-12-2020'
-            required: false
-    -   identifier: datetime
-        type: DateTime
-        properties:
-            default: '@now'
-            displayAge: true
-            size: 20
-            range:
-                lower: '00:01 01-01-1970'
-                upper: '29:59 31-12-2020'
-            required: false
-    -   identifier: time
-        type:
-        properties:
-            default: '@now'
-            displayAge: true
-            size: 20
-            range:
-                lower: '00:01'
-                upper: '29:59'
-            required: false
-    -   identifier: select
-        type: Select
-        properties:
-            items:
-                'one': 'The first'
-                'two': 'The second'
-                'three': 'The third'
-    -   identifier: selectSideBySide
-        type: MultiSelect
-        properties:
-            maxItems: 2
-            size: 5
-            items:
-                'one': 'The first'
-                'two': 'The second'
-                'three': 'The third'
-    
-    -   identifier: checkboxes
-        type: Checkbox
-        properties:
-            items:
-                'one': 'The first'
-                'two': 'The second'
-                'three': 'The third'
-    
-    -   identifier: radioboxes
-        type: Radiobox
-        properties:
-            items:
-                'one': 'The first'
-                'two': 'The second'
-                'three': 'The third'
+  - identifier: text
+    type: Text
+    properties:
+      autocomplete: true
+      default: 'Default value'
+      max: 15
+      placeholder: 'Placeholder text'
+      size: 20
+      required: false
+      trim: true
+  - identifier: textarea
+    type: Textarea
+    properties:
+      cols: 40
+      default: 'Default value'
+      enableRichtext: true
+      max: 150
+      placeholder: 'Placeholder text'
+      richtextConfiguration: default
+      rows: 15
+      required: false
+      trim: true
+  - identifier: email
+    type: Email
+    properties:
+      autocomplete: true
+      default: 'Default value'
+      placeholder: 'Placeholder text'
+      size: 20
+      required: true
+      trim: true
+  - identifier: integer
+    type: Integer
+    properties:
+      default: 0
+      size: 20
+      required: true
+      trim: true
+  - identifier: money
+    type: Money
+    properties:
+      size: 20
+      required: true
+      trim: true
+  - identifier: number
+    type: Number
+    properties:
+      default: 0
+      size: 20
+      required: true
+      trim: true
+  - identifier: percent
+    type: Percent
+    properties:
+      default: 0
+      range:
+        lower: 0
+        upper: 100
+      required: true
+      size: 20
+      slider:
+        step: 1
+        width: 100
+      trim: true
+  - identifier: url
+    type: Url
+    properties:
+      autocomplete: true
+      default: 'Default value'
+      linkPopup:
+        allowedExtensions: 'pdf'
+        blindLinkFields: 'target,title'
+        blindLinkOptions: 'folder,spec,telefone,mail'
+        windowOpenParameters: 'height=800,width=600'
+      max: 15
+      placeholder: 'Placeholder text'
+      size: 20
+      required: false
+  - identifier: tel
+    type: Tel
+    properties:
+      autocomplete: true
+      default: 0
+      size: 20
+      required: false
+  - identifier: color
+    type: Color
+    properties:
+      autocomplete: true
+      default: '#fff'
+      size: 20
+      required: false
+      valuePicker:
+        items:
+          '#FF0000': Red
+          '#008000': Green
+          '#0000FF': Blue
+  - identifier: date
+    type: Date
+    properties:
+      default: '@now'
+      displayAge: true
+      size: 20
+      range:
+        lower: '01-01-1970'
+        upper: '31-12-2020'
+      required: false
+  - identifier: datetime
+    type: DateTime
+    properties:
+      default: '@now'
+      displayAge: true
+      size: 20
+      range:
+        lower: '00:01 01-01-1970'
+        upper: '29:59 31-12-2020'
+      required: false
+  - identifier: time
+    type:
+    properties:
+      default: '@now'
+      displayAge: true
+      size: 20
+      range:
+        lower: '00:01'
+        upper: '29:59'
+      required: false
+  - identifier: select
+    type: Select
+    properties:
+      items:
+        'one': 'The first'
+        'two': 'The second'
+        'three': 'The third'
+  - identifier: selectSideBySide
+    type: MultiSelect
+    properties:
+      maxItems: 2
+      size: 5
+      items:
+        'one': 'The first'
+        'two': 'The second'
+        'three': 'The third'
+
+  - identifier: checkboxes
+    type: Checkbox
+    properties:
+      items:
+        'one': 'The first'
+        'two': 'The second'
+        'three': 'The third'
+
+  - identifier: radioboxes
+    type: Radiobox
+    properties:
+      items:
+        'one': 'The first'
+        'two': 'The second'
+        'three': 'The third'
+  - identifier: image
+    type: Image
+  - identifier: collection
+    type: Collection
+    properties:
+      fields:
+        - identifier: text
+          type: Text
+        - identifier: collection
+          type: Collection
+          properties:
+            fields:
+              - identifier: text
+                type: Text
