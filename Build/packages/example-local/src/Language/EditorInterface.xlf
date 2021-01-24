@@ -63,6 +63,9 @@
       <trans-unit id="typo3-contentblocks.example-local.datetime.label" xml:space="preserve">
 				<source>Date and Time</source>
 			</trans-unit>
+      <trans-unit id="typo3-contentblocks.example-local.time.label" xml:space="preserve">
+				<source>Time</source>
+			</trans-unit>
       <trans-unit id="typo3-contentblocks.example-local.select.label" xml:space="preserve">
 				<source>Select</source>
 			</trans-unit>
