@@ -20,12 +20,14 @@ You can reach us in the TYPO3 Slack `#cig-structuredcontent-contentblockcreation
 
 ### For developing on this API
 
-This will set up a TYPO3 v10 and install the API extension.
+This will set up a TYPO3 v10 with ddev and install the API extension.
 
-It is a quickstart to explore the feature, too.
+#### Requirements
 
-1) clone this repository
-2) `ddev launch /typo3`
+* ddev
+
+1. Clone this repository
+1. Run `ddev launch /typo3`
 
 The TYPO3 backend user is "admin", password "adminadmin".
 
@@ -37,16 +39,12 @@ It includes example Content Blocks in a local composer repository that are insta
 * TYPO3 v10+
 * In TYPO3 v10, backend previews require the [Fluid based Page module](https://docs.typo3.org/c/typo3/cms-core/master/en-us/Changelog/10.3/Feature-90348-NewFluid-basedReplacementForPageLayoutView.html) to be enabled.
 
-This installs the API required to use content blocks.
-It consists of 2 composer packages: an API extension and a composer plugin.
+The API required to use content blocks consists of 2 composer packages: an API extension and a composer plugin.
 
 #### Installation steps
-<pre>
-composer req typo3-contentblocks/contentblocks-reg-api:dev-master
-</pre>
-
-* Activate the extension `contentblocks_reg_api`
-* Add new database fields: (Backend) `Maintenance` › `Analyze Database Structure`
+1. `composer req typo3-contentblocks/contentblocks-reg-api:dev-master`
+1. Activate the extension `contentblocks_reg_api`
+1. Add new database fields: (Backend) `Maintenance` › `Analyze Database Structure`
 
 ### Getting/Creating new content blocks
 
