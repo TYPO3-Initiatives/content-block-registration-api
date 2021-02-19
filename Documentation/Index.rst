@@ -26,7 +26,7 @@ Content Blocks Registration API
 		2020-2021
 
 	:Author:
-		TYPO3 Structured Content Initiative
+		`TYPO3 Structured Content Initiative <https://typo3.org/community/teams/typo3-development/initiatives/structured-content/>`__
 
 	:License:
 		This document is published under the Open Content License
