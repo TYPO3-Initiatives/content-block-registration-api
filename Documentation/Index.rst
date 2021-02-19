@@ -13,6 +13,9 @@ Content Blocks Registration API
 	:Version:
 		|release|
 
+	:Status:
+		alpha
+
 	:Language:
 		en
 
