@@ -154,7 +154,7 @@ class FlexFormProcessor implements DataProcessorInterface
             $collections[end($fieldConf['_path'])] = [];
         }
 
-        while ($r = $stmt->fetchAll(\Doctrine\DBAL\FetchMode::ASSOCIATIVE)) {
+        while ($r = $stmt->fetch()) {
             // overlay workspaces
             if ($this->_isFrontend()) {
                 GeneralUtility::makeInstance(PageRepository::class)
