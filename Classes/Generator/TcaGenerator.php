@@ -108,7 +108,7 @@ class TcaGenerator
              */
             // Feature: enable pallette frame via extConf
             $enableLayoutOptions = (bool)\TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Configuration\ExtensionConfiguration::class)
-                            ->get('contentblocks_reg_api', 'enableLayoutOptions');  
+                            ->get('contentblocks_reg_api', 'enableLayoutOptions');
             $GLOBALS['TCA']['tt_content']['types'][$contentBlock['CType']] = array_replace_recursive(
                 $GLOBALS['TCA']['tt_content']['types'][$contentBlock['CType']],
                 [
