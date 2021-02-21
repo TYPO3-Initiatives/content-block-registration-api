@@ -105,3 +105,32 @@ is generated and stored in `tt_content.content_block`.
 * Add the content block to the NewContentElementWizard
 * Add TypoScript to render the content plugin
 * Add PageTS for the content block
+
+## Extension configuration
+
+For some reason it might be necessary to inherit content blocks from your own definition. E. g. if you want to inherit content blocks from lib.contentElement. In that case you can extend the default TypoScript as you need. 
+This is the default Code:
+
+<pre>
+lib.contentBlock = FLUIDTEMPLATE
+lib.contentBlock {
+    layoutRootPaths {
+        -5 = EXT:contentblocks_reg_api/Resources/Private/Layouts/
+    }
+
+    partialRootPaths {
+        0 = EXT:contentblocks_reg_api/Resources/Private/Partials/
+    }
+
+    dataProcessing {
+        10 = Typo3Contentblocks\ContentblocksRegApi\DataProcessing\CbProcessor
+        20 = Typo3Contentblocks\ContentblocksRegApi\DataProcessing\FlexFormProcessor
+    }
+}
+</pre>
+
+**Attention**: If you change the code, you are responsible for that the code is working. Beware of data processing. Your content block won't work without that.
+
+You can inject your code via the extension settings in the install tool. There you can set the default TypoScript to your specific file like `EXT:sitepackage/Configuration/TypoScript/contentBlock.typoscript`.
+
+The second thing in the extension configuration is to enable the frame pallet in the appearance section. This might be a helpful feature if you are using fluid_styled_content or bootstrap_package.
