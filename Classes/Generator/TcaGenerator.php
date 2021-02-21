@@ -106,6 +106,9 @@ class TcaGenerator
             /***************
              * Configure element type
              */
+            // Feature: enable pallette frame via extConf
+            $enableLayoutOptions = (bool)\TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Configuration\ExtensionConfiguration::class)
+                            ->get('contentblocks_reg_api', 'enableLayoutOptions');  
             $GLOBALS['TCA']['tt_content']['types'][$contentBlock['CType']] = array_replace_recursive(
                 $GLOBALS['TCA']['tt_content']['types'][$contentBlock['CType']],
                 [
@@ -114,7 +117,8 @@ class TcaGenerator
                             --palette--;;general,
                             header,
                             content_block,
-                        --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.appearance,
+                        --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.appearance,' . (($enableLayoutOptions) ? '
+                            --palette--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:palette.frames;frames,' : '') . '
                             --palette--;;appearanceLinks,
                         --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:language,
                             --palette--;;language,

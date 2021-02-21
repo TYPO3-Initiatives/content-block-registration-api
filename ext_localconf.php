@@ -26,9 +26,20 @@ defined('TYPO3_MODE') || die('Access denied.');
     );
 
     // TypoScript
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScriptSetup(
-        "@import 'EXT:contentblocks_reg_api/Configuration/TypoScript/setup.typoscript'"
-    );
+    // TODO: find a better way to add individuall definitions
+    $importTypoScriptTemplate = (string)\TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Configuration\ExtensionConfiguration::class)
+            ->get('contentblocks_reg_api', 'contentBlockDefinition'); 
+    if ( strlen('' . $importTypoScriptTemplate) > 2)
+    {
+        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScriptSetup(
+            "@import '$importTypoScriptTemplate'"
+        );
+    }
+    else {
+        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScriptSetup(
+            "@import 'EXT:contentblocks_reg_api/Configuration/TypoScript/setup.typoscript'"
+        );
+    }
 
     // contentBlocks
     $contentBlocks = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
