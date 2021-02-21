@@ -16,7 +16,7 @@ class PageTsConfigGenerator
     public function pageTsConfigForContentBlock(array $contentBlock): string
     {
         return '
-mod.wizards.newContentElement.wizardItems.common  {
+mod.wizards.newContentElement.wizardItems.' . ((strlen('' .$contentBlock['yaml']['group']) > 0) ? $contentBlock['yaml']['group'] : 'common') . '  {
     elements {
         ' . $contentBlock['CType'] . ' {
             iconIdentifier = ' . $contentBlock['CType'] . '
