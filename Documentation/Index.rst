@@ -8,7 +8,7 @@ Content Blocks Registration API
 .. only:: html
 
 	:Extension key:
-		content-block-registration-api
+		contentblocks_reg_api
 
 	:Version:
 		|release|
