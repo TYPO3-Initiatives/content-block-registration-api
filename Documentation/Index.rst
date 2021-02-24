@@ -7,39 +7,44 @@ Content Blocks Registration API
 
 .. only:: html
 
-	:Extension key:
-		content-block-registration-api
+:Extension key:
+   content-block-registration-api
 
-	:Version:
-		|release|
+:Version:
+   |release|
 
-	:Status:
-		alpha
+:Status:
+   alpha
 
-	:Language:
-		en
+:Language:
+   en
 
-	:Keywords:
-		content blocks
+:Keywords:
+   content blocks
 
-	:Copyright:
-		2020-2021
+:Copyright:
+   2020-2021
 
-	:Author:
-		`TYPO3 Structured Content Initiative <https://typo3.org/community/teams/typo3-development/initiatives/structured-content/>`__
+:Author:
+   `TYPO3 Structured Content Initiative <https://typo3.org/community/teams/typo3-development/initiatives/structured-content/>`__
 
-	:License:
-		This document is published under the Open Content License
-		available from http://www.opencontent.org/opl.shtml
+:License:
+   This document is published under the Open Content License
+   available from http://www.opencontent.org/opl.shtml
 
-	:Rendered:
-		|today|
+:Rendered:
+   |today|
 
-	The content of this document is related to TYPO3,
-	a GNU/GPL CMS/Framework available from `www.typo3.org <http://www.typo3.org/>`_.
+The content of this document is related to TYPO3,
+a GNU/GPL CMS/Framework available from `www.typo3.org <http://www.typo3.org/>`_.
 
 
-	**Table of Contents**
+**Contributing To This Manual**
+
+You are welcome to help improve this guide. Just click on "Edit me on GitHub"
+on the top right to submit your change request.
+
+**Table of Contents**
 
 .. toctree::
 	:maxdepth: 3
@@ -47,7 +52,7 @@ Content Blocks Registration API
 	:glob:
 
 	Introduction/Index
-	IntegratorManual/Index
-	DeveloperManual/Index
+	IntegratorManual/Installation/Index
+	DeveloperManual/Installation/Index
 	Examples/Index
 	Misc/Index

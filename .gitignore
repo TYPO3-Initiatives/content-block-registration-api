@@ -9,5 +9,8 @@
 /Tests/.phpunit.result.cache
 /.php_cs.cache
 
+# Rendered docs
+/Documentation-GENERATED-temp/
+
 # That's where you would checkout the composer-plugin for local development
 /Build/packages/content-blocks-composer-plugin/
