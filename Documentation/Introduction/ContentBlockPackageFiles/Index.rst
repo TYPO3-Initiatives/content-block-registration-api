@@ -20,10 +20,10 @@ dist/Frontend.js                 -           x
 
 
 Content block package files explained
-=====================================
+-------------------------------------
 
 composer.json
--------------
+~~~~~~~~~~~~~
 
 refers to: `Composer schema <https://getcomposer.org/doc/04-schema.md>`__
 
@@ -40,7 +40,7 @@ The content block ID (CType) derives from the package name. Therefore one compos
 
 
 EditorInterface.yaml
---------------------
+~~~~~~~~~~~~~~~~~~~~
 
 refers to: `YAML RFC <https://github.com/yaml/summit.yaml.io/wiki/YAML-RFC-Index>`__
 
@@ -57,7 +57,7 @@ and will be mapped to TCA. See :ref:`yaml_reference` for the mapping overview.
 
 
 ContentBlockIcon.(svg|png|gif)
-------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This is the icon for the content block. There is no fallback by intention, but it is easy to generate an SVG with the content block name as a graphical representation.
 
@@ -69,7 +69,7 @@ This is the icon for the content block. There is no fallback by intention, but i
 
 
 src/Language/Default.xlf
-------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 **You may**
 
