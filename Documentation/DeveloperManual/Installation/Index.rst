@@ -15,7 +15,7 @@ Installation steps
 ------------------
 
 #. Clone this repository
-#. Run ::`ddev launch /typo3`
+#. Run `ddev launch /typo3`
 
 The TYPO3 backend user is "admin", password "adminadmin".
 

@@ -48,7 +48,7 @@ in the maintenance area. Additional information to composer could be added via a
 Mapping to the database
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-There are ref:`data_storage_variants:several variants` of how data of a content block can be stored and retrieved from the database.
+There are :ref:`several variants:data_storage_variants` of how data of a content block can be stored and retrieved from the database.
 Currently, there is no decision on the desired storage method, because performance research is still in progress.
 
 Virtual generation of TCA (ext_tables.php)
