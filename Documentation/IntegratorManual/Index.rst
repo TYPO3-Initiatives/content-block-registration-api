@@ -13,7 +13,7 @@ This part of the documentation refers to setup and configuration for usage of th
 	:titlesonly:
 	:glob:
 
-	IntegratorManual/Installation/Index
-	IntegratorManual/ContentBlockDefinition/Index
-	IntegratorManual/ContentBlockDistribution/Index
-	IntegratorManual/YamlReference/Index
+	Installation/Index
+	ContentBlockDefinition/Index
+	ContentBlockDistribution/Index
+	YamlReference/Index

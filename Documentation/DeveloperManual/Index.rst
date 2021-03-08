@@ -13,4 +13,4 @@ This part of the documentation refers to setup and development for contribution.
 	:titlesonly:
 	:glob:
 
-	DeveloperManual/Installation/Index
+	Installation/Index
