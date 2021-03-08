@@ -52,7 +52,16 @@ on the top right to submit your change request.
 	:glob:
 
 	Introduction/Index
+	Introduction/ContentBlockPackageFiles/Index
+	Introduction/RegistrationProcesses/Index
+	Introduction/DataStorageVariants/Index
 	IntegratorManual/Installation/Index
+	IntegratorManual/ContentBlockDefinition/Index
+	IntegratorManual/ContentBlockDistribution/Index
+	IntegratorManual/YamlReference/Index
 	DeveloperManual/Installation/Index
 	Examples/Index
 	Misc/Index
+	Misc/Roadmap/Index
+	Misc/FAQ/Index
+	Misc/Changelog/Index
