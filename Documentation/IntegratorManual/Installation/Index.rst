@@ -1,5 +1,5 @@
 .. include:: /Includes.rst.txt
-.. _installation:
+.. _installation_use:
 
 Installation for using Content Blocks
 =====================================

@@ -1,5 +1,5 @@
 .. include:: /Includes.rst.txt
-.. _installation:
+.. _installation_dev:
 
 Installation for developing on this API
 =======================================
