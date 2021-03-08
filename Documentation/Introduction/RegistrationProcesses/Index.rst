@@ -37,6 +37,8 @@ Validating a content block
 
 .. note::
    **Not yet implemented!**
+   See `validation of package files <https://github.com/TYPO3-Initiatives/content-block-registration-api/issues/7>`__ and
+   `validation of the editing interface <https://github.com/TYPO3-Initiatives/content-block-registration-api/issues/8>`_.
    Basically a YAML schema validation (based on JSON schema) is needed here. Exchange with the Form Framework team is targeted.
 
 
