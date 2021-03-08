@@ -65,8 +65,7 @@ The content block ID (CType) derives from the package name. Therefore one compos
 *  define the editor interface of exactly one content block
 *  define all the fields and their position in the editing interface
 
-The field types for the EditorInterface.yaml are heavily inspired by the `Symfony field types <https://symfony.com/doc/current/reference/forms/types.html>`__
-and will be mapped to TCA. See :ref:`yaml_reference` for the mapping overview.
+See :ref:`yaml_reference`.
 
 
 ContentBlockIcon.(svg|png|gif)
