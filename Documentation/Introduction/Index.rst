@@ -28,7 +28,7 @@ Positive side effects of this approach
 *  You may reuse the content blocks in other projects.
 *  You can define review rules in common VCS so that the frontend engineers are notified for changes.
 
-
+**Further information**
 
 .. toctree::
 	:maxdepth: 3

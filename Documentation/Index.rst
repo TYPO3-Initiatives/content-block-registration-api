@@ -1,9 +1,9 @@
 .. include:: /Includes.rst.txt
 .. _start:
 
-=============================================================
+===============================
 Content Blocks Registration API
-=============================================================
+===============================
 
 .. only:: html
 
@@ -55,10 +55,12 @@ on the top right to submit your change request.
 	Introduction/ContentBlockPackageFiles/Index
 	Introduction/RegistrationProcesses/Index
 	Introduction/DataStorageVariants/Index
+	IntegratorManual/Index
 	IntegratorManual/Installation/Index
 	IntegratorManual/ContentBlockDefinition/Index
 	IntegratorManual/ContentBlockDistribution/Index
 	IntegratorManual/YamlReference/Index
+	DeveloperManual/Index
 	DeveloperManual/Installation/Index
 	Examples/Index
 	Misc/Index
