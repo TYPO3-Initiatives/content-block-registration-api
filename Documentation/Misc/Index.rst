@@ -11,7 +11,6 @@ Miscellaneous
 	:titlesonly:
 	:glob:
 
-	Index
 	Roadmap/Index
 	FAQ/Index
 	Changelog/Index
