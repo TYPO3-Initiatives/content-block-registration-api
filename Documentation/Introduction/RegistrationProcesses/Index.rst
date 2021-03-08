@@ -41,6 +41,9 @@ Validating a content block
    `validation of the editing interface <https://github.com/TYPO3-Initiatives/content-block-registration-api/issues/8>`_.
    Basically a YAML schema validation (based on JSON schema) is needed here. Exchange with the Form Framework team is targeted.
 
+If a content block is invalid, it won’t be available in the TYPO3 backend for editors. An error message is available in the “Check for broken content blocks” tool
+in the maintenance area. Additional information to composer could be added via a composer plugin to validate the definition during installation.
+
 
 Mapping to the database
 ~~~~~~~~~~~~~~~~~~~~~~~
