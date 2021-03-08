@@ -10,6 +10,7 @@ Abstraction Requirements
 To achieve the goal of reducing the complexity of content block registration the `facade pattern <https://en.wikipedia.org/wiki/Facade_pattern>`__
 approach needs to be used for some of TYPO3s internal APIs. These are
 
+*  Validation
 *  Mapping to the database
 *  TCA generation for
 
@@ -30,6 +31,14 @@ Detecting a content block
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The detection of content blocks depends on the composer package type. The custom composer installer then retrieves all packages, which are of the above defined type.
+
+Validating a content block
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. note::
+   **Not yet implemented!**
+   Basically a YAML schema validation (based on JSON schema) is needed here. Exchange with the Form Framework team is targeted.
+
 
 Mapping to the database
 ~~~~~~~~~~~~~~~~~~~~~~~
