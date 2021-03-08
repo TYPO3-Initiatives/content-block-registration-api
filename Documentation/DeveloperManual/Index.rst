@@ -4,7 +4,7 @@
 For Contribution
 ================
 
-This part of the documentation refers to dsetup and evelopment for contribution.
+This part of the documentation refers to setup and development for contribution.
 
 **Table of Contents**
 
