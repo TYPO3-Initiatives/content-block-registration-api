@@ -18,3 +18,25 @@ than TYPO3's exclusive TCA, thus providing a kind of ubiquitous language.
 .. note::
    With Symfony based field types the content blocks could even be integrated into a different CMS or database or file based system.
 
+Field definitions
+-----------------
+
+...
+
+Field grouping
+--------------
+
+Visually grouping of fields by palettes in the editing interface is defined by the key ::`palettes` Example:
+
+.. code-block:: yaml
+
+   palettes:
+      - identifier: palette_1
+        label: palette_1
+        fields:
+        # …
+
+See :ref:`yaml_reference`.
+
+.. attention::
+   **Not yet implemented!** See `feature request <https://github.com/TYPO3-Initiatives/content-block-registration-api/issues/22>`__
