@@ -16,3 +16,4 @@ Editing interface field types
 	Percent/Index
 	Text/Index
 	Textarea/Index
+	Url/Index

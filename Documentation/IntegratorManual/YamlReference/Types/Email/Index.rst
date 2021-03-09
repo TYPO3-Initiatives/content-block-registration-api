@@ -7,7 +7,7 @@ Email
 The "Email" type generates an `<input>` field, specified for entry of email addresses only.
 This type adds a server-side validation of an email address. If the input does not contain a valid email address, a flash message warning will be displayed.
 
-It corresponds with the TCA `type=’input’` (default) and `eval=´email´`.
+It corresponds with the TCA `type='input'` (default) and `eval='email'`.
 
 
 Properties

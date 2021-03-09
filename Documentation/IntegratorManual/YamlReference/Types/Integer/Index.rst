@@ -6,7 +6,7 @@ Integer
 
 The "Integer" type generates a simple `<input>` field, which evaluates the input to an integer.
 
-It corresponds with the TCA `type=’input’` (default) and `eval=´int´`.
+It corresponds with the TCA `type='input'` (default) and `eval='int'`.
 
 
 Properties

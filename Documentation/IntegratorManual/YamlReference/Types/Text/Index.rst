@@ -5,6 +5,7 @@ Text
 ====
 
 The "Text" type generates a simple `<input>` field, possibly with additional features applied.
+
 It corresponds with the TCA `type=’input’` (default), however special variants are defined as own field types.
 
 

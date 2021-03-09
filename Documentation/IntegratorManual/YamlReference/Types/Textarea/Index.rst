@@ -5,7 +5,8 @@ Textarea
 ========
 
 The "Textarea" s for multi line text input. A Rich Text Editor can be enabled by property.
-It corresponds with the TCA `type=’text’` (default).
+
+It corresponds with the TCA `type='text'` (default).
 
 
 Properties

@@ -4,8 +4,9 @@
 Percent
 =======
 
-The "Percent" type generates a simple `<input>` field, possibly with additional features applied.
-It corresponds with the TCA `type=’input’` (default), however special variants are defined as own field types.
+The "Percent" type generates a simple `<input>` field, which provides a slider for value picking.
+
+It corresponds with the TCA `type='input'` (default) with `range` and `slider` properties.
 
 
 Properties
@@ -29,19 +30,21 @@ range
 
    An array which defines an integer range within which the value must be. Keys:
 
-   **lower (integer/ float)**
+   lower (integer/ float)
       Defines the lower integer value. Default: 0.
-   **upper (integer/ float)**
+
+   upper (integer/ float)
       Defines the upper integer value. Default: 100.
+
    It is allowed to specify only one of both of them.
 
-Example:
+   Example:
 
-.. code-block:: yaml
+   .. code-block:: yaml
 
-   range:
-     lower: 0
-     upper: 100
+      range:
+        lower: 0
+        upper: 100
 
 required
    :sep:`|` :aspect:`Required:` false
@@ -67,18 +70,19 @@ slider
 
    Render a value slider next to the field. Available keys:
 
-   **step (integer / float)**
+   step (integer / float)
    Set the step size the slider will use. For floating point values this can itself be a floating point value. Default: 1.
-   **width (integer, pixels)**
+
+   width (integer, pixels)
    Define the width of the slider. Default: 100.
 
-Example:
+   Example:
 
-.. code-block:: yaml
+   .. code-block:: yaml
 
-   range:
-     step: 1
-     width: 100
+      range:
+        step: 1
+        width: 100
 
 trim
    :sep:`|` :aspect:`Required:` false

@@ -7,7 +7,7 @@ Money
 
 The "Money" type generates a simple `<input>` field, which converts the input to a floating point with 2 decimal positions, using the “.” (period) as the decimal delimited (accepts also “,” for the same).
 
-It corresponds with the TCA `type=’input’` (default) and `eval=´double2´`.
+It corresponds with the TCA `type='input'` (default) and `eval='double2'`.
 
 
 Properties
