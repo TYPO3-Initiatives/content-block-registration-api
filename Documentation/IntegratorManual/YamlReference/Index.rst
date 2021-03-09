@@ -21,12 +21,38 @@ than TYPO3's exclusive TCA, thus providing a kind of ubiquitous language.
 Field definitions
 -----------------
 
-...
+Common field properties
+~~~~~~~~~~~~~~~~~~~~~~~
+
+identifier
+   :sep:`|` :aspect:`Required:` true
+   :sep:`|` :aspect:`Type:` string
+   :sep:`|` :aspect:`Default:` ''
+   :sep:`|`
+
+   The field's identifier has to be unique within a content block.
+
+type
+   :sep:`|` :aspect:`Required:` true
+   :sep:`|` :aspect:`Type:` string
+   :sep:`|` :aspect:`Default:` ''
+   :sep:`|`
+
+   The field's type. See :ref:`field_types`.
+
+properties
+   :sep:`|` :aspect:`Required:` true
+   :sep:`|` :aspect:`Type:` array
+   :sep:`|` :aspect:`Default:` ''
+   :sep:`|`
+
+   Array of properties that are dependent on the :ref:`field_types`.
+
 
 Field grouping
 --------------
 
-Visually grouping of fields by palettes in the editing interface is defined by the key ::`palettes` Example:
+Visually grouping of fields by palettes in the editing interface is defined by the key `palettes` Example:
 
 .. code-block:: yaml
 
