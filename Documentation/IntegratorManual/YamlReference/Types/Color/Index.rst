@@ -1,12 +1,12 @@
 .. include:: /Includes.rst.txt
-.. _field_type_text:
+.. _field_type_color:
 
-Text
-====
+Color
+=====
 
-The "Text" type generates a simple `<input>` field, possibly with additional features applied.
+The "Color" type generates a simple `<input>` field, which provides a color picker.
 
-It corresponds with the TCA `type='input'` (default), however special variants are defined as own field types.
+It corresponds with the TCA `type='input'` (colorPicker).
 
 
 Properties
@@ -29,22 +29,6 @@ default
    :sep:`|`
 
    Default value set if a new record is created.
-
-max
-   :sep:`|` :aspect:`Required:` false
-   :sep:`|` :aspect:`Type:` integer
-   :sep:`|` :aspect:`Default:` '700'
-   :sep:`|`
-
-   Value for the “maxlength” attribute of the `<input>` field. Javascript prevents adding more than the given number of characters.
-
-placeholder
-   :sep:`|` :aspect:`Required:` false
-   :sep:`|` :aspect:`Type:` string
-   :sep:`|` :aspect:`Default:` ''
-   :sep:`|`
-
-   Placeholder text for the field.
 
 required
    :sep:`|` :aspect:`Required:` false
@@ -69,3 +53,25 @@ trim
    :sep:`|`
 
    If set, the PHP trim function is applied on the field's content.
+
+
+valuePicker
+   :sep:`|` :aspect:`Required:` false
+   :sep:`|` :aspect:`Type:` array
+   :sep:`|` :aspect:`Default:` ''
+   :sep:`|`
+
+   Renders a select box with static values next to the input field. When a value is selected in the box, the value is transferred to the field. Keys:
+
+   items (array)
+      An array with selectable items. Each item is an array with the first being the value transferred to the input field, and the second being the label in the select drop-down (LLL reference possible).
+
+   Example:
+
+   .. code-block:: yaml
+
+      valuePicker:
+        items:
+          '#FF0000': Red
+          '#008000': Green
+          '#0000FF': Blue

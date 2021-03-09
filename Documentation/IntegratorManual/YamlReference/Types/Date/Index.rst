@@ -1,26 +1,18 @@
 .. include:: /Includes.rst.txt
-.. _field_type_text:
+.. _field_type_date:
 
-Text
+Date
 ====
 
-The "Text" type generates a simple `<input>` field, possibly with additional features applied.
+The "Date" type generates a simple `<input>` field, which provides a date picker.
 
-It corresponds with the TCA `type='input'` (default), however special variants are defined as own field types.
+It corresponds with the TCA `type='inputDateTime'` (default) and `eval='date'`.
 
 
 Properties
 ----------
 
 .. rst-class:: dl-parameters
-
-autocomplete
-   :sep:`|` :aspect:`Required:` false
-   :sep:`|` :aspect:`Type:` boolean
-   :sep:`|` :aspect:`Default:` 'false'
-   :sep:`|`
-
-   If set, the autocomplete feature is enabled for this field.
 
 default
    :sep:`|` :aspect:`Required:` false
@@ -30,21 +22,37 @@ default
 
    Default value set if a new record is created.
 
-max
+displayAge
    :sep:`|` :aspect:`Required:` false
-   :sep:`|` :aspect:`Type:` integer
-   :sep:`|` :aspect:`Default:` '700'
+   :sep:`|` :aspect:`Type:` boolean
+   :sep:`|` :aspect:`Default:` false
    :sep:`|`
 
-   Value for the “maxlength” attribute of the `<input>` field. Javascript prevents adding more than the given number of characters.
+   If set, enables the display of the age (p.e. “2015-08-30 (-27 days)”) of date fields.
 
-placeholder
+range
    :sep:`|` :aspect:`Required:` false
-   :sep:`|` :aspect:`Type:` string
+   :sep:`|` :aspect:`Type:` array
    :sep:`|` :aspect:`Default:` ''
    :sep:`|`
 
-   Placeholder text for the field.
+   An array which defines an integer range within which the value must be. Keys:
+
+   lower (string in format `dd-mm-yyyy`)
+      Defines the lower integer value. Default: 0.
+
+   upper (string in format `dd-mm-yyyy`)
+      Defines the upper integer value. Default: 100.
+
+   It is allowed to specify only one of both of them.
+
+   Example:
+
+   .. code-block:: yaml
+
+      range:
+        lower: '01-01-1970'
+        upper: '31-12-2020'
 
 required
    :sep:`|` :aspect:`Required:` false

@@ -1,10 +1,10 @@
 .. include:: /Includes.rst.txt
-.. _field_type_text:
+.. _field_type_tel:
 
-Text
-====
+Tel
+===
 
-The "Text" type generates a simple `<input>` field, possibly with additional features applied.
+The "Tel" type generates a simple `<input>` field, which handles phone numbers.
 
 It corresponds with the TCA `type='input'` (default), however special variants are defined as own field types.
 
@@ -24,27 +24,11 @@ autocomplete
 
 default
    :sep:`|` :aspect:`Required:` false
-   :sep:`|` :aspect:`Type:` string
-   :sep:`|` :aspect:`Default:` ''
+   :sep:`|` :aspect:`Type:` integer
+   :sep:`|` :aspect:`Default:` 0
    :sep:`|`
 
    Default value set if a new record is created.
-
-max
-   :sep:`|` :aspect:`Required:` false
-   :sep:`|` :aspect:`Type:` integer
-   :sep:`|` :aspect:`Default:` '700'
-   :sep:`|`
-
-   Value for the “maxlength” attribute of the `<input>` field. Javascript prevents adding more than the given number of characters.
-
-placeholder
-   :sep:`|` :aspect:`Required:` false
-   :sep:`|` :aspect:`Type:` string
-   :sep:`|` :aspect:`Default:` ''
-   :sep:`|`
-
-   Placeholder text for the field.
 
 required
    :sep:`|` :aspect:`Required:` false

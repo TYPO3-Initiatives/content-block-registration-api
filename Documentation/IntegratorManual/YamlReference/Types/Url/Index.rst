@@ -4,9 +4,9 @@
 Url
 ====
 
-The "Url" type generates a simple `<input>` field, possibly with additional features applied.
+The "Url" type generates a simple `<input>` field, which handles different kinds of links.
 
-It corresponds with the TCA `type='input'` (default), however special variants are defined as own field types.
+It corresponds with the TCA `type='input'` (inputLink).
 
 
 Properties
@@ -38,17 +38,17 @@ linkPopup
 
    The link browser control is typically used with `type='input'` with `renderType='inputLink'` adding a button which opens a popup to select an internal link to a page, an external link or a mail address.
 
-   **allowedExtensions (string, list)**
-   Comma separated list of allowed file extensions. By default, all extensions are allowed.
+   allowedExtensions (string, list)
+      Comma separated list of allowed file extensions. By default, all extensions are allowed.
 
-   **blindLinkFields (string, list)**
-   Comma separated list of link fields that should not be displayed. Possible values are `class`, `params`, `target` and `title`. By default, all link fields are displayed.
+   blindLinkFields (string, list)
+      Comma separated list of link fields that should not be displayed. Possible values are `class`, `params`, `target` and `title`. By default, all link fields are displayed.
 
-   **blindLinkOptions (string, list)**
-   Comma separated list of link options that should not be displayed. Possible values are `file`, `folder`, `mail`, `page`, `spec`, `telephone` and `url`. By default, all link options are displayed.
+   blindLinkOptions (string, list)
+      Comma separated list of link options that should not be displayed. Possible values are `file`, `folder`, `mail`, `page`, `spec`, `telephone` and `url`. By default, all link options are displayed.
 
-   **windowOpenParameters (string)**
-   Allows to set a different size of the popup, defaults to `height=800,width=600,status=0,menubar=0,scrollbars=1`.
+   windowOpenParameters (string)
+      Allows to set a different size of the popup, defaults to `height=800,width=600,status=0,menubar=0,scrollbars=1`.
 
    Example:
 
