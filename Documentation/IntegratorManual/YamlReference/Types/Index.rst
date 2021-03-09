@@ -9,6 +9,10 @@ Editing interface field types
 	:titlesonly:
 	:glob:
 
+	Email/Index
+	Integer/Index
+	Money/Index
+	Number/Index
+	Percent/Index
 	Text/Index
 	Textarea/Index
-	Email/Index

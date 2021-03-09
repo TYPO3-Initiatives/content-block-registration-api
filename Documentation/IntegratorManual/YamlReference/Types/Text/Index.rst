@@ -45,14 +45,6 @@ placeholder
 
    Placeholder text for the field.
 
-size
-   :sep:`|` :aspect:`Required:` false
-   :sep:`|` :aspect:`Type:` integer
-   :sep:`|` :aspect:`Default:` '20'
-   :sep:`|`
-
-   Abstract value for the width of the `<input>` field.
-
 required
    :sep:`|` :aspect:`Required:` false
    :sep:`|` :aspect:`Type:` boolean
@@ -60,6 +52,14 @@ required
    :sep:`|`
 
    If set, the field will become mandatory.
+
+size
+   :sep:`|` :aspect:`Required:` false
+   :sep:`|` :aspect:`Type:` integer
+   :sep:`|` :aspect:`Default:` '20'
+   :sep:`|`
+
+   Abstract value for the width of the `<input>` field.
 
 trim
    :sep:`|` :aspect:`Required:` false
