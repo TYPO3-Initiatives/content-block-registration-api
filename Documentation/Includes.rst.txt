@@ -20,5 +20,8 @@
    :class: typoscript
    :language: typoscript
 
+.. role:: aspect (emphasis)
+.. role:: sep (strong)
+
 .. default-role:: code
 .. highlight:: php

@@ -1,11 +1,11 @@
 .. include:: /Includes.rst.txt
-.. _field_type_text:
+.. _field_type_email:
 
-Text
-====
+Email
+=====
 
-The "Text" type generates a simple `<input>` field, possibly with additional features applied.
-It corresponds with the TCA `type=’input’` (default), however special variants are defined as own field types.
+The "Email" type generates an `<input>` field for entry of email addresses only.
+It corresponds with the TCA `type=’input’` (default) with special settings.
 
 
 Properties
@@ -28,14 +28,6 @@ default
    :sep:`|`
 
    Default value set if a new record is created.
-
-max
-   :sep:`|` :aspect:`Required:` false
-   :sep:`|` :aspect:`Type:` integer
-   :sep:`|` :aspect:`Default:` '700'
-   :sep:`|`
-
-   Value for the “maxlength” attribute of the `<input>` field. Javascript prevents adding more than the given number of characters.
 
 placeholder
    :sep:`|` :aspect:`Required:` false

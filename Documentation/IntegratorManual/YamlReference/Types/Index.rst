@@ -11,3 +11,4 @@ Editing interface field types
 
 	Text/Index
 	Textarea/Index
+	Email/Index
