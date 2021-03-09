@@ -97,8 +97,9 @@ class FlexFormProcessor implements DataProcessorInterface
 
         $cbData = $this->flexFormService->convertFlexFormContentToArray($cbDataFlexForm);
 
-        $maybeLocalizedUid = $processedData['data']['_LOCALIZED_UID']
-            ?? $this->record['uid'];
+        $maybeLocalizedUid = (int)(
+            $this->record['_LOCALIZED_UID'] ?? $this->record['uid']
+        );
 
         // process Images on highest level (tt_content)
         foreach ($this->configurationService->cbFileFieldsAtPath($this->cType, []) as $fieldConf) {
@@ -106,18 +107,14 @@ class FlexFormProcessor implements DataProcessorInterface
             $cbData[end($fieldConf['_path'])] = $files;
         }
 
-        $this->_processCollections($cbData);
+        $this->_processCollections($cbData, $maybeLocalizedUid);
 
         $processedData = array_merge($processedData, $cbData);
         return $processedData;
     }
 
-    protected function _processCollections(array &$cbData): void
+    protected function _processCollections(array &$cbData, int $maybeLocalizedUid): void
     {
-        $maybeLocalizedUid = (int)(
-            $this->record['_LOCALIZED_UID'] ?? $this->record['uid']
-        );
-
         $collections = $this->_collections('tt_content', $maybeLocalizedUid);
 
         ArrayUtility::mergeRecursiveWithOverrule($cbData, $collections);
@@ -154,7 +151,7 @@ class FlexFormProcessor implements DataProcessorInterface
             $collections[end($fieldConf['_path'])] = [];
         }
 
-        while ($r = $stmt->fetchAssociative()) {
+        while ($r = $stmt->fetch()) {
             // overlay workspaces
             if ($this->_isFrontend()) {
                 GeneralUtility::makeInstance(PageRepository::class)
