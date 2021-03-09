@@ -23,6 +23,7 @@ Field definitions
 
 Common field properties
 ~~~~~~~~~~~~~~~~~~~~~~~
+.. rst-class:: dl-parameters
 
 identifier
    :sep:`|` :aspect:`Required:` true

@@ -10,3 +10,4 @@ Editing interface field types
 	:glob:
 
 	Text/Index
+	Textarea/Index

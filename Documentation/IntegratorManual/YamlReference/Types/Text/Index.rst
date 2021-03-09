@@ -11,6 +11,8 @@ It corresponds with the TCA type=’input’ (default), however special variants
 Properties
 ----------
 
+.. rst-class:: dl-parameters
+
 autocomplete
    :sep:`|` :aspect:`Required:` false
    :sep:`|` :aspect:`Type:` boolean
@@ -25,7 +27,7 @@ default
    :sep:`|` :aspect:`Default:` ''
    :sep:`|`
 
-   The field's default value.
+   Default value set if a new record is created.
 
 max
    :sep:`|` :aspect:`Required:` false
@@ -33,7 +35,7 @@ max
    :sep:`|` :aspect:`Default:` '700'
    :sep:`|`
 
-   Maximum amount of characters that can be entered.
+   Value for the “maxlength” attribute of the `<input>` field. Javascript prevents adding more than the given number of characters.
 
 placeholder
    :sep:`|` :aspect:`Required:` false
@@ -41,7 +43,7 @@ placeholder
    :sep:`|` :aspect:`Default:` ''
    :sep:`|`
 
-   The field's placeholder text.
+   Placeholder text for the field.
 
 size
    :sep:`|` :aspect:`Required:` false
@@ -49,7 +51,7 @@ size
    :sep:`|` :aspect:`Default:` '20'
    :sep:`|`
 
-   The field's size.
+   Abstract value for the width of the `<input>` field.
 
 required
    :sep:`|` :aspect:`Required:` false
