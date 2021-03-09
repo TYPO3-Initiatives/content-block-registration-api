@@ -54,5 +54,4 @@ on the top right to submit your change request.
 	Introduction/Index
 	IntegratorManual/Index
 	DeveloperManual/Index
-	Examples/Index
 	Misc/Index
