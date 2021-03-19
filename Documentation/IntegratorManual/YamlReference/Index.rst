@@ -67,3 +67,11 @@ See :ref:`yaml_reference`.
 
 .. attention::
    **Not yet implemented!** See `feature request <https://github.com/TYPO3-Initiatives/content-block-registration-api/issues/22>`__
+
+
+**Table of Contents**
+
+.. toctree::
+	:hidden:
+
+	Types/Index
