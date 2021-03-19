@@ -58,9 +58,16 @@ There you can set the default TypoScript to your specific file like
 `EXT:sitepackage/Configuration/TypoScript/contentBlock.typoscript`.
 
 The second thing in the extension configuration is to enable the frame pallet
-in the appearance section.
-This might be a helpful feature if you are using `EXT:fluid_styled_content`
-or `EXT:bootstrap_package`.
+in the appearance section. This might be a helpful feature if you are using
+`EXT:fluid_styled_content` or `EXT:bootstrap_package`.
+
+.. figure:: ./content_blocks_reg_api_ext_conf.png
+   :alt: Extension configuration for EXT:contentblocks_reg_api
+   :class: with-shadow
+   :width: 700px
+
+   Extension configuration for EXT:contentblocks_reg_api in "Configure Extensions"
+   of backend module "Settings"
 
 Creation/ registration of content blocks
 ========================================
