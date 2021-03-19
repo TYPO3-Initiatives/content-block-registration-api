@@ -18,4 +18,3 @@ Miscellaneous
 	Roadmap/Index
 	Examples/Index
 	FAQ/Index
-	Changelog/Index
