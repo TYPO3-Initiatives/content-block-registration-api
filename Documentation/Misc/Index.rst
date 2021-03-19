@@ -16,5 +16,6 @@ Miscellaneous
 	:glob:
 
 	Roadmap/Index
+	Examples/Index
 	FAQ/Index
 	Changelog/Index
