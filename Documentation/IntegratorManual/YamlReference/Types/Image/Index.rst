@@ -1,8 +1,9 @@
 .. include:: /Includes.rst.txt
-.. _field_type_text:
+.. _field_type_image:
 
+=====
 Image
-====
+=====
 
 The "Image" type generates a field for image relations.
 
@@ -10,7 +11,7 @@ It corresponds with the TCA `type='inline'` with FAL relation.
 
 
 Properties
-----------
+==========
 
 .. rst-class:: dl-parameters
 
@@ -20,7 +21,8 @@ maxItems
    :sep:`|` :aspect:`Default:` ''
    :sep:`|`
 
-   Maximum number of child items. Defaults to a high value. JavaScript record validation prevents the record from being saved if the limit is not satisfied.
+   Maximum number of child items. Defaults to a high value. JavaScript record
+   validation prevents the record from being saved if the limit is not satisfied.
 
 minItems
    :sep:`|` :aspect:`Required:` false
@@ -28,7 +30,8 @@ minItems
    :sep:`|` :aspect:`Default:` ''
    :sep:`|`
 
-   Minimum number of child items. Defaults to 0. JavaScript record validation prevents the record from being saved if the limit is not satisfied.
+   Minimum number of child items. Defaults to 0. JavaScript record validation
+   prevents the record from being saved if the limit is not satisfied.
 
 required
    :sep:`|` :aspect:`Required:` false

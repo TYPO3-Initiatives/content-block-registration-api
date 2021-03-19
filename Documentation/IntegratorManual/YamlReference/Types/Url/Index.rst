@@ -1,16 +1,18 @@
 .. include:: /Includes.rst.txt
 .. _field_type_url:
 
+===
 Url
-====
+===
 
-The "Url" type generates a simple `<input>` field, which handles different kinds of links.
+The "Url" type generates a simple `<input>` field, which handles different kinds
+of links.
 
 It corresponds with the TCA `type='input'` (inputLink).
 
 
 Properties
-----------
+==========
 
 .. rst-class:: dl-parameters
 
@@ -36,19 +38,27 @@ linkPopup
    :sep:`|` :aspect:`Default:` ''
    :sep:`|`
 
-   The link browser control is typically used with `type='input'` with `renderType='inputLink'` adding a button which opens a popup to select an internal link to a page, an external link or a mail address.
+   The link browser control is typically used with `type='input'` with
+   `renderType='inputLink'` adding a button which opens a popup to select an
+   internal link to a page, an external link or a mail address.
 
    allowedExtensions (string, list)
-      Comma separated list of allowed file extensions. By default, all extensions are allowed.
+      Comma separated list of allowed file extensions. By default, all extensions
+      are allowed.
 
    blindLinkFields (string, list)
-      Comma separated list of link fields that should not be displayed. Possible values are `class`, `params`, `target` and `title`. By default, all link fields are displayed.
+      Comma separated list of link fields that should not be displayed. Possible
+      values are `class`, `params`, `target` and `title`. By default, all link
+      fields are displayed.
 
    blindLinkOptions (string, list)
-      Comma separated list of link options that should not be displayed. Possible values are `file`, `folder`, `mail`, `page`, `spec`, `telephone` and `url`. By default, all link options are displayed.
+      Comma separated list of link options that should not be displayed. Possible
+      values are `file`, `folder`, `mail`, `page`, `spec`, `telephone` and `url`.
+      By default, all link options are displayed.
 
    windowOpenParameters (string)
-      Allows to set a different size of the popup, defaults to `height=800,width=600,status=0,menubar=0,scrollbars=1`.
+      Allows to set a different size of the popup, defaults to
+      `height=800,width=600,status=0,menubar=0,scrollbars=1`.
 
    Example:
 
@@ -66,7 +76,8 @@ max
    :sep:`|` :aspect:`Default:` '700'
    :sep:`|`
 
-   Value for the “maxlength” attribute of the `<input>` field. Javascript prevents adding more than the given number of characters.
+   Value for the “maxlength” attribute of the `<input>` field. Javascript
+   prevents adding more than the given number of characters.
 
 placeholder
    :sep:`|` :aspect:`Required:` false

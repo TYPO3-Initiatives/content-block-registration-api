@@ -1,16 +1,18 @@
 .. include:: /Includes.rst.txt
 .. _field_type_tel:
 
+===
 Tel
 ===
 
 The "Tel" type generates a simple `<input>` field, which handles phone numbers.
 
-It corresponds with the TCA `type='input'` (default), however special variants are defined as own field types.
+It corresponds with the TCA `type='input'` (default), however special
+variants are defined as own field types.
 
 
 Properties
-----------
+==========
 
 .. rst-class:: dl-parameters
 

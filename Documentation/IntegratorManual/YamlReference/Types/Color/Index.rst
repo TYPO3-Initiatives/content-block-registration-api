@@ -1,6 +1,7 @@
 .. include:: /Includes.rst.txt
 .. _field_type_color:
 
+=====
 Color
 =====
 
@@ -10,7 +11,7 @@ It corresponds with the TCA `type='input'` (colorPicker).
 
 
 Properties
-----------
+==========
 
 .. rst-class:: dl-parameters
 
@@ -61,10 +62,13 @@ valuePicker
    :sep:`|` :aspect:`Default:` ''
    :sep:`|`
 
-   Renders a select box with static values next to the input field. When a value is selected in the box, the value is transferred to the field. Keys:
+   Renders a select box with static values next to the input field. When
+   a value is selected in the box, the value is transferred to the field. Keys:
 
    items (array)
-      An array with selectable items. Each item is an array with the first being the value transferred to the input field, and the second being the label in the select drop-down (LLL reference possible).
+      An array with selectable items. Each item is an array with the first being
+      the value transferred to the input field, and the second being the label
+      in the select drop-down (LLL reference possible).
 
    Example:
 

@@ -1,8 +1,12 @@
 .. include:: /Includes.rst.txt
 .. _misc:
 
+=============
 Miscellaneous
--------------
+=============
+
+.. note::
+   Changelog see extension
 
 **Table of Contents**
 

@@ -1,13 +1,15 @@
 .. include:: /Includes.rst.txt
 .. _registration_processes:
 
+=======================================================
 Processes that happen during content block registration
 =======================================================
 
 Abstraction Requirements
-------------------------
+========================
 
-To achieve the goal of reducing the complexity of content block registration the `facade pattern <https://en.wikipedia.org/wiki/Facade_pattern>`__
+To achieve the goal of reducing the complexity of content block registration
+the `facade pattern <https://en.wikipedia.org/wiki/Facade_pattern>`__
 approach needs to be used for some of TYPO3s internal APIs. These are
 
 *  Validation
@@ -18,41 +20,48 @@ approach needs to be used for some of TYPO3s internal APIs. These are
    *  Configuration/TCA/….
    *  registration of the icon in the CType field in TCA
 
-*  Registration of the plugin to display the content for frontend rendering including DataProcessors
+*  Registration of the plugin to display the content for frontend rendering
+   including DataProcessors
 *  Registration of the icon in the new content element wizard (PageTS)
 *  Configuration of the template path(s)
 *  Registration for the preview in the backend
 
 
 Processes in detail
--------------------
+===================
 
 Detecting a content block
-~~~~~~~~~~~~~~~~~~~~~~~~~
+-------------------------
 
-The detection of content blocks depends on the composer package type. The custom composer installer then retrieves all packages, which are of the above defined type.
+The detection of content blocks depends on the composer package type. The custom
+composer installer then retrieves all packages, which are of the above defined type.
 
 Validating a content block
-~~~~~~~~~~~~~~~~~~~~~~~~~
+--------------------------
 
 .. note::
    **Not yet implemented!**
-   See `validation of package files <https://github.com/TYPO3-Initiatives/content-block-registration-api/issues/7>`__ and
-   `validation of the editing interface <https://github.com/TYPO3-Initiatives/content-block-registration-api/issues/8>`_.
-   Basically a YAML schema validation (based on JSON schema) is needed here. Exchange with the Form Framework team is targeted.
+   See `validation of package files <https://github.com/TYPO3-Initiatives/content-block-registration-api/issues/7>`__
+   and `validation of the editing interface <https://github.com/TYPO3-Initiatives/content-block-registration-api/issues/8>`_.
+   Basically a YAML schema validation (based on JSON schema) is needed here.
+   Exchange with the Form Framework team is targeted.
 
-If a content block is invalid, it won’t be available in the TYPO3 backend for editors. An error message is available in the “Check for broken content blocks” tool
-in the maintenance area. Additional information to composer could be added via a composer plugin to validate the definition during installation.
+If a content block is invalid, it won’t be available in the TYPO3 backend for
+editors. An error message is available in the “Check for broken content blocks”
+tool in the maintenance area. Additional information to composer could be added
+via a composer plugin to validate the definition during installation.
 
 
 Mapping to the database
-~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------
 
-There are :ref:`several variants:data_storage_variants` of how data of a content block can be stored and retrieved from the database.
-Currently, there is no decision on the desired storage method, because performance research is still in progress.
+There are :ref:`several variants<data_storage_variants>` of how data of a content
+block can be stored and retrieved from the database. Currently, there is no
+decision on the desired storage method, because performance research is still
+in progress.
 
 Virtual generation of TCA (ext_tables.php)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+------------------------------------------
 
 Requirements:
 
@@ -63,7 +72,7 @@ Requirements:
 TCA is virtually generated from the class implementing a content block field type.
 
 Generate registration of the plugin
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------------------
 
 Requirements:
 
@@ -73,4 +82,5 @@ Requirements:
 *  Add TypoScript to render the content plugin
 *  Add PageTS for the content block
 
-   *  Define where to display (group / location) the content block in the new content element wizard
+   *  Define where to display (group / location) the content block in the new
+      content element wizard

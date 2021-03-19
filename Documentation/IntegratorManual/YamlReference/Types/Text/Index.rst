@@ -1,16 +1,19 @@
 .. include:: /Includes.rst.txt
 .. _field_type_text:
 
+====
 Text
 ====
 
-The "Text" type generates a simple `<input>` field, possibly with additional features applied.
+The "Text" type generates a simple `<input>` field, possibly with additional
+features applied.
 
-It corresponds with the TCA `type='input'` (default), however special variants are defined as own field types.
+It corresponds with the TCA `type='input'` (default), however special variants
+are defined as own field types.
 
 
 Properties
-----------
+==========
 
 .. rst-class:: dl-parameters
 
@@ -36,7 +39,8 @@ max
    :sep:`|` :aspect:`Default:` '700'
    :sep:`|`
 
-   Value for the “maxlength” attribute of the `<input>` field. Javascript prevents adding more than the given number of characters.
+   Value for the “maxlength” attribute of the `<input>` field. Javascript
+   prevents adding more than the given number of characters.
 
 placeholder
    :sep:`|` :aspect:`Required:` false

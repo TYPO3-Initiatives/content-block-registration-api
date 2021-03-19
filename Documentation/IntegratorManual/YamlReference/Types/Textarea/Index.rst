@@ -1,16 +1,18 @@
 .. include:: /Includes.rst.txt
 .. _field_type_textarea:
 
+========
 Textarea
 ========
 
-The "Textarea" s for multi line text input. A Rich Text Editor can be enabled by property.
+The "Textarea" s for multi line text input. A Rich Text Editor can be enabled
+by property.
 
 It corresponds with the TCA `type='text'` (default).
 
 
 Properties
-----------
+==========
 
 .. rst-class:: dl-parameters
 
@@ -36,9 +38,12 @@ enableRichtext
    :sep:`|` :aspect:`Default:` 'false'
    :sep:`|`
 
-   If set to true, the system renders a Rich Text Editor if that is enabled for the editor (default: yes), and if a suitable editor extension is loaded (default: rteckeditor).
+   If set to true, the system renders a Rich Text Editor if that is enabled for
+   the editor (default: yes), and if a suitable editor extension is loaded
+   (default: rteckeditor).
 
-   If either of these requirements is not met, the system falls back to a `<textarea>` field.
+   If either of these requirements is not met, the system falls back to
+   a `<textarea>` field.
 
 max
    :sep:`|` :aspect:`Required:` false
@@ -46,7 +51,9 @@ max
    :sep:`|` :aspect:`Default:` '700'
    :sep:`|`
 
-   Adds the HTML5 attribute “maxlength” to a textarea. Prevents the field from adding more than specified number of characters. This is a client side restriction, no server side length restriction is enforced.
+   Adds the HTML5 attribute “maxlength” to a textarea. Prevents the field from
+   adding more than specified number of characters. This is a client side
+   restriction, no server side length restriction is enforced.
 
    Does not apply for RTE fields.
 
@@ -65,13 +72,20 @@ richtextConfiguration
    :sep:`|` :aspect:`Default:` ''
    :sep:`|`
 
-   The value is a key in :php:`$GLOBALS['TYPO3_CONF_VARS']['RTE']['Presets']` array and specifies the YAML configuration source field used for that RTE field. It does not make sense without having property `enableRichtext` set to true.
+   The value is a key in :php:`$GLOBALS['TYPO3_CONF_VARS']['RTE']['Presets']`
+   array and specifies the YAML configuration source field used for that RTE
+   field. It does not make sense without having property `enableRichtext` set to
+   true.
 
-   Extension `rte_ckeditor` registers three presets: `default`, `minimal` and `full` and points to YAML files with configuration details.
+   Extension `rte_ckeditor` registers three presets: `default`, `minimal` and
+   `full` and points to YAML files with configuration details.
 
-   Integrators may override for instance the `default` key to point to an own YAML file which will affect all core backend RTE instances to use that configuration.
+   Integrators may override for instance the `default` key to point to an own
+   YAML file which will affect all core backend RTE instances to use that
+   configuration.
 
-   If this property is not specified for an RTE field, the system will fall back to the `default` configuration.
+   If this property is not specified for an RTE field, the system will fall back
+   to the `default` configuration.
 
 rows
    :sep:`|` :aspect:`Required:` false

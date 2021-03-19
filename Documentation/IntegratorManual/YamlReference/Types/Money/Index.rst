@@ -2,16 +2,19 @@
 .. include:: /Includes.rst.txt
 .. _field_type_money:
 
+=====
 Money
 =====
 
-The "Money" type generates a simple `<input>` field, which converts the input to a floating point with 2 decimal positions, using the “.” (period) as the decimal delimited (accepts also “,” for the same).
+The "Money" type generates a simple `<input>` field, which converts the input
+to a floating point with 2 decimal positions, using the “.” (period) as
+the decimal delimited (accepts also “,” for the same).
 
 It corresponds with the TCA `type='input'` (default) and `eval='double2'`.
 
 
 Properties
-----------
+==========
 
 .. rst-class:: dl-parameters
 

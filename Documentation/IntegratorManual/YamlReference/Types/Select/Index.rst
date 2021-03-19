@@ -1,6 +1,7 @@
 .. include:: /Includes.rst.txt
 .. _field_type_select:
 
+======
 Select
 ======
 
@@ -10,7 +11,7 @@ It corresponds with the TCA `renderType='selectSingle'`.
 
 
 Properties
-----------
+==========
 
 .. rst-class:: dl-parameters
 
@@ -28,7 +29,9 @@ items
    :sep:`|` :aspect:`Default:` ''
    :sep:`|`
 
-   Contains the elements for the selector box. Each item is an array with the first being the value transferred to the input field, and the second being the label in the select drop-down (LLL reference possible).
+   Contains the elements for the selector box. Each item is an array with
+   the first being the value transferred to the input field, and the second
+   being the label in the select drop-down (LLL reference possible).
 
    Example:
 

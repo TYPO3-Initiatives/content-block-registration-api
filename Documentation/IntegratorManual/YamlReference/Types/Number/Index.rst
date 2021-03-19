@@ -1,16 +1,18 @@
 .. include:: /Includes.rst.txt
 .. _field_type_number:
 
+======
 Number
 ======
 
-The "Number" type generates a simple `<input>` field, which allows only 0-9 characters in the field.
+The "Number" type generates a simple `<input>` field, which allows only 0-9
+characters in the field.
 
 It corresponds with the TCA `type='input'` (default) and `eval='num'`.
 
 
 Properties
-----------
+==========
 
 .. rst-class:: dl-parameters
 

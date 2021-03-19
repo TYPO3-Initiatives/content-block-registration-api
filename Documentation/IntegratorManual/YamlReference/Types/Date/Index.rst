@@ -1,6 +1,7 @@
 .. include:: /Includes.rst.txt
 .. _field_type_date:
 
+====
 Date
 ====
 
@@ -10,7 +11,7 @@ It corresponds with the TCA `type='inputDateTime'` (default) and `eval='date'`.
 
 
 Properties
-----------
+==========
 
 .. rst-class:: dl-parameters
 
@@ -28,7 +29,8 @@ displayAge
    :sep:`|` :aspect:`Default:` false
    :sep:`|`
 
-   If set, enables the display of the age (p.e. “2015-08-30 (-27 days)”) of date fields.
+   If set, enables the display of the age (p.e. “2015-08-30 (-27 days)”)
+   of date fields.
 
 range
    :sep:`|` :aspect:`Required:` false

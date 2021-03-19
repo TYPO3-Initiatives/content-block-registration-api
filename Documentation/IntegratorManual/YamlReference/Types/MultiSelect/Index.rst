@@ -1,6 +1,7 @@
 .. include:: /Includes.rst.txt
 .. _field_type_multiselect:
 
+===========
 Multiselect
 ===========
 
@@ -10,7 +11,7 @@ It corresponds with the TCA `renderType='selectMultipleSideBySide'`.
 
 
 Properties
-----------
+==========
 
 .. rst-class:: dl-parameters
 
@@ -28,7 +29,9 @@ items
    :sep:`|` :aspect:`Default:` ''
    :sep:`|`
 
-   Contains the elements for the selector box. Each item is an array with the first being the value transferred to the input field, and the second being the label in the select drop-down (LLL reference possible).
+   Contains the elements for the selector box. Each item is an array with
+   the first being the value transferred to the input field, and the second
+   being the label in the select drop-down (LLL reference possible).
 
    Example:
 
@@ -45,7 +48,8 @@ maxItems
    :sep:`|` :aspect:`Default:` ''
    :sep:`|`
 
-   Maximum number of child items. Defaults to a high value. JavaScript record validation prevents the record from being saved if the limit is not satisfied.
+   Maximum number of child items. Defaults to a high value. JavaScript record
+   validation prevents the record from being saved if the limit is not satisfied.
 
 minItems
    :sep:`|` :aspect:`Required:` false
@@ -53,7 +57,8 @@ minItems
    :sep:`|` :aspect:`Default:` ''
    :sep:`|`
 
-   Minimum number of child items. Defaults to 0. JavaScript record validation prevents the record from being saved if the limit is not satisfied.
+   Minimum number of child items. Defaults to 0. JavaScript record validation
+   prevents the record from being saved if the limit is not satisfied.
 
 required
    :sep:`|` :aspect:`Required:` false

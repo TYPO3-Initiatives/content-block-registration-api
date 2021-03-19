@@ -1,20 +1,26 @@
 .. include:: /Includes.rst.txt
 .. _data_storage_variants:
 
+========================
 Variants of data storage
 ========================
 
-This section contains a summary of pros and cons for different data storage approaches based on currently highly discussed questions.
+This section contains a summary of pros and cons for different data storage
+approaches based on currently highly discussed questions.
 
 Extending tt_content
---------------------
+====================
 
-This approach is currently the default way to create additional fields to the fields provided by tt_content.
-It allows re-using already existing fields in tt_content, but forces the creator to pay attention to field definitions in TCA for existing fields.
+This approach is currently the default way to create additional fields to
+the fields provided by tt_content. It allows re-using already existing fields in
+tt_content, but forces the creator to pay attention to field definitions in TCA
+for existing fields.
 
-In the case of Content Blocks, fields defined in the EditorInterface.yaml would be mapped to the tt_content table via a virtual ext_tables.sql file.
-Therefore, a hook to inject SQL into the database schema manager wil be needed. New fields would be automatically created on installation.
-Changes need to be made visible in the Install Tool, also an accidental deletion of fields from the Install Tool has to be avoided.
+In the case of Content Blocks, fields defined in the EditorInterface.yaml would
+be mapped to the tt_content table via a virtual ext_tables.sql file. Therefore,
+a hook to inject SQL into the database schema manager wil be needed. New fields
+would be automatically created on installation. Changes need to be made visible
+in the Install Tool, also an accidental deletion of fields from the Install Tool has to be avoided.
 
 +---------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------+
 |                           Pros                          |                                                                 Cons                                                                 |
@@ -31,10 +37,13 @@ Changes need to be made visible in the Install Tool, also an accidental deletion
 
 
 Custom table per content block
-------------------------------
+==============================
 
-In the case of Content Blocks, fields defined in the EditorInterface.yaml are mapped to a new table. That way, each content block stores its data in an own table.
-To connect the content block data with tt_content a specified tt_content fields would be used to store the connected table's name and the uid of the content block data.
+In the case of Content Blocks, fields defined in the EditorInterface.yaml are
+mapped to a new table. That way, each content block stores its data in an own
+table. To connect the content block data with tt_content a specified tt_content
+fields would be used to store the connected table's name and the uid of the
+content block data.
 
 +-----------------------------------------------------------------+---------------------------------------------------------------------+
 |                               Pros                              |                                 Cons                                |
@@ -49,7 +58,7 @@ To connect the content block data with tt_content a specified tt_content fields 
 
 
 Entity-Attribute-Value (EAV)
-----------------------------
+============================
 
 See following links for more information:
 
@@ -57,12 +66,16 @@ See following links for more information:
 *  `https://en.wikipedia.org/wiki/Entity%E2%80%93attribute%E2%80%93value_model <https://en.wikipedia.org/wiki/Entity%E2%80%93attribute%E2%80%93value_model>`__
 
 Storing Blobs
--------------
+=============
 
-In the case of Content Blocks, fields defined in the EditorInterface.yaml of a particular content block would be stored as a JSON or XML blob (nosql-like) in a specified tt_content field (e.g. content).
-The content block automatically receives a DataProcessor that retrieves the data from the blob as array of values and objects.
+In the case of Content Blocks, fields defined in the EditorInterface.yaml of
+a particular content block would be stored as a JSON or XML blob (nosql-like)
+in a specified tt_content field (e.g. content). The content block automatically
+receives a DataProcessor that retrieves the data from the blob as array of values
+and objects.
 
-The blob storage approach would mean tt_content could be looking like this (in the future):
+The blob storage approach would mean tt_content could be looking like this
+(in the future):
 
 *  uid
 *  pid
@@ -85,10 +98,11 @@ The blob storage approach would mean tt_content could be looking like this (in t
 *  history fields
 *  versioning fields
 
-This basically means there are still meta-data fields (“enable fields”) still stored as separate fields, next to the actual payload (“content”) stored as blob.
+This basically means there are still meta-data fields (“enable fields”) still
+stored as separate fields, next to the actual payload (“content”) stored as blob.
 
 XML Blob
-~~~~~~~~
+========
 
 +-------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------+
 |                                            Pros                                           |                                       Cons                                      |
@@ -113,7 +127,7 @@ XML Blob
 
 
 JSON Blob
-~~~~~~~~~
+=========
 
 +------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------+
 |                                                 Pros                                                 |                                                                        Cons                                                                       |

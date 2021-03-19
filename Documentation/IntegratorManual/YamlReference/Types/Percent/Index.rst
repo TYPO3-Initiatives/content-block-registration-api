@@ -1,16 +1,19 @@
 .. include:: /Includes.rst.txt
 .. _field_type_percent:
 
+=======
 Percent
 =======
 
-The "Percent" type generates a simple `<input>` field, which provides a slider for value picking.
+The "Percent" type generates a simple `<input>` field, which provides a slider
+for value picking.
 
-It corresponds with the TCA `type='input'` (default) with `range` and `slider` properties.
+It corresponds with the TCA `type='input'` (default) with `range` and `slider`
+properties.
 
 
 Properties
-----------
+==========
 
 .. rst-class:: dl-parameters
 
@@ -71,10 +74,11 @@ slider
    Render a value slider next to the field. Available keys:
 
    step (integer / float)
-   Set the step size the slider will use. For floating point values this can itself be a floating point value. Default: 1.
+      Set the step size the slider will use. For floating point values this can
+      itself be a floating point value. Default: 1.
 
    width (integer, pixels)
-   Define the width of the slider. Default: 100.
+      Define the width of the slider. Default: 100.
 
    Example:
 
