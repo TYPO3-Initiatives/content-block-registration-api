@@ -21,7 +21,7 @@ extension and a composer plugin.
 #. Run `composer req typo3-contentblocks/contentblocks-reg-api:dev-master`
 #. Activate the extension `contentblocks_reg_api`
 #. Add new database fields in your TYPO3 backend:
-   `Maintenance` → `Analyze Database Structure`
+   :guilabel:`Maintenance > Analyze Database Structure`
 
 Extension configuration
 -----------------------
