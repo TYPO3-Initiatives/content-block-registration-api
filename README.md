@@ -7,9 +7,9 @@
 
 ## Introduction
 
-This API provides an easy and reliable way to register content blocks (composer packages).
-See [Content Blocks Registration in TYPO3](https://github.com/TYPO3-Initiatives/structured-content/blob/master/Documentation/ContentBlocks/ContentBlockRegistration.md)
- for more information about content blocks.
+This API provides an easy and reliable way to register content blocks (composer packages). 
+Follow this README for a qick getting started overview.
+Find the full [Documentation](https://github.com/TYPO3-Initiatives/content-block-registration-api/blob/master/Documentation/Index.rst) inside this repository.
 
 ### Status
 
