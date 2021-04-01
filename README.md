@@ -8,7 +8,7 @@
 ## Introduction
 
 This API provides an easy and reliable way to register content blocks (composer packages). 
-Follow this README for a qick getting started overview.
+Follow this README for a quick getting started overview.
 Find the full [Documentation](https://github.com/TYPO3-Initiatives/content-block-registration-api/blob/master/Documentation/Index.rst) inside this repository.
 
 ### Status
