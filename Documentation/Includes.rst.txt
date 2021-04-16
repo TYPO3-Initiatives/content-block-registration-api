@@ -1,17 +1,29 @@
 .. This is 'Includes.txt'. It is included at the very top of each and
    every ReST source file in THIS project (= manual).
 
+.. This files lives at https://github.com/TYPO3-Initiatives/content-block-registration-api/Documentation/Includes.rst.txt
+
+.. More information about this file:
+   https://docs.typo3.org/typo3cms/HowToDocument/GeneralConventions/DirectoryFilenames.html#includes-txt
+
+.. ----------
+.. text roles
+.. ----------
+
+.. role:: aspect(emphasis)
+
 .. role:: html(code)
    :language: html
 
 .. role:: js(code)
    :language: javascript
 
-.. role::   yaml(code)
-   :language: yaml
-
 .. role:: php(code)
    :language: php
+
+.. role:: pn(emphasis)
+.. role:: rst(code)
+.. role:: sep(strong)
 
 .. role:: typoscript(code)
    :language: typoscript
@@ -20,8 +32,14 @@
    :class: typoscript
    :language: typoscript
 
-.. role:: aspect (emphasis)
-.. role:: sep (strong)
+.. role:: yaml(code)
+   :language: yaml
 
 .. default-role:: code
+
+.. ---------
+.. highlight
+.. ---------
+
+.. By default, code blocks are php
 .. highlight:: php
