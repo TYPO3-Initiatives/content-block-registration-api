@@ -1,7 +1,7 @@
 {
     "name": "typo3-contentblocks/contentblocks-reg-api",
     "type": "typo3-cms-extension",
-    "description": "TYPO3 Content Block registration API extension",
+    "description": "This API provides an easy and reliable way to register content blocks as standalone packages.",
     "keywords": [
         "typo3",
         "content-blocks"

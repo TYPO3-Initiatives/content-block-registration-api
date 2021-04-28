@@ -2,7 +2,7 @@
 
 $EM_CONF[$_EXTKEY] = [
     'title' => 'Structured Content Registration API',
-    'description' => '//TODO',
+    'description' => 'This API provides an easy and reliable way to register content blocks as standalone packages.',
     'category' => 'fe',
     'author' => '',
     'author_email' => '',
