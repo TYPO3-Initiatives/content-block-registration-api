@@ -21,8 +21,8 @@ hooks:
         rm .typo3/public/typo3conf/LocalConfiguration.php &> /dev/null || true
         composer install-typo3
       fi
-  - composer: install-extensions
   - composer: typo3:flush
+  - composer: typo3cms database:updateschema
   pre-start:
   - exec-host: mkdir -p .typo3/public/typo3conf/ext/
 use_dns_when_possible: true

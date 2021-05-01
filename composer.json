@@ -118,15 +118,11 @@
         "fix:cgl:php-cs": [
             "php-cs-fixer --config=.php_cs.dist fix --using-cache=no"
         ],
-        "install-extensions": [
-            "typo3 extension:activate -n contentblocks_reg_api",
-            "typo3cms database:updateschema"
-        ],
         "install-typo3": [
             "typo3cms install:setup --admin-user-name=admin --admin-password=adminadmin --site-setup-type=site --site-name='Content Block API' --no-interaction",
             "typo3cms install:generatepackagestates"
         ],
-	"set-version": [
+        "set-version": [
             "tailor set-version"
         ],
         "test": [
@@ -155,8 +151,14 @@
         "tests-for:ci": [
             "@test"
         ],
+        "typo3": [
+            "typo3 --ansi"
+        ],
         "typo3:flush": [
-            "typo3cms cache:flush"
+            "@typo3cms cache:flush"
+        ],
+        "typo3cms": [
+            "typo3cms --ansi"
         ]
     },
     "support": {
