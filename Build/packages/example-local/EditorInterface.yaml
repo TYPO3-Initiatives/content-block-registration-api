@@ -105,7 +105,7 @@ fields:
       size: 20
       range:
         lower: '01-01-1970'
-        upper: '31-12-2020'
+        upper: '31-12-2030'
       required: false
   - identifier: datetime
     type: DateTime
@@ -115,7 +115,7 @@ fields:
       size: 20
       range:
         lower: '00:01 01-01-1970'
-        upper: '29:59 31-12-2020'
+        upper: '29:59 31-12-2030'
       required: false
   - identifier: time
     type: Time
