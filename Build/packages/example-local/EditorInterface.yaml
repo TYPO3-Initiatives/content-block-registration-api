@@ -151,6 +151,7 @@ fields:
         'one': 'The first'
         'two': 'The second'
         'three': 'The third'
+      default: 'two'
 
   - identifier: radioboxes
     type: Radiobox
