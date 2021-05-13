@@ -168,6 +168,8 @@ fields:
       fields:
         - identifier: text
           type: Text
+          maxItems: 2
+          minItems: 1
         - identifier: collection
           type: Collection
           properties:
