@@ -68,7 +68,7 @@ fields:
     type: Url
     properties:
       autocomplete: true
-      default: 'Default value'
+      default: 'https:typo3.org'
       linkPopup:
         allowedExtensions: 'pdf'
         blindLinkFields: 'target,title'
