@@ -26,7 +26,7 @@ fields:
     type: Email
     properties:
       autocomplete: true
-      default: 'Default value'
+      default: 'developer@localhost'
       placeholder: 'Placeholder text'
       size: 20
       required: true
