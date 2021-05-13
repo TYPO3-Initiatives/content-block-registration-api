@@ -24,7 +24,9 @@ autocomplete
    :sep:`|` :aspect:`Default:` 'false'
    :sep:`|`
 
-   If set, the autocomplete feature is enabled for this field.
+   Controls the autocomplete attribute of a given input field. If set to true
+   (default false), adds attribute autocomplete="on" to the input field allowing
+   browser auto filling the field.
 
 default
    :sep:`|` :aspect:`Required:` false
