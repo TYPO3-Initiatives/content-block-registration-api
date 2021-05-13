@@ -120,6 +120,7 @@ fields:
   - identifier: time
     type: Time
     properties:
+      default: '@now'
       displayAge: true
       size: 20
       range:
