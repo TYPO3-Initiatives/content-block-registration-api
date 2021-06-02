@@ -110,12 +110,23 @@ class WizardController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
             $tempField['identifier'] = $field;
             $fieldIdentifierList[] =  $field;
 
-            if ($value['type'] === 'Image') {
+            if ($value['type'] === 'Image' && intval($value["properties"]['maxItems']) == 1 ) {
+                $fieldsForTemplate .= '
+    <f:image image="{' . $field . '}" />';
+            }
+            elseif($value['type'] === 'Image' && intval($value["properties"]['maxItems']) != 1 ) {
                 $fieldsForTemplate .= '
     <f:for each="{' . $field . '}" as="i">
         <f:image image="{i}" />
     </f:for>';
-            } else {
+            }
+            elseif ($value['type'] === 'Textarea' && $value["properties"]['enableRichtext'] ) {
+                $fieldsForTemplate .= '
+      <f:format.html parseFuncTSPath="lib.parseFunc_RTE">{' . $field . '}</f:format.html>';
+            }
+            else {
+                debug($value);
+                exit;
                 $fieldsForTemplate .= '
     <p>{' . $field . '}</p>';
             }
@@ -188,7 +199,7 @@ class WizardController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
     <f:asset.css identifier="content-block-' . $contentBlock['packageName'] . '-be" href="CB:' . $contentBlock['packageName'] . '/dist/EditorPreview.css"/>
     <f:asset.css identifier="content-block-' . $contentBlock['packageName'] . '" href="CB:' . $contentBlock['packageName'] . '/dist/Frontend.css"/>
     <f:asset.script identifier="content-block-' . $contentBlock['packageName'] . '" src="CB:' . $contentBlock['packageName'] . '/dist/Frontend.js"/>
-    
+
     <div class="' . $contentBlock['packageName'] . '">
         ' . $fieldsForTemplate . '
     </div>
