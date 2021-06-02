@@ -1,7 +1,7 @@
 {
     "name": "typo3-contentblocks/contentblocks-reg-api",
     "type": "typo3-cms-extension",
-    "description": "TYPO3 Content Block registration API extension",
+    "description": "This API provides an easy and reliable way to register content blocks as standalone packages.",
     "keywords": [
         "typo3",
         "content-blocks"
@@ -11,7 +11,7 @@
     ],
     "authors": [
         {
-            "name": "Structured Content Initiative"
+            "name": "TYPO3 Structured Content Initiative"
         }
     ],
     "require": {
@@ -64,6 +64,7 @@
         "typo3/cms-tstemplate": "^10.4 || ^11.0.0 || dev-master",
         "typo3/cms-viewpage": "^10.4 || ^11.0.0 || dev-master",
         "typo3/cms-workspaces": "^10.4 || ^11.0.0 || dev-master",
+        "typo3/tailor": "^1.3",
         "typo3/testing-framework": "^6.4"
     },
     "config": {
@@ -117,13 +118,12 @@
         "fix:cgl:php-cs": [
             "php-cs-fixer --config=.php_cs.dist fix --using-cache=no"
         ],
-        "install-extensions": [
-            "typo3 extension:activate -n contentblocks_reg_api",
-            "typo3cms database:updateschema"
-        ],
         "install-typo3": [
             "typo3cms install:setup --admin-user-name=admin --admin-password=adminadmin --site-setup-type=site --site-name='Content Block API' --no-interaction",
             "typo3cms install:generatepackagestates"
+        ],
+        "set-version": [
+            "tailor set-version"
         ],
         "test": [
             "@test:cgl",
@@ -151,8 +151,14 @@
         "tests-for:ci": [
             "@test"
         ],
+        "typo3": [
+            "typo3 --ansi"
+        ],
         "typo3:flush": [
-            "typo3cms cache:flush"
+            "@typo3cms cache:flush"
+        ],
+        "typo3cms": [
+            "typo3cms --ansi"
         ]
     },
     "support": {

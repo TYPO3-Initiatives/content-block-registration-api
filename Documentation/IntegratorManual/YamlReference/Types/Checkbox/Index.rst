@@ -5,7 +5,7 @@
 Checkbox
 ========
 
-The "Checkbox" type generates a number of checkbox fields.
+The "Checkbox" type generates a number of checkbox fields. Selection of multiple items is enabled by default.
 
 It corresponds with the TCA `type='check'` (default).
 

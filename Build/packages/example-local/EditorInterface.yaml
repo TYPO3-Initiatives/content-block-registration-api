@@ -26,7 +26,7 @@ fields:
     type: Email
     properties:
       autocomplete: true
-      default: 'Default value'
+      default: 'developer@localhost'
       placeholder: 'Placeholder text'
       size: 20
       required: true
@@ -68,7 +68,7 @@ fields:
     type: Url
     properties:
       autocomplete: true
-      default: 'Default value'
+      default: 'https:typo3.org'
       linkPopup:
         allowedExtensions: 'pdf'
         blindLinkFields: 'target,title'
@@ -90,7 +90,7 @@ fields:
     properties:
       autocomplete: true
       default: '#fff'
-      size: 20
+      size: 5
       required: false
       valuePicker:
         items:
@@ -105,7 +105,7 @@ fields:
       size: 20
       range:
         lower: '01-01-1970'
-        upper: '31-12-2020'
+        upper: '31-12-2030'
       required: false
   - identifier: datetime
     type: DateTime
@@ -115,11 +115,12 @@ fields:
       size: 20
       range:
         lower: '00:01 01-01-1970'
-        upper: '29:59 31-12-2020'
+        upper: '29:59 31-12-2030'
       required: false
   - identifier: time
     type: Time
     properties:
+      default: '@now'
       displayAge: true
       size: 20
       range:
@@ -150,6 +151,7 @@ fields:
         'one': 'The first'
         'two': 'The second'
         'three': 'The third'
+      default: 'two'
 
   - identifier: radioboxes
     type: Radiobox
@@ -166,6 +168,8 @@ fields:
       fields:
         - identifier: text
           type: Text
+          maxItems: 2
+          minItems: 1
         - identifier: collection
           type: Collection
           properties:
