@@ -461,6 +461,8 @@ class FlexFormGenerator
             . '.' . $contentBlock['package'] . '.' . $field['_identifier'] . '.description</description>
                 <config>
                     <type>' . $type . '</type>
+                    <minitems>' . ($field['properties']['minItems'] ?? '1') . '</minitems>
+                    <maxitems>' . ($field['properties']['maxItems'] ?? '1') . '</maxitems>
                     <default>' . $field['properties']['default'] . '</default>
                     ' . $items . '
                     ' . $additionlConfig . '
