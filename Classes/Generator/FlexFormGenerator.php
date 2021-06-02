@@ -451,6 +451,9 @@ class FlexFormGenerator
         if ($field['properties']['maxItems']) {
             $additionlConfig .= '<maxitems>' . $field['properties']['maxItems'] . '</maxitems>';
         }
+        if ($field['properties']['minItems']) {
+            $additionlConfig .= '<minitems>' . $field['properties']['minItems'] . '</minitems>';
+        }
 
         return '
         <' . $field['_identifier'] . '>
@@ -461,8 +464,7 @@ class FlexFormGenerator
             . '.' . $contentBlock['package'] . '.' . $field['_identifier'] . '.description</description>
                 <config>
                     <type>' . $type . '</type>
-                    <minitems>' . ($field['properties']['minItems'] ?? '1') . '</minitems>
-                    <maxitems>' . ($field['properties']['maxItems'] ?? '1') . '</maxitems>
+                    ' . ($field['properties']['required'] === true ? '<eval>required</eval>' : '') . '
                     <default>' . $field['properties']['default'] . '</default>
                     ' . $items . '
                     ' . $additionlConfig . '

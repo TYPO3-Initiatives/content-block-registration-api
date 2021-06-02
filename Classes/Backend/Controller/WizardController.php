@@ -125,8 +125,6 @@ class WizardController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
       <f:format.html parseFuncTSPath="lib.parseFunc_RTE">{' . $field . '}</f:format.html>';
             }
             else {
-                debug($value);
-                exit;
                 $fieldsForTemplate .= '
     <p>{' . $field . '}</p>';
             }
