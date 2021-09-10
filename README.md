@@ -42,7 +42,7 @@ It includes example Content Blocks in a local composer repository that are insta
 The API required to use content blocks consists of 2 composer packages: an API extension and a composer plugin.
 
 #### Installation steps
-1. `composer req typo3-contentblocks/contentblocks-reg-api:dev-master`
+1. `composer req typo3-contentblocks/contentblocks-reg-api`
 1. Activate the extension `contentblocks_reg_api`
 1. Add new database fields: (Backend) `Maintenance` › `Analyze Database Structure`
 
