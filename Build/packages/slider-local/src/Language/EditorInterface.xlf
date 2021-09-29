@@ -6,6 +6,12 @@
 		  product-name="slider">
 		<header/>
 		<body>
+			<trans-unit id="typo3-contentblocks.slider-local.title" xml:space="preserve">
+				<source>Slider</source>
+			</trans-unit>
+			<trans-unit id="typo3-contentblocks.slider-local.description" xml:space="preserve">
+				<source>A simple slider example with a collection.</source>
+			</trans-unit>
 			<trans-unit id="typo3-contentblocks.slider-local.slides.title" xml:space="preserve">
 				<source>Slider</source>
 			</trans-unit>
