@@ -206,8 +206,8 @@ class FlexFormGenerator
                 <config>
 
                     <type>inline</type>
-                    <minitems>' . ($field['properties']['minItems'] ?? '1') . '</minitems>
-                    <maxitems>' . ($field['properties']['maxItems'] ?? '1') . '</maxitems>
+                    <minitems>' . ($field['properties']['minItems'] ?? '0') . '</minitems>
+                    <maxitems>' . ($field['properties']['maxItems'] ?? '9999') . '</maxitems>
                     <eval>' . ($field['properties']['required'] === true ? 'required' : '') . '</eval>
                     <foreign_table>sys_file_reference</foreign_table>
                     <foreign_table_field>tablenames</foreign_table_field>
