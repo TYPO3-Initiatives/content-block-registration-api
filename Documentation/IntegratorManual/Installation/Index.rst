@@ -18,7 +18,7 @@ Installation steps
 The API required to use content blocks consists of 2 composer packages: an API
 extension and a composer plugin.
 
-#. Run `composer req typo3-contentblocks/contentblocks-reg-api:dev-master`
+#. Run `composer req typo3-contentblocks/contentblocks-reg-api`
 #. Activate the extension `contentblocks_reg_api`
 #. Add new database fields in your TYPO3 backend:
    :guilabel:`Maintenance > Analyze Database Structure`
