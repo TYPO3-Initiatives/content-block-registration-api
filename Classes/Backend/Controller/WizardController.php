@@ -110,21 +110,18 @@ class WizardController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
             $tempField['identifier'] = $field;
             $fieldIdentifierList[] =  $field;
 
-            if ($value['type'] === 'Image' && intval($value["properties"]['maxItems']) == 1 ) {
+            if ($value['type'] === 'Image' && intval($value['properties']['maxItems']) == 1) {
                 $fieldsForTemplate .= '
     <f:image image="{' . $field . '}" />';
-            }
-            elseif($value['type'] === 'Image' && intval($value["properties"]['maxItems']) != 1 ) {
+            } elseif ($value['type'] === 'Image' && intval($value['properties']['maxItems']) != 1) {
                 $fieldsForTemplate .= '
     <f:for each="{' . $field . '}" as="i">
         <f:image image="{i}" />
     </f:for>';
-            }
-            elseif ($value['type'] === 'Textarea' && $value["properties"]['enableRichtext'] ) {
+            } elseif ($value['type'] === 'Textarea' && $value['properties']['enableRichtext']) {
                 $fieldsForTemplate .= '
       <f:format.html parseFuncTSPath="lib.parseFunc_RTE">{' . $field . '}</f:format.html>';
-            }
-            else {
+            } else {
                 $fieldsForTemplate .= '
     <p>{' . $field . '}</p>';
             }
