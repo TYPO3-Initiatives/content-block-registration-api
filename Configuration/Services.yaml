@@ -33,6 +33,10 @@ services:
     autowire: true
     autoconfigure: false
     public: true
+  Typo3Contentblocks\ContentblocksRegApi\Service\YamlToSqlTranslationService:
+    autowire: true
+    autoconfigure: false
+    public: true
   Typo3Contentblocks\ContentblocksRegApi\Validator\ContentBlockValidator:
     autowire: true
     autoconfigure: false
