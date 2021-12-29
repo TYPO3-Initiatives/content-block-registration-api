@@ -70,7 +70,12 @@
     "config": {
         "bin-dir": ".typo3/bin",
         "sort-packages": true,
-        "vendor-dir": ".typo3/vendor"
+        "vendor-dir": ".typo3/vendor",
+        "allow-plugins": {
+            "typo3/cms-composer-installers": true,
+            "typo3/class-alias-loader": true,
+            "typo3-contentblocks/composer-plugin": true
+        }
     },
     "extra": {
         "typo3/cms": {
