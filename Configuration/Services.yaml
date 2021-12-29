@@ -37,3 +37,12 @@ services:
     autowire: true
     autoconfigure: false
     public: true
+  Typo3Contentblocks\ContentblocksRegApi\Generator\SqlGenerator:
+    autowire: true
+    autoconfigure: false
+    public: true
+    tags:
+      - name: event.listener
+        identifier: 'cb-sql-generator'
+        event: TYPO3\CMS\Core\Database\Event\AlterTableDefinitionStatementsEvent
+        method: addDatabaseTablesDefinition
