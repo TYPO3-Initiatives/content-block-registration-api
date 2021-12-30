@@ -8,8 +8,6 @@ declare(strict_types=1);
  * For the full copyright and license information, please read the
  * LICENSE file that was distributed with this source code.
  *
- * Class SqlGenerator
- * This Class adds the contentblock configuration to the compare database statement in the InstallTool.
  *
  */
 
@@ -22,6 +20,11 @@ use Typo3Contentblocks\ContentblocksRegApi\Service\ConfigurationService;
 use Typo3Contentblocks\ContentblocksRegApi\Validator\ContentBlockValidator;
 use Typo3Contentblocks\ContentblocksRegApi\Service\YamlToSqlTranslationService;
 
+/**
+ * Class SqlGenerator
+ * This Class adds the contentblock configuration to the compare database statement in the InstallTool.
+ *
+ */
 class SqlGenerator implements SingletonInterface
 {
     /**
@@ -30,20 +33,14 @@ class SqlGenerator implements SingletonInterface
     protected $configurationService;
 
     /**
-     * @var ContentBlockValidator
-     */
-    protected $contentBlockValidator;
-
-    /**
      * @var YamlToSqlTranslationService
      */
     protected $yamlTranslator;
 
-    public function __construct()
+    public function __construct(ConfigurationService $configurationService, YamlToSqlTranslationService $yamlTranslator)
     {
-        $this->contentBlockValidator = GeneralUtility::makeInstance(ContentBlockValidator::class);
-        $this->configurationService = GeneralUtility::makeInstance(ConfigurationService::class, $this->contentBlockValidator);
-        $this->yamlTranslator = GeneralUtility::makeInstance(YamlToSqlTranslationService::class);
+        $this->configurationService = $configurationService;
+        $this->yamlTranslator = $yamlTranslator;
     }
 
     /**
