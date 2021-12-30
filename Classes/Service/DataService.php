@@ -61,4 +61,13 @@ class DataService implements SingletonInterface
     {
         return explode('|', $uniqueCombinedIdentifier);
     }
+
+    /**
+     * Manage to have SQL compatible column names, prefixed with "cb_".
+     * Result: cb_content_blockidentifier_column_path_column_name
+     */
+    public function uniqueColumnName (string $cType, string $combinedIdentifier): string
+    {
+        return 'cb_' . str_replace('-', '_', $cType) . '_' .  str_replace('-', '_', str_replace('.', '_', $combinedIdentifier) );
+    }
 }

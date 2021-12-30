@@ -17,6 +17,7 @@ use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Database\Event\AlterTableDefinitionStatementsEvent;
 use Typo3Contentblocks\ContentblocksRegApi\Service\ConfigurationService;
+use Typo3Contentblocks\ContentblocksRegApi\Service\DataService;
 use Typo3Contentblocks\ContentblocksRegApi\Validator\ContentBlockValidator;
 use Typo3Contentblocks\ContentblocksRegApi\Service\YamlToSqlTranslationService;
 
@@ -37,10 +38,16 @@ class SqlGenerator implements SingletonInterface
      */
     protected $yamlTranslator;
 
-    public function __construct(ConfigurationService $configurationService, YamlToSqlTranslationService $yamlTranslator)
+    /**
+     * @var DataService
+     */
+    protected $dataService;
+
+    public function __construct(ConfigurationService $configurationService, YamlToSqlTranslationService $yamlTranslator, DataService $dataService)
     {
         $this->configurationService = $configurationService;
         $this->yamlTranslator = $yamlTranslator;
+        $this->dataService = $dataService;
     }
 
     /**
@@ -65,11 +72,12 @@ class SqlGenerator implements SingletonInterface
                     $sqlCollectionStatement = $sqlCollectionStatementReset;
 
                     foreach ($fieldsList as $field) {
+                        $tempUniqueColumnName = $this->dataService->uniqueColumnName($contentBlock['key'], $field['_identifier']);
 
                         // Add fields to tt_content (first level)
                         if ( isset($field['_identifier']) && isset($field['type']) && count($field['_path']) == 1 ) {
                             $fieldSql = $this->yamlTranslator
-                                ->getSQL($field['_identifier'], $contentBlock['key'], $field['type']);
+                                ->getSQL($tempUniqueColumnName, $field['type']);
                             // check if field is supported by the yamlTranslator
                             if ( strlen('' . $fieldSql) > 3 ) {
                                 $sqlStatement .= (($sqlStatement !== $sqlStatementReset ) ? ',' : ''  ) . ' ' . $fieldSql;
@@ -80,7 +88,7 @@ class SqlGenerator implements SingletonInterface
                         // Add collection fields
                         else if ( isset($field['_identifier']) && isset($field['type']) && count($field['_path']) > 1 ) {
                             $fieldSql = $this->yamlTranslator
-                                ->getSQL( str_replace('.', '_', $field['_identifier'])  , $contentBlock['key'], $field['type']);
+                                ->getSQL( $tempUniqueColumnName, $field['type']);
                             // check if field is supported by the yamlTranslator
                             if ( strlen('' . $fieldSql) > 3 ) {
                                 $sqlCollectionStatement .= (($sqlCollectionStatement !== $sqlCollectionStatementReset ) ? ',' : ''  ) . ' ' . $fieldSql;

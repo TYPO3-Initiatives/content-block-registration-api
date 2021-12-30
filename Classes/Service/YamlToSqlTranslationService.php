@@ -33,67 +33,66 @@ class YamlToSqlTranslationService implements SingletonInterface
      * TODO: Translation from type to SQL should be managed in a yaml configuration.
      * This this yaml configuration should be overwritable by integrators.
      *
-     * @param string $fieldIdentifier
-     * @param string $cbIdentifier
+     * @param string $uniqueColumnName
      * @return string SQL statement
      *
      */
-    public function getSQL(string $fieldIdentifier, string $cbIdentifier, string $type): string
+    public function getSQL(string $uniqueColumnName, string $type): string
     {
-        if ( strlen('' . $fieldIdentifier) < 1 || strlen('' . $type) < 1 || strlen('' . $cbIdentifier) < 1 ) {
+        if ( strlen('' . $uniqueColumnName) < 1 || strlen('' . $type) < 1 ) {
             return ""; # TODO: Throw exception not enough information to get SQL definition to create a column.
         }
 
         // Unique name for the column
-        $identifier = "`cb_" .$cbIdentifier . "_" . $fieldIdentifier . "`";
+        $uniqueColumnName = "`$uniqueColumnName`";
 
         switch ($type) {
             case 'Checkbox':
-               return "$identifier VARCHAR(255) DEFAULT '' NOT NULL";
+               return "$uniqueColumnName VARCHAR(255) DEFAULT '' NOT NULL";
             case 'Collection':
-               return "$identifier int(11) DEFAULT '0' NOT NULL";
+               return "$uniqueColumnName int(11) DEFAULT '0' NOT NULL";
             case 'Color':
-               return "$identifier VARCHAR(255) DEFAULT '' NOT NULL";
+               return "$uniqueColumnName VARCHAR(255) DEFAULT '' NOT NULL";
             case 'Date':
-               return "$identifier date";
+               return "$uniqueColumnName datetime DEFAULT CURRENT_TIMESTAMP";
             case 'Datetime':
-               return "$identifier datetime";
+               return "$uniqueColumnName datetime DEFAULT CURRENT_TIMESTAMP";
             case 'Email':
-                return "$identifier VARCHAR(255) DEFAULT '' NOT NULL";
+                return "$uniqueColumnName VARCHAR(255) DEFAULT '' NOT NULL";
             case 'Icon': // TODO: is the same as Image, support for Icon should be removed forever?
-                return "$identifier int(11) DEFAULT '0' NOT NULL";
+                return "$uniqueColumnName int(11) DEFAULT '0' NOT NULL";
             case 'Image':
-                return "$identifier int(11) DEFAULT '0' NOT NULL";
+                return "$uniqueColumnName int(11) DEFAULT '0' NOT NULL";
             case 'Integer':
-                return "$identifier int(11) DEFAULT '0' NOT NULL";
+                return "$uniqueColumnName int(11) DEFAULT '0' NOT NULL";
             case 'Link': // FIXME: type Link is missing in the documentation OR is it called Url?
-                return "$identifier VARCHAR(255) DEFAULT '' NOT NULL";
+                return "$uniqueColumnName VARCHAR(255) DEFAULT '' NOT NULL";
             case 'Money':
-                return "$identifier double(11,4) DEFAULT 0.0 NOT NULL";
+                return "$uniqueColumnName double(11,4) DEFAULT 0.0 NOT NULL";
             case 'Multiselect':
-                return "$identifier VARCHAR(255) DEFAULT '' NOT NULL";
+                return "$uniqueColumnName VARCHAR(255) DEFAULT '' NOT NULL";
             case 'Number':
-                return "$identifier int(11) DEFAULT '0' NOT NULL";
+                return "$uniqueColumnName int(11) DEFAULT '0' NOT NULL";
             case 'Percent':
-                return "$identifier int(11) DEFAULT '0' NOT NULL";
+                return "$uniqueColumnName int(11) DEFAULT '0' NOT NULL";
             case 'Radiobox':
-                return "$identifier VARCHAR(255) DEFAULT '' NOT NULL";
+                return "$uniqueColumnName VARCHAR(255) DEFAULT '' NOT NULL";
             case 'Select':
-                return "$identifier VARCHAR(255) DEFAULT '' NOT NULL";
+                return "$uniqueColumnName VARCHAR(255) DEFAULT '' NOT NULL";
             case 'Tel':
-                return "$identifier VARCHAR(255) DEFAULT '' NOT NULL";
+                return "$uniqueColumnName VARCHAR(255) DEFAULT '' NOT NULL";
             case 'Text':
-               return "$identifier VARCHAR(255) DEFAULT '' NOT NULL";
+               return "$uniqueColumnName VARCHAR(255) DEFAULT '' NOT NULL";
             case 'Textarea':
-               return "$identifier text";
+               return "$uniqueColumnName text";
             case 'TextMultiline':
-               return "$identifier text";
+               return "$uniqueColumnName text";
             case 'Time':
-                return "$identifier datetime";
+                return "$uniqueColumnName datetime DEFAULT CURRENT_TIMESTAMP";
             case 'Toggle':
-                return "$identifier varchar(255) DEFAULT '' NOT NULL";
+                return "$uniqueColumnName varchar(255) DEFAULT '' NOT NULL";
             case 'Url': // FIXME: is this the same as type Link?
-                return "$identifier varchar(255) DEFAULT '' NOT NULL";
+                return "$uniqueColumnName varchar(255) DEFAULT '' NOT NULL";
             default:
                 return ""; // TODO: throw exception not supported field type (column type).
         }
