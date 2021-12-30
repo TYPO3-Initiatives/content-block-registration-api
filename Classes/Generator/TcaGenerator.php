@@ -13,6 +13,8 @@ namespace Typo3Contentblocks\ContentblocksRegApi\Generator;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use Typo3Contentblocks\ContentblocksRegApi\Service\ConfigurationService;
+use Typo3Contentblocks\ContentblocksRegApi\Service\DataService;
+use Typo3Contentblocks\ContentblocksRegApi\Service\TcaFieldService;
 
 class TcaGenerator
 {
@@ -21,9 +23,22 @@ class TcaGenerator
      */
     protected $configurationService;
 
-    public function __construct(ConfigurationService $configurationService)
+    /**
+     * @var TcaFieldService
+     */
+    protected $tcaFieldService;
+
+    /**
+     * @var DataService
+     */
+    protected $dataService;
+
+
+    public function __construct(ConfigurationService $configurationService, TcaFieldService $tcaFieldService, DataService $dataService)
     {
         $this->configurationService = $configurationService;
+        $this->tcaFieldService = $tcaFieldService;
+        $this->dataService = $dataService;
     }
 
     /**
@@ -104,6 +119,42 @@ class TcaGenerator
             );
 
             /***************
+             * Add columns to table TCA of tt_content and tx_contentblocks_reg_api_collection
+             */
+            $ttContentColumns = [];
+            $collectionColumns = [];
+            $ttContentShowitemFields = '';
+            if ( is_array($contentBlock['fields'])
+                && count($contentBlock['fields']) > 0
+            ) {
+                $fieldsList = $contentBlock['fields'];
+                foreach ($fieldsList as $field) {
+                    $tempUniqueColumnName = $this->dataService->uniqueColumnName($contentBlock['key'], $field['_identifier']);
+
+                    // Add fields to tt_content (first level)
+                    if ( isset($field['_identifier']) && isset($field['type']) && count($field['_path']) == 1 ) {
+                        $ttContentShowitemFields .= "\n" . $tempUniqueColumnName . ',';
+                        $ttContentColumns[$tempUniqueColumnName] = $this->tcaFieldService->getMatchedTcaConfig($contentBlock, $field);
+                        // TODO: else throw usefull exeption if not supported
+                    }
+
+                    // Add collection fields
+                    else if ( isset($field['_identifier']) && isset($field['type']) && count($field['_path']) > 1 ) {
+                        $collectionColumns[$tempUniqueColumnName] = $this->tcaFieldService->getMatchedTcaConfig($contentBlock, $field);
+                        // TODO: else throw usefull exeption if not supported
+                    }
+                }
+            }
+            $GLOBALS['TCA']['tt_content']['columns'] = array_replace_recursive(
+                $GLOBALS['TCA']['tt_content']['columns'],
+                $ttContentColumns
+            );
+            $GLOBALS['TCA']['tx_contentblocks_reg_api_collection']['columns'] = array_replace_recursive(
+                $GLOBALS['TCA']['tx_contentblocks_reg_api_collection']['columns'],
+                $collectionColumns
+            );
+
+            /***************
              * Configure element type
              */
             // Feature: enable pallette frame via extConf
@@ -115,7 +166,7 @@ class TcaGenerator
                     'showitem' => '
                         --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:general,
                             --palette--;;general,
-                            header,
+                            header,' . $ttContentShowitemFields . '
                             content_block,
                         --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.appearance,' . (($enableLayoutOptions) ? '
                             --palette--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:palette.frames;frames,' : '') . '
