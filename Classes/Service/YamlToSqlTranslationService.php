@@ -8,8 +8,6 @@ declare(strict_types=1);
  * For the full copyright and license information, please read the
  * LICENSE file that was distributed with this source code.
  *
- * Class YamlToSqlTranslationService
- * Manage to get the right SQL definition for each contentblock defined field in the yaml file.
  *
  */
 
@@ -17,17 +15,20 @@ namespace Typo3Contentblocks\ContentblocksRegApi\Service;
 
 use TYPO3\CMS\Core\SingletonInterface;
 
+/**
+ * Class YamlToSqlTranslationService
+ * Manage to get the right SQL definition for each contentblock defined field in the yaml file.
+ *
+ */
 class YamlToSqlTranslationService implements SingletonInterface
 {
-    /** Method getSQL
-     *  Main function to get SQL statement due to the given $field.
-     *  $field needs to have a identifier and a supported type.
-     *  That means, this both keys are required:
-     *  $field['identifier']
-     *  $field['type']
+    /**
+     * Method getSQL
+     * Main function to get SQL statement due to the given $field.
+     * $field needs to have a identifier and a supported type.
      *
-     *  To generate a unique field name, we also need the contentblock identifier $cbIdentifier.
-     *  The result of the field name is going to be 'bc_contentblockidentifier_fieldidentifier'.
+     * To generate a unique field name, we also need the contentblock identifier $cbIdentifier.
+     * The result of the field name is going to be 'bc_contentblockidentifier_fieldidentifier'.
      *
      * TODO: Translation from type to SQL should be managed in a yaml configuration.
      * This this yaml configuration should be overwritable by integrators.
@@ -35,6 +36,7 @@ class YamlToSqlTranslationService implements SingletonInterface
      * @param string $fieldIdentifier
      * @param string $cbIdentifier
      * @return string SQL statement
+     *
      */
     public function getSQL(string $fieldIdentifier, string $cbIdentifier, string $type): string
     {
