@@ -11,7 +11,9 @@ declare(strict_types=1);
 
 namespace Typo3Contentblocks\ContentblocksRegApi\Validator;
 
-class ContentBlockValidator
+use TYPO3\CMS\Core\SingletonInterface;
+
+class ContentBlockValidator implements SingletonInterface
 {
     /**
      * Throws on validation error
