@@ -438,7 +438,7 @@ class FlexFormGenerator
         if ($field['type'] === 'Select') {
             $additionlConfig = '<renderType>selectSingle</renderType>';
         }
-        if ($field['type'] === 'MultiSelect') {
+        if ($field['type'] === 'Multiselect') {
             $additionlConfig = '<renderType>selectMultipleSideBySide</renderType>';
         }
         if ($field['type'] === 'Toggle') {
@@ -557,7 +557,7 @@ class FlexFormGenerator
                     return $this->createImageField($field, $contentBlock);
                 case 'Select':
                 case 'Checkbox':
-                case 'MultiSelect':
+                case 'Multiselect':
                 case 'Radiobox':
                 case 'Toggle':
                     return $this->createSelections($field, $contentBlock);

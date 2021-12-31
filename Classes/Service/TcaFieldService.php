@@ -64,7 +64,7 @@ class TcaFieldService implements SingletonInterface
                 return $this->getInputFieldTca($contentBlock, $field);
             case 'Money':
                 return $this->getInputFieldTca($contentBlock, $field);
-            case 'MultiSelect':
+            case 'Multiselect':
                 return $this->getSelectFieldTca($contentBlock, $field);
             case 'Number':
                 return $this->getInputFieldTca($contentBlock, $field);
@@ -419,10 +419,10 @@ class TcaFieldService implements SingletonInterface
             'renderType' => 'selectSingle',
         ];
 
-        if ($field['type'] == 'MultiSelect'){
+        if ($field['type'] == 'Multiselect'){
             $config['renderType'] = 'selectMultipleSideBySide';
 
-            if (isset($field['properties']['size'])){ // Size only supportet by MultiSelect
+            if (isset($field['properties']['size'])){ // Size only supportet by Multiselect
                 $config['size'] = $field['properties']['size'];
             }
         }
