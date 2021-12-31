@@ -55,7 +55,7 @@ class YamlToSqlTranslationService implements SingletonInterface
                return "$uniqueColumnName VARCHAR(255) DEFAULT '' NOT NULL";
             case 'Date':
                return "$uniqueColumnName datetime DEFAULT CURRENT_TIMESTAMP";
-            case 'Datetime':
+            case 'DateTime':
                return "$uniqueColumnName datetime DEFAULT CURRENT_TIMESTAMP";
             case 'Email':
                 return "$uniqueColumnName VARCHAR(255) DEFAULT '' NOT NULL";
