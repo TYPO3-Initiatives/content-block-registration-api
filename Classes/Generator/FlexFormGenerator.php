@@ -168,6 +168,10 @@ class FlexFormGenerator
             $additionlConfig .= '<displayAge>true</displayAge>';
         }
 
+        if (isset($field['properties']['default']) && $field['properties']['default'] === '@now') {
+            $field['properties']['default'] = strtotime('now');
+        }
+
         return '
         <' . $field['_identifier'] . '>
             <TCEforms>
@@ -438,7 +442,7 @@ class FlexFormGenerator
         if ($field['type'] === 'Select') {
             $additionlConfig = '<renderType>selectSingle</renderType>';
         }
-        if ($field['type'] === 'Multiselect') {
+        if ($field['type'] === 'MultiSelect') {
             $additionlConfig = '<renderType>selectMultipleSideBySide</renderType>';
         }
         if ($field['type'] === 'Toggle') {
@@ -557,7 +561,7 @@ class FlexFormGenerator
                     return $this->createImageField($field, $contentBlock);
                 case 'Select':
                 case 'Checkbox':
-                case 'Multiselect':
+                case 'MultiSelect':
                 case 'Radiobox':
                 case 'Toggle':
                     return $this->createSelections($field, $contentBlock);

@@ -54,9 +54,9 @@ class YamlToSqlTranslationService implements SingletonInterface
             case 'Color':
                return "$uniqueColumnName VARCHAR(255) DEFAULT '' NOT NULL";
             case 'Date':
-               return "$uniqueColumnName datetime DEFAULT CURRENT_TIMESTAMP";
+               return "$uniqueColumnName datetime DEFAULT CURRENT_TIMESTAMP NOT NULL";
             case 'DateTime':
-               return "$uniqueColumnName datetime DEFAULT CURRENT_TIMESTAMP";
+               return "$uniqueColumnName datetime DEFAULT CURRENT_TIMESTAMP NOT NULL";
             case 'Email':
                 return "$uniqueColumnName VARCHAR(255) DEFAULT '' NOT NULL";
             case 'Icon': // TODO: is the same as Image, support for Icon should be removed forever?
@@ -69,7 +69,7 @@ class YamlToSqlTranslationService implements SingletonInterface
                 return "$uniqueColumnName VARCHAR(255) DEFAULT '' NOT NULL";
             case 'Money':
                 return "$uniqueColumnName double(11,4) DEFAULT 0.0 NOT NULL";
-            case 'Multiselect':
+            case 'MultiSelect':
                 return "$uniqueColumnName VARCHAR(255) DEFAULT '' NOT NULL";
             case 'Number':
                 return "$uniqueColumnName int(11) DEFAULT '0' NOT NULL";
@@ -88,7 +88,7 @@ class YamlToSqlTranslationService implements SingletonInterface
             case 'TextMultiline':
                return "$uniqueColumnName text";
             case 'Time':
-                return "$uniqueColumnName datetime DEFAULT CURRENT_TIMESTAMP";
+                return "$uniqueColumnName datetime DEFAULT CURRENT_TIMESTAMP NOT NULL";
             case 'Toggle':
                 return "$uniqueColumnName varchar(255) DEFAULT '' NOT NULL";
             case 'Url': // FIXME: is this the same as type Link?

@@ -64,7 +64,7 @@ class TcaFieldService implements SingletonInterface
                 return $this->getInputFieldTca($contentBlock, $field);
             case 'Money':
                 return $this->getInputFieldTca($contentBlock, $field);
-            case 'Multiselect':
+            case 'MultiSelect':
                 return $this->getSelectFieldTca($contentBlock, $field);
             case 'Number':
                 return $this->getInputFieldTca($contentBlock, $field);
@@ -132,16 +132,16 @@ class TcaFieldService implements SingletonInterface
         }
         if ($field['type'] === 'Date') {
             $evalFields = $evalFields . (strlen($evalFields) > 0 ? ', ' : '') . 'date';
-            $config['renderType'] = 'inputDateTime';
         }
         if ($field['type'] === 'DateTime') {
             $evalFields = $evalFields . (strlen($evalFields) > 0 ? ', ' : '') . 'datetime';
-            $config['renderType'] = 'inputDateTime';
         }
         if ($field['type'] === 'Time') {
             $evalFields = $evalFields . (strlen($evalFields) > 0 ? ', ' : '') . 'time';
-            $config['renderType'] = 'inputDateTime';
         }
+
+        $config['eval'] = $evalFields;
+
         if ($field['type'] === 'Url' || $field['type'] === 'Link') {
             $config['renderType'] = 'inputLink';
             if (isset($field['properties']['linkPopup'])){
@@ -151,11 +151,31 @@ class TcaFieldService implements SingletonInterface
             }
         }
 
-        $config['eval'] = $evalFields;
-
+        if ($field['type'] === 'Date' || $field['type'] === 'DateTime' || $field['type'] === 'Time') {
+            $config['renderType'] = 'inputDateTime';
+            $config['dbType'] = 'datetime';
+            // While handling with datetime objects, those fields must be set to a handleable value.
+            $config['default'] = ((!isset($config['default'])) ? strtotime('now') : $config['default'] );
+        }
 
         if (is_array($field['properties']['range'])) {
             $config['range'] = $field['properties']['range'];
+            if ($field['type'] === 'Date' || $field['type'] === 'DateTime') {
+                if (isset($config['range']['lower'])) {
+                    $config['range']['lower'] = ((strtotime($config['range']['lower'])) ? strtotime($config['range']['lower']) : 0);
+                }
+                if (isset($config['range']['upper'])) {
+                    $config['range']['upper'] = ((strtotime($config['range']['upper'])) ? strtotime($config['range']['upper']) : 0);
+                }
+            }
+            if ($field['type'] === 'Time') {
+                if (isset($config['range']['lower']) && strlen('' . $config['range']['lower']) < 9) {
+                    $config['range']['lower'] = ((strtotime($config['range']['lower'])) ? strtotime('1970-01-01 ' . $config['range']['lower']) : 0);
+                }
+                if (isset($config['range']['upper']) && strlen('' . $config['range']['upper']) < 9) {
+                    $config['range']['upper'] = ((strtotime($config['range']['upper'])) ? strtotime('1970-01-01 ' . $config['range']['upper']) : 0);
+                }
+            }
         }
 
         if ($field['type'] === 'Percent' && is_array($field['properties']['slider'])) {
@@ -419,10 +439,10 @@ class TcaFieldService implements SingletonInterface
             'renderType' => 'selectSingle',
         ];
 
-        if ($field['type'] == 'Multiselect'){
+        if ($field['type'] == 'MultiSelect'){
             $config['renderType'] = 'selectMultipleSideBySide';
 
-            if (isset($field['properties']['size'])){ // Size only supportet by Multiselect
+            if (isset($field['properties']['size'])){ // Size only supportet by MultiSelect
                 $config['size'] = $field['properties']['size'];
             }
         }
@@ -471,6 +491,9 @@ class TcaFieldService implements SingletonInterface
         }
         if (isset($field['properties']['default'])){
             $config['default'] = $field['properties']['default'];
+            if ($config['default'] === '@now') {
+                $config['default'] = strtotime('now');
+            }
         }
 
         $evalFields = ($field['properties']['required'] === true ? 'required' : '') .
