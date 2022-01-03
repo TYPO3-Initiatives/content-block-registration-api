@@ -153,7 +153,7 @@ class TcaFieldService implements SingletonInterface
 
         if ($field['type'] === 'Date' || $field['type'] === 'DateTime' || $field['type'] === 'Time') {
             $config['renderType'] = 'inputDateTime';
-            $config['dbType'] = 'datetime';
+            // $config['dbType'] = 'datetime';
             // While handling with datetime objects, those fields must be set to a handleable value.
             $config['default'] = ((!isset($config['default'])) ? strtotime('now') : $config['default'] );
         }
