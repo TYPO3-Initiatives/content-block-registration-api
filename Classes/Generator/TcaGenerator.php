@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace Typo3Contentblocks\ContentblocksRegApi\Generator;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use Typo3Contentblocks\ComposerPlugin\Configuration\Constants;
 use Typo3Contentblocks\ContentblocksRegApi\Service\ConfigurationService;
 use Typo3Contentblocks\ContentblocksRegApi\Service\DataService;
 use Typo3Contentblocks\ContentblocksRegApi\Service\TcaFieldService;
@@ -34,8 +35,11 @@ class TcaGenerator
     protected $dataService;
 
 
-    public function __construct(ConfigurationService $configurationService, TcaFieldService $tcaFieldService, DataService $dataService)
-    {
+    public function __construct(
+        ConfigurationService $configurationService,
+        TcaFieldService $tcaFieldService,
+        DataService $dataService,
+    ) {
         $this->configurationService = $configurationService;
         $this->tcaFieldService = $tcaFieldService;
         $this->dataService = $dataService;
@@ -149,8 +153,8 @@ class TcaGenerator
                 $GLOBALS['TCA']['tt_content']['columns'],
                 $ttContentColumns
             );
-            $GLOBALS['TCA']['tx_contentblocks_reg_api_collection']['columns'] = array_replace_recursive(
-                $GLOBALS['TCA']['tx_contentblocks_reg_api_collection']['columns'],
+            $GLOBALS['TCA'][Constants::COLLECTION_FOREIGN_TABLE]['columns'] = array_replace_recursive(
+                $GLOBALS['TCA'][Constants::COLLECTION_FOREIGN_TABLE]['columns'],
                 $collectionColumns
             );
 

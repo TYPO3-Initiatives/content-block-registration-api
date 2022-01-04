@@ -20,6 +20,7 @@ use Typo3Contentblocks\ContentblocksRegApi\Service\ConfigurationService;
 use Typo3Contentblocks\ContentblocksRegApi\Service\DataService;
 use Typo3Contentblocks\ContentblocksRegApi\Validator\ContentBlockValidator;
 use Typo3Contentblocks\ContentblocksRegApi\Service\YamlToSqlTranslationService;
+use Typo3Contentblocks\ComposerPlugin\Configuration\Constants;
 
 /**
  * Class SqlGenerator
@@ -57,7 +58,7 @@ class SqlGenerator implements SingletonInterface
     {
         $sql = [];
         $sqlStatementReset = "CREATE TABLE tt_content (";
-        $sqlCollectionStatementReset = "CREATE TABLE tx_contentblocks_reg_api_collection (";
+        $sqlCollectionStatementReset = "CREATE TABLE " . Constants::COLLECTION_FOREIGN_TABLE . " (";
         $collectionFields = [];
 
         $configuration = $this->configurationService->configuration();

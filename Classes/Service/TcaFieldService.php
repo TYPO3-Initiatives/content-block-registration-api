@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace Typo3Contentblocks\ContentblocksRegApi\Service;
 
 use TYPO3\CMS\Core\SingletonInterface;
+use Typo3Contentblocks\ComposerPlugin\Configuration\Constants;
 use Typo3Contentblocks\ContentblocksRegApi\Service\DataService;
 
 
@@ -373,11 +374,11 @@ class TcaFieldService implements SingletonInterface
         $uniqueFieldIdentifier = $this->dataService->uniqueColumnName($contentBlock['key'], $field['_identifier']);
         $config = [
             'type' => 'inline',
-            'foreign_table' => 'tx_contentblocks_reg_api_collection',
-            'foreign_field' => 'content_block_foreign_field',
-            'foreign_table_field' => 'content_block_foreign_table_field',
+            'foreign_table' => Constants::COLLECTION_FOREIGN_TABLE,
+            'foreign_field' => Constants::COLLECTION_FOREIGN_FIELD,
+            'foreign_table_field' => Constants::COLLECTION_FOREIGN_TABLE_FIELD,
             'foreign_match_fields' => [
-                'content_block_field_identifier' => $uniqueFieldIdentifier,
+                Constants::COLLECTION_FOREIGN_MATCH_FIELD => $uniqueFieldIdentifier,
             ],
             'appearance' => [
                 'collapseAll' => 1,
