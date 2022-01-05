@@ -11,6 +11,7 @@ lib.contentBlock {
 
     dataProcessing {
         10 = Typo3Contentblocks\ContentblocksRegApi\DataProcessing\CbProcessor
-        20 = Typo3Contentblocks\ContentblocksRegApi\DataProcessing\FlexFormProcessor
+        // 20 = Typo3Contentblocks\ContentblocksRegApi\DataProcessing\FlexFormProcessor
+        20 = Typo3Contentblocks\ContentblocksRegApi\DataProcessing\CbContentProcessor
     }
 }
