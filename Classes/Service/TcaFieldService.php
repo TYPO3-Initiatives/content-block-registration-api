@@ -305,7 +305,7 @@ class TcaFieldService implements SingletonInterface
     protected function getImageFieldTca(array $contentBlock, array $field): array
     {
         $config = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
-            'image',
+            $field['_identifier'],
             [
                 'appearance' => [
                    'createNewRelationLinkTitle' => 'LLL:EXT:cms/locallang_ttc.xlf:images.addFileReference'
