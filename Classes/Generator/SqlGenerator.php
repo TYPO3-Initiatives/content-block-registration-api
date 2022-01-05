@@ -20,7 +20,7 @@ use Typo3Contentblocks\ContentblocksRegApi\Service\ConfigurationService;
 use Typo3Contentblocks\ContentblocksRegApi\Service\DataService;
 use Typo3Contentblocks\ContentblocksRegApi\Validator\ContentBlockValidator;
 use Typo3Contentblocks\ContentblocksRegApi\Service\YamlToSqlTranslationService;
-use Typo3Contentblocks\ComposerPlugin\Configuration\Constants;
+use Typo3Contentblocks\ContentblocksRegApi\Constants;
 
 /**
  * Class SqlGenerator

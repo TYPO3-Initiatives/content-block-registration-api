@@ -12,7 +12,7 @@ declare(strict_types=1);
 namespace Typo3Contentblocks\ContentblocksRegApi\Generator;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use Typo3Contentblocks\ComposerPlugin\Configuration\Constants;
+use Typo3Contentblocks\ContentblocksRegApi\Constants;
 use Typo3Contentblocks\ContentblocksRegApi\Service\ConfigurationService;
 use Typo3Contentblocks\ContentblocksRegApi\Service\DataService;
 use Typo3Contentblocks\ContentblocksRegApi\Service\TcaFieldService;
@@ -38,7 +38,7 @@ class TcaGenerator
     public function __construct(
         ConfigurationService $configurationService,
         TcaFieldService $tcaFieldService,
-        DataService $dataService,
+        DataService $dataService
     ) {
         $this->configurationService = $configurationService;
         $this->tcaFieldService = $tcaFieldService;

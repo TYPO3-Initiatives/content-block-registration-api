@@ -12,7 +12,7 @@ declare(strict_types=1);
 namespace Typo3Contentblocks\ContentblocksRegApi\Service;
 
 use TYPO3\CMS\Core\SingletonInterface;
-use Typo3Contentblocks\ComposerPlugin\Configuration\Constants;
+use Typo3Contentblocks\ContentblocksRegApi\Constants;
 use Typo3Contentblocks\ContentblocksRegApi\Service\DataService;
 
 
