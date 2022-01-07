@@ -13,16 +13,6 @@ declare(strict_types=1);
     $tcaGenerator = TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
         Typo3Contentblocks\ContentblocksRegApi\Generator\TcaGenerator::class
     );
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns(
-        'tt_content',
-        [
-            'content_block' => $tcaGenerator->contentBlockFlexformColumnTca(),
-        ]
-    );
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes(
-        'tt_content',
-        'content_block'
-    );
 
     $tcaGenerator->setTca();
 })();

@@ -46,43 +46,6 @@ class TcaGenerator
     }
 
     /**
-     * Get default flexform configuration of the tt_content.content_block field
-     *
-    */
-    public function contentBlockFlexformColumnTca() :array
-    {
-        return [
-            'exclude' => 0,
-            'label' => 'LLL:EXT:contentblocks_reg_api/Resources/Private/Language/locallang_db.xlf:tt_content.content_block',
-            'config' => [
-                'type' => 'flex',
-                'ds_pointerField' => 'CType',
-                'ds' => [
-                    'default' => '
-<T3DataStructure>
-  <ROOT>
-    <type>array</type>
-    <el>
-        <!-- Repeat an element like "xmlTitle" beneath for as many elements you like. Remember to name them uniquely  -->
-      <xmlTitle>
-        <TCEforms>
-            <label>The Title:</label>
-            <config>
-                <type>input</type>
-                <size>48</size>
-            </config>
-        </TCEforms>
-      </xmlTitle>
-    </el>
-  </ROOT>
-</T3DataStructure>
-'
-                ]
-            ]
-        ];
-    }
-
-    /**
      * Create the TCA config for all Content Blocks
      **/
     public function setTca() :void
@@ -188,12 +151,6 @@ class TcaGenerator
                     ',
                 ]
             );
-
-            /***************
-             * Add flexForms for content element configuration
-             */
-            GeneralUtility::makeInstance(FlexFormGenerator::class)
-                ->createFlexform($contentBlock);
         }
     }
 }

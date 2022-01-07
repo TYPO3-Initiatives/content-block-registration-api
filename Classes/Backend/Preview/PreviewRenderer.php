@@ -16,8 +16,8 @@ use TYPO3\CMS\Backend\View\BackendLayout\Grid\GridColumnItem;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
+use Typo3Contentblocks\ContentblocksRegApi\DataProcessing\CbContentProcessor;
 use Typo3Contentblocks\ContentblocksRegApi\DataProcessing\CbProcessor;
-use Typo3Contentblocks\ContentblocksRegApi\DataProcessing\FlexFormProcessor;
 use Typo3Contentblocks\ContentblocksRegApi\Service\ConfigurationService;
 
 /**
@@ -26,11 +26,6 @@ use Typo3Contentblocks\ContentblocksRegApi\Service\ConfigurationService;
  */
 class PreviewRenderer extends StandardContentPreviewRenderer
 {
-    /**
-     * @var FlexFormProcessor
-     */
-    protected $flexFormProcessor;
-
     /**
      * @var CbProcessor
      */
@@ -46,16 +41,21 @@ class PreviewRenderer extends StandardContentPreviewRenderer
      */
     protected $configurationService;
 
+    /**
+     * @var CbContentProcessor
+    */
+    protected $contentProcessor;
+
     public function __construct(
         ContentObjectRenderer $cObj,
-        FlexFormProcessor $flexFormProcessor,
         CbProcessor $cbProcessor,
-        ConfigurationService $configurationService
+        ConfigurationService $configurationService,
+        CbContentProcessor $contentProcessor
     ) {
         $this->cObj = $cObj;
-        $this->flexFormProcessor = $flexFormProcessor;
         $this->cbProcessor = $cbProcessor;
         $this->configurationService = $configurationService;
+        $this->contentProcessor = $contentProcessor;
     }
 
     public function renderPageModulePreviewContent(GridColumnItem $item): string
@@ -94,8 +94,8 @@ class PreviewRenderer extends StandardContentPreviewRenderer
                 [],
                 $processedData
             );
-        // Flexform
-        $processedData = $this->flexFormProcessor
+        // Database fields
+        $processedData = $this->contentProcessor
             ->process(
                 $this->cObj,
                 [],

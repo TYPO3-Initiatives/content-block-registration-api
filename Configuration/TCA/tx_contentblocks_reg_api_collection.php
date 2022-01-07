@@ -70,7 +70,7 @@ return [
         ],
         'visibility' => [
             'showitem' => '
-                hidden;LLL:' . $generalLanguageFile . ':LGL.hidden, 
+                hidden;LLL:' . $generalLanguageFile . ':LGL.hidden,
                 l10n_parent;LLL:' . $generalLanguageFile . ':LGL.l18n_parent
             ',
         ],
@@ -165,32 +165,6 @@ return [
         'l10n_diffsource' => [
             'config' => [
                 'type' => 'passthrough',
-            ],
-        ],
-        'content_block' => [
-            'label' => 'Content Block Data',
-            'config' => [
-                'type' => 'flex',
-                'ds_pointerField' => 'content_block_field_identifier',
-                'ds' => [
-                    'default' => '
-                        <T3DataStructure>
-                            <ROOT>
-                                <type>array</type>
-                                <el>
-                                    <input_1>
-                                        <TCEforms>
-                                            <label>Input default</label>
-                                            <config>
-                                                <type>input</type>
-                                            </config>
-                                        </TCEforms>
-                                    </input_1>
-                                </el>
-                            </ROOT>
-                        </T3DataStructure>
-                    ',
-                ],
             ],
         ],
         'content_block_field_identifier' => [
