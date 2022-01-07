@@ -192,8 +192,8 @@ class TcaGenerator
             /***************
              * Add flexForms for content element configuration
              */
-            GeneralUtility::makeInstance(FlexFormGenerator::class)
-                ->createFlexform($contentBlock);
+            // GeneralUtility::makeInstance(FlexFormGenerator::class)
+            //     ->createFlexform($contentBlock);
         }
     }
 }
