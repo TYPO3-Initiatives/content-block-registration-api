@@ -28,7 +28,7 @@ defined('TYPO3_MODE') || die('Access denied.');
     // TypoScript
     // TODO: find a better way to add individuall definitions
     $importTypoScriptTemplate = (string)\TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Configuration\ExtensionConfiguration::class)
-            ->get('contentblocks_reg_api', 'contentBlockDefinition'); 
+            ->get('contentblocks_reg_api', 'contentBlockDefinition');
     if ( strlen('' . $importTypoScriptTemplate) > 2)
     {
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScriptSetup(
@@ -76,3 +76,6 @@ defined('TYPO3_MODE') || die('Access denied.');
         "@import 'EXT:contentblocks_reg_api/Configuration/TypoScript/module/setup.typoscript'"
     );
 })();
+
+// Add Upgrade Wizard
+$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['contentblocksRegApi_flexformToDbColumnsUpdate'] = \Typo3Contentblocks\ContentblocksRegApi\Updates\FlexformToDbColumnsUpdate::class;

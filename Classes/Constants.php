@@ -19,4 +19,5 @@ class Constants
     const COLLECTION_FOREIGN_FIELD = 'content_block_foreign_field';
     const COLLECTION_FOREIGN_MATCH_FIELD = 'content_block_field_identifier';
     const FLEXFORM_FIELD = 'content_block';
+    const UPGRADE_WIZARD_SEARCH_OLD_FLEXFORMS = '%T3FlexForms%data%sheet%';
 }
