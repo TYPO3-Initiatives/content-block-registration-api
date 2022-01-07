@@ -125,9 +125,9 @@ class TcaGenerator
             /***************
              * Add columns to table TCA of tt_content and tx_contentblocks_reg_api_collection
              */
+            $ttContentShowitemFields = '';
             $ttContentColumns = [];
             $collectionColumns = [];
-            $ttContentShowitemFields = '';
             if ( is_array($contentBlock['fields'])
                 && count($contentBlock['fields']) > 0
             ) {
