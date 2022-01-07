@@ -119,7 +119,7 @@ class CbContentProcessor implements DataProcessorInterface
             $cbData[$fieldConf['identifier']] = $record[$fieldColumnName];
         }
         // get file fields
-        else if ( array_key_exists($fieldConf['_identifier'], $this->cbConf['fileFields']) && $record[$fieldColumnName] > 0 ){
+        else if ( array_key_exists($fieldConf['_identifier'], $this->cbConf['fileFields']) ){
             $files = $this->_getFiles (
                 $fieldConf['_identifier'],
                 ((count($fieldConf['_path']) == 1) ? 'tt_content' : Constants::COLLECTION_FOREIGN_TABLE ),
