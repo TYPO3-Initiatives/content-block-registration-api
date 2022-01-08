@@ -68,13 +68,13 @@ fields:
     type: Url
     properties:
       autocomplete: true
-      default: 'https:typo3.org'
+      default: 'https://typo3.org'
       linkPopup:
         allowedExtensions: 'pdf'
         blindLinkFields: 'target,title'
         blindLinkOptions: 'folder,spec,telefone,mail'
         windowOpenParameters: 'height=800,width=600'
-      max: 15
+      max: 150
       placeholder: 'Placeholder text'
       size: 20
       required: false
@@ -89,7 +89,7 @@ fields:
     type: Color
     properties:
       autocomplete: true
-      default: '#fff'
+      default: '#0000aa'
       size: 5
       required: false
       valuePicker:
@@ -100,27 +100,27 @@ fields:
   - identifier: date
     type: Date
     properties:
-      default: '@now'
+      default: '1580468400'
       displayAge: true
       size: 20
       range:
-        lower: '01-01-1970'
-        upper: '31-12-2030'
+        lower: '1422702000'
+        upper: '2053854000'
       required: false
   - identifier: datetime
     type: DateTime
     properties:
-      default: '@now'
+      default: '1580468400'
       displayAge: true
       size: 20
       range:
-        lower: '00:01 01-01-1970'
-        upper: '29:59 31-12-2030'
+        lower: '1422702000'
+        upper: '2053854000'
       required: false
   - identifier: time
     type: Time
     properties:
-      default: '@now'
+      default: '1580468400'
       displayAge: true
       size: 20
       range:
@@ -151,11 +151,12 @@ fields:
         'one': 'The first'
         'two': 'The second'
         'three': 'The third'
-      default: 'two'
+      default: 2
 
   - identifier: radioboxes
     type: Radiobox
     properties:
+      default: 'two'
       items:
         'one': 'The first'
         'two': 'The second'

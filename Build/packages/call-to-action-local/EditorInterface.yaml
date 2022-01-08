@@ -2,6 +2,9 @@ group: common
 fields:
   - identifier: image
     type: Image
+    properties:
+      minItems: 1
+      maxItems: 1
   - identifier: text
     type: Textarea
     properties:

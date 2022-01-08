@@ -6,7 +6,7 @@
 <div class="slider" data-autoplay="{autoplay}">
     <f:for each="{slides}" as="slide" iteration="iteration">
         <div class="slider-item">
-            <f:if condition="{icon}">
+            <f:if condition="{slide.image}">
                 <f:image image="{slide.image}" width="1170" height="658" alt=""/>
             </f:if>
             <f:if condition="{slide.headline}">

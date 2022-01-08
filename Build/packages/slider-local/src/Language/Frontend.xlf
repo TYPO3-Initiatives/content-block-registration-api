@@ -9,10 +9,10 @@
 			<trans-unit id="defaultLinkLabel" xml:space="preserve">
 				<source>Learn more</source>
 			</trans-unit>
-			<trans-unit id="navigationPrev" xml:space="preserve">
+			<trans-unit id="navigationPrev" key="navigationPrev" xml:space="preserve">
 				<source>Previous slide</source>
 			</trans-unit>
-			<trans-unit id="navigationNext" xml:space="preserve">
+			<trans-unit id="navigationNext" key="navigationNext" xml:space="preserve">
 				<source>Next slide</source>
 			</trans-unit>
 		</body>

@@ -30,4 +30,5 @@ fields:
             linkTypes: [page, external]
   - identifier: autoplay
     type: Toggle
-    defaultValue: true
+    properties:
+      default: true
