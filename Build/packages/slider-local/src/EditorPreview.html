@@ -14,12 +14,12 @@
                 <p>{slide.text -> f:format.nl2br()}</p>
             </f:if>
             <f:if condition="{slide.buttonLink}">
-                <f:link.typolink parameter="{slide.buttonLink}" class="btn btn-primary">
+                <a href="{slide.buttonLink}" class="btn btn-primary" target="_blank">
                     <f:if condition="{slide.buttonCaption}">
                         <f:then>{slide.buttonCaption}</f:then>
                         <f:else>{f:translate(key: 'defaultLinkLabel')}</f:else>
                     </f:if>
-                </f:link.typolink>
+                </a>
             </f:if>
         </div>
     </f:for>
