@@ -44,7 +44,7 @@ class FlexformToDbColumnsUpdate implements UpgradeWizardInterface, RepeatableInt
      */
     public function getIdentifier(): string
     {
-      return 'contentblocksRegApi_flexformToDbColumnsUpdate';
+        return 'contentblocksRegApi_flexformToDbColumnsUpdate';
     }
 
     /**
@@ -54,7 +54,7 @@ class FlexformToDbColumnsUpdate implements UpgradeWizardInterface, RepeatableInt
      */
     public function getTitle(): string
     {
-      return '[Contentblocks Registration API] Move Flexform to database columns';
+        return '[Contentblocks Registration API] Move Flexform to database columns';
     }
 
     /**
@@ -64,7 +64,7 @@ class FlexformToDbColumnsUpdate implements UpgradeWizardInterface, RepeatableInt
      */
     public function getDescription(): string
     {
-      return 'After testing periot, we moved data storage from flexform technology to database tables. If you see this suggestion, you might have some old content block flexforms in your system.';
+        return 'After testing periot, we moved data storage from flexform technology to database tables. If you see this suggestion, you might have some old content block flexforms in your system.';
     }
 
     /**
@@ -81,11 +81,11 @@ class FlexformToDbColumnsUpdate implements UpgradeWizardInterface, RepeatableInt
         $db_user = $GLOBALS['TYPO3_CONF_VARS']['DB']['Connections']['Default']['user'];
         $db_password = $GLOBALS['TYPO3_CONF_VARS']['DB']['Connections']['Default']['password'];
         $db_dbname = $GLOBALS['TYPO3_CONF_VARS']['DB']['Connections']['Default']['dbname'];
-        if(isset($GLOBALS['TYPO3_CONF_VARS']['DB']['Connections']['Default']['port']) && strlen('' . $GLOBALS['TYPO3_CONF_VARS']['DB']['Connections']['Default']['port']) > 0) {
+        if (isset($GLOBALS['TYPO3_CONF_VARS']['DB']['Connections']['Default']['port']) && strlen('' . $GLOBALS['TYPO3_CONF_VARS']['DB']['Connections']['Default']['port']) > 0) {
             $db_port = intval($GLOBALS['TYPO3_CONF_VARS']['DB']['Connections']['Default']['port']);
-            $db = mysqli_connect( $db_host, $db_user, $db_password, $db_dbname, $db_port );
+            $db = mysqli_connect($db_host, $db_user, $db_password, $db_dbname, $db_port);
         } else {
-            $db = mysqli_connect( $db_host, $db_user, $db_password, $db_dbname );
+            $db = mysqli_connect($db_host, $db_user, $db_password, $db_dbname);
         }
 
         // Check db connection
@@ -102,7 +102,7 @@ class FlexformToDbColumnsUpdate implements UpgradeWizardInterface, RepeatableInt
         $collectionColumns = [];
         $collectionUpdateString = '';
         foreach ($configuration as $contentBlock) {
-            if ( is_array($contentBlock['fields'])
+            if (is_array($contentBlock['fields'])
                 && count($contentBlock['fields']) > 0
             ) {
                 $fieldsList = $contentBlock['fields'];
@@ -110,13 +110,13 @@ class FlexformToDbColumnsUpdate implements UpgradeWizardInterface, RepeatableInt
                     $tempUniqueColumnName = $dataService->uniqueColumnName($contentBlock['key'], $field['_identifier']);
 
                     // Add fields to tt_content (first level)
-                    if ( isset($field['_identifier']) && isset($field['type']) && count($field['_path']) == 1 && !isset($ttContentColumns[$tempUniqueColumnName]) ) {
+                    if (isset($field['_identifier']) && isset($field['type']) && count($field['_path']) == 1 && !isset($ttContentColumns[$tempUniqueColumnName])) {
                         $ttContentColumns[$tempUniqueColumnName] = $field['_identifier'];
                         $ttContentUpdateString .= ((strlen('' . $ttContentUpdateString) > 1) ? ' , ' : '') . $tempUniqueColumnName . ' = ' . $this->_getSqlFieldMatchingPart($field);
                     }
 
                     // Add collection fields
-                    else if ( isset($field['_identifier']) && isset($field['type']) && count($field['_path']) > 1 && !isset($collectionColumns[$tempUniqueColumnName]) ) {
+                    elseif (isset($field['_identifier']) && isset($field['type']) && count($field['_path']) > 1 && !isset($collectionColumns[$tempUniqueColumnName])) {
                         $collectionColumns[$tempUniqueColumnName] = $field['_identifier'];
                         $collectionUpdateString .= ((strlen('' . $collectionUpdateString) > 1) ? ', ' : '') . $tempUniqueColumnName . ' = ' . $this->_getSqlFieldMatchingPart($field);
                     }
@@ -125,10 +125,10 @@ class FlexformToDbColumnsUpdate implements UpgradeWizardInterface, RepeatableInt
         }
 
         // check if there is something to do (there should be something to do)
-        if(
+        if (
             (count($ttContentColumns) < 1 && count($collectionColumns) < 1)
             || (strlen('' . $collectionUpdateString) < 1 && strlen('' . $ttContentUpdateString) < 1)
-        ){
+        ) {
             mysqli_close($db);
             return false;
         }
@@ -138,7 +138,7 @@ class FlexformToDbColumnsUpdate implements UpgradeWizardInterface, RepeatableInt
         if (count($ttContentColumns) > 0) {
             $sql = 'UPDATE tt_content SET ' . $ttContentUpdateString . ' WHERE ' . Constants::FLEXFORM_FIELD . ' LIKE \'' . Constants::UPGRADE_WIZARD_SEARCH_OLD_FLEXFORMS . '\';';
             $result = $db->query($sql);
-            if ($result !== TRUE){
+            if ($result !== true) {
                 $this->logger->error('Could not update tt_content in class ' . get_class($this) . ':' . __LINE__ . '.', [
                     'sql' => $sql
                 ]);
@@ -151,7 +151,7 @@ class FlexformToDbColumnsUpdate implements UpgradeWizardInterface, RepeatableInt
         if (count($collectionColumns) > 0) {
             $sql = 'UPDATE ' . Constants::COLLECTION_FOREIGN_TABLE . ' SET ' . $collectionUpdateString . ' WHERE ' . Constants::FLEXFORM_FIELD . ' LIKE \'' . Constants::UPGRADE_WIZARD_SEARCH_OLD_FLEXFORMS . '\';';
             $result = $db->query($sql);
-            if ($result !== TRUE){
+            if ($result !== true) {
                 $this->logger->error('Could not update ' . Constants::COLLECTION_FOREIGN_TABLE . ' in class ' . get_class($this) . ':' . __LINE__ . '.', [
                     'sql' => $sql
                 ]);
@@ -172,7 +172,7 @@ class FlexformToDbColumnsUpdate implements UpgradeWizardInterface, RepeatableInt
                 \'.\', \'_\')
             WHERE ' . Constants::FLEXFORM_FIELD . ' LIKE \'' . Constants::UPGRADE_WIZARD_SEARCH_OLD_FLEXFORMS . '\';';
         $result = $db->query($sql);
-        if ($result !== TRUE){
+        if ($result !== true) {
             $this->logger->error('Could not update ' . Constants::COLLECTION_FOREIGN_TABLE . ' in class ' . get_class($this) . ':' . __LINE__ . ' while process existing collections from flexform to database table columns.', [
                 'sql' => $sql
             ]);
@@ -185,7 +185,7 @@ class FlexformToDbColumnsUpdate implements UpgradeWizardInterface, RepeatableInt
         // set tt_content.content_block to '\<?xml version="1.0" encoding="utf-8" standalone="yes" ?\>'
         $sql = 'UPDATE tt_content SET ' . Constants::FLEXFORM_FIELD . ' = \'\<?xml version="1.0" encoding="utf-8" standalone="yes" ?\>\' WHERE ' . Constants::FLEXFORM_FIELD . ' LIKE \'' . Constants::UPGRADE_WIZARD_SEARCH_OLD_FLEXFORMS . '\';';
         $result = $db->query($sql);
-        if ($result !== TRUE){
+        if ($result !== true) {
             mysqli_close($db);
             return false;
         }
@@ -193,7 +193,7 @@ class FlexformToDbColumnsUpdate implements UpgradeWizardInterface, RepeatableInt
         // set tx_contentblocks_reg_api_collection.content_block to NULL
         $sql = 'UPDATE ' . Constants::COLLECTION_FOREIGN_TABLE . ' SET ' . Constants::FLEXFORM_FIELD . ' = NULL WHERE ' . Constants::FLEXFORM_FIELD . ' LIKE \'' . Constants::UPGRADE_WIZARD_SEARCH_OLD_FLEXFORMS . '\';';
         $result = $db->query($sql);
-        if ($result !== TRUE){
+        if ($result !== true) {
             mysqli_close($db);
             return false;
         }
@@ -223,7 +223,7 @@ class FlexformToDbColumnsUpdate implements UpgradeWizardInterface, RepeatableInt
                 )
             )
             ->execute()->fetchColumn(0);
-        if((bool)$elementCount) {
+        if ((bool)$elementCount) {
             return (bool)$elementCount;
         }
 
@@ -239,7 +239,7 @@ class FlexformToDbColumnsUpdate implements UpgradeWizardInterface, RepeatableInt
                 )
             )
             ->execute()->fetchColumn(0);
-        if((bool)$elementCount) {
+        if ((bool)$elementCount) {
             return (bool)$elementCount;
         }
 

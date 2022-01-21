@@ -7,8 +7,6 @@ declare(strict_types=1);
  *
  * For the full copyright and license information, please read the
  * LICENSE file that was distributed with this source code.
- *
- *
  */
 
 namespace Typo3Contentblocks\ContentblocksRegApi\Service;
@@ -39,8 +37,8 @@ class YamlToSqlTranslationService implements SingletonInterface
      */
     public function getSQL(string $uniqueColumnName, string $type): string
     {
-        if ( strlen('' . $uniqueColumnName) < 1 || strlen('' . $type) < 1 ) {
-            return ""; # TODO: Throw exception not enough information to get SQL definition to create a column.
+        if (strlen('' . $uniqueColumnName) < 1 || strlen('' . $type) < 1) {
+            return ''; // TODO: Throw exception not enough information to get SQL definition to create a column.
         }
 
         // Unique name for the column
@@ -90,10 +88,9 @@ class YamlToSqlTranslationService implements SingletonInterface
             case 'Url':
                 return "$uniqueColumnName varchar(255) DEFAULT '' NOT NULL";
             default:
-                return ""; // TODO: throw exception not supported field type (column type).
+                return ''; // TODO: throw exception not supported field type (column type).
         }
 
-        return ""; // in case of fire, keep calm.
+        return ''; // in case of fire, keep calm.
     }
-
 }

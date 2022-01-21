@@ -13,8 +13,6 @@ namespace Typo3Contentblocks\ContentblocksRegApi\Service;
 
 use TYPO3\CMS\Core\SingletonInterface;
 use Typo3Contentblocks\ContentblocksRegApi\Constants;
-use Typo3Contentblocks\ContentblocksRegApi\Service\DataService;
-
 
 /* Class TcaFieldService
  * Manage to get the TCA configuration for each field.
@@ -28,7 +26,6 @@ class TcaFieldService implements SingletonInterface
      */
     protected $dataService;
 
-
     public function __construct(DataService $dataService)
     {
         $this->dataService = $dataService;
@@ -41,7 +38,6 @@ class TcaFieldService implements SingletonInterface
      */
     public function getMatchedTcaConfig(array $contentBlock, array $field) :array
     {
-
         switch ($field['type']) {
             case 'Checkbox':
                 return $this->getCheckboxFieldTca($contentBlock, $field);
@@ -103,7 +99,7 @@ class TcaFieldService implements SingletonInterface
         ];
 
         // Add basic TCA stuff to the config
-        $config = $this->setConfigBasics($config,$field);
+        $config = $this->setConfigBasics($config, $field);
 
         $evalFields = ((isset($config['eval']) ? $config['eval'] : '')); // save values from config basics
         if ($field['type'] === 'Email') {
@@ -141,7 +137,7 @@ class TcaFieldService implements SingletonInterface
 
         if ($field['type'] === 'Url') {
             $config['renderType'] = 'inputLink';
-            if (isset($field['properties']['linkPopup'])){
+            if (isset($field['properties']['linkPopup'])) {
                 $config['fieldControl'] = [];
                 $config['fieldControl']['linkPopup'] = [];
                 $config['fieldControl']['linkPopup']['options'] = $field['properties']['linkPopup'];
@@ -167,7 +163,7 @@ class TcaFieldService implements SingletonInterface
             }
 
             if ($field['type'] === 'Time') {
-                if(isset($field['properties']['default'])){
+                if (isset($field['properties']['default'])) {
                     $config['default'] = $this->timestampConvert($field['properties']['default'], false);
                 }
                 if (isset($config['range']['lower']) && strlen('' . $config['range']['lower']) < 9) {
@@ -192,10 +188,10 @@ class TcaFieldService implements SingletonInterface
             $config['valuePicker']['items'] = $tempPickerItems;
         }
 
-        if (isset($field['properties']['autocomplete'])){
+        if (isset($field['properties']['autocomplete'])) {
             $config['autocomplete'] = $field['properties']['autocomplete'];
         }
-        if (isset($field['properties']['displayAge'])){
+        if (isset($field['properties']['displayAge'])) {
             $config['displayAge'] = $field['properties']['displayAge'];
         }
 
@@ -219,18 +215,18 @@ class TcaFieldService implements SingletonInterface
         ];
 
         // Add basic TCA stuff to the config
-        $config = $this->setConfigBasics($config,$field);
+        $config = $this->setConfigBasics($config, $field);
 
-        if (isset($field['properties']['cols'])){
+        if (isset($field['properties']['cols'])) {
             $config['cols'] = $field['properties']['cols'];
         }
-        if (isset($field['properties']['enableRichtext'])){
+        if (isset($field['properties']['enableRichtext'])) {
             $config['enableRichtext'] = $field['properties']['enableRichtext'];
         }
-        if (isset($field['properties']['richtextConfiguration'])){
+        if (isset($field['properties']['richtextConfiguration'])) {
             $config['richtextConfiguration'] = $field['properties']['richtextConfiguration'];
         }
-        if (isset($field['properties']['rows'])){
+        if (isset($field['properties']['rows'])) {
             $config['rows'] = $field['properties']['rows'];
         }
 
@@ -254,7 +250,7 @@ class TcaFieldService implements SingletonInterface
         ];
 
         // Add basic TCA stuff to the config
-        $config = $this->setConfigBasics($config,$field);
+        $config = $this->setConfigBasics($config, $field);
 
         if ($field['type'] =='Radiobox') {
             $config['type'] = 'radio';
@@ -262,21 +258,20 @@ class TcaFieldService implements SingletonInterface
         if ($field['type'] =='Toggle') {
             $config['renderType'] = 'checkboxToggle';
         }
-        if (isset($field['properties']['cols'])){
+        if (isset($field['properties']['cols'])) {
             $config['cols'] = $field['properties']['cols'];
         }
 
-        if (isset($field['properties']['items'])){
+        if (isset($field['properties']['items'])) {
             $items = [];
             foreach ($field['properties']['items'] as $key => $value) {
                 $items[] = [ $value, $key];
             }
-            if ($field['type'] =='Toggle' && isset($field['properties']['invertStateDisplay']) && $field['properties']['invertStateDisplay'] === true ) {
+            if ($field['type'] =='Toggle' && isset($field['properties']['invertStateDisplay']) && $field['properties']['invertStateDisplay'] === true) {
                 $items['invertStateDisplay'] = true;
             }
             $config['items'] = $items;
-        }
-        elseif ($field['type'] =='Toggle' && isset($field['properties']['invertStateDisplay']) && $field['properties']['invertStateDisplay'] === true ) {
+        } elseif ($field['type'] =='Toggle' && isset($field['properties']['invertStateDisplay']) && $field['properties']['invertStateDisplay'] === true) {
             $config['items'] = [
                 [
                    0 => '',
@@ -284,8 +279,7 @@ class TcaFieldService implements SingletonInterface
                    'invertStateDisplay' => true
                 ]
              ];
-        }
-        else {
+        } else {
             $config['items'] = [
                 [
                     0 => '',
@@ -340,13 +334,13 @@ class TcaFieldService implements SingletonInterface
             $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']
         );
 
-        if (isset($field['properties']['required']) && $field['properties']['required'] === true){
+        if (isset($field['properties']['required']) && $field['properties']['required'] === true) {
             $config['eval'] = 'required';
         }
-        if (isset($field['properties']['maxItems'])){
+        if (isset($field['properties']['maxItems'])) {
             $config['maxitems'] = $field['properties']['maxItems'];
         }
-        if (isset($field['properties']['minItems'])){
+        if (isset($field['properties']['minItems'])) {
             $config['minitems'] = $field['properties']['minItems'];
         }
 
@@ -358,7 +352,6 @@ class TcaFieldService implements SingletonInterface
             . '.' . $contentBlock['package'] . '.' . $field['_identifier'] . '.description',
             'config' => $config,
         ];
-
     }
 
     /*********************
@@ -407,20 +400,20 @@ class TcaFieldService implements SingletonInterface
             ],
         ];
 
-        if (isset($field['properties']['maxItems'])){
+        if (isset($field['properties']['maxItems'])) {
             $config['maxitems'] = $field['properties']['maxItems'];
         }
-        if (isset($field['properties']['minItems'])){
+        if (isset($field['properties']['minItems'])) {
             $config['minitems'] = $field['properties']['minItems'];
         }
-        if (isset($field['properties']['useAsLabel']) && is_array($field['properties']['fields']) ){
+        if (isset($field['properties']['useAsLabel']) && is_array($field['properties']['fields'])) {
             $labelField = array_column($field['properties']['fields'], null, 'identifier');
             $labelField = $labelField[ $field['properties']['useAsLabel'] ];
 
             if (
                 strlen('' . $labelField['identifier']) > 0
                 && strpos('Color, Date, DateTime, Email, Integer, Money, Number, Percent, Tel, Text, Textarea, Time, Url', $labelField['type'])
-            ){
+            ) {
                 $labelFieldIdentifier = $this->dataService->uniqueColumnName($contentBlock['key'], $labelField['_identifier']);
                 $config['foreign_label'] = $labelFieldIdentifier;
             }
@@ -446,10 +439,10 @@ class TcaFieldService implements SingletonInterface
             'renderType' => 'selectSingle',
         ];
 
-        if ($field['type'] == 'MultiSelect'){
+        if ($field['type'] == 'MultiSelect') {
             $config['renderType'] = 'selectMultipleSideBySide';
 
-            if (isset($field['properties']['size'])){ // Size only supportet by MultiSelect
+            if (isset($field['properties']['size'])) { // Size only supportet by MultiSelect
                 $config['size'] = $field['properties']['size'];
             }
         }
@@ -457,21 +450,21 @@ class TcaFieldService implements SingletonInterface
         // Add basic TCA stuff to the config
         $config = $this->setConfigBasics($config, $field);
 
-        if (isset($field['properties']['items'])){
+        if (isset($field['properties']['items'])) {
             $items = [];
             foreach ($field['properties']['items'] as $key => $value) {
                 $items[] = [ $value, $key];
             }
-            if ($field['type'] =='Toggle' && isset($field['properties']['invertStateDisplay']) && $field['properties']['invertStateDisplay'] === true ) {
+            if ($field['type'] =='Toggle' && isset($field['properties']['invertStateDisplay']) && $field['properties']['invertStateDisplay'] === true) {
                 $items['invertStateDisplay'] = true;
             }
             $config['items'] = $items;
         }
 
-        if (isset($field['properties']['maxItems'])){
+        if (isset($field['properties']['maxItems'])) {
             $config['maxitems'] = $field['properties']['maxItems'];
         }
-        if (isset($field['properties']['minItems'])){
+        if (isset($field['properties']['minItems'])) {
             $config['minitems'] = $field['properties']['minItems'];
         }
 
@@ -490,13 +483,13 @@ class TcaFieldService implements SingletonInterface
      */
     protected function setConfigBasics(array $config, array $field): array
     {
-        if (isset($field['properties']['max'])){
+        if (isset($field['properties']['max'])) {
             $config['max'] = $field['properties']['max'];
         }
-        if (isset($field['properties']['placeholder'])){
+        if (isset($field['properties']['placeholder'])) {
             $config['placeholder'] = $field['properties']['placeholder'];
         }
-        if (isset($field['properties']['default'])){
+        if (isset($field['properties']['default'])) {
             $config['default'] = $field['properties']['default'];
             if ($config['default'] === '@now') {
                 $config['default'] = strtotime('now');
@@ -507,7 +500,7 @@ class TcaFieldService implements SingletonInterface
             ($field['properties']['trim'] === true && $field['properties']['required'] === true ? ',  ' : '') .
             ($field['properties']['trim'] === true ? 'trim ' : '');
 
-        if (strlen(''.$evalFields) > 1) {
+        if (strlen('' . $evalFields) > 1) {
             $config['eval'] = $evalFields;
         }
 
@@ -523,16 +516,15 @@ class TcaFieldService implements SingletonInterface
     */
     protected function timestampConvert($input, bool $isTime = false): int
     {
-        if (is_int($input)){
+        if (is_int($input)) {
             return $input;
         }
-        if ($isTime && strlen('' .$input) > 0){
+        if ($isTime && strlen('' . $input) > 0) {
             $input = '1970-01-01 ' . $input;
         }
-        if (strtotime($input)){
+        if (strtotime($input)) {
             return strtotime($input);
         }
         return 0;
     }
-
 }

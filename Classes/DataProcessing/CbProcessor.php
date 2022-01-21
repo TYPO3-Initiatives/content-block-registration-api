@@ -12,18 +12,18 @@ declare(strict_types=1);
 namespace Typo3Contentblocks\ContentblocksRegApi\DataProcessing;
 
 use TYPO3\CMS\Backend\Utility\BackendUtility;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
-use TYPO3\CMS\Frontend\ContentObject\DataProcessorInterface;
-use TYPO3\CMS\Frontend\Resource\FileCollector;
-use Typo3Contentblocks\ContentblocksRegApi\Service\ConfigurationService;
-use Typo3Contentblocks\ContentblocksRegApi\Service\DataService;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\Restriction\WorkspaceRestriction;
 use TYPO3\CMS\Core\Domain\Repository\PageRepository;
-use Typo3Contentblocks\ContentblocksRegApi\Constants;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
+use TYPO3\CMS\Frontend\ContentObject\DataProcessorInterface;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
+use TYPO3\CMS\Frontend\Resource\FileCollector;
+use Typo3Contentblocks\ContentblocksRegApi\Constants;
+use Typo3Contentblocks\ContentblocksRegApi\Service\ConfigurationService;
+use Typo3Contentblocks\ContentblocksRegApi\Service\DataService;
 
 /**
  * Adds information about the current content block to variable "cb".
@@ -110,16 +110,16 @@ class CbProcessor implements DataProcessorInterface
     {
         $fieldColumnName = $this->dataService->uniqueColumnName($this->cbConf['key'], $fieldConf['_identifier']);
         // Get normal fields
-        if ( !array_key_exists($fieldConf['_identifier'], $this->cbConf['collectionFields'])
+        if (!array_key_exists($fieldConf['_identifier'], $this->cbConf['collectionFields'])
                 && !array_key_exists($fieldConf['_identifier'], $this->cbConf['fileFields'])
         ) {
             $cbData[$fieldConf['identifier']] = $record[$fieldColumnName];
         }
         // get file fields
-        else if ( array_key_exists($fieldConf['_identifier'], $this->cbConf['fileFields']) ){
-            $files = $this->_getFiles (
+        elseif (array_key_exists($fieldConf['_identifier'], $this->cbConf['fileFields'])) {
+            $files = $this->_getFiles(
                 $fieldConf['_identifier'],
-                ((count($fieldConf['_path']) == 1) ? 'tt_content' : Constants::COLLECTION_FOREIGN_TABLE ),
+                ((count($fieldConf['_path']) == 1) ? 'tt_content' : Constants::COLLECTION_FOREIGN_TABLE),
                 $record
             );
 
@@ -129,7 +129,7 @@ class CbProcessor implements DataProcessorInterface
             $cbData[$fieldConf['identifier']] = $files;
         }
         // handle collections
-        else if ($fieldConf['type'] == 'Collection'){
+        elseif ($fieldConf['type'] == 'Collection') {
             $cbData[$fieldConf['identifier']] = $this->_processCollection(
                 ((count($fieldConf['_path']) == 1) ? 'tt_content' : Constants::COLLECTION_FOREIGN_TABLE),
                 $record['uid'],
@@ -156,7 +156,7 @@ class CbProcessor implements DataProcessorInterface
     protected function _processCollection(string $parentTable, int $parentUid, array $parentFieldConf): array
     {
         // check if collection can be processed
-        if ( !isset($parentFieldConf['properties']['fields']) || !is_array($parentFieldConf['properties']['fields'])){
+        if (!isset($parentFieldConf['properties']['fields']) || !is_array($parentFieldConf['properties']['fields'])) {
             return [];
         }
 

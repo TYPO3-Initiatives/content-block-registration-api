@@ -7,20 +7,16 @@ declare(strict_types=1);
  *
  * For the full copyright and license information, please read the
  * LICENSE file that was distributed with this source code.
- *
- *
  */
 
 namespace Typo3Contentblocks\ContentblocksRegApi\Generator;
 
-use TYPO3\CMS\Core\SingletonInterface;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Database\Event\AlterTableDefinitionStatementsEvent;
+use TYPO3\CMS\Core\SingletonInterface;
+use Typo3Contentblocks\ContentblocksRegApi\Constants;
 use Typo3Contentblocks\ContentblocksRegApi\Service\ConfigurationService;
 use Typo3Contentblocks\ContentblocksRegApi\Service\DataService;
-use Typo3Contentblocks\ContentblocksRegApi\Validator\ContentBlockValidator;
 use Typo3Contentblocks\ContentblocksRegApi\Service\YamlToSqlTranslationService;
-use Typo3Contentblocks\ContentblocksRegApi\Constants;
 
 /**
  * Class SqlGenerator
@@ -57,15 +53,15 @@ class SqlGenerator implements SingletonInterface
     protected function getSqlByConfiguration(): array
     {
         $sql = [];
-        $sqlStatementReset = "CREATE TABLE tt_content (";
-        $sqlCollectionStatementReset = "CREATE TABLE " . Constants::COLLECTION_FOREIGN_TABLE . " (";
+        $sqlStatementReset = 'CREATE TABLE tt_content (';
+        $sqlCollectionStatementReset = 'CREATE TABLE ' . Constants::COLLECTION_FOREIGN_TABLE . ' (';
         $collectionFields = [];
 
         $configuration = $this->configurationService->configuration();
 
-        if ( is_array($configuration) ) {
+        if (is_array($configuration)) {
             foreach ($configuration as $contentBlock) {
-                if ( is_array($contentBlock['fields'])
+                if (is_array($contentBlock['fields'])
                     && count($contentBlock['fields']) > 0
                 ) {
                     $fieldsList = $contentBlock['fields'];
@@ -76,23 +72,23 @@ class SqlGenerator implements SingletonInterface
                         $tempUniqueColumnName = $this->dataService->uniqueColumnName($contentBlock['key'], $field['_identifier']);
 
                         // Add fields to tt_content (first level)
-                        if ( isset($field['_identifier']) && isset($field['type']) && count($field['_path']) == 1 ) {
+                        if (isset($field['_identifier']) && isset($field['type']) && count($field['_path']) == 1) {
                             $fieldSql = $this->yamlTranslator
                                 ->getSQL($tempUniqueColumnName, $field['type']);
                             // check if field is supported by the yamlTranslator
-                            if ( strlen('' . $fieldSql) > 3 ) {
-                                $sqlStatement .= (($sqlStatement !== $sqlStatementReset ) ? ',' : ''  ) . ' ' . $fieldSql;
+                            if (strlen('' . $fieldSql) > 3) {
+                                $sqlStatement .= (($sqlStatement !== $sqlStatementReset) ? ',' : '') . ' ' . $fieldSql;
                             }
                             // TODO: else throw usefull exeption if not supported
                         }
 
                         // Add collection fields
-                        else if ( isset($field['_identifier']) && isset($field['type']) && count($field['_path']) > 1 ) {
+                        elseif (isset($field['_identifier']) && isset($field['type']) && count($field['_path']) > 1) {
                             $fieldSql = $this->yamlTranslator
-                                ->getSQL( $tempUniqueColumnName, $field['type']);
+                                ->getSQL($tempUniqueColumnName, $field['type']);
                             // check if field is supported by the yamlTranslator
-                            if ( strlen('' . $fieldSql) > 3 ) {
-                                $sqlCollectionStatement .= (($sqlCollectionStatement !== $sqlCollectionStatementReset ) ? ',' : ''  ) . ' ' . $fieldSql;
+                            if (strlen('' . $fieldSql) > 3) {
+                                $sqlCollectionStatement .= (($sqlCollectionStatement !== $sqlCollectionStatementReset) ? ',' : '') . ' ' . $fieldSql;
                             }
                             // TODO: else throw usefull exeption if not supported
                         }
@@ -101,7 +97,7 @@ class SqlGenerator implements SingletonInterface
                     if ($sqlStatement !== $sqlStatementReset) {
                         $sql[] = $sqlStatement . ");\n";
                     }
-                    if ( $sqlCollectionStatement !== $sqlCollectionStatementReset ) {
+                    if ($sqlCollectionStatement !== $sqlCollectionStatementReset) {
                         $collectionFields[] = $sqlCollectionStatement . ");\n";
                     }
                 }

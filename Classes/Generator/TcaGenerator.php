@@ -11,7 +11,6 @@ declare(strict_types=1);
 
 namespace Typo3Contentblocks\ContentblocksRegApi\Generator;
 
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use Typo3Contentblocks\ContentblocksRegApi\Constants;
 use Typo3Contentblocks\ContentblocksRegApi\Service\ConfigurationService;
 use Typo3Contentblocks\ContentblocksRegApi\Service\DataService;
@@ -33,7 +32,6 @@ class TcaGenerator
      * @var DataService
      */
     protected $dataService;
-
 
     public function __construct(
         ConfigurationService $configurationService,
@@ -91,7 +89,7 @@ class TcaGenerator
             $ttContentShowitemFields = '';
             $ttContentColumns = [];
             $collectionColumns = [];
-            if ( is_array($contentBlock['fields'])
+            if (is_array($contentBlock['fields'])
                 && count($contentBlock['fields']) > 0
             ) {
                 $fieldsList = $contentBlock['fields'];
@@ -99,14 +97,14 @@ class TcaGenerator
                     $tempUniqueColumnName = $this->dataService->uniqueColumnName($contentBlock['key'], $field['_identifier']);
 
                     // Add fields to tt_content (first level)
-                    if ( isset($field['_identifier']) && isset($field['type']) && count($field['_path']) == 1 ) {
+                    if (isset($field['_identifier']) && isset($field['type']) && count($field['_path']) == 1) {
                         $ttContentShowitemFields .= "\n" . $tempUniqueColumnName . ',';
                         $ttContentColumns[$tempUniqueColumnName] = $this->tcaFieldService->getMatchedTcaConfig($contentBlock, $field);
-                        // TODO: else throw usefull exeption if not supported
+                    // TODO: else throw usefull exeption if not supported
                     }
 
                     // Add collection fields
-                    else if ( isset($field['_identifier']) && isset($field['type']) && count($field['_path']) > 1 ) {
+                    elseif (isset($field['_identifier']) && isset($field['type']) && count($field['_path']) > 1) {
                         $collectionColumns[$tempUniqueColumnName] = $this->tcaFieldService->getMatchedTcaConfig($contentBlock, $field);
                         // TODO: else throw usefull exeption if not supported
                     }
