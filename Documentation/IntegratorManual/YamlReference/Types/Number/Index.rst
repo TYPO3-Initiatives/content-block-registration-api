@@ -71,3 +71,27 @@ trim
    :sep:`|`
 
    If set, the PHP trim function is applied on the field's content.
+
+valuePicker
+   :sep:`|` :aspect:`Required:` false
+   :sep:`|` :aspect:`Type:` array
+   :sep:`|` :aspect:`Default:` ''
+   :sep:`|`
+
+   Renders a select box with static values next to the input field. When
+   a value is selected in the box, the value is transferred to the field. Keys:
+
+   items (array)
+      An array with selectable items. Each item is an array with the first being
+      the value transferred to the input field, and the second being the label
+      in the select drop-down (LLL reference possible).
+
+   Example:
+
+   .. code-block:: yaml
+
+      valuePicker:
+        items:
+          100: 100
+          250: 250
+          500: 500
