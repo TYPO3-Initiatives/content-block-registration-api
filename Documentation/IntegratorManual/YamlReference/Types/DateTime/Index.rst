@@ -2,10 +2,10 @@
 .. _field_type_datetime:
 
 ========
-Datetime
+DateTime
 ========
 
-The "Datetime" type generates a simple `<input>` field, which provides a date picker.
+The "DateTime" type generates a simple `<input>` field, which provides a date picker.
 
 It corresponds with the TCA `type='inputDateTime'` (default) and `eval='datetime'`.
 
