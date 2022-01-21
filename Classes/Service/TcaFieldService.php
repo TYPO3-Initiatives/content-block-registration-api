@@ -404,10 +404,10 @@ class TcaFieldService implements SingletonInterface
         if (isset($field['properties']['minItems'])){
             $config['minitems'] = $field['properties']['minItems'];
         }
-        if (isset($field['properties']['labelField']) && is_array($field['properties']['fields']) ){
+        if (isset($field['properties']['useAsLabel']) && is_array($field['properties']['fields']) ){
             $labelFieldIdentifier = '';
             foreach ($field['properties']['fields'] as $subField) {
-                if ($subField['identifier'] == $field['properties']['labelField']) {
+                if ($subField['identifier'] == $field['properties']['useAsLabel']) {
                     $labelFieldIdentifier = $this->dataService->uniqueColumnName($contentBlock['key'], $subField['_identifier']);
                 }
             }

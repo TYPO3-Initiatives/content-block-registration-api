@@ -31,4 +31,4 @@ fields:
   - identifier: autoplay
     type: Toggle
     properties:
-      default: true
+      defaultValue: true

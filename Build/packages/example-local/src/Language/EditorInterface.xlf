@@ -78,6 +78,15 @@
       <trans-unit id="typo3-contentblocks.example-local.radioboxes.label" xml:space="preserve">
 				<source>Radioboxes</source>
 			</trans-unit>
+      <trans-unit id="typo3-contentblocks.example-local.toggle.label" xml:space="preserve">
+				<source>Toggle checkbox</source>
+			</trans-unit>
+      <trans-unit id="typo3-contentblocks.example-local.toggleInverted.label" xml:space="preserve">
+				<source>Toggle checkbox inverted</source>
+			</trans-unit>
+      <trans-unit id="typo3-contentblocks.example-local.toggleInverted.description" xml:space="preserve">
+				<source>You can invert state display on toggle checkboxes.</source>
+			</trans-unit>
       <trans-unit id="typo3-contentblocks.example-local.image.label" xml:space="preserve">
 				<source>Image</source>
 			</trans-unit>
