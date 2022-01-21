@@ -182,8 +182,13 @@ class TcaFieldService implements SingletonInterface
             $config['slider'] = $field['properties']['slider'];
         } elseif ($field['type'] === 'Color') {
             $config['renderType'] = 'colorpicker';
-        } elseif (is_array($field['properties']['valuePicker']['items'])) {
-            $config['valuePicker'] = $field['properties']['valuePicker'];
+        }
+        if (is_array($field['properties']['valuePicker']['items'])) {
+            $tempPickerItems = [];
+            foreach ($field['properties']['valuePicker']['items'] as $key => $name) {
+                $tempPickerItems[] = [$name, $key];
+            }
+            $config['valuePicker']['items'] = $tempPickerItems;
         }
 
         if (isset($field['properties']['autocomplete'])){
