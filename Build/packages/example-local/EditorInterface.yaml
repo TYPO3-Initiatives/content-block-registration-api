@@ -120,12 +120,12 @@ fields:
   - identifier: time
     type: Time
     properties:
-      default: '1580468400'
+      default: '15:30'
       displayAge: true
       size: 20
       range:
-        lower: '00:01'
-        upper: '29:59'
+        lower: '06:01'
+        upper: '17:59'
       required: false
   - identifier: select
     type: Select
@@ -164,7 +164,7 @@ fields:
   - identifier: toggle
     type: Toggle
     properties:
-      defaultValue: true
+      default: true
   - identifier: toggleInverted
     type: Toggle
     properties:

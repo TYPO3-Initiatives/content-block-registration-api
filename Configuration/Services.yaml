@@ -13,10 +13,6 @@ services:
     autowire: true
     autoconfigure: false
     public: true
-  Typo3Contentblocks\ContentblocksRegApi\DataProcessing\CbContentProcessor:
-    autowire: true
-    autoconfigure: false
-    public: true
   Typo3Contentblocks\ContentblocksRegApi\DataProcessing\FlexFormProcessor:
     autowire: true
     autoconfigure: false

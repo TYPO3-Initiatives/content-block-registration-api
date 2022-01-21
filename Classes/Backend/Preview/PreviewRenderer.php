@@ -16,7 +16,6 @@ use TYPO3\CMS\Backend\View\BackendLayout\Grid\GridColumnItem;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
-use Typo3Contentblocks\ContentblocksRegApi\DataProcessing\CbContentProcessor;
 use Typo3Contentblocks\ContentblocksRegApi\DataProcessing\CbProcessor;
 use Typo3Contentblocks\ContentblocksRegApi\Service\ConfigurationService;
 
@@ -49,13 +48,11 @@ class PreviewRenderer extends StandardContentPreviewRenderer
     public function __construct(
         ContentObjectRenderer $cObj,
         CbProcessor $cbProcessor,
-        ConfigurationService $configurationService,
-        CbContentProcessor $contentProcessor
+        ConfigurationService $configurationService
     ) {
         $this->cObj = $cObj;
         $this->cbProcessor = $cbProcessor;
         $this->configurationService = $configurationService;
-        $this->contentProcessor = $contentProcessor;
     }
 
     public function renderPageModulePreviewContent(GridColumnItem $item): string
@@ -86,16 +83,8 @@ class PreviewRenderer extends StandardContentPreviewRenderer
 
         $processedData = ['data' => $record];
         // TODO use TypoScript configuration for DataProcessors
-        // CB configuration
+        // CB configuration & Database fields
         $processedData = $this->cbProcessor
-            ->process(
-                $this->cObj,
-                [],
-                [],
-                $processedData
-            );
-        // Database fields
-        $processedData = $this->contentProcessor
             ->process(
                 $this->cObj,
                 [],
