@@ -4,12 +4,39 @@
       data-namespace-typo3-fluid="true">
 
 <f:section name="content">
-    <div class="advanced-settings-optional {selectorClasses}">
-        <input type="checkbox"
-               id="{fieldID}"
-               class="{selectorClasses}" {f:if(condition: checked, then: 'checked="checked"')} autocomplete="off">
-        <span>{label}</span>
-        <br><br>
+    <div class="form-group advanced-settings-optional {selectorClasses}">
+        <div class="checkbox checkbox-type-icon-toggle">
+            <input type="checkbox"
+                   id="{fieldID}"
+                   class="checkbox-input {selectorClasses}"
+                   autocomplete="off"
+                   {f:if(condition: checked, then:'checked="checked"')}>
+            <label class="checkbox-label" for="{fieldID}">
+                <span class="checkbox-label-icon">
+                    <span class="checkbox-label-icon-checked">
+                        <span class="t3js-icon icon icon-size-small icon-state-default icon-actions-check"
+                        data-identifier="actions-check">
+                        <span class="icon-markup">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+                                <g class="icon-color">
+                                    <path d="M13.3 4.8l-.7-.7c-.2-.2-.5-.2-.7 0L6.5 9.5 4 6.9c-.2-.2-.5-.2-.7 0l-.6.7c-.2.2-.2.5 0 .7l3.6 3.6c.2.2.5.2.7 0l6.4-6.4c.1-.2.1-.5-.1-.7z"></path>
+                                </g>
+                            </svg>
+                        </span>
+                        </span>
+                    </span>
+                    <span class="checkbox-label-icon-unchecked">
+                        <span class="icon icon-size-small icon-state-default icon-empty-empty"
+                              data-identifier="empty-empty">
+                            <span class="icon-markup">
+                                <span class="icon-unify"><i class="fa fa-empty-empty"></i></span>
+                            </span>
+                        </span>
+                    </span>
+                </span>
+                <span class="checkbox-label-text">{label}</span>
+            </label>
+        </div>
     </div>
 </f:section>
 </html>

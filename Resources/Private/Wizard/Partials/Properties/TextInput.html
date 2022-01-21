@@ -4,14 +4,13 @@
       data-namespace-typo3-fluid="true">
 
 <f:section name="content">
-    <div class="advanced-settings-optional {selectorClasses}">
+    <div class="form-group advanced-settings-optional {selectorClasses}">
+        <label for="{fieldID}">{label}</label>
         <input type="text"
                id="{fieldID}"
-               class="{selectorClasses}"
-               placeholder="{label}"
+               class="form-control {selectorClasses}"
                value="{value}"
                autocomplete="off">
-        <br><br>
     </div>
 </f:section>
 </html>
