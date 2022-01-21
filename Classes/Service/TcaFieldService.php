@@ -150,30 +150,31 @@ class TcaFieldService implements SingletonInterface
 
         if ($field['type'] === 'Date' || $field['type'] === 'DateTime' || $field['type'] === 'Time') {
             $config['renderType'] = 'inputDateTime';
-            // $config['dbType'] = 'datetime';
             // While handling with datetime objects, those fields must be set to a handleable value.
-            $config['default'] = ((!isset($config['default'])) ? strtotime('now') : $config['default'] );
+            $config['default'] = $this->timestampConvert($config['default']);
         }
 
         if (is_array($field['properties']['range'])) {
             $config['range'] = $field['properties']['range'];
+
             if ($field['type'] === 'Date' || $field['type'] === 'DateTime') {
                 if (isset($config['range']['lower'])) {
-                    $config['range']['lower'] = ((strtotime($config['range']['lower'])) ? strtotime($config['range']['lower']) : 0);
+                    $config['range']['lower'] = $this->timestampConvert($config['range']['lower']);
                 }
                 if (isset($config['range']['upper'])) {
-                    $config['range']['upper'] = ((strtotime($config['range']['upper'])) ? strtotime($config['range']['upper']) : 0);
+                    $config['range']['upper'] = $this->timestampConvert($config['range']['upper']);
                 }
             }
+
             if ($field['type'] === 'Time') {
                 if(isset($field['properties']['default'])){
-                    $config['default'] = ((is_int($field['properties']['default'])) ? $field['properties']['default'] : strtotime('1970-01-01 ' . $field['properties']['default']));
+                    $config['default'] = $this->timestampConvert($field['properties']['default'], false);
                 }
                 if (isset($config['range']['lower']) && strlen('' . $config['range']['lower']) < 9) {
-                    $config['range']['lower'] = ((strtotime($config['range']['lower'])) ? strtotime('1970-01-01 ' . $config['range']['lower']) : 0);
+                    $config['range']['lower'] = $this->timestampConvert($config['range']['lower'], true);
                 }
                 if (isset($config['range']['upper']) && strlen('' . $config['range']['upper']) < 9) {
-                    $config['range']['upper'] = ((strtotime($config['range']['upper'])) ? strtotime('1970-01-01 ' . $config['range']['upper']) : 0);
+                    $config['range']['upper'] = $this->timestampConvert($config['range']['upper'], true);
                 }
             }
         }
@@ -513,5 +514,25 @@ class TcaFieldService implements SingletonInterface
         return $config;
     }
 
+    /** Helper function timestampConvert
+     * Returns a timestamp as integer. Returns 0 if it could not create a timestamp.
+     *
+     * @param string|int $input
+     * @param bool $isTime
+     * @return int
+    */
+    protected function timestampConvert($input, bool $isTime = false): int
+    {
+        if (is_int($input)){
+            return $input;
+        }
+        if ($isTime && strlen('' .$input) > 0){
+            $input = '1970-01-01 ' . $input;
+        }
+        if (strtotime($input)){
+            return strtotime($input);
+        }
+        return 0;
+    }
 
 }

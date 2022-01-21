@@ -100,23 +100,23 @@ fields:
   - identifier: date
     type: Date
     properties:
-      default: '1580468400'
+      default: '2020-12-12'
       displayAge: true
       size: 20
       range:
-        lower: '1422702000'
-        upper: '2053854000'
-      required: false
+        lower: '2019-12-12'
+        upper: '2035-12-12'
+      required: true
   - identifier: datetime
     type: DateTime
     properties:
-      default: '1580468400'
+      default: '2020-01-31 12:00:00'
       displayAge: true
       size: 20
       range:
-        lower: '1422702000'
-        upper: '2053854000'
-      required: false
+        lower: '2019-01-31 12:00:00'
+        upper: '2040-01-31 12:00:00'
+      required: true
   - identifier: time
     type: Time
     properties:
@@ -126,7 +126,7 @@ fields:
       range:
         lower: '06:01'
         upper: '17:59'
-      required: false
+      required: true
   - identifier: select
     type: Select
     properties:
