@@ -59,8 +59,6 @@ class TcaFieldService implements SingletonInterface
                 return $this->getImageFieldTca($contentBlock, $field);
             case 'Integer':
                return $this->getInputFieldTca($contentBlock, $field);
-            case 'Link': // FIXME: type Link is missing in the documentation OR is it called Url?
-                return $this->getInputFieldTca($contentBlock, $field);
             case 'Money':
                 return $this->getInputFieldTca($contentBlock, $field);
             case 'MultiSelect':
@@ -85,7 +83,7 @@ class TcaFieldService implements SingletonInterface
                 return $this->getInputFieldTca($contentBlock, $field);
             case 'Toggle':
                 return $this->getCheckboxFieldTca($contentBlock, $field);
-            case 'Url': // FIXME: is this the same as type Link?
+            case 'Url':
                 return $this->getInputFieldTca($contentBlock, $field);
             default:
                 return []; // TODO: throw exception not supported field type (column type).
@@ -141,7 +139,7 @@ class TcaFieldService implements SingletonInterface
 
         $config['eval'] = $evalFields;
 
-        if ($field['type'] === 'Url' || $field['type'] === 'Link') {
+        if ($field['type'] === 'Url') {
             $config['renderType'] = 'inputLink';
             if (isset($field['properties']['linkPopup'])){
                 $config['fieldControl'] = [];

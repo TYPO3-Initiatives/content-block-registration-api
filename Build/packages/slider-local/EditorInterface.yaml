@@ -25,7 +25,7 @@ fields:
           properties:
             required: true
         - identifier: buttonLink
-          type: Link
+          type: Url
           properties:
             linkTypes: [page, external]
   - identifier: autoplay

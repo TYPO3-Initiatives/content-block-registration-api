@@ -63,8 +63,6 @@ class YamlToSqlTranslationService implements SingletonInterface
                 return "$uniqueColumnName int(11) DEFAULT '0' NOT NULL";
             case 'Integer':
                 return "$uniqueColumnName int(11) DEFAULT '0' NOT NULL";
-            case 'Link': // FIXME: type Link is missing in the documentation OR is it called Url?
-                return "$uniqueColumnName VARCHAR(255) DEFAULT '' NOT NULL";
             case 'Money':
                 return "$uniqueColumnName double(11,4) DEFAULT 0.0 NOT NULL";
             case 'MultiSelect':
@@ -89,7 +87,7 @@ class YamlToSqlTranslationService implements SingletonInterface
                 return "$uniqueColumnName int(11) DEFAULT '0' NOT NULL";
             case 'Toggle':
                 return "$uniqueColumnName varchar(255) DEFAULT '' NOT NULL";
-            case 'Url': // FIXME: is this the same as type Link?
+            case 'Url':
                 return "$uniqueColumnName varchar(255) DEFAULT '' NOT NULL";
             default:
                 return ""; // TODO: throw exception not supported field type (column type).

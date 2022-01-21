@@ -304,8 +304,6 @@ class FlexformToDbColumnsUpdate implements UpgradeWizardInterface, RepeatableInt
             case 'Image':
             case 'Integer':
                return $castInteger;
-            case 'Link': // FIXME: type Link is missing in the documentation OR is it called Url?
-                return $castText;
             case 'Money':
                 return $castDouble;
             case 'MultiSelect':
@@ -323,7 +321,7 @@ class FlexformToDbColumnsUpdate implements UpgradeWizardInterface, RepeatableInt
             case 'Time':
                 return $castInteger;
             case 'Toggle':
-            case 'Url': // FIXME: is this the same as type Link?
+            case 'Url':
                 return $castText;
             default:
                 return $castText; // TODO: throw exception not supported field type (column type).
