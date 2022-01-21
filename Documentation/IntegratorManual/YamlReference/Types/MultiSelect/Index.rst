@@ -2,7 +2,7 @@
 .. _field_type_multiselect:
 
 ===========
-Multiselect
+MultiSelect
 ===========
 
 The "Multiselect" type generates a select field where multiple items can be chosen.
