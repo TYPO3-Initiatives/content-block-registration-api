@@ -1,55 +1,80 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
-			xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers"
-			xmlns:be="http://typo3.org/ns/TYPO3/CMS/Backend/ViewHelpers"
-            data-namespace-typo3-fluid="true">
+      xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers"
+      xmlns:be="http://typo3.org/ns/TYPO3/CMS/Backend/ViewHelpers"
+      data-namespace-typo3-fluid="true">
 
-    <f:section name="content">
-        <div class="advanced-settings step-5 step">
-            <br>
-            <p>Expert mode:</p>
+<f:section name="content">
+    <div class="advanced-settings step-5 step">
+        <br>
+        <p>Settings:</p>
 
-            <!-- DESCRIPTION field -->
-            <f:render partial="Properties/TextInput" arguments="{fieldID: 'cb-field-translationDescription', label='Discription in the backend' , selectorClasses: 'Text Textarea Image Url Select MultiSelect Checkbox Radiobox'}" section="content" />
+        <!-- DESCRIPTION field -->
+        <f:render partial="Properties/TextInput"
+                  arguments="{fieldID: 'cb-field-translationDescription', label='Discription in the backend' , selectorClasses: 'Text Textarea Image Url Select MultiSelect Checkbox Radiobox'}"
+                  section="content"/>
 
-            <!-- MAXimum count field -->
-            <f:render partial="Properties/TextInput" arguments="{fieldID: 'cb-field-max', label='Maximum count' , selectorClasses: 'Text Textarea Url'}" section="content" />
+        <!-- MAXimum count field -->
+        <f:render partial="Properties/TextInput"
+                  arguments="{fieldID: 'cb-field-max', label='Maximum count' , selectorClasses: 'Text Textarea Url'}"
+                  section="content"/>
 
-            <!-- ROWS count field -->
-            <f:render partial="Properties/TextInput" arguments="{fieldID: 'cb-field-rows', label='Rows of the field' , selectorClasses: 'Textarea '}" section="content" />
+        <!-- ROWS count field -->
+        <f:render partial="Properties/TextInput"
+                  arguments="{fieldID: 'cb-field-rows', label='Rows of the field' , selectorClasses: 'Textarea '}"
+                  section="content"/>
 
-            <!-- COLS count field -->
-            <f:render partial="Properties/TextInput" arguments="{fieldID: 'cb-field-cols', label='Cols of the field' , selectorClasses: 'Textarea '}" section="content" />
+        <!-- COLS count field -->
+        <f:render partial="Properties/TextInput"
+                  arguments="{fieldID: 'cb-field-cols', label='Cols of the field' , selectorClasses: 'Textarea '}"
+                  section="content"/>
 
-            <!-- SIZE of the field -->
-            <f:render partial="Properties/TextInput" arguments="{fieldID: 'cb-field-size', label='Size of the field (width in backend)' , selectorClasses: 'Text Url MultiSelect'}" section="content" />
+        <!-- SIZE of the field -->
+        <f:render partial="Properties/TextInput"
+                  arguments="{fieldID: 'cb-field-size', label='Size of the field (width in backend)' , selectorClasses: 'Text Url MultiSelect'}"
+                  section="content"/>
 
-            <!-- DEFAULT value of the field -->
-            <f:render partial="Properties/TextInput" arguments="{fieldID: 'cb-field-default', label='Default value, if needed' , selectorClasses: 'Text Textarea Url Checkbox'}" section="content" />
+        <!-- DEFAULT value of the field -->
+        <f:render partial="Properties/TextInput"
+                  arguments="{fieldID: 'cb-field-default', label='Default value, if needed' , selectorClasses: 'Text Textarea Url Checkbox'}"
+                  section="content"/>
 
-            <!-- PLACEHOLDER of the field -->
-            <f:render partial="Properties/TextInput" arguments="{fieldID: 'cb-field-placeholder', label='Placeholder, if needed' , selectorClasses: 'Text Textarea Url'}" section="content" />
+        <!-- PLACEHOLDER of the field -->
+        <f:render partial="Properties/TextInput"
+                  arguments="{fieldID: 'cb-field-placeholder', label='Placeholder, if needed' , selectorClasses: 'Text Textarea Url'}"
+                  section="content"/>
 
-            <!-- MINITEMS of the field -->
-            <f:render partial="Properties/TextInput" arguments="{fieldID: 'cb-field-minItems', label='Minimum count of items' , selectorClasses: 'Image MultiSelect', value: 1}" section="content" />
+        <!-- MINITEMS of the field -->
+        <f:render partial="Properties/TextInput"
+                  arguments="{fieldID: 'cb-field-minItems', label='Minimum count of items' , selectorClasses: 'Image MultiSelect'}"
+                  section="content"/>
 
-            <!-- MAXITEMS of the field -->
-            <f:render partial="Properties/TextInput" arguments="{fieldID: 'cb-field-maxItems', label='Maximum count of items' , selectorClasses: 'Image MultiSelect', value: 5}" section="content" />
+        <!-- MAXITEMS of the field -->
+        <f:render partial="Properties/TextInput"
+                  arguments="{fieldID: 'cb-field-maxItems', label='Maximum count of items' , selectorClasses: 'Image MultiSelect'}"
+                  section="content"/>
 
-            <!-- CHECKBOXES start -->
+        <!-- CHECKBOXES start -->
 
-            <!-- field is REQUIRED -->
-            <f:render partial="Properties/Checkbox" arguments="{fieldID: 'cb-field-required', label='Is this field required?' , selectorClasses: 'Text Textarea Url Checkbox'}" section="content" />
+        <!-- field is REQUIRED -->
+        <f:render partial="Properties/Checkbox"
+                  arguments="{fieldID: 'cb-field-required', label='Is this field required?' , selectorClasses: 'Text Textarea Url Checkbox'}"
+                  section="content"/>
 
-            <!-- enable TRIM (default: yes) -->
-            <f:render partial="Properties/Checkbox" arguments="{fieldID: 'cb-field-trim', label='Trim whitespaces and stuff like that' , selectorClasses: 'Text Textarea', checked: 1}" section="content" />
+        <!-- enable TRIM (default: yes) -->
+        <f:render partial="Properties/Checkbox"
+                  arguments="{fieldID: 'cb-field-trim', label='Trim whitespaces and stuff like that' , selectorClasses: 'Text Textarea', checked: 1}"
+                  section="content"/>
 
-            <!-- enable RICHTEXT editing -->
-            <f:render partial="Properties/Checkbox" arguments="{fieldID: 'cb-field-enableRichtext', label='Enable richtext editing' , selectorClasses: 'Textarea'}" section="content" />
+        <!-- enable RICHTEXT editing -->
+        <f:render partial="Properties/Checkbox"
+                  arguments="{fieldID: 'cb-field-enableRichtext', label='Enable richtext editing' , selectorClasses: 'Textarea'}"
+                  section="content"/>
 
-            <!-- enable AUTOCOMPLETE -->
-            <f:render partial="Properties/Checkbox" arguments="{fieldID: 'cb-field-autocomplete', label='Activate autocomplete' , selectorClasses: 'Text Url'}" section="content" />
-
-            <br>
-        </div>
-    </f:section>
+        <!-- enable AUTOCOMPLETE -->
+        <f:render partial="Properties/Checkbox"
+                  arguments="{fieldID: 'cb-field-autocomplete', label='Activate autocomplete' , selectorClasses: 'Text Url'}"
+                  section="content"/>
+        <br>
+    </div>
+</f:section>
 </html>

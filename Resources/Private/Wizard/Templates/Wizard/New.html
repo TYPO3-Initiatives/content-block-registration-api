@@ -1,79 +1,130 @@
-<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" 
-			xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers"
-			xmlns:be="http://typo3.org/ns/TYPO3/CMS/Backend/ViewHelpers"
-			data-namespace-typo3-fluid="true">
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers"
+      xmlns:be="http://typo3.org/ns/TYPO3/CMS/Backend/ViewHelpers"
+      data-namespace-typo3-fluid="true">
 
-	<f:layout name="Default" />
+<f:layout name="Default"/>
 
+<f:section name="content">
+    <h1>Content Block Builder</h1>
+    <p>Kickstart your content block by using this step-by-step wizard.</p>
+    <br>
 
-	<f:section name="content">
-		<h1>Content Block Builder</h1>
-		<p>This wizard is actually just a demo and tries to let you do the basic stuff.</p>
-		<br>
+    <f:flashMessages/>
+    <div class="step-1">
+        <h2>First, define the package name:</h2>
+        <div class="form-group" style="max-width: 396px">
+            <label for="cb-package-name">Specify the package name</label>
+            <div class="formengine-field-item">
+                <span class="text-muted">Use only alphanumeric characters, dashes or underscores</span>
+                <input type="text" id="cb-package-name" class="form-control" autocomplete="off">
+            </div>
+        </div>
+        <div class="form-group" style="max-width: 396px">
+            <label for="cb-package-nameTranslation">Specify the backend title</label>
+            <div class="formengine-field-item">
+                <span class="formengine-field-item-description text-muted">Will be added to the translation file automatically</span>
+                <input type="text" id="cb-package-nameTranslation" class="form-control" autocomplete="off">
+            </div>
+        </div>
+    </div>
 
-		<f:flashMessages />
-		<div class="step-1">
-			<h2>First, define the package name:</h2>
-			<p>(like "teaser", "callToAction1", "contactPerson" or what else...)</p>
-			<input type="text" id="cb-package-name"><br><br>
-			<p>If you give me a name, I write that directly to the translation file for you:</p>
-			<input type="text" id="cb-package-nameTranslation"><br>
-		</div>
+    <div class="new-block">
+        <div class="step-2 step">
+            <h2>What kind of field do you need?</h2>
+            <button class="btn btn-default Text" onclick="resetFields();setupField('Text');nextStep(3);">
+                Text (input)
+            </button>
+            <button class="btn btn-default Textarea" onclick="resetFields();setupField('Textarea');nextStep(3);">
+                Textarea (normal or with RTE)
+            </button>
+            <button class="btn btn-default Image" onclick="resetFields();setupField('Image');nextStep(3);">
+                Image
+            </button>
+            <button class="btn btn-default Url" onclick="resetFields();setupField('Url');nextStep(3);">
+                Link / URL
+            </button>
+            <button class="btn btn-default Select" onclick="resetFields();setupField('Select');nextStep(3);">
+                Select (Dropdown)
+            </button>
+            <button class="btn btn-default MultiSelect" onclick="resetFields();setupField('MultiSelect');nextStep(3);">
+                Select multiple (side by side)
+            </button>
+            <button class="btn btn-default Checkbox" onclick="resetFields();setupField('Checkbox');nextStep(3);">
+                Checkboxes
+            </button>
+            <button class="btn btn-default Radiobox" onclick="resetFields();setupField('Radiobox');nextStep(3);">
+                Radio boxes
+            </button>
+        </div>
+        <div class="step-3 step" style="margin-top: 20px;">
+            <div class="form-group" style="max-width: 396px">
+                <label for="cb-field-identifier">Specify the field identifier</label>
+                <div class="formengine-field-item">
+                    <span class="text-muted">Use only alphanumeric characters, dashes or underscores</span>
+                    <input type="text" id="cb-field-identifier" class="form-control" autocomplete="off">
+                </div>
+            </div>
+            <p>(You can later use this identifier in the template, like "&#123;name&#125;")</p>
+            <button class="btn btn-default next-step" onclick="nextStep(4);">Next step</button>
+            <br><br>
+        </div>
+        <div class="step-4 step">
+            <h2>Here you can configure your properties:</h2>
 
-		<div class="new-block">
-			<div class="step-2 step">
-				<h2>What kind of field do you need?</h2>
-				<button class="btn btn-default Text" onclick="resetFields();setupField('Text');nextStep(3);">Text (input)</button>
-				<button class="btn btn-default Textarea" onclick="resetFields();setupField('Textarea');nextStep(3);">Textarea (normal or with RTE)</button>
-				<button class="btn btn-default Image" onclick="resetFields();setupField('Image');nextStep(3);">Image</button>
-				<button class="btn btn-default Url" onclick="resetFields();setupField('Url');nextStep(3);">Link / URL</button>
-				<button class="btn btn-default Select" onclick="resetFields();setupField('Select');nextStep(3);">Select (Dropdown)</button>
-				<button class="btn btn-default MultiSelect" onclick="resetFields();setupField('MultiSelect');nextStep(3);">Select multiple (side by side)</button>
-				<button class="btn btn-default Checkbox" onclick="resetFields();setupField('Checkbox');nextStep(3);">Checkboxes</button>
-				<button class="btn btn-default Radiobox" onclick="resetFields();setupField('Radiobox');nextStep(3);">Radio boxes</button>
-				<br>
-			</div>
-			<div class="step-3 step">
-				<h2>Tell me the identifier:</h2>
-				<p>(like "name", "street", "number", "linktoage" or what else...)</p>
-				<input type="text" id="cb-field-identifier"><br>
-				<p>(You can call me with this identifier later in the template like  "&#123;name&#125;" )</p>
-				<button class="btn btn-default next-step"  onclick="nextStep(4);">Next step</button>
-				<br> <br>
-			</div>
-			<div class="step-4 step">
-				<h2>Here you can configure your poperties:</h2>
+            <!-- The label for default translation --->
+            <div class="form-group" style="max-width: 396px">
+                <label for="cb-field-translationLabel">Specify the backend label</label>
+                <div class="formengine-field-item Text Textarea Image Url Select MultiSelect Checkbox Radiobox">
+                    <span class="formengine-field-item-description text-muted">Will be added to the translation file automatically</span>
+                    <input type="text" id="cb-field-translationLabel" class="form-control" autocomplete="off">
+                </div>
+            </div>
 
-				<!-- The label for default translation --->
-				<input type="text" id="cb-field-translationLabel" class="Text Textarea Image Url Select MultiSelect Checkbox Radiobox" placeholder="Label in the Backend" ><br><br>
+            <!-- ITEMS -->
+            <f:render partial="Properties/Textarea"
+                      arguments="{fieldID: 'cb-field-items', label='Insert here your combinations of value and labels for your editors:' , selectorClasses: 'Select MultiSelect Checkbox Radiobox'}"
+                      section="content"/>
 
-				<!-- ITEMS -->
-				<f:render partial="Properties/Textarea" arguments="{fieldID: 'cb-field-items', label='Insert here your combinations of value and labels for your editors:' , selectorClasses: 'Select MultiSelect Checkbox Radiobox'}" section="content" />
-			
-				<br>
-				<button class="btn btn-default additional-configuration" onclick="nextStep(5);">(show advanced settings)</button>
-				<br>
+            <br>
+            <button class="btn btn-default additional-configuration" onclick="nextStep(5);">
+                Specify element properties
+            </button>
+            <br>
 
-				<!-- EXPORT MODE -->
-				<f:render partial="ExpertMode" section="content" arguments="{_all}" />
-				<br>
-				
-			</div>
-		</div>
-		<div class="field-list">
-			<br>
-			<p><strong>Listing your fields:</strong></p>
-			<br>
-		</div>
-		<br class="clearfix"><br>
-		<p><button class="btn btn-default" onclick="saveField();resetFields();nextStep(2)">Create new field</button> <button class="btn btn-default" onclick="saveField();resetFields();nextStep(2)">Add configuration to field list</button></p>
-		<br> <br>
-		<p>You should only write configuration if you are finished with creaton work. <br> You should see your feelds on the right side.</p>
-		<p><button class="btn btn-default" onclick="subimtData()">Write the new content block to file system</button></p>
+            <!-- EXPORT MODE -->
+            <f:render partial="ExpertMode" section="content" arguments="{_all}"/>
+            <br>
+        </div>
+    </div>
+    <div class="field-list">
+        <br>
+        <p><strong>Listing your fields:</strong></p>
+        <br>
+    </div>
+    <br class="clearfix"><br>
+    <p>
+        <button class="btn btn-default" onclick="saveField();resetFields();nextStep(2)">
+            Create new field
+        </button>
+        <button class="btn btn-default" onclick="saveField();resetFields();nextStep(2)">
+            Add configuration to field list
+        </button>
+    </p>
+    <br> <br>
+    <p>
+        You should only write configuration if you are finished with creation work.<br>
+        You should see your fields on the right side.
+    </p>
+    <p>
+        <button class="btn btn-default" onclick="submitData()">
+            Write the new content block to file system
+        </button>
+    </p>
 
-<br><br>
-		<f:form action="create"  name="Wizard" id="contenBlockSubmit">
-			<f:form.hidden id="contentBlocksDataField" name="contentBlocks" value="" />
-		</f:form>
-	</f:section>
+    <br><br>
+    <f:form action="create" name="Wizard" id="contenBlockSubmit">
+        <f:form.hidden id="contentBlocksDataField" name="contentBlocks" value=""/>
+    </f:form>
+</f:section>
 </html>
