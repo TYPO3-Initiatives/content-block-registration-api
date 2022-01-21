@@ -181,7 +181,7 @@ function removeFieldFromList(field)
     field.remove();
 }
 
-function subimtData() {
+function submitData() {
     var formular = document.getElementById('contenBlockSubmit');
     formular.elements.contentBlocksDataField.value = JSON.stringify(finalContentBlockConfig);
     formular.submit();

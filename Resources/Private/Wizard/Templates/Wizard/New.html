@@ -5,7 +5,6 @@
 
 <f:layout name="Default"/>
 
-
 <f:section name="content">
     <h1>Content Block Builder</h1>
     <p>This wizard is actually just a demo and tries to let you do the basic stuff.</p>
@@ -55,7 +54,7 @@
         </div>
         <div class="step-3 step">
             <h2>Tell me the identifier:</h2>
-            <p>(like "name", "street", "number", "linktoage" or what else...)</p>
+            <p>(like "name", "street", "number", "linkToPage" or what else...)</p>
             <input type="text" id="cb-field-identifier"><br>
             <p>(You can call me with this identifier later in the template like "&#123;name&#125;" )</p>
             <button class="btn btn-default next-step" onclick="nextStep(4);">Next step</button>
@@ -101,11 +100,11 @@
     </p>
     <br> <br>
     <p>
-        You should only write configuration if you are finished with creaton work.<br>
-        You should see your feelds on the right side.
+        You should only write configuration if you are finished with creation work.<br>
+        You should see your fields on the right side.
     </p>
     <p>
-        <button class="btn btn-default" onclick="subimtData()">
+        <button class="btn btn-default" onclick="submitData()">
             Write the new content block to file system
         </button>
     </p>
