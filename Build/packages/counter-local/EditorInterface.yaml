@@ -3,8 +3,10 @@ fields:
   - identifier: amount
     type: Number
     properties:
-      defaultValue: 0
-      maximum: 100
+      defaultValue: 50
+      range:
+        lower: 26
+        upper: 112
       required:  true
   - identifier: icon
     type: Icon
