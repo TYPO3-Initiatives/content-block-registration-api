@@ -55,8 +55,6 @@ class TcaFieldService implements SingletonInterface
                 return $this->getInputFieldTca($contentBlock, $field);
             case 'Email':
                 return $this->getInputFieldTca($contentBlock, $field);
-            case 'Icon': // TODO: is the same as Image, support for Icon should be removed forever?
-                return $this->getImageFieldTca($contentBlock, $field);
             case 'Image':
                 return $this->getImageFieldTca($contentBlock, $field);
             case 'Integer':

@@ -59,8 +59,6 @@ class YamlToSqlTranslationService implements SingletonInterface
                return "$uniqueColumnName int(11) DEFAULT '0' NOT NULL";
             case 'Email':
                 return "$uniqueColumnName VARCHAR(255) DEFAULT '' NOT NULL";
-            case 'Icon': // TODO: is the same as Image, support for Icon should be removed forever?
-                return "$uniqueColumnName int(11) DEFAULT '0' NOT NULL";
             case 'Image':
                 return "$uniqueColumnName int(11) DEFAULT '0' NOT NULL";
             case 'Integer':

@@ -300,7 +300,7 @@ class FlexformToDbColumnsUpdate implements UpgradeWizardInterface, RepeatableInt
                 return $castInteger;
             case 'Email':
                 return $castText;
-            case 'Icon': // TODO: is the same as Image, support for Icon should be removed forever?
+            case 'Icon': // Icon was supported in v1, so we should migrate that to image
             case 'Image':
             case 'Integer':
                return $castInteger;

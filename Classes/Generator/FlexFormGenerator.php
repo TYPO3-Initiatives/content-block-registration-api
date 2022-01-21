@@ -196,7 +196,7 @@ class FlexFormGenerator
     }
 
     /**
-     * Create an flexform inline field for pictures (Image or Icon)
+     * Create an flexform inline field for pictures (Image)
     */
     protected function createImageField(array $field, array $contentBlock) :string
     {
@@ -557,7 +557,6 @@ class FlexFormGenerator
                 case 'Url':
                     return $this->createTypoLink($field, $contentBlock);
                 case 'Image':
-                case 'Icon':
                     return $this->createImageField($field, $contentBlock);
                 case 'Select':
                 case 'Checkbox':

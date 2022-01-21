@@ -9,7 +9,7 @@ fields:
         upper: 112
       required:  true
   - identifier: icon
-    type: Icon
+    type: Image
     properties:
       allowedExtensions: 'svg'
       minItems: 1

@@ -7,7 +7,7 @@ fields:
       maximum: 100
       required:  true
   - identifier: icon
-    type: Icon
+    type: Image
     properties:
       allowedExtensions: 'svg'
       minItems: 1
