@@ -40,6 +40,27 @@ fields
         - identifier: image
           type: Image
 
+useAsLabel
+   :sep:`|` :aspect:`Required:` true
+   :sep:`|` :aspect:`Type:` array
+   :sep:`|` :aspect:`Default:` ''
+   :sep:`|`
+
+   Defines which field of the collection item should be used as the title of the
+   inline element. The given field has to be a string based field type, or at
+   least be convertable to a string.
+
+   Example:
+
+   .. code-block:: yaml
+
+      useAsLabel: text
+      fields:
+        - identifier: text
+          type: Text
+        - identifier: image
+          type: Image
+
 maxItems
    :sep:`|` :aspect:`Required:` false
    :sep:`|` :aspect:`Type:` integer
