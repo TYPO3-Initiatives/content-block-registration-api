@@ -1,28 +1,22 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
-	xmlns:be="http://typo3.org/ns/TYPO3/CMS/Backend/ViewHelpers"
-	data-namespace-typo3-fluid="true">
+      xmlns:be="http://typo3.org/ns/TYPO3/CMS/Backend/ViewHelpers"
+      data-namespace-typo3-fluid="true">
 
-
-
-	<be:moduleLayout>
-		<f:be.pageRenderer
-			includeRequireJsModules="{
+<be:moduleLayout>
+    <f:be.pageRenderer
+        includeRequireJsModules="{
 				0:'TYPO3/CMS/Backend/ContextMenu',
 				1:'TYPO3/CMS/Backend/Modal'
 			}"
-			includeCssFiles="{
+        includeCssFiles="{
 				0: '{f:uri.resource(path:\'Css/wizard-style.css\')}'
 			}"
-			includeJsFiles="{
+        includeJsFiles="{
 				0: '{f:uri.resource(path:\'JavaScript/wizard-modul.js\')}'
-			}"
-		/>
-	
-		
+			}"/>
 
-		<f:flashMessages />
-		<f:render section="content" />
-
-	</be:moduleLayout>
+    <f:flashMessages/>
+    <f:render section="content"/>
+</be:moduleLayout>
 
 </html>
