@@ -175,14 +175,16 @@ fields:
     type: Collection
     properties:
       useAsLabel: text
+      maxItems: 5
+      required: true
       fields:
         - identifier: text
           type: Text
-          maxItems: 2
-          minItems: 1
         - identifier: collection
           type: Collection
           properties:
+            maxItems: 2
+            minItems: 1
             fields:
               - identifier: text
                 type: Text

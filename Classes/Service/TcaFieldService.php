@@ -405,7 +405,10 @@ class TcaFieldService implements SingletonInterface
         }
         if (isset($field['properties']['minItems'])) {
             $config['minitems'] = $field['properties']['minItems'];
+        } elseif ($field['properties']['required']) {
+            $config['minitems'] = 1;
         }
+
         if (isset($field['properties']['useAsLabel']) && is_array($field['properties']['fields'])) {
             $labelField = array_column($field['properties']['fields'], null, 'identifier');
             $labelField = $labelField[ $field['properties']['useAsLabel'] ];
