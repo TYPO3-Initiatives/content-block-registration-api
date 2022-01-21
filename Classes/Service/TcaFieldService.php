@@ -166,6 +166,9 @@ class TcaFieldService implements SingletonInterface
                 }
             }
             if ($field['type'] === 'Time') {
+                if(isset($field['properties']['default'])){
+                    $config['default'] = ((is_int($field['properties']['default'])) ? $field['properties']['default'] : strtotime('1970-01-01 ' . $field['properties']['default']));
+                }
                 if (isset($config['range']['lower']) && strlen('' . $config['range']['lower']) < 9) {
                     $config['range']['lower'] = ((strtotime($config['range']['lower'])) ? strtotime('1970-01-01 ' . $config['range']['lower']) : 0);
                 }
