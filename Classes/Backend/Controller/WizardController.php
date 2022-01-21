@@ -240,6 +240,7 @@ class WizardController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 
         $this->addFlashMessage('The content block was created.', '', \TYPO3\CMS\Core\Messaging\AbstractMessage::OK);
         $this->addFlashMessage('Please clear all caches bevor you use the new content block.', '', \TYPO3\CMS\Core\Messaging\AbstractMessage::WARNING);
+        $this->addFlashMessage('You must compare and update database to add your new columns there.', '', \TYPO3\CMS\Core\Messaging\AbstractMessage::WARNING);
 
         $this->redirect('new');
     }
