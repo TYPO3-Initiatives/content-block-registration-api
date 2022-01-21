@@ -32,6 +32,30 @@ size
 
    Abstract value for the width of the `<input>` field.
 
+range
+   :sep:`|` :aspect:`Required:` false
+   :sep:`|` :aspect:`Type:` array
+   :sep:`|` :aspect:`Default:` ''
+   :sep:`|`
+
+   An array which defines an integer range within which the value must be. Keys:
+
+   lower (integer)
+      Defines the lower integer value. Default: 0.
+
+   upper (integer)
+      Defines the upper integer value. Default: none.
+
+   It is allowed to specify only one of both of them.
+
+   Example:
+
+   .. code-block:: yaml
+
+      range:
+        lower: 10
+        upper: 999
+
 required
    :sep:`|` :aspect:`Required:` false
    :sep:`|` :aspect:`Type:` boolean

@@ -2,10 +2,10 @@
 .. _field_type_multiselect:
 
 ===========
-Multiselect
+MultiSelect
 ===========
 
-The "Multiselect" type generates a select field where multiple items can be chosen.
+The "MultiSelect" type generates a select field where multiple items can be chosen.
 
 It corresponds with the TCA `renderType='selectMultipleSideBySide'`.
 

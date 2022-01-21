@@ -42,6 +42,19 @@ items
         'two': 'The second'
         'three': 'The third'
 
+invertStateDisplay
+   :sep:`|` :aspect:`Required:` false
+   :sep:`|` :aspect:`Type:` boolean
+   :sep:`|` :aspect:`Default:` ''
+   :sep:`|`
+
+   Inverts the display state (onf/off) of the toggle items.
+
+   Example:
+
+   .. code-block:: yaml
+
+      invertStateDisplay: true
 
 required
    :sep:`|` :aspect:`Required:` false

@@ -14,7 +14,7 @@ Editing interface field types
 	Collection/Index
 	Color/Index
 	Date/Index
-	Datetime/Index
+	DateTime/Index
 	Email/Index
 	Image/Index
 	Integer/Index
