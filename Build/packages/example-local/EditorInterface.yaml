@@ -161,6 +161,14 @@ fields:
         'one': 'The first'
         'two': 'The second'
         'three': 'The third'
+  - identifier: toggle
+    type: Toggle
+    properties:
+      defaultValue: true
+  - identifier: toggleInverted
+    type: Toggle
+    properties:
+      invertStateDisplay: true
   - identifier: image
     type: Image
   - identifier: collection
