@@ -44,49 +44,50 @@ class YamlToSqlTranslationService implements SingletonInterface
         // Unique name for the column
         $uniqueColumnName = "`$uniqueColumnName`";
 
+        // return values:
+        $returnInt = "$uniqueColumnName int(11) DEFAULT '0' NOT NULL";
+        $returnVarchar = "$uniqueColumnName VARCHAR(255) DEFAULT '' NOT NULL";
+
         switch ($type) {
             case 'Checkbox':
-               return "$uniqueColumnName VARCHAR(255) DEFAULT '' NOT NULL";
+               return $returnVarchar;
             case 'Collection':
-               return "$uniqueColumnName int(11) DEFAULT '0' NOT NULL";
+               return $returnInt;
             case 'Color':
-               return "$uniqueColumnName VARCHAR(255) DEFAULT '' NOT NULL";
+               return $returnVarchar;
             case 'Date':
-               return "$uniqueColumnName int(11) DEFAULT '0' NOT NULL";
             case 'DateTime':
-               return "$uniqueColumnName int(11) DEFAULT '0' NOT NULL";
+               return $returnInt;
             case 'Email':
-                return "$uniqueColumnName VARCHAR(255) DEFAULT '' NOT NULL";
+                return $returnVarchar;
             case 'Image':
-                return "$uniqueColumnName int(11) DEFAULT '0' NOT NULL";
             case 'Integer':
-                return "$uniqueColumnName int(11) DEFAULT '0' NOT NULL";
+                return $returnInt;
             case 'Money':
                 return "$uniqueColumnName double(11,4) DEFAULT 0.0 NOT NULL";
             case 'MultiSelect':
-                return "$uniqueColumnName VARCHAR(255) DEFAULT '' NOT NULL";
+                return $returnVarchar;
             case 'Number':
-                return "$uniqueColumnName int(11) DEFAULT '0' NOT NULL";
             case 'Percent':
-                return "$uniqueColumnName int(11) DEFAULT '0' NOT NULL";
+                return $returnInt;
             case 'Radiobox':
-                return "$uniqueColumnName VARCHAR(255) DEFAULT '' NOT NULL";
+                return $returnVarchar;
             case 'Select':
-                return "$uniqueColumnName VARCHAR(255) DEFAULT '' NOT NULL";
+                return $returnVarchar;
             case 'Tel':
-                return "$uniqueColumnName VARCHAR(255) DEFAULT '' NOT NULL";
+                return $returnVarchar;
             case 'Text':
-               return "$uniqueColumnName VARCHAR(255) DEFAULT '' NOT NULL";
+               return $returnVarchar;
             case 'Textarea':
                return "$uniqueColumnName text";
             case 'TextMultiline':
                return "$uniqueColumnName text";
             case 'Time':
-                return "$uniqueColumnName int(11) DEFAULT '0' NOT NULL";
+                return $returnInt;
             case 'Toggle':
-                return "$uniqueColumnName varchar(255) DEFAULT '' NOT NULL";
+                return $returnVarchar;
             case 'Url':
-                return "$uniqueColumnName varchar(255) DEFAULT '' NOT NULL";
+                return $returnVarchar;
             default:
                 return ''; // TODO: throw exception not supported field type (column type).
         }

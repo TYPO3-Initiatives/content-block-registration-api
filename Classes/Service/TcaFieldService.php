@@ -38,49 +38,28 @@ class TcaFieldService implements SingletonInterface
      */
     public function getMatchedTcaConfig(array $contentBlock, array $field) :array
     {
+        if (strpos(Constants::LIST_INPUT_FIELD_TYPES,$field['type']) !== false) {
+            return $this->getInputFieldTca($contentBlock, $field);
+        }
         switch ($field['type']) {
             case 'Checkbox':
                 return $this->getCheckboxFieldTca($contentBlock, $field);
             case 'Collection':
                 return $this->getCollectionFieldTca($contentBlock, $field);
-            case 'Color':
-                return $this->getInputFieldTca($contentBlock, $field);
-            case 'Date':
-                return $this->getInputFieldTca($contentBlock, $field);
-            case 'DateTime':
-                return $this->getInputFieldTca($contentBlock, $field);
-            case 'Email':
-                return $this->getInputFieldTca($contentBlock, $field);
             case 'Image':
                 return $this->getImageFieldTca($contentBlock, $field);
-            case 'Integer':
-               return $this->getInputFieldTca($contentBlock, $field);
-            case 'Money':
-                return $this->getInputFieldTca($contentBlock, $field);
             case 'MultiSelect':
                 return $this->getSelectFieldTca($contentBlock, $field);
-            case 'Number':
-                return $this->getInputFieldTca($contentBlock, $field);
-            case 'Percent':
-                return $this->getInputFieldTca($contentBlock, $field);
             case 'Radiobox':
                 return $this->getCheckboxFieldTca($contentBlock, $field);
             case 'Select':
                 return $this->getSelectFieldTca($contentBlock, $field);
-            case 'Tel':
-                return $this->getInputFieldTca($contentBlock, $field);
-            case 'Text':
-                return $this->getInputFieldTca($contentBlock, $field);
             case 'Textarea':
                 return $this->getTextareaFieldTca($contentBlock, $field);
             case 'TextMultiline':
                 return $this->getTextareaFieldTca($contentBlock, $field);
-            case 'Time':
-                return $this->getInputFieldTca($contentBlock, $field);
             case 'Toggle':
                 return $this->getCheckboxFieldTca($contentBlock, $field);
-            case 'Url':
-                return $this->getInputFieldTca($contentBlock, $field);
             default:
                 return []; // TODO: throw exception not supported field type (column type).
         }
@@ -415,7 +394,7 @@ class TcaFieldService implements SingletonInterface
 
             if (
                 strlen('' . $labelField['identifier']) > 0
-                && strpos('Color, Date, DateTime, Email, Integer, Money, Number, Percent, Tel, Text, Textarea, Time, Url', $labelField['type'])
+                && strpos(Constants::LIST_INPUT_FIELD_TYPES, $labelField['type']) !== false
             ) {
                 $labelFieldIdentifier = $this->dataService->uniqueColumnName($contentBlock['key'], $labelField['_identifier']);
                 $config['foreign_label'] = $labelFieldIdentifier;
