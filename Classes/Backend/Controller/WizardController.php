@@ -11,7 +11,13 @@ namespace Typo3Contentblocks\ContentblocksRegApi\Backend\Controller;
 
 use Symfony\Component\Yaml\Yaml;
 use TYPO3\CMS\Core\Core\Environment;
+use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Database\Schema\SchemaMigrator;
+use TYPO3\CMS\Core\Database\Schema\SqlReader;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extensionmanager\Utility\InstallUtility;
 use Typo3Contentblocks\ContentblocksRegApi\Constants;
+use Typo3Contentblocks\ContentblocksRegApi\Service\DatabaseService;
 
 /***
  *
@@ -149,7 +155,6 @@ class WizardController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 
                 if ($property === 'items') {
                     $tempItemsArrExploded = \explode(PHP_EOL, $propertyVal);
-                    $tempItemsArr = [];
                     foreach ($tempItemsArrExploded as $tempItem => $value) {
                         $tempItem = \explode(':', $value);
                         $tempField['properties'][$property][ $tempItem[0] ] = $tempItem[1];
@@ -240,7 +245,16 @@ class WizardController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 
         $this->addFlashMessage('The content block was created.', '', \TYPO3\CMS\Core\Messaging\AbstractMessage::OK);
         $this->addFlashMessage('Please clear all caches bevor you use the new content block.', '', \TYPO3\CMS\Core\Messaging\AbstractMessage::WARNING);
-        $this->addFlashMessage('You must compare and update database to add your new columns there.', '', \TYPO3\CMS\Core\Messaging\AbstractMessage::WARNING);
+
+        // Update database
+        $updateResult = GeneralUtility::makeInstance(DatabaseService::class)->addColumnsToCType($editorInterfaceYaml ['fields'], $contentBlock['packageName']);
+        if ($updateResult === true) {
+            $this->addFlashMessage('New columns created at the database.', '', \TYPO3\CMS\Core\Messaging\AbstractMessage::OK);
+        } elseif (is_array($updateResult) && isset($updateResult['error'])) {
+            $this->addFlashMessage('An error occured while trying to ubdate database: ' . $updateResult['error'], '', \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR);
+        } else {
+            $this->addFlashMessage('Could not update database. You must compare and update database to add your new columns there.', '', \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR);
+        }
 
         $this->redirect('new');
     }
