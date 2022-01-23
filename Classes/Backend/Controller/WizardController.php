@@ -251,7 +251,7 @@ class WizardController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
         if ($updateResult === true) {
             $this->addFlashMessage('New columns created at the database.', '', \TYPO3\CMS\Core\Messaging\AbstractMessage::OK);
         } elseif (is_array($updateResult) && isset($updateResult['error'])) {
-            $this->addFlashMessage('An error occured while trying to ubdate database: ' . $updateResult['error'], '', \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR);
+            $this->addFlashMessage('An error occured while trying to update database: ' . $updateResult['error'], '', \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR);
         } else {
             $this->addFlashMessage('Could not update database. You must compare and update database to add your new columns there.', '', \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR);
         }

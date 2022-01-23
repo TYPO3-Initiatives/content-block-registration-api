@@ -196,13 +196,13 @@ class DatabaseService implements SingletonInterface
         foreach ($sqlUpdateSuggestion as $updateSuggestions) {
             unset($updateSuggestions['tables_count'], $updateSuggestions['change_currentValue']);
             $updateSuggestions = array_merge(...array_values($updateSuggestions));
-            foreach ($updateSuggestions as $curretnStatement) {
+            foreach ($updateSuggestions as $currentStatement) {
                 if ($updateResult) {
                     try {
                         if (method_exists($connection, 'executeStatement')) {
-                            $connection->executeStatement($curretnStatement);
+                            $connection->executeStatement($currentStatement);
                         } else {
-                            $connection->executeUpdate($curretnStatement);
+                            $connection->executeUpdate($currentStatement);
                         }
                         $updateResult = true;
                     } catch (Exception $exception) {
