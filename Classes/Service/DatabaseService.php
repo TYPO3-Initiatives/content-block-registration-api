@@ -218,14 +218,16 @@ class DatabaseService implements SingletonInterface
     }
 
     /** public function execDatabaseSqlStatement
+     * Executes a sql $statement directly to the given $table.
      *
-     * $table is the table name.
+     * Returns true if successfull
+     * Returns an array ['error' => 'error message'] if something went wrong.
      *
      * @param string $statement
      * @param string $table
      * @return bool|array
      */
-    protected function execDatabaseSqlStatement(string $statement, string $table): ?bool
+    public function execDatabaseSqlStatement(string $statement, string $table): ?bool
     {
         if (strlen('' . $table) < 1 || strlen('' . $statement) < 1) {
             return false;
