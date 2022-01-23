@@ -146,7 +146,6 @@ class FlexformToDbColumnsUpdate implements UpgradeWizardInterface, RepeatableInt
             }
         }
 
-
         // move collections from Flexform to database column
         $sql = 'UPDATE ' . Constants::COLLECTION_FOREIGN_TABLE . '
             SET ' . Constants::COLLECTION_FOREIGN_MATCH_FIELD . ' =

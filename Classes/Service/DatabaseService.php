@@ -12,14 +12,11 @@ declare(strict_types=1);
 namespace Typo3Contentblocks\ContentblocksRegApi\Service;
 
 use Doctrine\DBAL\Exception;
-use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Database\ConnectionPool;
-use TYPO3\CMS\Core\Database\Event\AlterTableDefinitionStatementsEvent;
 use TYPO3\CMS\Core\Database\Schema\SchemaMigrator;
-use TYPO3\CMS\Core\Database\Schema\SqlReader;
+use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use Typo3Contentblocks\ContentblocksRegApi\Constants;
-use Typo3Contentblocks\ContentblocksRegApi\Service\YamlToSqlTranslationService;
 
 /** Class DatabaseService
  * Manages database updates e. g. add columns after creating a new content block.
@@ -77,7 +74,7 @@ class DatabaseService implements SingletonInterface
         $this->cType = $cType;
         foreach ($fields as $field) {
             if ($field['type'] == 'Collection') {
-                if (!$this->addColumnsToCollectionTable($field) ) {
+                if (!$this->addColumnsToCollectionTable($field)) {
                     return false;
                 }
             }
@@ -148,7 +145,6 @@ class DatabaseService implements SingletonInterface
             }
             $statementCollections .= " );\n";
         }
-
 
         // add tt_content fields
         if ($statementTtContent !== $sqlTtContentStatementStart && count($this->tt_contentFields) > 0) {

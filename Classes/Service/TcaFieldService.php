@@ -38,7 +38,7 @@ class TcaFieldService implements SingletonInterface
      */
     public function getMatchedTcaConfig(array $contentBlock, array $field) :array
     {
-        if (strpos(Constants::LIST_INPUT_FIELD_TYPES,$field['type']) !== false) {
+        if (strpos(Constants::LIST_INPUT_FIELD_TYPES, $field['type']) !== false) {
             return $this->getInputFieldTca($contentBlock, $field);
         }
         switch ($field['type']) {
