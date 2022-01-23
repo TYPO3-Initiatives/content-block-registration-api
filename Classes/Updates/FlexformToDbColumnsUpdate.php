@@ -21,6 +21,7 @@ use TYPO3\CMS\Install\Updates\RepeatableInterface;
 use TYPO3\CMS\Install\Updates\UpgradeWizardInterface;
 use Typo3Contentblocks\ContentblocksRegApi\Constants;
 use Typo3Contentblocks\ContentblocksRegApi\Service\ConfigurationService;
+use Typo3Contentblocks\ContentblocksRegApi\Service\DatabaseService;
 use Typo3Contentblocks\ContentblocksRegApi\Service\DataService;
 
 /**
@@ -76,24 +77,6 @@ class FlexformToDbColumnsUpdate implements UpgradeWizardInterface, RepeatableInt
      */
     public function executeUpdate(): bool
     {
-        // connect to database: Manual connection needed, because we need support of ExtractValue().
-        $db_host = $GLOBALS['TYPO3_CONF_VARS']['DB']['Connections']['Default']['host'];
-        $db_user = $GLOBALS['TYPO3_CONF_VARS']['DB']['Connections']['Default']['user'];
-        $db_password = $GLOBALS['TYPO3_CONF_VARS']['DB']['Connections']['Default']['password'];
-        $db_dbname = $GLOBALS['TYPO3_CONF_VARS']['DB']['Connections']['Default']['dbname'];
-        if (isset($GLOBALS['TYPO3_CONF_VARS']['DB']['Connections']['Default']['port']) && strlen('' . $GLOBALS['TYPO3_CONF_VARS']['DB']['Connections']['Default']['port']) > 0) {
-            $db_port = intval($GLOBALS['TYPO3_CONF_VARS']['DB']['Connections']['Default']['port']);
-            $db = mysqli_connect($db_host, $db_user, $db_password, $db_dbname, $db_port);
-        } else {
-            $db = mysqli_connect($db_host, $db_user, $db_password, $db_dbname);
-        }
-
-        // Check db connection
-        if (!$db) {
-            $this->logger->error('Could not connect to database in class ' . get_class($this) . ':' . __LINE__ . '.');
-            return false;
-        }
-
         // get all fields
         $configuration = GeneralUtility::makeInstance(ConfigurationService::class)->configuration();
         $dataService = GeneralUtility::makeInstance(DataService::class);
@@ -129,20 +112,22 @@ class FlexformToDbColumnsUpdate implements UpgradeWizardInterface, RepeatableInt
             (count($ttContentColumns) < 1 && count($collectionColumns) < 1)
             || (strlen('' . $collectionUpdateString) < 1 && strlen('' . $ttContentUpdateString) < 1)
         ) {
-            mysqli_close($db);
             return false;
         }
+
+        $databaseService = GeneralUtility::makeInstance(DatabaseService::class);
 
         // update tt_content
         $sql = '';
         if (count($ttContentColumns) > 0) {
             $sql = 'UPDATE tt_content SET ' . $ttContentUpdateString . ' WHERE ' . Constants::FLEXFORM_FIELD . ' LIKE \'' . Constants::UPGRADE_WIZARD_SEARCH_OLD_FLEXFORMS . '\';';
-            $result = $db->query($sql);
+            $result = $databaseService->execDatabaseSqlStatement($sql, 'tt_content');
             if ($result !== true) {
+                $error = ((is_array($result) && isset($result['error'])) ? $result['error'] : '');
                 $this->logger->error('Could not update tt_content in class ' . get_class($this) . ':' . __LINE__ . '.', [
-                    'sql' => $sql
+                    'sql' => $sql,
+                    'errorMsg' => $error
                 ]);
-                mysqli_close($db);
                 return false;
             }
         }
@@ -150,15 +135,17 @@ class FlexformToDbColumnsUpdate implements UpgradeWizardInterface, RepeatableInt
         $sql = '';
         if (count($collectionColumns) > 0) {
             $sql = 'UPDATE ' . Constants::COLLECTION_FOREIGN_TABLE . ' SET ' . $collectionUpdateString . ' WHERE ' . Constants::FLEXFORM_FIELD . ' LIKE \'' . Constants::UPGRADE_WIZARD_SEARCH_OLD_FLEXFORMS . '\';';
-            $result = $db->query($sql);
+            $result = $databaseService->execDatabaseSqlStatement($sql, Constants::COLLECTION_FOREIGN_TABLE);
             if ($result !== true) {
+                $error = ((is_array($result) && isset($result['error'])) ? $result['error'] : '');
                 $this->logger->error('Could not update ' . Constants::COLLECTION_FOREIGN_TABLE . ' in class ' . get_class($this) . ':' . __LINE__ . '.', [
-                    'sql' => $sql
+                    'sql' => $sql,
+                    'errorMsg' => $error
                 ]);
-                mysqli_close($db);
                 return false;
             }
         }
+
 
         // move collections from Flexform to database column
         $sql = 'UPDATE ' . Constants::COLLECTION_FOREIGN_TABLE . '
@@ -171,12 +158,13 @@ class FlexformToDbColumnsUpdate implements UpgradeWizardInterface, RepeatableInt
                     \'-\', \'_\'),
                 \'.\', \'_\')
             WHERE ' . Constants::FLEXFORM_FIELD . ' LIKE \'' . Constants::UPGRADE_WIZARD_SEARCH_OLD_FLEXFORMS . '\';';
-        $result = $db->query($sql);
+        $result = $databaseService->execDatabaseSqlStatement($sql, Constants::COLLECTION_FOREIGN_TABLE);
         if ($result !== true) {
+            $error = ((is_array($result) && isset($result['error'])) ? $result['error'] : '');
             $this->logger->error('Could not update ' . Constants::COLLECTION_FOREIGN_TABLE . ' in class ' . get_class($this) . ':' . __LINE__ . ' while process existing collections from flexform to database table columns.', [
-                'sql' => $sql
+                'sql' => $sql,
+                'errorMsg' => $error
             ]);
-            mysqli_close($db);
             return false;
         }
 
@@ -184,17 +172,25 @@ class FlexformToDbColumnsUpdate implements UpgradeWizardInterface, RepeatableInt
 
         // set tt_content.content_block to '\<?xml version="1.0" encoding="utf-8" standalone="yes" ?\>'
         $sql = 'UPDATE tt_content SET ' . Constants::FLEXFORM_FIELD . ' = \'\<?xml version="1.0" encoding="utf-8" standalone="yes" ?\>\' WHERE ' . Constants::FLEXFORM_FIELD . ' LIKE \'' . Constants::UPGRADE_WIZARD_SEARCH_OLD_FLEXFORMS . '\';';
-        $result = $db->query($sql);
+        $result = $databaseService->execDatabaseSqlStatement($sql, 'tt_content');
         if ($result !== true) {
-            mysqli_close($db);
+            $error = ((is_array($result) && isset($result['error'])) ? $result['error'] : '');
+            $this->logger->error('Could not reset tt_content.' . Constants::FLEXFORM_FIELD . ' flexform in class ' . get_class($this) . ':' . __LINE__ . '.', [
+                'sql' => $sql,
+                'errorMsg' => $error
+            ]);
             return false;
         }
 
         // set tx_contentblocks_reg_api_collection.content_block to NULL
         $sql = 'UPDATE ' . Constants::COLLECTION_FOREIGN_TABLE . ' SET ' . Constants::FLEXFORM_FIELD . ' = NULL WHERE ' . Constants::FLEXFORM_FIELD . ' LIKE \'' . Constants::UPGRADE_WIZARD_SEARCH_OLD_FLEXFORMS . '\';';
-        $result = $db->query($sql);
+        $result = $databaseService->execDatabaseSqlStatement($sql, Constants::COLLECTION_FOREIGN_TABLE);
         if ($result !== true) {
-            mysqli_close($db);
+            $error = ((is_array($result) && isset($result['error'])) ? $result['error'] : '');
+            $this->logger->error('Could not reset ' . Constants::COLLECTION_FOREIGN_TABLE . '.' . Constants::FLEXFORM_FIELD . ' flexform in class ' . get_class($this) . ':' . __LINE__ . ' while process existing collections from flexform to database table columns.', [
+                'sql' => $sql,
+                'errorMsg' => $error
+            ]);
             return false;
         }
 
