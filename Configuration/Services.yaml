@@ -33,6 +33,10 @@ services:
     autowire: true
     autoconfigure: false
     public: true
+  Typo3Contentblocks\ContentblocksRegApi\Service\DatabaseService:
+    autowire: true
+    autoconfigure: false
+    public: true
   Typo3Contentblocks\ContentblocksRegApi\Service\TcaFieldService:
     autowire: true
     autoconfigure: false
