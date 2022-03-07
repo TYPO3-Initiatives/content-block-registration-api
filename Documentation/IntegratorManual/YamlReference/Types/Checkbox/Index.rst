@@ -45,12 +45,3 @@ items
         'one': 'The first'
         'two': 'The second'
         'three': 'The third'
-
-
-required
-   :sep:`|` :aspect:`Required:` false
-   :sep:`|` :aspect:`Type:` boolean
-   :sep:`|` :aspect:`Default:` 'false'
-   :sep:`|`
-
-   If set, the field will become mandatory.
