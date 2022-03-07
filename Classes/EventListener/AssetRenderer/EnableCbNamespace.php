@@ -64,6 +64,7 @@ class EnableCbNamespace
     {
         $assets = $this->assetCollector->getStyleSheets($this->event->isPriority());
         foreach ($assets as $identifier => $asset) {
+            // @extensionScannerIgnoreLine
             $this->assetCollector->addStyleSheet($identifier, $this->mapUri($asset['source']));
         }
     }
