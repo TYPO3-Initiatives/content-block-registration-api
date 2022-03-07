@@ -169,7 +169,7 @@ class DatabaseService implements SingletonInterface
      * Or multiple columns:
      * CREATE TABLE tablename (column_name1 column_definition1, column_name2 column_definition2);
      *
-     * It is realy important that the statemnt is a CREATE TABLE statement.
+     * It is realy important that the statement is a CREATE TABLE statement.
      *
      * $table is the table name.
      *
