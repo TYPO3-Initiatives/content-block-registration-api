@@ -21,7 +21,11 @@ default
    :sep:`|` :aspect:`Default:` ''
    :sep:`|`
 
-   Default value set if a new record is created.
+   Default value set if a new record is created. As example, value 5 enabled
+   first and third checkbox.
+
+   Each bit corresponds to a check box. This is true even if there is only one
+   checkbox which which then maps to bit-0.
 
 items
    :sep:`|` :aspect:`Required:` true
