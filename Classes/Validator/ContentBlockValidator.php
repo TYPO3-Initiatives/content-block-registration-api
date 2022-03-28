@@ -11,7 +11,9 @@ declare(strict_types=1);
 
 namespace Typo3Contentblocks\ContentblocksRegApi\Validator;
 
+use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\SingletonInterface;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class ContentBlockValidator implements SingletonInterface
 {
@@ -24,5 +26,31 @@ class ContentBlockValidator implements SingletonInterface
         // TODO
         // we should check that there are no fields 'data' or 'cb' defined since these would clash
         // identifiers should not contain '.'
+    }
+
+    /**
+     * Checks if there are the needed files to prevent for errors.
+     *
+     * Throws on validation error
+     *
+     * @param string $cbConfiguration
+     */
+    public function validateCbPathStructure(string $cbPath): bool
+    {
+        // TODO
+        // we should check that there are no fields 'data' or 'cb' defined since these would clash
+        // identifiers should not contain '.'
+        // Throw a error
+        if (substr($cbPath, -1) !== '/') {
+            $cbPath .= '/';
+        }
+        if (
+            !file_exists($cbPath . 'composer.json')
+            || !file_exists($cbPath . 'EditorInterface.yaml')
+        ){
+            return false;
+        }
+
+        return true;
     }
 }
