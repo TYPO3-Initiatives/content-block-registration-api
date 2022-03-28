@@ -27,7 +27,6 @@ use Typo3Contentblocks\ContentblocksRegApi\Service\DataService;
 
 /**
  * Adds information about the current content block to variable "cb".
- * TODO: undecided yet which information should be included.
  */
 class CbProcessor implements DataProcessorInterface
 {
@@ -91,11 +90,6 @@ class CbProcessor implements DataProcessorInterface
             }
         }
 
-        // TODO: Check what is about localization?
-        // $maybeLocalizedUid = (int)(
-        //     $this->record['_LOCALIZED_UID'] ?? $this->record['uid']
-        // );
-
         $processedData = array_merge($processedData, $cbData);
         return $processedData;
     }
@@ -132,7 +126,7 @@ class CbProcessor implements DataProcessorInterface
         elseif ($fieldConf['type'] == 'Collection') {
             $cbData[$fieldConf['identifier']] = $this->_processCollection(
                 ((count($fieldConf['_path']) == 1) ? 'tt_content' : Constants::COLLECTION_FOREIGN_TABLE),
-                $record['uid'],
+                $record['_LOCALIZED_UID'] ?? $record['uid'],
                 $fieldConf
             );
         }
