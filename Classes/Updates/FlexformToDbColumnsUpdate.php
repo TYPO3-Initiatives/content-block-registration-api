@@ -124,6 +124,7 @@ class FlexformToDbColumnsUpdate implements UpgradeWizardInterface, RepeatableInt
             $result = $databaseService->execDatabaseSqlStatement($sql, 'tt_content');
             if ($result !== true) {
                 $error = ((is_array($result) && isset($result['error'])) ? $result['error'] : '');
+                // @extensionScannerIgnoreLine
                 $this->logger->error('Could not update tt_content in class ' . get_class($this) . ':' . __LINE__ . '.', [
                     'sql' => $sql,
                     'errorMsg' => $error
@@ -138,6 +139,7 @@ class FlexformToDbColumnsUpdate implements UpgradeWizardInterface, RepeatableInt
             $result = $databaseService->execDatabaseSqlStatement($sql, Constants::COLLECTION_FOREIGN_TABLE);
             if ($result !== true) {
                 $error = ((is_array($result) && isset($result['error'])) ? $result['error'] : '');
+                // @extensionScannerIgnoreLine
                 $this->logger->error('Could not update ' . Constants::COLLECTION_FOREIGN_TABLE . ' in class ' . get_class($this) . ':' . __LINE__ . '.', [
                     'sql' => $sql,
                     'errorMsg' => $error
@@ -160,6 +162,7 @@ class FlexformToDbColumnsUpdate implements UpgradeWizardInterface, RepeatableInt
         $result = $databaseService->execDatabaseSqlStatement($sql, Constants::COLLECTION_FOREIGN_TABLE);
         if ($result !== true) {
             $error = ((is_array($result) && isset($result['error'])) ? $result['error'] : '');
+            // @extensionScannerIgnoreLine
             $this->logger->error('Could not update ' . Constants::COLLECTION_FOREIGN_TABLE . ' in class ' . get_class($this) . ':' . __LINE__ . ' while process existing collections from flexform to database table columns.', [
                 'sql' => $sql,
                 'errorMsg' => $error
@@ -174,6 +177,7 @@ class FlexformToDbColumnsUpdate implements UpgradeWizardInterface, RepeatableInt
         $result = $databaseService->execDatabaseSqlStatement($sql, 'tt_content');
         if ($result !== true) {
             $error = ((is_array($result) && isset($result['error'])) ? $result['error'] : '');
+            // @extensionScannerIgnoreLine
             $this->logger->error('Could not reset tt_content.' . Constants::FLEXFORM_FIELD . ' flexform in class ' . get_class($this) . ':' . __LINE__ . '.', [
                 'sql' => $sql,
                 'errorMsg' => $error
@@ -186,6 +190,7 @@ class FlexformToDbColumnsUpdate implements UpgradeWizardInterface, RepeatableInt
         $result = $databaseService->execDatabaseSqlStatement($sql, Constants::COLLECTION_FOREIGN_TABLE);
         if ($result !== true) {
             $error = ((is_array($result) && isset($result['error'])) ? $result['error'] : '');
+            // @extensionScannerIgnoreLine
             $this->logger->error('Could not reset ' . Constants::COLLECTION_FOREIGN_TABLE . '.' . Constants::FLEXFORM_FIELD . ' flexform in class ' . get_class($this) . ':' . __LINE__ . ' while process existing collections from flexform to database table columns.', [
                 'sql' => $sql,
                 'errorMsg' => $error
