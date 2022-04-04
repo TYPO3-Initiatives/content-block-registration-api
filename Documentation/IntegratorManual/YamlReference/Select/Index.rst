@@ -42,6 +42,19 @@ items
         'two': 'The second'
         'three': 'The third'
 
+prependLabel
+   :sep:`|` :aspect:`Required:` false
+   :sep:`|` :aspect:`Type:` string
+   :sep:`|` :aspect:`Default:` ''
+   :sep:`|`
+
+   Label that is prepended before the select items, e.g. "Please choose ..."
+
+   Example:
+
+   .. code-block:: yaml
+
+      prependLabel: 'Please choose'
 
 required
    :sep:`|` :aspect:`Required:` false
@@ -67,4 +80,5 @@ Example
             'one': 'The first'
             'two': 'The second'
             'three': 'The third'
+          prependLabel: 'Please choose'
           required: true

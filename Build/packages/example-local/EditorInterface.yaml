@@ -134,6 +134,7 @@ fields:
         'one': 'The first'
         'two': 'The second'
         'three': 'The third'
+      prependLabel: 'Please choose'
   - identifier: selectSideBySide
     type: MultiSelect
     properties:

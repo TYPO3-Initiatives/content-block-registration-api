@@ -434,6 +434,11 @@ class TcaFieldService implements SingletonInterface
 
         if (isset($field['properties']['items'])) {
             $items = [];
+
+            if (isset($field['properties']['prependLabel'])) {
+                $items[] = [$field['properties']['prependLabel']];
+            }
+
             foreach ($field['properties']['items'] as $key => $value) {
                 $items[] = [ $value, $key];
             }
