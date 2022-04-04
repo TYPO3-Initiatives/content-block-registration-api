@@ -43,8 +43,21 @@ class ContentBlockValidator implements SingletonInterface
             $cbPath .= '/';
         }
         if (
-            !file_exists($cbPath . 'composer.json')
-            || !file_exists($cbPath . 'EditorInterface.yaml')
+            !file_exists($cbPath . 'composer.json') // is there a composer.json?
+            || !file_exists($cbPath . 'EditorInterface.yaml') // is there a EditorInterface.yaml?
+            || (    // Is there a ContentBlockIcon?
+                    !file_exists($cbPath . 'ContentBlockIcon.svg')
+                    && !file_exists($cbPath . 'ContentBlockIcon.png')
+                    && !file_exists($cbPath . 'ContentBlockIcon.gif')
+                )
+            || (    // Is the ContentBlock of type 'typo3-cms-contentblock'?
+                    strpos(file_get_contents($cbPath . 'composer.json'), '"type": "typo3-cms-contentblock"') === false
+                    && strpos(file_get_contents($cbPath . 'composer.json'), "'type': 'typo3-cms-contentblock'") === false
+                )
+            || (    // Is there a translation file?
+                    !file_exists($cbPath . 'src/Language/Default.xlf')
+                    && !file_exists($cbPath . 'src/Language/EditorInterface.xlf')
+                )
         ) {
             return false;
         }
