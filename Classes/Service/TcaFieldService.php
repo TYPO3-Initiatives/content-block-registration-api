@@ -171,7 +171,7 @@ class TcaFieldService implements SingletonInterface
             $config['autocomplete'] = $field['properties']['autocomplete'];
         }
         if (isset($field['properties']['displayAge'])) {
-            $config['displayAge'] = $field['properties']['displayAge'];
+            $config['disableAgeDisplay'] = !$field['properties']['displayAge'];
         }
 
         return [
