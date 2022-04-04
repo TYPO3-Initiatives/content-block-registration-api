@@ -45,7 +45,7 @@ type
    :sep:`|` :aspect:`Default:` ''
    :sep:`|`
 
-   The field's type. See :ref:`field_types`.
+   The field's type. See :ref:`field types`.
 
 properties
    :sep:`|` :aspect:`Required:` true
@@ -53,7 +53,39 @@ properties
    :sep:`|` :aspect:`Default:` ''
    :sep:`|`
 
-   Array of properties that are dependent on the :ref:`field_types`.
+   Array of properties that are dependent on the :ref:`field types`.
+
+
+.. _field types:
+
+Field types
+-----------
+
+.. toctree::
+	:maxdepth: 3
+	:titlesonly:
+	:glob:
+
+	Checkbox/Index
+	Collection/Index
+	Color/Index
+	Date/Index
+	DateTime/Index
+	Email/Index
+	Image/Index
+	Integer/Index
+	Money/Index
+	MultiSelect/Index
+	Number/Index
+	Percent/Index
+	Radiobox/Index
+	Select/Index
+	Tel/Index
+	Text/Index
+	Textarea/Index
+	Time/Index
+	Toggle/Index
+	Url/Index
 
 
 Field grouping
@@ -70,13 +102,6 @@ the key `palettes` Example:
         fields:
         # …
 
-See :ref:`yaml_reference`.
-
 .. attention::
    **Not yet implemented!** See `feature request <https://github.com/
    TYPO3-Initiatives/content-block-registration-api/issues/22>`__
-
-.. toctree::
-	:hidden:
-
-	Types/Index
