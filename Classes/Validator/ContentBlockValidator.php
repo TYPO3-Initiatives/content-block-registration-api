@@ -11,9 +11,7 @@ declare(strict_types=1);
 
 namespace Typo3Contentblocks\ContentblocksRegApi\Validator;
 
-use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\SingletonInterface;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class ContentBlockValidator implements SingletonInterface
 {
@@ -47,7 +45,7 @@ class ContentBlockValidator implements SingletonInterface
         if (
             !file_exists($cbPath . 'composer.json')
             || !file_exists($cbPath . 'EditorInterface.yaml')
-        ){
+        ) {
             return false;
         }
 
