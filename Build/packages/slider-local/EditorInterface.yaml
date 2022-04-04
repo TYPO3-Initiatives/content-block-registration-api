@@ -3,12 +3,6 @@ fields:
   - identifier: slides
     type: Collection
     properties:
-      allowAdd: true
-      allowMove: true
-      allowDelete: true
-      minItems: 1
-      maxItems: 5
-      required:  true
       fields:
         - identifier: image
           type: Image
@@ -28,6 +22,8 @@ fields:
           type: Url
           properties:
             linkTypes: [page, external]
+      maxItems: 5
+      minItems: 1
   - identifier: autoplay
     type: Toggle
     properties:
