@@ -173,12 +173,15 @@ class WizardController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
         /* +++++  EditorPreview.html  +++++ */
 
         file_put_contents($cbBasePath . 'src/EditorPreview.html', '
-<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:be="http://typo3.org/ns/TYPO3/CMS/Backend/ViewHelpers" data-namespace-typo3-fluid="true">
 
 <f:asset.css identifier="content-block-' . $contentBlock['packageName'] . '-be" href="CB:' . $contentBlock['packageName'] . '/dist/EditorPreview.css"/>
-<div class="' . $contentBlock['packageName'] . '">
-    ' . $fieldsForTemplate . '
-</div>
+
+<be:link.editRecord uid="{data.uid}" table="tt_content" id="element-tt_content-{data.uid}">
+    <div class="' . $contentBlock['packageName'] . '">
+        ' . $fieldsForTemplate . '
+    </div>
+</be:link.editRecord>
 
 </html>
         ');
