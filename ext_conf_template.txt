@@ -5,5 +5,8 @@
 # cat=Features; type=string; label=contentBlockDefinition: Use our own definition, e. g. EXT:sitepackage/Configuration/TypoScript/contentBlock.typoscript
 contentBlockDefinition = 0
 
-# cat=Features; type=boolean; label=enableLayoutOptions: show layout (frame) options palette known from fluid_styled_content and bootstrap_package
+# cat=Features; type=boolean; label=enableLayoutOptions: Show layout (frame) options palette known from fluid_styled_content and bootstrap_package
 enableLayoutOptions = 0
+
+# cat=Features; type=boolean; label=disableBackendModul: On production, you should disable the backend module for creating content blocks
+disableBackendModul = 0
