@@ -73,7 +73,6 @@ fields:
         allowedExtensions: 'pdf'
         blindLinkFields: 'target,title'
         blindLinkOptions: 'folder,spec,telefone,mail'
-        windowOpenParameters: 'height=800,width=600'
       max: 150
       placeholder: 'Placeholder text'
       size: 20

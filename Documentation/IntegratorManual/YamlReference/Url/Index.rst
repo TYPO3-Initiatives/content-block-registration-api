@@ -58,10 +58,6 @@ linkPopup
       values are `file`, `folder`, `mail`, `page`, `spec`, `telephone` and `url`.
       By default, all link options are displayed.
 
-   windowOpenParameters (string)
-      Allows to set a different size of the popup, defaults to
-      `height=800,width=600,status=0,menubar=0,scrollbars=1`.
-
    Example:
 
    .. code-block:: yaml
@@ -152,7 +148,6 @@ Example
             allowedExtensions: 'pdf'
             blindLinkFields: 'target,title'
             blindLinkOptions: 'folder,spec,telefone,mail'
-            windowOpenParameters: 'height=800,width=600'
           max: 150
           placeholder: 'Placeholder text'
           required: false
