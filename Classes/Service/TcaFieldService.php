@@ -506,7 +506,7 @@ class TcaFieldService implements SingletonInterface
         if ($isTime && strlen('' . $input) > 0) {
             $input = '1970-01-01 ' . $input;
         }
-        if (strtotime($input)) {
+        if ($input !== null && strtotime($input)) {
             return strtotime($input);
         }
         return 0;
