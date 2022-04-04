@@ -18,6 +18,41 @@ Properties
 
 .. rst-class:: dl-parameters
 
+collapseAll
+   :sep:`|` :aspect:`Required:` false
+   :sep:`|` :aspect:`Type:` boolean
+   :sep:`|` :aspect:`Default:` 'true'
+   :sep:`|`
+
+   Show all child-records collapsed (if false, all are expanded)
+
+enabledControls
+   :sep:`|` :aspect:`Required:` false
+   :sep:`|` :aspect:`Type:` array
+   :sep:`|` :aspect:`Default:` 'true'
+   :sep:`|`
+
+   Associative array with the keys ‘info’, ‘new’, ‘dragdrop’, ‘sort’, ‘hide’,
+   ‘delete’, ‘localize’. If the accordant values are set to a boolean value
+   (true or false), the control is shown or hidden in the header of each record.
+
+enableSorting
+   :sep:`|` :aspect:`Required:` false
+   :sep:`|` :aspect:`Type:` boolean
+   :sep:`|` :aspect:`Default:` 'true'
+   :sep:`|`
+
+   Activate drag & drop.
+
+expandSingle
+   :sep:`|` :aspect:`Required:` false
+   :sep:`|` :aspect:`Type:` boolean
+   :sep:`|` :aspect:`Default:` 'true'
+   :sep:`|`
+
+   Show only one child-record expanded each time. If a collapsed record is clicked,
+   the currently open one collapses and the clicked one expands.
+
 fields
    :sep:`|` :aspect:`Required:` true
    :sep:`|` :aspect:`Type:` array
@@ -89,6 +124,16 @@ Example
       - identifier: slides
         type: Collection
         properties:
+          collapseAll: true
+          enabledControls:
+            delete: true
+            dragdrop: true
+            new: true
+            hide: true
+            info: true
+            localize: true
+          enableSorting: true
+          expandSingle: true
           fields:
             - identifier: image
               type: Image

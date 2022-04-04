@@ -358,16 +358,16 @@ class TcaFieldService implements SingletonInterface
                 Constants::COLLECTION_FOREIGN_MATCH_FIELD => $uniqueFieldIdentifier,
             ],
             'appearance' => [
-                'collapseAll' => 1,
-                'expandSingle' => 1,
-                'useSortable' => 1,
+                'collapseAll' => !isset($field['properties']['collapseAll']) || $field['properties']['collapseAll'],
+                'expandSingle' => !isset($field['properties']['expandSingle']) || $field['properties']['expandSingle'],
+                'useSortable' => !isset($field['properties']['enableSorting']) || $field['properties']['enableSorting'],
                 'enabledControls' => [
-                    'delete' => 1,
-                    'dragdrop' => 1,
-                    'new' => 1,
-                    'hide' => 1,
-                    'info' => 1,
-                    'localize' => 1,
+                    'delete' => !isset($field['properties']['enabledControls']['delete']) || $field['properties']['enabledControls']['delete'],
+                    'dragdrop' => !isset($field['properties']['enabledControls']['dragdrop']) || $field['properties']['enabledControls']['dragdrop'],
+                    'new' => !isset($field['properties']['enabledControls']['new']) || $field['properties']['enabledControls']['new'],
+                    'hide' => !isset($field['properties']['enabledControls']['hide']) || $field['properties']['enabledControls']['hide'],
+                    'info' => !isset($field['properties']['enabledControls']['info']) || $field['properties']['enabledControls']['info'],
+                    'localize' => !isset($field['properties']['enabledControls']['localize']) || $field['properties']['enabledControls']['localize']
                 ],
             ],
             'overrideChildTca' => [
