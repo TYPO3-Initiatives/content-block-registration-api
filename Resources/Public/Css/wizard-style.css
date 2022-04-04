@@ -12,13 +12,13 @@ textarea#cb-field-items {width: 430px; height: 150px;}
 
 .advanced-settings-optional {display: none;}
 
-.step-4.Text .advanced-settings-optional.Text, 
-.step-4.Textarea .advanced-settings-optional.Textarea, 
+.step-4.Text .advanced-settings-optional.Text,
+.step-4.Textarea .advanced-settings-optional.Textarea,
 .step-4.Image .advanced-settings-optional.Image,
-.step-4.Url .advanced-settings-optional.Url, 
-.step-4.Select .advanced-settings-optional.Select, 
+.step-4.Url .advanced-settings-optional.Url,
+.step-4.Select .advanced-settings-optional.Select,
 .step-4.MultiSelect .advanced-settings-optional.MultiSelect,
-.step-4.Checkbox .advanced-settings-optional.Checkbox, 
+.step-4.Checkbox .advanced-settings-optional.Checkbox,
 .step-4.Radiobox .advanced-settings-optional.Radiobox
  {display: initial;}
 
@@ -32,7 +32,7 @@ textarea#cb-field-items {width: 430px; height: 150px;}
     border-bottom: 1px solid #fff;
 }
 .new-block .step.open {
-    max-height: 700px;
+    max-height: 750px;
     border-bottom: 1px solid #aeaeae;
 }
 
@@ -50,12 +50,12 @@ textarea#cb-field-items {width: 430px; height: 150px;}
 		transform: scale(0.95);
 		box-shadow: 0 0 0 0 rgba(222, 0, 0, 0.7);
 	}
-	
+
 	70% {
 		transform: scale(1);
 		box-shadow: 0 0 0 10px rgba(255, 0, 0, 0);
 	}
-	
+
 	100% {
 		transform: scale(0.95);
 		box-shadow: 0 0 0 0 rgba(255, 0, 0, 0);
