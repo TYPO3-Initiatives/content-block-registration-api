@@ -79,3 +79,22 @@ trim
    :sep:`|`
 
    If set, the PHP trim function is applied on the field's content.
+
+Example
+=======
+
+.. code-block:: yaml
+
+    group: common
+    fields:
+      - identifier: date
+        type: Date
+        properties:
+          default: '15:30'
+          displayAge: true
+          range:
+            lower: '06:01'
+            upper: '17:59'
+          required: false
+          size: 20
+          trim: true

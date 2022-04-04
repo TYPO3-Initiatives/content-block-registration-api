@@ -41,3 +41,19 @@ items
         'one': 'The first'
         'two': 'The second'
         'three': 'The third'
+
+Example
+=======
+
+.. code-block:: yaml
+
+    group: common
+    fields:
+      - identifier: radioboxes
+        type: Radiobox
+        properties:
+          default: 'two'
+          items:
+            'one': 'The first'
+            'two': 'The second'
+            'three': 'The third'

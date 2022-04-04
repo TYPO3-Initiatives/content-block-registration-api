@@ -135,3 +135,30 @@ valuePicker
         items:
           'https://www.typo3.org': TYPO3 CMS
           'https://www.typo3.com': TYPO3 GmbH
+
+Example
+=======
+
+.. code-block:: yaml
+
+    group: common
+    fields:
+      - identifier: url
+        type: Url
+        properties:
+          autocomplete: true
+          default: 'https://typo3.org'
+          linkPopup:
+            allowedExtensions: 'pdf'
+            blindLinkFields: 'target,title'
+            blindLinkOptions: 'folder,spec,telefone,mail'
+            windowOpenParameters: 'height=800,width=600'
+          max: 150
+          placeholder: 'Placeholder text'
+          required: false
+          size: 20
+          trim: true
+          valuePicker:
+            items:
+              'https://www.typo3.org': TYPO3 CMS
+              'https://www.typo3.com': TYPO3 GmbH

@@ -1,5 +1,6 @@
 .. include:: /Includes.rst.txt
 .. _field_type_checkbox:
+.. rst-class:: dl-parameters
 
 ========
 Checkbox
@@ -12,8 +13,6 @@ It corresponds with the TCA `type='check'` (default).
 
 Properties
 ==========
-
-.. rst-class:: dl-parameters
 
 default
    :sep:`|` :aspect:`Required:` false
@@ -45,3 +44,19 @@ items
         'one': 'The first'
         'two': 'The second'
         'three': 'The third'
+
+Example
+=======
+
+.. code-block:: yaml
+
+    group: common
+    fields:
+      - identifier: checkboxes
+        type: Checkbox
+        properties:
+          items:
+            'one': 'The first'
+            'two': 'The second'
+            'three': 'The third'
+          default: 2

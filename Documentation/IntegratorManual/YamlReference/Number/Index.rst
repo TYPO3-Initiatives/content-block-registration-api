@@ -95,3 +95,26 @@ valuePicker
           100: 100
           250: 250
           500: 500
+
+Example
+=======
+
+.. code-block:: yaml
+
+    group: common
+    fields:
+      - identifier: number
+        type: Number
+        properties:
+          default: 10
+          size: 20
+          range:
+            lower: 10
+            upper: 999
+          required: true
+          trim: true
+          valuePicker:
+            items:
+              100: 100
+              250: 250
+              500: 500

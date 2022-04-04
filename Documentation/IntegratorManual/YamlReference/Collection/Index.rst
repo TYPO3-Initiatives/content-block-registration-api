@@ -40,6 +40,24 @@ fields
         - identifier: image
           type: Image
 
+maxItems
+   :sep:`|` :aspect:`Required:` false
+   :sep:`|` :aspect:`Type:` integer
+   :sep:`|` :aspect:`Default:` ''
+   :sep:`|`
+
+   Maximum number of child items. Defaults to a high value. JavaScript record
+   validation prevents the record from being saved if the limit is not satisfied.
+
+minItems
+   :sep:`|` :aspect:`Required:` false
+   :sep:`|` :aspect:`Type:` integer
+   :sep:`|` :aspect:`Default:` ''
+   :sep:`|`
+
+   Minimum number of child items. Defaults to 0. JavaScript record validation
+   prevents the record from being saved if the limit is not satisfied.
+
 useAsLabel
    :sep:`|` :aspect:`Required:` true
    :sep:`|` :aspect:`Type:` array
@@ -61,20 +79,25 @@ useAsLabel
         - identifier: image
           type: Image
 
-maxItems
-   :sep:`|` :aspect:`Required:` false
-   :sep:`|` :aspect:`Type:` integer
-   :sep:`|` :aspect:`Default:` ''
-   :sep:`|`
+Example
+=======
 
-   Maximum number of child items. Defaults to a high value. JavaScript record
-   validation prevents the record from being saved if the limit is not satisfied.
+.. code-block:: yaml
 
-minItems
-   :sep:`|` :aspect:`Required:` false
-   :sep:`|` :aspect:`Type:` integer
-   :sep:`|` :aspect:`Default:` ''
-   :sep:`|`
-
-   Minimum number of child items. Defaults to 0. JavaScript record validation
-   prevents the record from being saved if the limit is not satisfied.
+    group: common
+    fields:
+      - identifier: slides
+        type: Collection
+        properties:
+          fields:
+            - identifier: image
+              type: Image
+              properties:
+                minItems: 1
+                maxItems: 1
+                required:  true
+            - identifier: title
+              type: Text
+          maxItems: 5
+          minItems: 1
+          useAsLabel: title

@@ -81,3 +81,24 @@ valuePicker
           '#FF0000': Red
           '#008000': Green
           '#0000FF': Blue
+
+Example
+=======
+
+.. code-block:: yaml
+
+    group: common
+    fields:
+      - identifier: color
+        type: Color
+        properties:
+          autocomplete: true
+          default: '#0000aa'
+          required: false
+          size: 5
+          trim: true
+          valuePicker:
+            items:
+              '#FF0000': Red
+              '#008000': Green
+              '#0000FF': Blue

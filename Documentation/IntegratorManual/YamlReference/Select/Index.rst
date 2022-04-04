@@ -50,3 +50,21 @@ required
    :sep:`|`
 
    If set, the field will become mandatory.
+
+
+Example
+=======
+
+.. code-block:: yaml
+
+    group: common
+    fields:
+      - identifier: select
+        type: Select
+        properties:
+          default: 'one'
+          items:
+            'one': 'The first'
+            'two': 'The second'
+            'three': 'The third'
+          required: true

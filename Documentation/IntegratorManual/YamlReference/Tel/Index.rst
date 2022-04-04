@@ -81,3 +81,25 @@ valuePicker
           '+49 111 111111-11': Contact 1
           '+49 111 111111-12': Contact 2
           '+49 111 111111-13': Contact 3
+
+
+Example
+=======
+
+.. code-block:: yaml
+
+    group: common
+    fields:
+      - identifier: tel
+        type: Tel
+        properties:
+          autocomplete: true
+          default: 0
+          required: false
+          size: 20
+          trim: true
+          valuePicker:
+            items:
+              '+49 111 111111-11': Contact 1
+              '+49 111 111111-12': Contact 2
+              '+49 111 111111-13': Contact 3

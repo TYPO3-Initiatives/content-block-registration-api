@@ -40,3 +40,17 @@ required
    :sep:`|`
 
    If set, the field will become mandatory.
+
+Example
+=======
+
+.. code-block:: yaml
+
+    group: common
+    fields:
+      - identifier: image
+        type: Image
+        properties:
+            maxItems: 2
+            minItems: 1
+            required: true

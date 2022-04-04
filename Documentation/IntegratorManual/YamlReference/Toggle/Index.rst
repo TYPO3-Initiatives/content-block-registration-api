@@ -56,10 +56,19 @@ invertStateDisplay
 
       invertStateDisplay: true
 
-required
-   :sep:`|` :aspect:`Required:` false
-   :sep:`|` :aspect:`Type:` boolean
-   :sep:`|` :aspect:`Default:` 'false'
-   :sep:`|`
+Example
+=======
 
-   If set, the field will become mandatory.
+.. code-block:: yaml
+
+    group: common
+    fields:
+      - identifier: toggleInverted
+        type: Toggle
+        properties:
+          default: 'one'
+          items:
+            'one': 'The first'
+            'two': 'The second'
+            'three': 'The third'
+          invertStateDisplay: true

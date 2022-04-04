@@ -26,11 +26,12 @@ default
 displayAge
    :sep:`|` :aspect:`Required:` false
    :sep:`|` :aspect:`Type:` boolean
-   :sep:`|` :aspect:`Default:` false
+   :sep:`|` :aspect:`Default:` true
    :sep:`|`
 
    If set, enables the display of the age (p.e. “2015-08-30 (-27 days)”)
-   of date fields.
+   of date fields. Invert state of TCA's disableAgeDisplay property.
+
 
 range
    :sep:`|` :aspect:`Required:` false
@@ -79,3 +80,22 @@ trim
    :sep:`|`
 
    If set, the PHP trim function is applied on the field's content.
+
+Example
+=======
+
+.. code-block:: yaml
+
+    group: common
+    fields:
+      - identifier: datetime
+        type: DateTime
+        properties:
+          default: '2020-12-12'
+          displayAge: true
+          range:
+            lower: '2019-01-31 12:00:00'
+            upper: '2040-01-31 12:00:00'
+          required: false
+          size: 20
+          trim: true

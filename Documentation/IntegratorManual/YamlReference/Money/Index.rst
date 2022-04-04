@@ -65,3 +65,22 @@ valuePicker
           100: 100
           250: 250
           500: 500
+
+Example
+=======
+
+.. code-block:: yaml
+
+    group: common
+    fields:
+      - identifier: money
+        type: Money
+        properties:
+          size: 20
+          required: true
+          trim: true
+          valuePicker:
+            items:
+              100: 100
+              250: 250
+              500: 500

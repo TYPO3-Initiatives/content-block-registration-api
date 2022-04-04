@@ -110,3 +110,23 @@ trim
    :sep:`|`
 
    If set, the PHP trim function is applied on the field's content.
+
+Example
+=======
+
+.. code-block:: yaml
+
+    group: common
+    fields:
+      - identifier: textarea
+        type: Textarea
+        properties:
+          cols: 40
+          default: 'Default value'
+          enableRichtext: true
+          max: 150
+          placeholder: 'Placeholder text'
+          richtextConfiguration: default
+          rows: 15
+          required: false
+          trim: true

@@ -91,3 +91,25 @@ valuePicker
           'contact_1@example.com': Contact 1
           'contact_2@example.com': Contact 2
           'contact_3@example.com': Contact 3
+
+Example
+=======
+
+.. code-block:: yaml
+
+    group: common
+    fields:
+      - identifier: email
+        type: Email
+        properties:
+          autocomplete: true
+          default: 'developer@localhost'
+          placeholder: 'Enter your email address'
+          size: 20
+          required: true
+          trim: true
+          valuePicker:
+            items:
+              'contact_1@example.com': Contact 1
+              'contact_2@example.com': Contact 2
+              'contact_3@example.com': Contact 3

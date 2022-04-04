@@ -119,3 +119,29 @@ valuePicker
           25: 25
           50: 50
           100: 100
+
+Example
+=======
+
+.. code-block:: yaml
+
+    group: common
+    fields:
+      - identifier: percent
+        type: Percent
+        properties:
+          default: 0
+          range:
+            lower: 0
+            upper: 100
+          required: true
+          size: 20
+          slider:
+            step: 1
+            width: 100
+          trim: true
+          valuePicker:
+            items:
+              25: 25
+              50: 50
+              100: 100

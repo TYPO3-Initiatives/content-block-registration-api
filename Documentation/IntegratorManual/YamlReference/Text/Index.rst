@@ -98,3 +98,26 @@ valuePicker
         items:
           'Want to join our team? Take the initiative!': Job offer general
           'We are looking for ...': Job offer specific
+
+
+Example
+=======
+
+.. code-block:: yaml
+
+    group: common
+    fields:
+      - identifier: text
+        type: Text
+        properties:
+          autocomplete: false
+          default: 'Default value'
+          max: 15
+          placeholder: 'Placeholder text'
+          required: false
+          size: 20
+          trim: true
+          valuePicker:
+            items:
+              'Want to join our team? Take the initiative!': Job offer general
+              'We are looking for ...': Job offer specific

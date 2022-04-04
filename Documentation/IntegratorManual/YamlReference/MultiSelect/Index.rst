@@ -75,3 +75,23 @@ size
    :sep:`|`
 
    Abstract value for the width of the `<input>` field.
+
+Example
+=======
+
+.. code-block:: yaml
+
+    group: common
+    fields:
+      - identifier: selectSideBySide
+        type: MultiSelect
+        properties:
+          default: 'one'
+          items:
+            'one': 'The first'
+            'two': 'The second'
+            'three': 'The third'
+          maxItems: 2
+          minItems: 1
+          required: true
+          size: 5
