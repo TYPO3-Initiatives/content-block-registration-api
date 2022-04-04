@@ -45,7 +45,7 @@ type
    :sep:`|` :aspect:`Default:` ''
    :sep:`|`
 
-   The field's type. See :ref:`field types`.
+   The field's type. See :ref:`field_types`.
 
 properties
    :sep:`|` :aspect:`Required:` true
@@ -53,10 +53,10 @@ properties
    :sep:`|` :aspect:`Default:` ''
    :sep:`|`
 
-   Array of properties that are dependent on the :ref:`field types`.
+   Array of properties that are dependent on the :ref:`field_types`.
 
 
-.. _field types:
+.. _field_types:
 
 Field types
 -----------

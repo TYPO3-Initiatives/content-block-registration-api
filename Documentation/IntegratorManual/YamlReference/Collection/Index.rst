@@ -25,7 +25,7 @@ fields
    :sep:`|`
 
    Configures a set of fields as repeatable child objects. All fields defined in
-   :ref:`field_types` are possible as children. However, consider not to have
+   field types are possible as children. However, consider not to have
    too many nested Collection fields to avoid performance issues. Content Blocks
    are not intended to represent complex data structures. Consider to create
    custom tables for these cases.
