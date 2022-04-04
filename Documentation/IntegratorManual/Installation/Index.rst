@@ -109,3 +109,31 @@ Non-composer mode
 
 A content block can also be added manually in `typo3conf/contentBlocks` in
 non-composer mode.
+
+
+Security
+========
+
+.. attention::
+   You'll need to modify your .htaccess or nginx configuration to secure the src
+   folder of your content blocks.
+
+In .htaccess:
+
+.. code-block:: code
+
+    # Add your own rules here.
+    <If "%{REQUEST_URI} =~ m#^/typo3conf/contentBlocks/.*\.(yaml|html|xlf|json)#">
+        Order allow,deny
+        Deny from all
+        Satisfy All
+    </If>
+
+
+In nginx:
+
+.. code-block:: code
+
+    location ~ (?:typo3conf/contentBlocks)/[^/]+/(?:src?)/ {
+        deny all;
+    }
