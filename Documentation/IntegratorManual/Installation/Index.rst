@@ -23,6 +23,22 @@ extension and a composer plugin.
 #. Add new database fields in your TYPO3 backend:
    :guilabel:`Maintenance > Analyze Database Structure`
 
+.. attention::
+   If you use composer >= 2.0, you will need to allow the content blocks composer
+   plugin in your projects `composer.json`. Plugins, that are not not explicitly
+   allowed, will be blocked. See `here <https://getcomposer.org/doc/06-config.md#allow-plugins>`__
+   for more information.
+
+.. code-block:: json
+
+    {
+        "config": {
+            "allow-plugins": {
+                "typo3-contentblocks/composer-plugin": true
+            }
+        }
+    }
+
 Extension configuration
 -----------------------
 

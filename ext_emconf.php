@@ -1,7 +1,7 @@
 <?php
 
 $EM_CONF[$_EXTKEY] = [
-    'title' => 'Structured Content Registration API',
+    'title' => 'Content Blocks Registration API',
     'description' => 'This API provides an easy and reliable way to register content blocks as standalone packages.',
     'category' => 'fe',
     'author' => 'TYPO3 Structured Content Initiative',
