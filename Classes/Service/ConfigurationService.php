@@ -72,7 +72,10 @@ class ConfigurationService implements SingletonInterface
 
         $contentBlockConfiguration = [];
         foreach ($cbsFinder as $cbDir) {
-            if ($this->contentBlockValidator->validateCbPathStructure($cbDir->getPathname())) {
+            // check if the content block can be processed (throws exception)
+            $validationresult = $this->contentBlockValidator->validateCbPathStructure($cbDir->getPathname());
+
+            if ($validationresult) {
                 $_cbConfiguration = $this->byPath($cbDir);
                 $contentBlockConfiguration [$_cbConfiguration['CType']] = $_cbConfiguration;
             }
