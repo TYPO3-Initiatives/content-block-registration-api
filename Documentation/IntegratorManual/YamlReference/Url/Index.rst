@@ -8,7 +8,7 @@ Url
 The "Url" type generates a simple `<input>` field, which handles different kinds
 of links.
 
-It corresponds with the TCA `type='input'` (inputLink).
+It corresponds with the TCA `type='input'` and `renderType='inputLink'`.
 
 
 Properties
