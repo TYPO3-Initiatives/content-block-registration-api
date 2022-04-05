@@ -16,24 +16,26 @@ use TYPO3\CMS\Core\Resource\File;
 use TYPO3\CMS\Core\SingletonInterface;
 use Typo3Contentblocks\ContentblocksRegApi\Constants;
 
-/* Class TcaFieldService
+/** Class TcaFieldService
  * Manage to get the TCA configuration for each field.
  *
  */
 class TcaFieldService implements SingletonInterface
 {
-
     /**
      * @var DataService
      */
     protected $dataService;
 
+    /**
+     * @param DataService $dataService
+     */
     public function __construct(DataService $dataService)
     {
         $this->dataService = $dataService;
     }
 
-    /*
+    /**
      * Method getMatchedTcaConfig
      * Returns the matching TCA configuration as it is, as an array.
      * Supports the dynamically generated TCA.
@@ -45,25 +47,22 @@ class TcaFieldService implements SingletonInterface
         }
         switch ($field['type']) {
             case 'Checkbox':
+            case 'Radiobox':
+            case 'Toggle':
                 return $this->getCheckboxFieldTca($contentBlock, $field);
             case 'Collection':
                 return $this->getCollectionFieldTca($contentBlock, $field);
             case 'Image':
                 return $this->getImageFieldTca($contentBlock, $field);
+            case 'Select':
             case 'MultiSelect':
                 return $this->getSelectFieldTca($contentBlock, $field);
-            case 'Radiobox':
-                return $this->getCheckboxFieldTca($contentBlock, $field);
-            case 'Select':
-                return $this->getSelectFieldTca($contentBlock, $field);
+            case 'TextMultiline':
             case 'Textarea':
                 return $this->getTextareaFieldTca($contentBlock, $field);
-            case 'TextMultiline':
-                return $this->getTextareaFieldTca($contentBlock, $field);
-            case 'Toggle':
-                return $this->getCheckboxFieldTca($contentBlock, $field);
             default:
-                return []; // TODO: throw exception not supported field type (column type).
+                // TODO: throw exception not supported field type (column type).
+                return [];
         }
 
         return []; // in case of fire, keep calm.

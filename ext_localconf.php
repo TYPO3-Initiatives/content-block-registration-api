@@ -10,7 +10,7 @@ defined('TYPO3') || die('Access denied.');
         $GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations']
         [\Typo3Contentblocks\ContentblocksRegApi\Constants::CACHE] = [
             'groups' => ['system'],
-            'frontend' => \TYPO3\CMS\Core\Cache\Frontend\VariableFrontend::class,
+            'frontend' => \TYPO3\CMS\Core\Cache\Frontend\VariableFrontend::class
         ];
     }
 
