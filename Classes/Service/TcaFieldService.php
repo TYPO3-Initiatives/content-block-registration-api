@@ -74,12 +74,12 @@ class TcaFieldService implements SingletonInterface
     protected function getInputFieldTca(array $contentBlock, array $field): array
     {
         $tcaColumn = [];
+        $config = [
+            'type' => 'input'
+        ];
 
         if (isset($field['properties'])) {
-            $config = [
-                'type' => 'input',
-                'size' => $field['properties']['size'] ?? 30,
-            ];
+            $config['size'] = $field['properties']['size'] ?? 30;
 
             // Add basic TCA stuff to the config
             $config = $this->setConfigBasics($config, $field);
