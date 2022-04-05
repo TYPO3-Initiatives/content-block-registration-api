@@ -73,7 +73,6 @@ class TcaFieldService implements SingletonInterface
      */
     protected function getInputFieldTca(array $contentBlock, array $field): array
     {
-        $tcaColumn = [];
         $config = [
             'type' => 'input'
         ];
@@ -177,17 +176,15 @@ class TcaFieldService implements SingletonInterface
             if (isset($field['properties']['displayAge'])) {
                 $config['disableAgeDisplay'] = !$field['properties']['displayAge'];
             }
-
-            $tcaColumn =  [
-                'exclude' => 1,
-                'label' => 'LLL:' . $contentBlock['EditorInterfaceXlf'] . ':' . $contentBlock['vendor']
-                    . '.' . $contentBlock['package'] . '.' . $field['_identifier'] . '.label',
-                'description' => 'LLL:' . $contentBlock['EditorInterfaceXlf'] . ':' . $contentBlock['vendor']
-                    . '.' . $contentBlock['package'] . '.' . $field['_identifier'] . '.description',
-                'config' => $config,
-            ];
         }
-        return $tcaColumn;
+        return [
+            'exclude' => 1,
+            'label' => 'LLL:' . $contentBlock['EditorInterfaceXlf'] . ':' . $contentBlock['vendor']
+                . '.' . $contentBlock['package'] . '.' . $field['_identifier'] . '.label',
+            'description' => 'LLL:' . $contentBlock['EditorInterfaceXlf'] . ':' . $contentBlock['vendor']
+                . '.' . $contentBlock['package'] . '.' . $field['_identifier'] . '.description',
+            'config' => $config,
+        ];
     }
 
     /*********************
@@ -422,12 +419,12 @@ class TcaFieldService implements SingletonInterface
      */
     protected function getSelectFieldTca(array $contentBlock, array $field): array
     {
-        $tcaColumn = [];
+        $config = [
+            'type' => 'select',
+            'renderType' => 'selectSingle',
+        ];
+
         if (isset($field['properties'])) {
-            $config = [
-                'type' => 'select',
-                'renderType' => 'selectSingle',
-            ];
 
             if ($field['type'] == 'MultiSelect') {
                 $config['renderType'] = 'selectMultipleSideBySide';
@@ -467,17 +464,15 @@ class TcaFieldService implements SingletonInterface
             ) {
                 $config['minitems'] = 1;
             }
-
-            $tcaColumn =  [
-                'exclude' => 1,
-                'label' => 'LLL:' . $contentBlock['EditorInterfaceXlf'] . ':' . $contentBlock['vendor']
-                    . '.' . $contentBlock['package'] . '.' . $field['_identifier'] . '.label',
-                'description' => 'LLL:' . $contentBlock['EditorInterfaceXlf'] . ':' . $contentBlock['vendor']
-                    . '.' . $contentBlock['package'] . '.' . $field['_identifier'] . '.description',
-                'config' => $config,
-            ];
         }
-        return $tcaColumn;
+        return [
+            'exclude' => true,
+            'label' => 'LLL:' . $contentBlock['EditorInterfaceXlf'] . ':' . $contentBlock['vendor']
+                . '.' . $contentBlock['package'] . '.' . $field['_identifier'] . '.label',
+            'description' => 'LLL:' . $contentBlock['EditorInterfaceXlf'] . ':' . $contentBlock['vendor']
+                . '.' . $contentBlock['package'] . '.' . $field['_identifier'] . '.description',
+            'config' => $config,
+        ];
     }
 
     /************************
