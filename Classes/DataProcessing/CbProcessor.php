@@ -117,8 +117,11 @@ class CbProcessor implements DataProcessorInterface
                 $record
             );
 
-            if ($fieldConf['properties']['minItems'] == 1 && $fieldConf['properties']['maxItems'] == 1) {
-                $files = $files[0];
+            if (
+                (isset($fieldConf['properties']['minItems']) && $fieldConf['properties']['minItems'] == 1) &&
+                (isset($fieldConf['properties']['maxItems']) && $fieldConf['properties']['maxItems'] == 1)
+            ) {
+                $files = array_pop(array_reverse($files));
             }
             $cbData[$fieldConf['identifier']] = $files;
         }

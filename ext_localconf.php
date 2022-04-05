@@ -3,10 +3,10 @@
 defined('TYPO3') || die('Access denied.');
 
 (static function () {
-    if (!is_array(
-        $GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations']
-        [\Typo3Contentblocks\ContentblocksRegApi\Constants::CACHE]
-    )) {
+    if (
+        !isset($GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations'][\Typo3Contentblocks\ContentblocksRegApi\Constants::CACHE]) ||
+        !is_array($GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations'][\Typo3Contentblocks\ContentblocksRegApi\Constants::CACHE])
+    ) {
         $GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations']
         [\Typo3Contentblocks\ContentblocksRegApi\Constants::CACHE] = [
             'groups' => ['system'],

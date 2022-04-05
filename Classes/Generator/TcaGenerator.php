@@ -58,7 +58,10 @@ class TcaGenerator
             /***************
              * Add Content Element
              */
-            if (!is_array($GLOBALS['TCA']['tt_content']['types'][$contentBlock['CType']])) {
+            if (
+                !isset($GLOBALS['TCA']['tt_content']['types'][$contentBlock['CType']]) ||
+                !is_array($GLOBALS['TCA']['tt_content']['types'][$contentBlock['CType']])
+            ) {
                 $GLOBALS['TCA']['tt_content']['types'][$contentBlock['CType']] = [];
             }
 

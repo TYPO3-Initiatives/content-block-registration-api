@@ -74,116 +74,121 @@ class TcaFieldService implements SingletonInterface
      */
     protected function getInputFieldTca(array $contentBlock, array $field): array
     {
-        $config = [
-            'type' => 'input',
-            'size' => (($field['properties']['size']) ? $field['properties']['size'] : 30),
-        ];
+        $tcaColumn = [];
 
-        // Add basic TCA stuff to the config
-        $config = $this->setConfigBasics($config, $field);
+        if (isset($field['properties'])) {
+            $config = [
+                'type' => 'input',
+                'size' => $field['properties']['size'] ?? 30,
+            ];
 
-        $evalFields = ((isset($config['eval']) ? $config['eval'] : '')); // save values from config basics
-        if ($field['type'] === 'Email') {
-            $evalFields = $evalFields . (strlen($evalFields) > 0 ? ', ' : '') . 'email';
-        }
-        if ($field['type'] === 'Integer') {
-            $evalFields = $evalFields . (strlen($evalFields) > 0 ? ', ' : '') . 'int';
-        }
-        if ($field['type'] === 'Money') {
-            $evalFields = $evalFields . (strlen($evalFields) > 0 ? ', ' : '') . 'double2';
-        }
-        if ($field['type'] === 'Number') {
-            $evalFields = $evalFields . (strlen($evalFields) > 0 ? ', ' : '') . 'num';
-        }
-        if ($field['type'] === 'Password') {
-            $evalFields = $evalFields . (strlen($evalFields) > 0 ? ', ' : '') . 'password';
-        }
-        if ($field['type'] === 'Range' || $field['type'] === 'Percent') {
-            $evalFields = $evalFields . (strlen($evalFields) > 0 ? ', ' : '') . 'trim,int';
-        }
-        if ($field['type'] === 'Tel') {
-            $evalFields = $evalFields . (strlen($evalFields) > 0 ? ', ' : '') . 'alphanum';
-        }
-        if ($field['type'] === 'Date') {
-            $evalFields = $evalFields . (strlen($evalFields) > 0 ? ', ' : '') . 'date';
-        }
-        if ($field['type'] === 'DateTime') {
-            $evalFields = $evalFields . (strlen($evalFields) > 0 ? ', ' : '') . 'datetime';
-        }
-        if ($field['type'] === 'Time') {
-            $evalFields = $evalFields . (strlen($evalFields) > 0 ? ', ' : '') . 'time';
-        }
+            // Add basic TCA stuff to the config
+            $config = $this->setConfigBasics($config, $field);
 
-        $config['eval'] = $evalFields;
-
-        if ($field['type'] === 'Url') {
-            $config['renderType'] = 'inputLink';
-            if (isset($field['properties']['linkPopup'])) {
-                $config['fieldControl'] = [];
-                $config['fieldControl']['linkPopup'] = [];
-                $config['fieldControl']['linkPopup']['options'] = $field['properties']['linkPopup'];
+            $evalFields = $config['eval'] ?? ''; // save values from config basics
+            if ($field['type'] === 'Email') {
+                $evalFields = $evalFields . (strlen($evalFields) > 0 ? ', ' : '') . 'email';
             }
-        }
-
-        if ($field['type'] === 'Date' || $field['type'] === 'DateTime' || $field['type'] === 'Time') {
-            $config['renderType'] = 'inputDateTime';
-            // While handling with datetime objects, those fields must be set to a handleable value.
-            $config['default'] = $this->timestampConvert($config['default']);
-        }
-
-        if (is_array($field['properties']['range'])) {
-            $config['range'] = $field['properties']['range'];
-
-            if ($field['type'] === 'Date' || $field['type'] === 'DateTime') {
-                if (isset($config['range']['lower'])) {
-                    $config['range']['lower'] = $this->timestampConvert($config['range']['lower']);
-                }
-                if (isset($config['range']['upper'])) {
-                    $config['range']['upper'] = $this->timestampConvert($config['range']['upper']);
-                }
+            if ($field['type'] === 'Integer') {
+                $evalFields = $evalFields . (strlen($evalFields) > 0 ? ', ' : '') . 'int';
             }
-
+            if ($field['type'] === 'Money') {
+                $evalFields = $evalFields . (strlen($evalFields) > 0 ? ', ' : '') . 'double2';
+            }
+            if ($field['type'] === 'Number') {
+                $evalFields = $evalFields . (strlen($evalFields) > 0 ? ', ' : '') . 'num';
+            }
+            if ($field['type'] === 'Password') {
+                $evalFields = $evalFields . (strlen($evalFields) > 0 ? ', ' : '') . 'password';
+            }
+            if ($field['type'] === 'Range' || $field['type'] === 'Percent') {
+                $evalFields = $evalFields . (strlen($evalFields) > 0 ? ', ' : '') . 'trim,int';
+            }
+            if ($field['type'] === 'Tel') {
+                $evalFields = $evalFields . (strlen($evalFields) > 0 ? ', ' : '') . 'alphanum';
+            }
+            if ($field['type'] === 'Date') {
+                $evalFields = $evalFields . (strlen($evalFields) > 0 ? ', ' : '') . 'date';
+            }
+            if ($field['type'] === 'DateTime') {
+                $evalFields = $evalFields . (strlen($evalFields) > 0 ? ', ' : '') . 'datetime';
+            }
             if ($field['type'] === 'Time') {
-                if (isset($field['properties']['default'])) {
-                    $config['default'] = $this->timestampConvert($field['properties']['default'], false);
-                }
-                if (isset($config['range']['lower']) && strlen('' . $config['range']['lower']) < 9) {
-                    $config['range']['lower'] = $this->timestampConvert($config['range']['lower'], true);
-                }
-                if (isset($config['range']['upper']) && strlen('' . $config['range']['upper']) < 9) {
-                    $config['range']['upper'] = $this->timestampConvert($config['range']['upper'], true);
+                $evalFields = $evalFields . (strlen($evalFields) > 0 ? ', ' : '') . 'time';
+            }
+
+            $config['eval'] = $evalFields;
+
+            if ($field['type'] === 'Url') {
+                $config['renderType'] = 'inputLink';
+                if (isset($field['properties']['linkPopup'])) {
+                    $config['fieldControl'] = [];
+                    $config['fieldControl']['linkPopup'] = [];
+                    $config['fieldControl']['linkPopup']['options'] = $field['properties']['linkPopup'];
                 }
             }
-        }
 
-        if ($field['type'] === 'Percent' && is_array($field['properties']['slider'])) {
-            $config['slider'] = $field['properties']['slider'];
-        } elseif ($field['type'] === 'Color') {
-            $config['renderType'] = 'colorpicker';
-        }
-        if (is_array($field['properties']['valuePicker']['items'])) {
-            $tempPickerItems = [];
-            foreach ($field['properties']['valuePicker']['items'] as $key => $name) {
-                $tempPickerItems[] = [$name, $key];
+            if ($field['type'] === 'Date' || $field['type'] === 'DateTime' || $field['type'] === 'Time') {
+                $config['renderType'] = 'inputDateTime';
+                // While handling with datetime objects, those fields must be set to a handleable value.
+                $config['default'] = $this->timestampConvert($config['default']);
             }
-            $config['valuePicker']['items'] = $tempPickerItems;
-        }
 
-        if (isset($field['properties']['autocomplete'])) {
-            $config['autocomplete'] = $field['properties']['autocomplete'];
-        }
-        if (isset($field['properties']['displayAge'])) {
-            $config['disableAgeDisplay'] = !$field['properties']['displayAge'];
-        }
+            if (isset($field['properties']['range']) && is_array($field['properties']['range'])) {
+                $config['range'] = $field['properties']['range'];
 
-        return [
-            'exclude' => 1,
-            'label' => 'LLL:' . $contentBlock['EditorInterfaceXlf'] . ':' . $contentBlock['vendor']
-                        . '.' . $contentBlock['package'] . '.' . $field['_identifier'] . '.label',
-            'description' => 'LLL:' . $contentBlock['EditorInterfaceXlf'] . ':' . $contentBlock['vendor']
-            . '.' . $contentBlock['package'] . '.' . $field['_identifier'] . '.description',
-            'config' => $config,
-        ];
+                if ($field['type'] === 'Date' || $field['type'] === 'DateTime') {
+                    if (isset($config['range']['lower'])) {
+                        $config['range']['lower'] = $this->timestampConvert($config['range']['lower']);
+                    }
+                    if (isset($config['range']['upper'])) {
+                        $config['range']['upper'] = $this->timestampConvert($config['range']['upper']);
+                    }
+                }
+
+                if ($field['type'] === 'Time') {
+                    if (isset($field['properties']['default'])) {
+                        $config['default'] = $this->timestampConvert($field['properties']['default'], false);
+                    }
+                    if (isset($config['range']['lower']) && strlen('' . $config['range']['lower']) < 9) {
+                        $config['range']['lower'] = $this->timestampConvert($config['range']['lower'], true);
+                    }
+                    if (isset($config['range']['upper']) && strlen('' . $config['range']['upper']) < 9) {
+                        $config['range']['upper'] = $this->timestampConvert($config['range']['upper'], true);
+                    }
+                }
+            }
+
+            if ($field['type'] === 'Percent' && is_array($field['properties']['slider'])) {
+                $config['slider'] = $field['properties']['slider'];
+            } elseif ($field['type'] === 'Color') {
+                $config['renderType'] = 'colorpicker';
+            }
+            if (isset($field['properties']['valuePicker']['items']) && is_array($field['properties']['valuePicker']['items'])) {
+                $tempPickerItems = [];
+                foreach ($field['properties']['valuePicker']['items'] as $key => $name) {
+                    $tempPickerItems[] = [$name, $key];
+                }
+                $config['valuePicker']['items'] = $tempPickerItems;
+            }
+
+            if (isset($field['properties']['autocomplete'])) {
+                $config['autocomplete'] = $field['properties']['autocomplete'];
+            }
+            if (isset($field['properties']['displayAge'])) {
+                $config['disableAgeDisplay'] = !$field['properties']['displayAge'];
+            }
+
+            $tcaColumn =  [
+                'exclude' => 1,
+                'label' => 'LLL:' . $contentBlock['EditorInterfaceXlf'] . ':' . $contentBlock['vendor']
+                    . '.' . $contentBlock['package'] . '.' . $field['_identifier'] . '.label',
+                'description' => 'LLL:' . $contentBlock['EditorInterfaceXlf'] . ':' . $contentBlock['vendor']
+                    . '.' . $contentBlock['package'] . '.' . $field['_identifier'] . '.description',
+                'config' => $config,
+            ];
+        }
+        return $tcaColumn;
     }
 
     /*********************
@@ -418,55 +423,62 @@ class TcaFieldService implements SingletonInterface
      */
     protected function getSelectFieldTca(array $contentBlock, array $field): array
     {
-        $config = [
-            'type' => 'select',
-            'renderType' => 'selectSingle',
-        ];
+        $tcaColumn = [];
+        if (isset($field['properties'])) {
+            $config = [
+                'type' => 'select',
+                'renderType' => 'selectSingle',
+            ];
 
-        if ($field['type'] == 'MultiSelect') {
-            $config['renderType'] = 'selectMultipleSideBySide';
+            if ($field['type'] == 'MultiSelect') {
+                $config['renderType'] = 'selectMultipleSideBySide';
 
-            if (isset($field['properties']['size'])) { // Size only supportet by MultiSelect
-                $config['size'] = $field['properties']['size'];
-            }
-        }
-
-        // Add basic TCA stuff to the config
-        $config = $this->setConfigBasics($config, $field);
-
-        if (isset($field['properties']['items'])) {
-            $items = [];
-
-            if (isset($field['properties']['prependLabel'])) {
-                $items[] = [$field['properties']['prependLabel']];
+                if (isset($field['properties']['size'])) { // Size only supportet by MultiSelect
+                    $config['size'] = $field['properties']['size'];
+                }
             }
 
-            foreach ($field['properties']['items'] as $key => $value) {
-                $items[] = [ $value, $key];
-            }
-            if ($field['type'] =='Toggle' && isset($field['properties']['invertStateDisplay']) && $field['properties']['invertStateDisplay'] === true) {
-                $items['invertStateDisplay'] = true;
-            }
-            $config['items'] = $items;
-        }
+            // Add basic TCA stuff to the config
+            $config = $this->setConfigBasics($config, $field);
 
-        if (isset($field['properties']['maxItems'])) {
-            $config['maxitems'] = $field['properties']['maxItems'];
-        }
-        if (isset($field['properties']['minItems'])) {
-            $config['minitems'] = $field['properties']['minItems'];
-        } elseif ($field['type'] == 'MultiSelect' && $field['properties']['required']) {
-            $config['minitems'] = 1;
-        }
+            if (isset($field['properties']['items'])) {
+                $items = [];
 
-        return [
-            'exclude' => 1,
-            'label' => 'LLL:' . $contentBlock['EditorInterfaceXlf'] . ':' . $contentBlock['vendor']
-                        . '.' . $contentBlock['package'] . '.' . $field['_identifier'] . '.label',
-            'description' => 'LLL:' . $contentBlock['EditorInterfaceXlf'] . ':' . $contentBlock['vendor']
-            . '.' . $contentBlock['package'] . '.' . $field['_identifier'] . '.description',
-            'config' => $config,
-        ];
+                if (isset($field['properties']['prependLabel'])) {
+                    $items[] = [$field['properties']['prependLabel']];
+                }
+
+                foreach ($field['properties']['items'] as $key => $value) {
+                    $items[] = [ $value, $key];
+                }
+                if ($field['type'] =='Toggle' && isset($field['properties']['invertStateDisplay']) && $field['properties']['invertStateDisplay'] === true) {
+                    $items['invertStateDisplay'] = true;
+                }
+                $config['items'] = $items;
+            }
+
+            if (isset($field['properties']['maxItems'])) {
+                $config['maxitems'] = $field['properties']['maxItems'];
+            }
+            if (isset($field['properties']['minItems'])) {
+                $config['minitems'] = $field['properties']['minItems'];
+            } elseif (
+                $field['type'] == 'MultiSelect' &&
+                (isset($field['properties']['required']) && $field['properties']['required'])
+            ) {
+                $config['minitems'] = 1;
+            }
+
+            $tcaColumn =  [
+                'exclude' => 1,
+                'label' => 'LLL:' . $contentBlock['EditorInterfaceXlf'] . ':' . $contentBlock['vendor']
+                    . '.' . $contentBlock['package'] . '.' . $field['_identifier'] . '.label',
+                'description' => 'LLL:' . $contentBlock['EditorInterfaceXlf'] . ':' . $contentBlock['vendor']
+                    . '.' . $contentBlock['package'] . '.' . $field['_identifier'] . '.description',
+                'config' => $config,
+            ];
+        }
+        return $tcaColumn;
     }
 
     /************************
@@ -487,12 +499,11 @@ class TcaFieldService implements SingletonInterface
             }
         }
 
-        $evalFields = ($field['properties']['required'] === true ? 'required' : '') .
-            ($field['properties']['trim'] === true && $field['properties']['required'] === true ? ',  ' : '') .
-            ($field['properties']['trim'] === true ? 'trim ' : '');
+        $evalFields[] = (isset($field['properties']['required']) && $field['properties']['required'] === true) ? 'required' : '';
+        $evalFields[] = (isset($field['properties']['trim']) && $field['properties']['trim'] === true) ? 'trim ' : '';
 
-        if (strlen('' . $evalFields) > 1) {
-            $config['eval'] = $evalFields;
+        if (count($evalFields) > 1) {
+            $config['eval'] = implode(',', $evalFields);
         }
 
         return $config;
@@ -510,7 +521,7 @@ class TcaFieldService implements SingletonInterface
         if (is_int($input)) {
             return $input;
         }
-        if ($isTime && strlen('' . $input) > 0) {
+        if ($isTime && strlen($input) > 0) {
             $input = '1970-01-01 ' . $input;
         }
         if ($input !== null && strtotime($input)) {
