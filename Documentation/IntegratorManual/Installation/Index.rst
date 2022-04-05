@@ -45,7 +45,7 @@ Extension configuration
 Sometimes it might be necessary to inherit content blocks from your ow
 n definition (e. g. if you want to inherit content blocks from lib.contentElement).
 In that case you can extend the default TypoScript as you need.
-This is the default Code:
+This is the default code:
 
 .. code-block:: typoscript
 
@@ -110,6 +110,13 @@ Non-composer mode
 A content block can also be added manually in `typo3conf/contentBlocks` in
 non-composer mode.
 
+Administration
+==============
+
+.. attention::
+   You will need to allow the generated fields (tt_content,
+   tx_contentblocks_reg_api_collection) and CType in the backend user group
+   permissions.
 
 Security
 ========
@@ -120,7 +127,7 @@ Security
 
 In .htaccess:
 
-.. code-block:: code
+.. code-block:: yaml
 
     # Add your own rules here.
     <If "%{REQUEST_URI} =~ m#^/typo3conf/contentBlocks/.*\.(yaml|html|xlf|json)#">
@@ -132,7 +139,7 @@ In .htaccess:
 
 In nginx:
 
-.. code-block:: code
+.. code-block:: yaml
 
     location ~ (?:typo3conf/contentBlocks)/[^/]+/(?:src?)/ {
         deny all;
