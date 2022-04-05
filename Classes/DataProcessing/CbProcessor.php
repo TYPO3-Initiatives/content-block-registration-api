@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace Typo3Contentblocks\ContentblocksRegApi\DataProcessing;
 
 use TYPO3\CMS\Backend\Utility\BackendUtility;
+use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\Restriction\WorkspaceRestriction;
@@ -112,7 +113,7 @@ class CbProcessor implements DataProcessorInterface
         // get file fields
         elseif (array_key_exists($fieldConf['_identifier'], $this->cbConf['fileFields'])) {
             $files = $this->_getFiles(
-                $fieldConf['_identifier'],
+                (($this->_isFrontend()) ? $fieldConf['_identifier'] : $fieldColumnName),
                 ((count($fieldConf['_path']) == 1) ? 'tt_content' : Constants::COLLECTION_FOREIGN_TABLE),
                 $record
             );
@@ -157,10 +158,17 @@ class CbProcessor implements DataProcessorInterface
             return [];
         }
 
+        // Managing Workspace overlays
+        $workspaceId = GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('workspace', 'id', 0);
+
         $q = GeneralUtility::makeInstance(ConnectionPool::class)
             ->getConnectionForTable(Constants::COLLECTION_FOREIGN_TABLE)
             ->createQueryBuilder();
-        $q->getRestrictions()->add(GeneralUtility::makeInstance(WorkspaceRestriction::class));
+
+        $q->getRestrictions()->add(
+            GeneralUtility::makeInstance(WorkspaceRestriction::class, $workspaceId)
+        );
+
         $stmt = $q->select('*')
             ->from(Constants::COLLECTION_FOREIGN_TABLE)
             ->where(
@@ -173,7 +181,8 @@ class CbProcessor implements DataProcessorInterface
                     Constants::COLLECTION_FOREIGN_TABLE_FIELD,
                     $q->createNamedParameter($parentTable)
                 )
-            )->orderBy('sorting')
+            )
+            ->orderBy('sorting')
             ->execute();
 
         $fieldData = [];
