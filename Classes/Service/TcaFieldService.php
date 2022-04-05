@@ -387,7 +387,7 @@ class TcaFieldService implements SingletonInterface
         }
         if (isset($field['properties']['minItems'])) {
             $config['minitems'] = $field['properties']['minItems'];
-        } elseif ($field['properties']['required']) {
+        } elseif (isset($field['properties']['required']) && $field['properties']['required']) {
             $config['minitems'] = 1;
         }
 
