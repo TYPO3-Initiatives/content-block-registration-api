@@ -15,11 +15,11 @@
         }
     ],
     "require": {
-        "php": "^8.0",
+        "php": "^7.4 || 8.0",
         "ext-json": "*",
         "typo3-contentblocks/composer-plugin": "*",
-        "typo3/cms-core": "^11.5",
-        "typo3/cms-filelist": "^11.5"
+        "typo3/cms-core": "^10.4 || ^11.5",
+        "typo3/cms-filelist": "^10.4 || ^11.5"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.16",
