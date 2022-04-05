@@ -7,7 +7,7 @@ Toggle
 
 The "Toggle" type generates a number of checkbox fields with toggles.
 
-It corresponds with the TCA `type='check'` (checkboxToggle).
+It corresponds with the TCA `type='check'` and `renderType='checkboxToggle'`.
 
 
 Properties

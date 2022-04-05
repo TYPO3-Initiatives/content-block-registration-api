@@ -7,7 +7,7 @@ Color
 
 The "Color" type generates a simple `<input>` field, which provides a color picker.
 
-It corresponds with the TCA `type='input'` (colorPicker).
+It corresponds with the TCA `type='input'` and `renderType='colorPicker'`.
 
 
 Properties
