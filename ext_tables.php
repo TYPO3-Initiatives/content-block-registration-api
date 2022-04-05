@@ -1,22 +1,16 @@
 <?php
 
-use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
-use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
-
-defined('TYPO3_MODE') || die('Access denied.');
+defined('TYPO3') || die('Access denied.');
 
 
 call_user_func(
-    function()
+    static function()
     {
-
         if (TYPO3_MODE === 'BE') {
 
-            if (!(bool) GeneralUtility::makeInstance(ExtensionConfiguration::class)->get('contentblocks_reg_api')['disableBackendModul']) {
-                ExtensionUtility::registerModule(
-                    'Typo3Contentblocks.ContentblocksRegApi',
+            if (!(bool) \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Configuration\ExtensionConfiguration::class)->get('contentblocks_reg_api')['disableBackendModul']) {
+                \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
+                    'ContentblocksRegApi',
                     'tools', // Make module a submodule of 'web'
                     'wizard', // Submodule key
                     '', // Position
@@ -33,12 +27,11 @@ call_user_func(
                 );
             }
 
-            /***************
+            /**
              * Allow Custom Records on Standard Pages
              */
-            ExtensionManagementUtility::allowTableOnStandardPages('tx_contentblocks_reg_api_collection');
+            \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_contentblocks_reg_api_collection');
 
         }
-
     }
 );

@@ -11,6 +11,10 @@ declare(strict_types=1);
 
 namespace Typo3Contentblocks\ContentblocksRegApi\Generator;
 
+use Typo3Contentblocks\ContentblocksRegApi\Backend\Preview\PreviewRenderer;
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use Typo3Contentblocks\ContentblocksRegApi\Constants;
 use Typo3Contentblocks\ContentblocksRegApi\Service\ConfigurationService;
 use Typo3Contentblocks\ContentblocksRegApi\Service\DataService;
@@ -60,7 +64,7 @@ class TcaGenerator
 
             // PreviewRenderer
             $GLOBALS['TCA']['tt_content']['types'][$contentBlock['CType']]['previewRenderer'] =
-                \Typo3Contentblocks\ContentblocksRegApi\Backend\Preview\PreviewRenderer::class;
+                PreviewRenderer::class;
 
             /***************
              * Assign Icon
@@ -70,7 +74,7 @@ class TcaGenerator
             /***************
              * Add content element to selector list
              */
-            \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTcaSelectItem(
+            ExtensionManagementUtility::addTcaSelectItem(
                 'tt_content',
                 'CType',
                 [
@@ -123,7 +127,7 @@ class TcaGenerator
              * Configure element type
              */
             // Feature: enable pallette frame via extConf
-            $enableLayoutOptions = (bool)\TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Configuration\ExtensionConfiguration::class)
+            $enableLayoutOptions = (bool)GeneralUtility::makeInstance(ExtensionConfiguration::class)
                             ->get('contentblocks_reg_api', 'enableLayoutOptions');
             $GLOBALS['TCA']['tt_content']['types'][$contentBlock['CType']] = array_replace_recursive(
                 $GLOBALS['TCA']['tt_content']['types'][$contentBlock['CType']],

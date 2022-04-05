@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace Typo3Contentblocks\ContentblocksRegApi\Validator;
 
+use TYPO3\CMS\Core\Http\ApplicationType;
 use TYPO3\CMS\Core\SingletonInterface;
 
 class ContentBlockValidator implements SingletonInterface
@@ -46,7 +47,7 @@ class ContentBlockValidator implements SingletonInterface
 
         // is there a composer.json?
         if (!file_exists($cbPath . 'composer.json')) {
-            if (TYPO3_MODE === 'FE') {
+            if (ApplicationType::fromRequest($GLOBALS['TYPO3_REQUEST'])->isFrontend()) {
                 return false;
             }
             throw new \Exception(sprintf('composer.json not found in ContentBlock %s', $cbPath));
@@ -54,7 +55,7 @@ class ContentBlockValidator implements SingletonInterface
 
         // is there a EditorInterface.yaml?
         if (!file_exists($cbPath . 'EditorInterface.yaml')) {
-            if (TYPO3_MODE === 'FE') {
+            if (ApplicationType::fromRequest($GLOBALS['TYPO3_REQUEST'])->isFrontend()) {
                 return false;
             }
             throw new \Exception(sprintf('EditorInterface.yaml not found in ContentBlock %s', $cbPath));
@@ -66,7 +67,7 @@ class ContentBlockValidator implements SingletonInterface
             && !file_exists($cbPath . 'ContentBlockIcon.png')
             && !file_exists($cbPath . 'ContentBlockIcon.gif')
         ) {
-            if (TYPO3_MODE === 'FE') {
+            if (ApplicationType::fromRequest($GLOBALS['TYPO3_REQUEST'])->isFrontend()) {
                 return false;
             }
             throw new \Exception(sprintf('ContentBlockIcon.(svg|png|gif) not found in ContentBlock %s', $cbPath));
@@ -77,7 +78,7 @@ class ContentBlockValidator implements SingletonInterface
             strpos(file_get_contents($cbPath . 'composer.json'), '"type": "typo3-cms-contentblock"') === false
             && strpos(file_get_contents($cbPath . 'composer.json'), "'type': 'typo3-cms-contentblock'") === false
         ) {
-            if (TYPO3_MODE === 'FE') {
+            if (ApplicationType::fromRequest($GLOBALS['TYPO3_REQUEST'])->isFrontend()) {
                 return false;
             }
             throw new \Exception(sprintf('Your ContentBlock must be of composer type \'typo3-cms-contentblock\' in %s', $cbPath));
@@ -88,7 +89,7 @@ class ContentBlockValidator implements SingletonInterface
             !file_exists($cbPath . 'src/Language/Default.xlf')
             && !file_exists($cbPath . 'src/Language/EditorInterface.xlf')
         ) {
-            if (TYPO3_MODE === 'FE') {
+            if (ApplicationType::fromRequest($GLOBALS['TYPO3_REQUEST'])->isFrontend()) {
                 return false;
             }
             throw new \Exception(sprintf('ContentBlock translation for backend is missing. No \'src/Language/Default.xlf\' and no \'src/Language/EditorInterface.xlf\' found in ContentBlock %s', $cbPath));

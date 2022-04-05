@@ -9,6 +9,9 @@
 
 namespace Typo3Contentblocks\ContentblocksRegApi\Backend\Controller;
 
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use Psr\Http\Message\ResponseInterface;
+use TYPO3\CMS\Core\Messaging\AbstractMessage;
 use Symfony\Component\Yaml\Yaml;
 use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -27,16 +30,17 @@ use Typo3Contentblocks\ContentblocksRegApi\Service\DatabaseService;
 /**
  * Wizard
  */
-class WizardController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
+class WizardController extends ActionController
 {
     /**
      * action new
      *
      * @return void
      */
-    public function newAction()
+    public function newAction(): ResponseInterface
     {
         // Nothing to do
+        return $this->htmlResponse();
     }
 
     /**
@@ -51,7 +55,7 @@ class WizardController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
         // $this->addFlashMessage('The object was created. Please be aware that this action is publicly accessible unless you implement an access check. See https://docs.typo3.org/typo3cms/extensions/extension_builder/User/Index.html', '', \TYPO3\CMS\Core\Messaging\AbstractMessage::WARNING);
         // $this->redirect('new');
         if (strlen($contentBlockFromWizard) < 10) {
-            $this->addFlashMessage('I have not written anything, because there was no configuration.', '', \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR);
+            $this->addFlashMessage('I have not written anything, because there was no configuration.', '', AbstractMessage::ERROR);
             $this->redirect('new');
         }
 
@@ -59,11 +63,11 @@ class WizardController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
         $contentBlock = json_decode($contentBlockFromWizard, true);
 
         if (count($contentBlock) < 3) {
-            $this->addFlashMessage('I have not written anything, because there was no configuration. No field given.', '', \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR);
+            $this->addFlashMessage('I have not written anything, because there was no configuration. No field given.', '', AbstractMessage::ERROR);
             $this->redirect('new');
         }
         if (strlen($contentBlock['packageName']) < 1) {
-            $this->addFlashMessage('I have not written anything, because there was no configuration. No package name given.', '', \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR);
+            $this->addFlashMessage('I have not written anything, because there was no configuration. No package name given.', '', AbstractMessage::ERROR);
             $this->redirect('new');
         }
 
@@ -77,7 +81,7 @@ class WizardController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 
         /***  check if directory exists, if so, stop. */
         if (is_dir($cbBasePath)) {
-            $this->addFlashMessage('I have not written anything, because the content block seems to allready exists.', '', \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR);
+            $this->addFlashMessage('I have not written anything, because the content block seems to allready exists.', '', AbstractMessage::ERROR);
             $this->redirect('new');
         }
 
@@ -242,17 +246,17 @@ class WizardController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
         ];
         file_put_contents($cbBasePath . 'composer.json', json_encode($composerJson, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
 
-        $this->addFlashMessage('The content block was created.', '', \TYPO3\CMS\Core\Messaging\AbstractMessage::OK);
-        $this->addFlashMessage('Please clear all caches bevor you use the new content block.', '', \TYPO3\CMS\Core\Messaging\AbstractMessage::WARNING);
+        $this->addFlashMessage('The content block was created.', '', AbstractMessage::OK);
+        $this->addFlashMessage('Please clear all caches bevor you use the new content block.', '', AbstractMessage::WARNING);
 
         // Update database
         $updateResult = GeneralUtility::makeInstance(DatabaseService::class)->addColumnsToCType($editorInterfaceYaml ['fields'], $contentBlock['packageName']);
         if ($updateResult === true) {
-            $this->addFlashMessage('New columns created at the database.', '', \TYPO3\CMS\Core\Messaging\AbstractMessage::OK);
+            $this->addFlashMessage('New columns created at the database.', '', AbstractMessage::OK);
         } elseif (is_array($updateResult) && isset($updateResult['error'])) {
-            $this->addFlashMessage('An error occured while trying to update database: ' . $updateResult['error'], '', \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR);
+            $this->addFlashMessage('An error occured while trying to update database: ' . $updateResult['error'], '', AbstractMessage::ERROR);
         } else {
-            $this->addFlashMessage('Could not update database. You must compare and update database to add your new columns there.', '', \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR);
+            $this->addFlashMessage('Could not update database. You must compare and update database to add your new columns there.', '', AbstractMessage::ERROR);
         }
 
         $this->redirect('new');

@@ -29,8 +29,8 @@ return [
         'hideTable' => true,
         'hideAtCopy' => true,
         'prependAtCopy' => 'LLL:' . $generalLanguageFile . ':LGL.prependAtCopy',
-        'transOrigPointerField' => 'l10n_parent',
         'transOrigDiffSourceField' => 'l10n_diffsource',
+        'transOrigPointerField' => 'l10n_parent',
         'languageField' => 'sys_language_uid',
         'enablecolumns' => [
             'disabled' => 'hidden',
@@ -41,21 +41,9 @@ return [
             'default' => 'ext-contentblocks_reg_api',
         ],
     ],
-    'interface' => [
-        'showRecordFieldList' => '
-            hidden,
-            content_block
-        ',
-    ],
     'types' => [
         '1' => [
-            'showitem' => '
-                content_block,
-                --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,
-                --palette--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:palette.visibility;visibility,
-                --palette--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:palette.access;access,
-                --palette--;;hiddenLanguagePalette,
-            ',
+            'showitem' => 'content_block,--div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,--palette--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:palette.visibility;visibility,--palette--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:palette.access;access,--palette--;;hiddenLanguagePalette',
         ],
     ],
     'palettes' => [
@@ -124,42 +112,33 @@ return [
             'l10n_display' => 'defaultAsReadonly',
         ],
         'sys_language_uid' => [
-            'exclude' => 1,
             'label' => 'LLL:' . $generalLanguageFile . ':LGL.language',
             'config' => [
-                'type' => 'select',
-                'renderType' => 'selectSingle',
-                'foreign_table' => 'sys_language',
-                'foreign_table_where' => 'ORDER BY sys_language.title',
+                'default' => 0,
                 'items' => [
                     [
                         'LLL:' . $generalLanguageFile . ':LGL.allLanguages',
                         -1,
-                    ],
-                    [
-                        'LLL:' . $generalLanguageFile . ':LGL.default_value',
-                        0,
-                    ],
+                        'flags-multiple'
+                    ]
                 ],
-                'allowNonIdValues' => true,
-            ],
+                'type' => 'select',
+                'renderType' => 'selectSingle',
+                'special' => 'languages'
+            ]
         ],
         'l10n_parent' => [
             'displayCond' => 'FIELD:sys_language_uid:>:0',
-            'exclude' => 1,
             'label' => 'LLL:' . $generalLanguageFile . ':LGL.l18n_parent',
             'config' => [
+                'default' => 0,
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'items' => [
-                    [
-                        '',
-                        0,
-                    ],
+                    ['', 0,],
                 ],
                 'foreign_table' => 'tx_contentblocks_reg_api_collection',
                 'foreign_table_where' => 'AND tx_contentblocks_reg_api_collection.pid=###CURRENT_PID### AND tx_contentblocks_reg_api_collection.sys_language_uid IN (-1,0)',
-                'default' => 0,
             ],
         ],
         'l10n_diffsource' => [
@@ -173,7 +152,7 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 500,
-            ],
-        ],
-    ],
+            ]
+        ]
+    ]
 ];

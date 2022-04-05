@@ -1,9 +1,8 @@
 <?php
 
-defined('TYPO3_MODE') || die('Access denied.');
+defined('TYPO3') || die('Access denied.');
 
-(static function ($_EXTKEY = 'contentblocks_reg_api') {
-    // cache
+(static function () {
     if (!is_array(
         $GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations']
         [\Typo3Contentblocks\ContentblocksRegApi\Constants::CACHE]
@@ -16,9 +15,7 @@ defined('TYPO3_MODE') || die('Access denied.');
     }
 
     // Icons
-    $iconRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
-        \TYPO3\CMS\Core\Imaging\IconRegistry::class
-    );
+    $iconRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Imaging\IconRegistry::class);
     $iconRegistry->registerIcon(
         'ext-contentblocks_reg_api',
         \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
@@ -26,10 +23,10 @@ defined('TYPO3_MODE') || die('Access denied.');
     );
 
     // TypoScript
-    // TODO: find a better way to add individuall definitions
+    // TODO: find a better way to add individual definitions
     $importTypoScriptTemplate = (string)\TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Configuration\ExtensionConfiguration::class)
             ->get('contentblocks_reg_api', 'contentBlockDefinition');
-    if ( strlen('' . $importTypoScriptTemplate) > 2)
+    if ( strlen($importTypoScriptTemplate) > 2)
     {
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScriptSetup(
             "@import '$importTypoScriptTemplate'"
@@ -41,37 +38,31 @@ defined('TYPO3_MODE') || die('Access denied.');
         );
     }
 
-    // contentBlocks
+    // Register content blocks
     $contentBlocks = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
         Typo3Contentblocks\ContentblocksRegApi\Service\ConfigurationService::class
-    )
-        ->configuration();
+    )->configuration();
     foreach ($contentBlocks as $contentBlock) {
-        // PageTsConfig
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig(
             TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
                 \Typo3Contentblocks\ContentblocksRegApi\Generator\PageTsConfigGenerator::class
-            )
-                ->pageTsConfigForContentBlock($contentBlock)
+            )->pageTsConfigForContentBlock($contentBlock)
         );
 
-        // Icons
         $iconRegistry->registerIcon(
             $contentBlock['CType'],
             $contentBlock['iconProviderClass'],
             ['source' => $contentBlock['icon']]
         );
 
-        // CB TypoScript
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScriptSetup(
             TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
                 \Typo3Contentblocks\ContentblocksRegApi\Generator\TypoScriptGenerator::class
-            )
-                ->typoScriptForContentBlock($contentBlock)
+            )->typoScriptForContentBlock($contentBlock)
         );
     }
 
-    // module TypoScript
+    // Module TypoScript
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScriptSetup(
         "@import 'EXT:contentblocks_reg_api/Configuration/TypoScript/module/setup.typoscript'"
     );
