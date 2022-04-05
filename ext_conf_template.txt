@@ -8,5 +8,5 @@ contentBlockDefinition = 0
 # cat=Features; type=boolean; label=enableLayoutOptions: Show layout (frame) options palette known from fluid_styled_content and bootstrap_package
 enableLayoutOptions = 0
 
-# cat=Features; type=boolean; label=disableBackendModul: On production, you should disable the backend module for creating content blocks
-disableBackendModul = 0
+# cat=Features; type=boolean; label=showBackendModule: On production, you should disable the backend module for creating content blocks
+showBackendModule = 1

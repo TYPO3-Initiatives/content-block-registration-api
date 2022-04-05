@@ -6,7 +6,10 @@ defined('TYPO3') || die('Access denied.');
 call_user_func(
     static function()
     {
-        if (!(bool) \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Configuration\ExtensionConfiguration::class)->get('contentblocks_reg_api')['disableBackendModul']) {
+        $contentBlocksSettings = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Configuration\ExtensionConfiguration::class)->get('contentblocks_reg_api');
+        $showBackendModule = isset($contentBlocksSettings['showBackendModule']) ? (bool)$contentBlocksSettings['showBackendModule'] : true;
+
+        if ($showBackendModule) {
             \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
                 'ContentblocksRegApi',
                 'tools', // Make module a submodule of 'web'
