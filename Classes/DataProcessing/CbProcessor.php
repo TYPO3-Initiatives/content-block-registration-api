@@ -150,7 +150,7 @@ class CbProcessor implements DataProcessorInterface
         } else {
             // Since bug in FileCollector, we need to handle files the other way in backend to support workspaces.
             // https://review.typo3.org/c/Packages/TYPO3.CMS/+/74185
-            // This should be replaced after dropping support for v10.5
+            // This should be removed after dropping support for v10.4
             $workspaceId = GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('workspace', 'id', 0);
             $files = BackendUtility::resolveFileReferences(
                 $table,
