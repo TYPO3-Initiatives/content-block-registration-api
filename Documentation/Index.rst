@@ -14,7 +14,7 @@ Content Blocks Registration API
    |release|
 
 :Status:
-   alpha
+   beta
 
 :Language:
    en
@@ -23,7 +23,7 @@ Content Blocks Registration API
    content blocks
 
 :Copyright:
-   2020-2021
+   2020-2022
 
 :Author:
    `TYPO3 Structured Content Initiative <https://typo3.org/community/teams/typo3-development/initiatives/structured-content/>`__

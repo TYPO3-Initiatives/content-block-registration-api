@@ -6,17 +6,17 @@ $EM_CONF[$_EXTKEY] = [
     'category' => 'fe',
     'author' => 'TYPO3 Structured Content Initiative',
     'author_email' => '',
-    'state' => 'alpha',
+    'state' => 'beta',
     'clearCacheOnLoad' => true,
-    'version' => '1.0.2',
+    'version' => '2.0.0',
     'constraints' => [
         'depends' => [
             'typo3' => '10.4.0-11.9.99',
         ],
         'conflicts' => [],
         'suggests' => [
-            'fluid_styled_content' => '10.4.0-0.0.0',
-            'bootstrap_package' => '10.0.0-0.0.0',
+            'fluid_styled_content' => '10.4.0-11.9.99',
+            'bootstrap_package' => '^12.0',
         ],
     ],
     'autoload' => [
