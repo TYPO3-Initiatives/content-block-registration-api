@@ -14,7 +14,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: ${{ matrix.php }}
+          php-version: ${{ matrix.php-version }}
       -   run: composer update --no-interaction --no-progress
       -   run: composer show
       -   run: composer tests-for:ci
