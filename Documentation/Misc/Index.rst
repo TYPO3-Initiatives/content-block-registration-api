@@ -17,3 +17,4 @@ Miscellaneous
 	Roadmap/Index
 	Examples/Index
 	FAQ/Index
+	Issues/Index
