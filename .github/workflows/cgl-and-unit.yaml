@@ -4,13 +4,11 @@ on: [push, pull_request]
 
 jobs:
   cgl-and-unit-tests:
-    runs-on: ${{ matrix.operating-system }}
+    runs-on: 'ubuntu-latest'
     strategy:
       fail-fast: false
       matrix:
-        ### Use Ubuntu 18.04 for PHP 7.2 - 7.4 and 20.04 for PHP 8.0
-        operating-system: [ubuntu-18.04, ubuntu-20.04]
-        php-version: [7.2, 7.3, 7.4, 8.0]
+        php-version: ['7.2', '7.3', '7.4', '8.0']
     steps:
       -   uses: actions/checkout@v2
       -   uses: shivammathur/setup-php@v2
