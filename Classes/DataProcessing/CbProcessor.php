@@ -17,6 +17,7 @@ use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\Restriction\WorkspaceRestriction;
 use TYPO3\CMS\Core\Domain\Repository\PageRepository;
+use TYPO3\CMS\Core\Resource\FileReference;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\ContentObject\DataProcessorInterface;
@@ -141,10 +142,29 @@ class CbProcessor implements DataProcessorInterface
     protected function _getFiles($fieldName, $table, $record): array
     {
         // gather data
-        /** @var FileCollector $fileCollector */
-        $fileCollector = GeneralUtility::makeInstance(FileCollector::class);
-        $fileCollector->addFilesFromRelation($table, $fieldName, $record);
-        return $fileCollector->getFiles();
+        if ($this->_isFrontend()) {
+            /** @var FileCollector $fileCollector */
+            $fileCollector = GeneralUtility::makeInstance(FileCollector::class);
+            $fileCollector->addFilesFromRelation($table, $fieldName, $record);
+            return $fileCollector->getFiles();
+        } else {
+            // Since bug in FileCollector, we need to handle files the other way in backend to support workspaces.
+            // https://review.typo3.org/c/Packages/TYPO3.CMS/+/74185
+            // This should be replaced after dropping support for v10.5
+            $workspaceId = GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('workspace', 'id', 0);
+            $files = BackendUtility::resolveFileReferences(
+                $table,
+                $fieldName,
+                $record,
+                (($workspaceId !== 0) ? $workspaceId : null)
+            );
+            if ($files instanceof FileReference) {
+                return [$files];
+            } else {
+                $files = array_reverse($files);
+                return $files;
+            }
+        }
     }
 
     /**
