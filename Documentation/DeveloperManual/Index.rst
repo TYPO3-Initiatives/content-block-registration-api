@@ -6,12 +6,20 @@ For Contribution
 ================
 
 This part of the documentation refers to setup and development for contribution.
+It will set up a TYPO3 v10 with ddev and install the API extension.
 
-**Table of Contents**
+Requirements
+============
 
-.. toctree::
-	:maxdepth: 3
-	:titlesonly:
-	:glob:
+*  ddev
 
-	Installation/Index
+Installation for developing on this API
+=======================================
+
+#. Clone this repository
+#. Run `ddev launch /typo3`
+
+The TYPO3 backend user is "admin", password "adminadmin".
+
+It includes example Content Blocks in a local composer repository that are
+installed by default.
