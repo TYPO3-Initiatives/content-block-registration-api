@@ -9,13 +9,12 @@ jobs:
       fail-fast: false
       matrix:
         php-version: ['7.2', '7.3', '7.4', '8.0']
-        include:
-          - operating-system: 'ubuntu-latest'
-            php-versions: '7.2'
     steps:
       -   uses: actions/checkout@v2
-      -   uses: shivammathur/setup-php@v2
-      -   run: sudo update-alternatives --set php /usr/bin/php${{ matrix.php-version }}
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
       -   run: composer update --no-interaction --no-progress
       -   run: composer show
       -   run: composer tests-for:ci
