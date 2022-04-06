@@ -11,9 +11,9 @@ declare(strict_types=1);
 
 namespace Typo3Contentblocks\ContentblocksRegApi\Service;
 
-use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Resource\File;
 use TYPO3\CMS\Core\SingletonInterface;
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use Typo3Contentblocks\ContentblocksRegApi\Constants;
 
 /** Class TcaFieldService
@@ -425,7 +425,6 @@ class TcaFieldService implements SingletonInterface
         ];
 
         if (isset($field['properties'])) {
-
             if ($field['type'] == 'MultiSelect') {
                 $config['renderType'] = 'selectMultipleSideBySide';
 

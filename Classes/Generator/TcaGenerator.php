@@ -11,10 +11,10 @@ declare(strict_types=1);
 
 namespace Typo3Contentblocks\ContentblocksRegApi\Generator;
 
-use Typo3Contentblocks\ContentblocksRegApi\Backend\Preview\PreviewRenderer;
+use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
+use Typo3Contentblocks\ContentblocksRegApi\Backend\Preview\PreviewRenderer;
 use Typo3Contentblocks\ContentblocksRegApi\Constants;
 use Typo3Contentblocks\ContentblocksRegApi\Service\ConfigurationService;
 use Typo3Contentblocks\ContentblocksRegApi\Service\DataService;

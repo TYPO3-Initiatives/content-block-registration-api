@@ -9,12 +9,11 @@
 
 namespace Typo3Contentblocks\ContentblocksRegApi\Backend\Controller;
 
-use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
-use Psr\Http\Message\ResponseInterface;
-use TYPO3\CMS\Core\Messaging\AbstractMessage;
 use Symfony\Component\Yaml\Yaml;
 use TYPO3\CMS\Core\Core\Environment;
+use TYPO3\CMS\Core\Messaging\AbstractMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use Typo3Contentblocks\ContentblocksRegApi\Constants;
 use Typo3Contentblocks\ContentblocksRegApi\Service\DatabaseService;
 
@@ -118,12 +117,12 @@ class WizardController extends ActionController
 
             if ($value['type'] === 'Image' && intval($value['properties']['maxItems']) == 1) {
                 $fieldsForTemplate .= '<f:image image="{' . $field . '}" />';
-            } else if ($value['type'] === 'Image' && intval($value['properties']['maxItems']) != 1) {
+            } elseif ($value['type'] === 'Image' && intval($value['properties']['maxItems']) != 1) {
                 $fieldsForTemplate .= '
                     <f:for each="{' . $field . '}" as="i">
                         <f:image image="{i}" />
                     </f:for>';
-            } else if ($value['type'] === 'Textarea' && $value['properties']['enableRichtext']) {
+            } elseif ($value['type'] === 'Textarea' && $value['properties']['enableRichtext']) {
                 $fieldsForTemplate .= '<f:format.html parseFuncTSPath="lib.parseFunc_RTE">{' . $field . '}</f:format.html>';
             } else {
                 $fieldsForTemplate .= '<p>{' . $field . '}</p>';
@@ -258,7 +257,7 @@ class WizardController extends ActionController
         $updateResult = GeneralUtility::makeInstance(DatabaseService::class)->addColumnsToCType($editorInterfaceYaml ['fields'], $contentBlock['packageName']);
         if ($updateResult === true) {
             $this->addFlashMessage('New columns created at the database.', '', AbstractMessage::OK);
-        } else if (is_array($updateResult) && isset($updateResult['error'])) {
+        } elseif (is_array($updateResult) && isset($updateResult['error'])) {
             $this->addFlashMessage(
                 'An error occured while trying to update database: ' . $updateResult['error'],
                 '',

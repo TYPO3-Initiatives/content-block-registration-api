@@ -135,7 +135,7 @@ return [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'items' => [
-                    ['', 0,],
+                    ['', 0],
                 ],
                 'foreign_table' => 'tx_contentblocks_reg_api_collection',
                 'foreign_table_where' => 'AND tx_contentblocks_reg_api_collection.pid=###CURRENT_PID### AND tx_contentblocks_reg_api_collection.sys_language_uid IN (-1,0)',
