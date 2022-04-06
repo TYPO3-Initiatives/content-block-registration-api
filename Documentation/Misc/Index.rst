@@ -13,8 +13,8 @@ Miscellaneous
 .. toctree::
 	:maxdepth: 3
 	:titlesonly:
-	:glob:
 
 	Roadmap/Index
 	Examples/Index
 	FAQ/Index
+	Issues/Index

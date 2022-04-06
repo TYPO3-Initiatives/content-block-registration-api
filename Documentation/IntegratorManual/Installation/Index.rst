@@ -1,5 +1,5 @@
 .. include:: /Includes.rst.txt
-.. _installation_use:
+.. _installation:
 
 =====================================
 Installation for using Content Blocks
@@ -125,22 +125,23 @@ Security
    You'll need to modify your .htaccess or nginx configuration to secure the src
    folder of your content blocks.
 
-In .htaccess:
+.. tabs::
 
-.. code-block:: yaml
+   .. group-tab:: .htaccess
 
-    # Add your own rules here.
-    <If "%{REQUEST_URI} =~ m#^/typo3conf/contentBlocks/.*\.(yaml|html|xlf|json)#">
-        Order allow,deny
-        Deny from all
-        Satisfy All
-    </If>
+        In .htaccess::
 
+            # Add your own rules here.
+            <If "%{REQUEST_URI} =~ m#^/typo3conf/contentBlocks/.*\.(yaml|html|xlf|json)#">
+                Order allow,deny
+                Deny from all
+                Satisfy All
+            </If>
 
-In nginx:
+   .. group-tab:: .nginx
 
-.. code-block:: yaml
+        In nginx::
 
-    location ~ (?:typo3conf/contentBlocks)/[^/]+/(?:src?)/ {
-        deny all;
-    }
+            location ~ (?:typo3conf/contentBlocks)/[^/]+/(?:src?)/ {
+                deny all;
+            }
