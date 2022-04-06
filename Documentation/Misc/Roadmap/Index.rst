@@ -10,8 +10,8 @@ feedback faster and react on it, the implementation process is split into
 following phases. Those phases represent a rough roadmap and may be adapted
 during the development process.
 
-Phase 1
-=======
+Phase 1 (completed)
+===================
 
 *  Composer installer for Content Blocks
 *  Validation of editing interface YAML
@@ -22,8 +22,8 @@ Phase 1
 *  Generate TypoScript
 
 
-Phase 2
-=======
+Phase 2 (dropped)
+=================
 
 This phase might be skipped. The decision depends on the research results for
 data storage.
@@ -34,8 +34,8 @@ Phase 2 may, if deemed vital, be done as part of phase 1. The necessary patch is
 nearly complete and can easily be adapted to, for example, writing a more
 condensed JSON blob.
 
-Phase 3
-=======
+Phase 3 (dropped)
+=================
 
 *  Refactor Flexforms to freely organize fields in the editing interface
    (new feature, ability to extract field definitions from a DS and render them
@@ -43,8 +43,8 @@ Phase 3
 
 Phase 3 also could be created right now as a `feature request on forge <https://forge.typo3.org/projects/typo3cms-core/issues>`__.
 
-Phase 4
-=======
+Phase 4 (completed)
+===================
 
 *  Based on investigation of performance, decide on a different storage strategy
    for the data that (according to phase 1) is stored as blobs based on FlexForm
@@ -52,3 +52,17 @@ Phase 4
 *  FlexForm storage driver potentially allows EAV or flat table implementations
    (actual storage strategy is arbitrary)
 
+.. note::
+   After further evaluation we decided not to use blobs, but to extend `tt_content`
+   and use a custom table for collections.
+
+Phase 5
+=======
+
+Further development:
+- Refactor the content blocks kickstart module
+- Compatibility with TYPO3 v12
+
+.. note::
+    Have a look at our `milestones <https://github.com/TYPO3-Initiatives/content-block-registration-api/milestones3>`__
+    to see which features are planned for which major version.
