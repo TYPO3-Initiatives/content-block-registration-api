@@ -47,7 +47,6 @@ Positive side effects of this approach
 .. toctree::
 	:maxdepth: 3
 	:titlesonly:
-	:glob:
 
 	ContentBlockPackageFiles/Index
 	DataStorageVariants/Index

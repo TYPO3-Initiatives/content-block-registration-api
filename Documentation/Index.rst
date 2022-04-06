@@ -48,9 +48,8 @@ on the top right to submit your change request.
 
 
 .. toctree::
-	:maxdepth: 3
+	:maxdepth: 2
 	:titlesonly:
-	:glob:
 
 	Introduction/Index
 	IntegratorManual/Index

@@ -62,9 +62,8 @@ Field types
 -----------
 
 .. toctree::
-	:maxdepth: 3
+	:maxdepth: 1
 	:titlesonly:
-	:glob:
 
 	Checkbox/Index
 	Collection/Index

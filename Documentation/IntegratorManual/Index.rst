@@ -13,7 +13,6 @@ the content blocks.
 .. toctree::
 	:maxdepth: 3
 	:titlesonly:
-	:glob:
 
 	Installation/Index
 	ContentBlockDefinition/Index
