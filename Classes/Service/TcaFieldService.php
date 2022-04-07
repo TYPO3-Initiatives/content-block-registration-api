@@ -502,8 +502,7 @@ class TcaFieldService implements SingletonInterface
 
         if (count($evalFields) > 1) {
             $config['eval'] = implode(',', $evalFields);
-        }
-        elseif (count($evalFields) === 1) {
+        } elseif (count($evalFields) === 1) {
             $config['eval'] = $evalFields[0];
         }
 
