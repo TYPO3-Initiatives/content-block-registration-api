@@ -440,11 +440,11 @@ class TcaFieldService implements SingletonInterface
                 $items = [];
 
                 if (isset($field['properties']['prependLabel'])) {
-                    $items[] = [$field['properties']['prependLabel']];
+                    $items[] = [$field['properties']['prependLabel'], '--div--'];
                 }
 
                 foreach ($field['properties']['items'] as $key => $value) {
-                    $items[] = [ $value, $key];
+                    $items[] = [$value, $key];
                 }
                 if ($field['type'] =='Toggle' && isset($field['properties']['invertStateDisplay']) && $field['properties']['invertStateDisplay'] === true) {
                     $items['invertStateDisplay'] = true;
@@ -492,11 +492,19 @@ class TcaFieldService implements SingletonInterface
             }
         }
 
-        $evalFields[] = (isset($field['properties']['required']) && $field['properties']['required'] === true) ? 'required' : '';
-        $evalFields[] = (isset($field['properties']['trim']) && $field['properties']['trim'] === true) ? 'trim ' : '';
+        $evalFields = [];
+        if (isset($field['properties']['required']) && $field['properties']['required'] === true) {
+            $evalFields[] = 'required';
+        }
+        if (isset($field['properties']['trim']) && $field['properties']['trim'] === true) {
+            $evalFields[] = 'trim ';
+        }
 
         if (count($evalFields) > 1) {
             $config['eval'] = implode(',', $evalFields);
+        }
+        elseif (count($evalFields) === 1) {
+            $config['eval'] = $evalFields[0];
         }
 
         return $config;
