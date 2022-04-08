@@ -13,7 +13,7 @@ Find the full [Documentation](https://github.com/TYPO3-Initiatives/content-block
 
 ### Status
 
-`alpha` - the main concepts are laid out but nothing is polished yet. We welcome your feedback.
+`beta` - the main concepts are laid out, the data storage method refactored and tested. We welcome your feedback.
 You can reach us in the TYPO3 Slack `#cig-structuredcontent` ❤️.
 
 ## Installation
