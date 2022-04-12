@@ -42,8 +42,8 @@ extension and a composer plugin.
 Extension configuration
 -----------------------
 
-Sometimes it might be necessary to inherit content blocks from your ow
-n definition (e. g. if you want to inherit content blocks from lib.contentElement).
+Sometimes it might be necessary to inherit content blocks from your own 
+definition (e. g. if you want to inherit content blocks from lib.contentElement).
 In that case you can extend the default TypoScript as you need.
 This is the default code:
 
