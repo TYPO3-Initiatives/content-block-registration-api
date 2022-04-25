@@ -2,18 +2,13 @@
 /.ddev export-ignore
 /.github export-ignore
 /Tests export-ignore
+/Build export-ignore
 
 # Files
 .editorconfig export-ignore
 .gitattributes export-ignore
-.crowdin.yaml export-ignore
 .gitignore export-ignore
 .php_cs.dist export-ignore
-
-# Build
-package.json export-ignore
-webpack.config.js export-ignore
-yarn.lock export-ignore
 
 # Enforce checkout with linux lf consistent over all plattforms
 *.xml text eol=lf
