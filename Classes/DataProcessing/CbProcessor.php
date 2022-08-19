@@ -138,7 +138,9 @@ class CbProcessor implements DataProcessorInterface
         return $cbData;
     }
 
-    /* find file for a field */
+    /** 
+     * find file for a field 
+     */
     protected function _getFiles($fieldName, $table, $record): array
     {
         // gather data
@@ -228,8 +230,13 @@ class CbProcessor implements DataProcessorInterface
             }
 
             $collectionData = [];
+            // add the field infos
             foreach ($parentFieldConf['properties']['fields'] as $fieldConf) {
                 $collectionData = $this->_processField($fieldConf, $r, $collectionData);
+            }
+            // add uid to collection items
+            if (!array_key_exists('uid', $collectionData)) {
+                $collectionData['uid'] = $r['uid'];
             }
             $fieldData[] = $collectionData;
         }
