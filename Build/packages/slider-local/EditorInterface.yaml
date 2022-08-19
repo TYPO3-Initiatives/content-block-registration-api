@@ -3,6 +3,7 @@ fields:
   - identifier: slides
     type: Collection
     properties:
+      useAsLabel: headline
       fields:
         - identifier: image
           type: Image
