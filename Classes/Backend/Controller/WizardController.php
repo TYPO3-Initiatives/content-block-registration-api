@@ -92,7 +92,7 @@ class WizardController extends ActionController
 
         // remember fields identifier
         $fieldIdentifierList = [];
-        $fieldsForTemplate = '';
+        $fieldsForTemplate = "\n";
         $fieldsForXLF = '';
 
         /* +++++  EditorInterface.yaml  +++++ */
@@ -116,16 +116,16 @@ class WizardController extends ActionController
             $fieldIdentifierList[] = $field;
 
             if ($value['type'] === 'Image' && intval($value['properties']['maxItems']) == 1) {
-                $fieldsForTemplate .= '<f:image image="{' . $field . '}" />';
+                $fieldsForTemplate .= '      <f:image image="{' . $field . '}" />' . "\n";
             } elseif ($value['type'] === 'Image' && intval($value['properties']['maxItems']) != 1) {
-                $fieldsForTemplate .= '
-                    <f:for each="{' . $field . '}" as="i">
-                        <f:image image="{i}" />
-                    </f:for>';
+                $fieldsForTemplate .= "\n";
+                $fieldsForTemplate .= '      <f:for each="{' . $field . '}" as="i">' . "\n";
+                $fieldsForTemplate .= '          <f:image image="{i}" />' . "\n";
+                $fieldsForTemplate .= '      </f:for>' . "\n";
             } elseif ($value['type'] === 'Textarea' && $value['properties']['enableRichtext']) {
-                $fieldsForTemplate .= '<f:format.html parseFuncTSPath="lib.parseFunc_RTE">{' . $field . '}</f:format.html>';
+                $fieldsForTemplate .= '      <f:format.html parseFuncTSPath="lib.parseFunc_RTE">{' . $field . '}</f:format.html>' . "\n";
             } else {
-                $fieldsForTemplate .= '<p>{' . $field . '}</p>';
+                $fieldsForTemplate .= '      <p>{' . $field . '}</p>' . "\n";
             }
 
             $tempField['type'] = $value['type'];
@@ -133,17 +133,17 @@ class WizardController extends ActionController
 
             foreach ($value['properties'] as $property => $propertyVal) {
                 if ($property === 'translationLabel') {
-                    $fieldsForXLF .= '
-                        <trans-unit id="' . $contentBlock['vendor'] . '.' . $contentBlock['packageName'] . '.' . $tempField['identifier'] . '.label" xml:space="preserve">
-                            <source>' . $propertyVal . '</source>
-                        </trans-unit>';
+                    $fieldsForXLF .= "\n";
+                    $fieldsForXLF .= '            <trans-unit id="' . $contentBlock['vendor'] . '.' . $contentBlock['packageName'] . '.' . $tempField['identifier'] . '.label" xml:space="preserve">' . "\n";
+                    $fieldsForXLF .= '                <source>' . $propertyVal . '</source>' . "\n";
+                    $fieldsForXLF .= '            </trans-unit>' . "\n";
                     continue;
                 }
                 if ($property === 'translationDescription') {
-                    $fieldsForXLF .= '
-                        <trans-unit id="' . $contentBlock['vendor'] . '.' . $contentBlock['packageName'] . '.' . $tempField['identifier'] . '.description" xml:space="preserve">
-                            <source>' . $propertyVal . '</source>
-                        </trans-unit>';
+                    $fieldsForXLF .= "\n";
+                    $fieldsForXLF .= '            <trans-unit id="' . $contentBlock['vendor'] . '.' . $contentBlock['packageName'] . '.' . $tempField['identifier'] . '.description" xml:space="preserve">' . "\n";
+                    $fieldsForXLF .= '                <source>' . $propertyVal . '</source>' . "\n";
+                    $fieldsForXLF .= '            </trans-unit>' . "\n";
                     continue;
                 }
 
@@ -170,64 +170,65 @@ class WizardController extends ActionController
 
         /* +++++  EditorPreview.html  +++++ */
         // TODO: Render template
+        $editorPreviewTemplate = '{namespace be=TYPO3\CMS\Backend\ViewHelpers}' . "\n";
+        $editorPreviewTemplate .= '<f:asset.css identifier="content-block-' . $contentBlock['packageName'] . '-be" href="CB:' . $contentBlock['packageName'] . '/dist/EditorPreview.css"/>' . "\n";
+        $editorPreviewTemplate .= '' . "\n";
+        $editorPreviewTemplate .= '<be:link.editRecord uid="{data.uid}" table="tt_content" id="element-tt_content-{data.uid}">' . "\n";
+        $editorPreviewTemplate .= '    <div class="' . $contentBlock['packageName'] . '">' . "\n";
+        $editorPreviewTemplate .= $fieldsForTemplate . "\n";
+        $editorPreviewTemplate .= '    </div>' . "\n";
+        $editorPreviewTemplate .= '</be:link.editRecord>' . "\n";
+
         file_put_contents(
             $cbBasePath . 'src/EditorPreview.html',
-            '<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:be="http://typo3.org/ns/TYPO3/CMS/Backend/ViewHelpers" data-namespace-typo3-fluid="true">
-
-                    <f:asset.css identifier="content-block-' . $contentBlock['packageName'] . '-be" href="CB:' . $contentBlock['packageName'] . '/dist/EditorPreview.css"/>
-
-                    <be:link.editRecord uid="{data.uid}" table="tt_content" id="element-tt_content-{data.uid}">
-                        <div class="' . $contentBlock['packageName'] . '">
-                            ' . $fieldsForTemplate . '
-                        </div>
-                    </be:link.editRecord>
-
-                </html>'
+            $editorPreviewTemplate
         );
 
         /* +++++  Frontend.html  +++++ */
         // TODO: Render template
+        $frontendTemplate = '<f:layout name="Default" />' . "\n";
+        $frontendTemplate .= '' . "\n";
+        $frontendTemplate .= '<f:section name="Main">' . "\n";
+        $frontendTemplate .= '' . "\n";
+        $frontendTemplate .= '    <f:asset.css identifier="content-block-' . $contentBlock['packageName'] . '-be" href="CB:' . $contentBlock['packageName'] . '/dist/EditorPreview.css"/>' . "\n";
+        $frontendTemplate .= '    <f:asset.css identifier="content-block-' . $contentBlock['packageName'] . '" href="CB:' . $contentBlock['packageName'] . '/dist/Frontend.css"/>' . "\n";
+        $frontendTemplate .= '    <f:asset.script identifier="content-block-' . $contentBlock['packageName'] . '" src="CB:' . $contentBlock['packageName'] . '/dist/Frontend.js"/>' . "\n";
+        $frontendTemplate .= '' . "\n";
+        $frontendTemplate .= '    <div class="' . $contentBlock['packageName'] . '">' . "\n";
+        $frontendTemplate .= $fieldsForTemplate . "\n";
+        $frontendTemplate .= '    </div>' . "\n";
+        $frontendTemplate .= '' . "\n";
+        $frontendTemplate .= '</f:section>' . "\n";
+            
         file_put_contents(
             $cbBasePath . 'src/Frontend.html',
-            '<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
-
-                    <f:layout name="Default" />
-
-                    <f:section name="Main">
-
-                        <f:asset.css identifier="content-block-' . $contentBlock['packageName'] . '-be" href="CB:' . $contentBlock['packageName'] . '/dist/EditorPreview.css"/>
-                        <f:asset.css identifier="content-block-' . $contentBlock['packageName'] . '" href="CB:' . $contentBlock['packageName'] . '/dist/Frontend.css"/>
-                        <f:asset.script identifier="content-block-' . $contentBlock['packageName'] . '" src="CB:' . $contentBlock['packageName'] . '/dist/Frontend.js"/>
-
-                        <div class="' . $contentBlock['packageName'] . '">
-                            ' . $fieldsForTemplate . '
-                        </div>
-
-                    </f:section>
-                </html>'
+            $frontendTemplate
         );
 
         /* +++++  Default.xlf  +++++ */
+        $xmlOutput = '<?xml version="1.0"?>' . "\n";
+        $xmlOutput .= '<xliff version="1.0">' . "\n";
+        $xmlOutput .= '    <file datatype="plaintext"' . "\n";
+        $xmlOutput .= '            original="messages"' . "\n";
+        $xmlOutput .= '            source-language="en"' . "\n";
+        $xmlOutput .= '            product-name="text">' . "\n";
+        $xmlOutput .= '        <header/>' . "\n";
+        $xmlOutput .= '        <body>' . "\n";
+        $xmlOutput .= '            <trans-unit id="' . $contentBlock['vendor'] . '.' . $contentBlock['packageName'] . '.title" xml:space="preserve">' . "\n";
+        $xmlOutput .= '                <source>' . $contentBlock['backendName'] . '</source>' . "\n";
+        $xmlOutput .= '            </trans-unit>' . "\n";
+        $xmlOutput .= '            <trans-unit id="' . $contentBlock['vendor'] . '.' . $contentBlock['packageName'] . '.description" xml:space="preserve">' . "\n";
+        $xmlOutput .= '                <source>' . $contentBlock['backendName'] . ' - ' . $contentBlock['packageName'] . ' created by Content Block Builder.</source>' . "\n";
+        $xmlOutput .= '            </trans-unit>' . "\n";
+        $xmlOutput .= $fieldsForXLF . "\n";
+        $xmlOutput .= '        </body>' . "\n";
+        $xmlOutput .= '    </file>' . "\n";
+        $xmlOutput .= '</xliff>' . "\n";
+
+
         file_put_contents(
-            $cbBasePath . 'src/Language/Default.xlf',
-            '<?xml version="1.0"?>
-                    <xliff version="1.0">
-                        <file datatype="plaintext"
-                                original="messages"
-                                source-language="en"
-                                product-name="text">
-                            <header/>
-                            <body>
-                                <trans-unit id="' . $contentBlock['vendor'] . '.' . $contentBlock['packageName'] . '.title" xml:space="preserve">
-                                    <source>' . $contentBlock['backendName'] . '</source>
-                                </trans-unit>
-                                <trans-unit id="' . $contentBlock['vendor'] . '.' . $contentBlock['packageName'] . '.description" xml:space="preserve">
-                                    <source>' . $contentBlock['backendName'] . ' - ' . $contentBlock['packageName'] . ' created by Content Block Builder.</source>
-                                </trans-unit>
-                    ' . $fieldsForXLF . '
-                            </body>
-                        </file>
-                    </xliff>'
+            $cbBasePath . 'src/Language/Default.xlf', 
+            $xmlOutput
         );
 
         // TODO: Fetch SVG from file
