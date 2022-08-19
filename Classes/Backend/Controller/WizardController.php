@@ -199,7 +199,7 @@ class WizardController extends ActionController
         $frontendTemplate .= '    </div>' . "\n";
         $frontendTemplate .= '' . "\n";
         $frontendTemplate .= '</f:section>' . "\n";
-            
+
         file_put_contents(
             $cbBasePath . 'src/Frontend.html',
             $frontendTemplate
@@ -225,9 +225,8 @@ class WizardController extends ActionController
         $xmlOutput .= '    </file>' . "\n";
         $xmlOutput .= '</xliff>' . "\n";
 
-
         file_put_contents(
-            $cbBasePath . 'src/Language/Default.xlf', 
+            $cbBasePath . 'src/Language/Default.xlf',
             $xmlOutput
         );
 

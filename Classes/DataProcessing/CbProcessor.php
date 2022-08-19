@@ -138,8 +138,8 @@ class CbProcessor implements DataProcessorInterface
         return $cbData;
     }
 
-    /** 
-     * find file for a field 
+    /**
+     * find file for a field
      */
     protected function _getFiles($fieldName, $table, $record): array
     {
