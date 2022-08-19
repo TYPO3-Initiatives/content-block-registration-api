@@ -180,5 +180,3 @@ function submitData() {
   formular.elements.contentBlocksDataField.value = JSON.stringify(finalContentBlockConfig);
   formular.submit();
 }
-
-console.log('wiard');
