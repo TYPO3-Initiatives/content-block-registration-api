@@ -11,7 +11,6 @@ declare(strict_types=1);
 
 namespace Typo3Contentblocks\ContentblocksRegApi\Service;
 
-use PHPUnit\TextUI\XmlConfiguration\Constant;
 use TYPO3\CMS\Core\Resource\File;
 use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
@@ -429,7 +428,7 @@ class TcaFieldService implements SingletonInterface
             . '.' . $contentBlock['package'] . '.' . $field['_identifier'] . '.description',
             'config' => $config,
         ];
-        
+
         if (count($collectionColumnsOverrides) > 0) {
             $tcaConfig['config']['overrideChildTca']['columns'] = $collectionColumnsOverrides;
         }

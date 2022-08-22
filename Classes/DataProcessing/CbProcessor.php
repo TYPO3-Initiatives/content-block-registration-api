@@ -112,7 +112,7 @@ class CbProcessor implements DataProcessorInterface
         ) {
             // Feature: reuse of existing fields
             if (
-                isset($fieldConf['properties']['useExistingField']) 
+                isset($fieldConf['properties']['useExistingField'])
                 && $fieldConf['properties']['useExistingField'] === true
                 // check if there is a column configuration, otherwice there is a content block field
                 && (
@@ -125,7 +125,7 @@ class CbProcessor implements DataProcessorInterface
                 }
                 $cbData[$fieldConf['identifier']] = $record[$fieldConf['identifier']];
             } else {
-                if (!array_key_exists($fieldColumnName, $record)) {   
+                if (!array_key_exists($fieldColumnName, $record)) {
                     throw new \Exception(sprintf('It seems your field %s is missing in the database. Maybe a database compare could help you out.', $fieldColumnName));
                 }
                 // The "normal" way
