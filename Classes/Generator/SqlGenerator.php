@@ -69,6 +69,27 @@ class SqlGenerator implements SingletonInterface
                     $sqlCollectionStatement = $sqlCollectionStatementReset;
 
                     foreach ($fieldsList as $field) {
+                        // Feature: reuse of existing fields
+                        if (
+                            (
+                                // check tt_content
+                                isset($field['properties']['useExistingField'])
+                                && $field['properties']['useExistingField'] === true
+                                // check if there is a column configuration
+                                && array_key_exists($field['identifier'], $GLOBALS['TCA']['tt_content']['columns'])
+                            ) || (
+                                // check collection
+                                isset($field['identifier'])
+                                && isset($field['type'])
+                                && count($field['_path']) > 1
+                                && isset($field['properties']['useExistingField'])
+                                && $field['properties']['useExistingField'] === true
+                                && array_key_exists($field['identifier'], $GLOBALS['TCA'][Constants::COLLECTION_FOREIGN_TABLE]['columns'])
+                            )
+                        ) {
+                            continue;
+                        }
+
                         $tempUniqueColumnName = $this->dataService->uniqueColumnName($contentBlock['key'], $field['_identifier']);
 
                         // Add fields to tt_content (first level)

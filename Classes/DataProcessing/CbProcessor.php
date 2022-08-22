@@ -97,6 +97,7 @@ class CbProcessor implements DataProcessorInterface
     }
 
     /** process a field
+     * @throws \Exception
      * @var array $fieldConf, configuration of the field
      * @var array $record, the data base record (row) with the values inside
      * @var array $cbData, the data stack where to add the data
@@ -109,7 +110,27 @@ class CbProcessor implements DataProcessorInterface
         if (!array_key_exists($fieldConf['_identifier'], $this->cbConf['collectionFields'])
                 && !array_key_exists($fieldConf['_identifier'], $this->cbConf['fileFields'])
         ) {
-            $cbData[$fieldConf['identifier']] = $record[$fieldColumnName];
+            // Feature: reuse of existing fields
+            if (
+                isset($fieldConf['properties']['useExistingField']) 
+                && $fieldConf['properties']['useExistingField'] === true
+                // check if there is a column configuration, otherwice there is a content block field
+                && (
+                    array_key_exists($fieldConf['identifier'], $GLOBALS['TCA']['tt_content']['columns'])
+                    || array_key_exists($fieldConf['identifier'], $GLOBALS['TCA'][Constants::COLLECTION_FOREIGN_TABLE]['columns'])
+                )
+            ) {
+                if (!array_key_exists($fieldConf['identifier'], $record)) {
+                    throw new \Exception(sprintf('It seems your field %s is missing in the database. Maybe a database compare could help you out.', $fieldConf['identifier']));
+                }
+                $cbData[$fieldConf['identifier']] = $record[$fieldConf['identifier']];
+            } else {
+                if (!array_key_exists($fieldColumnName, $record)) {   
+                    throw new \Exception(sprintf('It seems your field %s is missing in the database. Maybe a database compare could help you out.', $fieldColumnName));
+                }
+                // The "normal" way
+                $cbData[$fieldConf['identifier']] = $record[$fieldColumnName];
+            }
         }
         // get file fields
         elseif (array_key_exists($fieldConf['_identifier'], $this->cbConf['fileFields'])) {

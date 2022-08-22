@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace Typo3Contentblocks\ContentblocksRegApi\Service;
 
+use PHPUnit\TextUI\XmlConfiguration\Constant;
 use TYPO3\CMS\Core\Resource\File;
 use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
@@ -343,10 +344,26 @@ class TcaFieldService implements SingletonInterface
     {
         // get the fields in the collections
         $fieldsConfig = '';
+        $collectionColumnsOverrides = [];
         if (isset($field['properties']['fields']) && count($field['properties']['fields']) > 0) {
             foreach ($field['properties']['fields'] as $collectionField) {
-                $identifier = $this->dataService->uniqueColumnName($contentBlock['key'], $collectionField['_identifier']);
-                $fieldsConfig .= (($fieldsConfig === '') ? $identifier : ',' . $identifier);
+                // re-use existing
+                if (
+                    isset($collectionField['properties']['useExistingField'])
+                    && $collectionField['properties']['useExistingField'] === true
+                    // check if there is a column configuration
+                    && (
+                        array_key_exists($collectionField['identifier'], $GLOBALS['TCA']['tt_content']['columns'])
+                        || array_key_exists($collectionField['identifier'], $GLOBALS['TCA'][Constants::COLLECTION_FOREIGN_TABLE]['columns'])
+                    )
+                ) {
+                    $fieldsConfig .= (($fieldsConfig === '') ? $collectionField['identifier'] : ',' . $collectionField['identifier']);
+                    $collectionColumnsOverrides[$collectionField['identifier']] = $this->getMatchedTcaConfig($contentBlock, $collectionField);
+                } else {
+                    // The normal way
+                    $identifier = $this->dataService->uniqueColumnName($contentBlock['key'], $collectionField['_identifier']);
+                    $fieldsConfig .= (($fieldsConfig === '') ? $identifier : ',' . $identifier);
+                }
             }
             $fieldsConfig .= ', --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access, --palette--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:palette.visibility;visibility, --palette--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:palette.access;access, --palette--;;hiddenLanguagePalette,';
         }
@@ -404,7 +421,7 @@ class TcaFieldService implements SingletonInterface
             }
         }
 
-        return [
+        $tcaConfig = [
             'exclude' => 1,
             'label' => 'LLL:' . $contentBlock['EditorInterfaceXlf'] . ':' . $contentBlock['vendor']
                         . '.' . $contentBlock['package'] . '.' . $field['_identifier'] . '.label',
@@ -412,6 +429,12 @@ class TcaFieldService implements SingletonInterface
             . '.' . $contentBlock['package'] . '.' . $field['_identifier'] . '.description',
             'config' => $config,
         ];
+        
+        if (count($collectionColumnsOverrides) > 0) {
+            $tcaConfig['config']['overrideChildTca']['columns'] = $collectionColumnsOverrides;
+        }
+
+        return $tcaConfig;
     }
 
     /*********************

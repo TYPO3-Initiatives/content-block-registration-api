@@ -95,6 +95,7 @@ class TcaGenerator
              */
             $ttContentShowitemFields = '';
             $ttContentColumns = [];
+            $ttContentColumnsOverrides = [];
             $collectionColumns = [];
             if (is_array($contentBlock['fields'])
                 && count($contentBlock['fields']) > 0
@@ -105,13 +106,34 @@ class TcaGenerator
 
                     // Add fields to tt_content (first level)
                     if (isset($field['_identifier']) && isset($field['type']) && count($field['_path']) == 1) {
-                        $ttContentShowitemFields .= "\n" . $tempUniqueColumnName . ',';
-                        $ttContentColumns[$tempUniqueColumnName] = $this->tcaFieldService->getMatchedTcaConfig($contentBlock, $field);
-                    // TODO: else throw usefull exeption if not supported
+                        // re-use existing
+                        if (
+                            isset($field['properties']['useExistingField'])
+                            && $field['properties']['useExistingField'] === true
+                            // check if there is a column configuration
+                            && array_key_exists($field['identifier'], $GLOBALS['TCA']['tt_content']['columns'])
+                        ) {
+                            $ttContentShowitemFields .= "\n" . $field['identifier'] . ',';
+                            $ttContentColumnsOverrides[$field['identifier']] = $this->tcaFieldService->getMatchedTcaConfig($contentBlock, $field);
+                        } else {
+                            // The "normal" way to add fields
+                            $ttContentShowitemFields .= "\n" . $tempUniqueColumnName . ',';
+                            $ttContentColumns[$tempUniqueColumnName] = $this->tcaFieldService->getMatchedTcaConfig($contentBlock, $field);
+                        }
+                        // TODO: else throw usefull exeption if not supported
                     }
 
                     // Add collection fields
-                    elseif (isset($field['_identifier']) && isset($field['type']) && count($field['_path']) > 1) {
+                    elseif (
+                        isset($field['_identifier'])
+                        && isset($field['type'])
+                        && count($field['_path']) > 1
+                        && (
+                            !isset($field['properties']['useExistingField'])
+                            || $field['properties']['useExistingField'] === false
+                            || !array_key_exists($field['identifier'], $GLOBALS['TCA'][Constants::COLLECTION_FOREIGN_TABLE]['columns'])
+                        )
+                    ) {
                         $collectionColumns[$tempUniqueColumnName] = $this->tcaFieldService->getMatchedTcaConfig($contentBlock, $field);
                         // TODO: else throw usefull exeption if not supported
                     }
@@ -156,6 +178,11 @@ class TcaGenerator
                     ',
                 ]
             );
+
+            // Feature, reuse an existing field: overwrite the column config for this cType
+            if (count($ttContentColumnsOverrides) > 0) {
+                $GLOBALS['TCA']['tt_content']['types'][$contentBlock['CType']]['columnsOverrides'] = $ttContentColumnsOverrides;
+            }
         }
     }
 }
