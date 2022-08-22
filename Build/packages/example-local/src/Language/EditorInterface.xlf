@@ -90,6 +90,12 @@
       <trans-unit id="typo3-contentblocks.example-local.image.label" xml:space="preserve">
 				<source>Image</source>
 			</trans-unit>
+      <trans-unit id="typo3-contentblocks.example-local.bodytext.label" xml:space="preserve">
+			<source>Bodytext reuse example</source>
+		</trans-unit>
+      <trans-unit id="typo3-contentblocks.example-local.bodytext.description" xml:space="preserve">
+			<source>This is an example how to reuse an existing field like the TYPO3 cores bodytext.</source>
+		</trans-unit>
       <trans-unit id="typo3-contentblocks.example-local.collection.label" xml:space="preserve">
 				<source>Collection</source>
 			</trans-unit>
@@ -101,6 +107,12 @@
 			</trans-unit>
       <trans-unit id="typo3-contentblocks.example-local.collection.collection.text.label" xml:space="preserve">
 				<source>Text in Collection in Collection</source>
+			</trans-unit>
+      <trans-unit id="typo3-contentblocks.example-local.collection.collection.cb_slider_local_slides_text.label" xml:space="preserve">
+				<source>Reused text field slider collection</source>
+			</trans-unit>
+      <trans-unit id="typo3-contentblocks.example-local.collection.collection.cb_slider_local_slides_text.description" xml:space="preserve">
+				<source>This an example how to reuse a field from another collection. It is the reused textfield from the slider collection.</source>
 			</trans-unit>
     </body>
   </file>

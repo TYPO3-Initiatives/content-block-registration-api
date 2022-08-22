@@ -171,6 +171,11 @@ fields:
       invertStateDisplay: true
   - identifier: image
     type: Image
+  - identifier: bodytext
+    type: Textarea
+    properties:
+      useExistingField: true
+      enableRichtext: true
   - identifier: collection
     type: Collection
     properties:
@@ -188,3 +193,9 @@ fields:
             fields:
               - identifier: text
                 type: Text
+              - identifier: cb_slider_local_slides_text
+                type: Textarea
+                properties:
+                  useExistingField: true
+                  enableRichtext: true
+
