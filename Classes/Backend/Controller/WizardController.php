@@ -116,16 +116,16 @@ class WizardController extends ActionController
             $fieldIdentifierList[] = $field;
 
             if ($value['type'] === 'Image' && intval($value['properties']['maxItems']) == 1) {
-                $fieldsForTemplate .= '      <f:image image="{' . $field . '}" />' . "\n";
+                $fieldsForTemplate .= '            <f:image image="{' . $field . '}" />' . "\n";
             } elseif ($value['type'] === 'Image' && intval($value['properties']['maxItems']) != 1) {
                 $fieldsForTemplate .= "\n";
-                $fieldsForTemplate .= '      <f:for each="{' . $field . '}" as="i">' . "\n";
-                $fieldsForTemplate .= '          <f:image image="{i}" />' . "\n";
-                $fieldsForTemplate .= '      </f:for>' . "\n";
+                $fieldsForTemplate .= '            <f:for each="{' . $field . '}" as="i">' . "\n";
+                $fieldsForTemplate .= '                <f:image image="{i}" />' . "\n";
+                $fieldsForTemplate .= '            </f:for>' . "\n";
             } elseif ($value['type'] === 'Textarea' && $value['properties']['enableRichtext']) {
-                $fieldsForTemplate .= '      <f:format.html parseFuncTSPath="lib.parseFunc_RTE">{' . $field . '}</f:format.html>' . "\n";
+                $fieldsForTemplate .= '            <f:format.html parseFuncTSPath="lib.parseFunc_RTE">{' . $field . '}</f:format.html>' . "\n";
             } else {
-                $fieldsForTemplate .= '      <p>{' . $field . '}</p>' . "\n";
+                $fieldsForTemplate .= '            <p>{' . $field . '}</p>' . "\n";
             }
 
             $tempField['type'] = $value['type'];
@@ -170,14 +170,15 @@ class WizardController extends ActionController
 
         /* +++++  EditorPreview.html  +++++ */
         // TODO: Render template
-        $editorPreviewTemplate = '{namespace be=TYPO3\CMS\Backend\ViewHelpers}' . "\n";
-        $editorPreviewTemplate .= '<f:asset.css identifier="content-block-' . $contentBlock['packageName'] . '-be" href="CB:' . $contentBlock['packageName'] . '/dist/EditorPreview.css"/>' . "\n";
-        $editorPreviewTemplate .= '' . "\n";
-        $editorPreviewTemplate .= '<be:link.editRecord uid="{data.uid}" table="tt_content" id="element-tt_content-{data.uid}">' . "\n";
-        $editorPreviewTemplate .= '    <div class="' . $contentBlock['packageName'] . '">' . "\n";
+        $editorPreviewTemplate = '<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:be="http://typo3.org/ns/TYPO3/CMS/Backend/ViewHelpers" data-namespace-typo3-fluid="true">' . "\n";
+        $editorPreviewTemplate .= '    <f:asset.css identifier="content-block-' . $contentBlock['packageName'] . '-be" href="CB:' . $contentBlock['packageName'] . '/dist/EditorPreview.css"/>' . "\n";
+        $editorPreviewTemplate .= "\n";
+        $editorPreviewTemplate .= '    <be:link.editRecord uid="{data.uid}" table="tt_content" id="element-tt_content-{data.uid}">' . "\n";
+        $editorPreviewTemplate .= '        <div class="' . $contentBlock['packageName'] . '">' . "\n";
         $editorPreviewTemplate .= $fieldsForTemplate . "\n";
-        $editorPreviewTemplate .= '    </div>' . "\n";
-        $editorPreviewTemplate .= '</be:link.editRecord>' . "\n";
+        $editorPreviewTemplate .= '        </div>' . "\n";
+        $editorPreviewTemplate .= '    </be:link.editRecord>' . "\n";
+        $editorPreviewTemplate .= '</html>' . "\n";
 
         file_put_contents(
             $cbBasePath . 'src/EditorPreview.html',
@@ -186,19 +187,22 @@ class WizardController extends ActionController
 
         /* +++++  Frontend.html  +++++ */
         // TODO: Render template
-        $frontendTemplate = '<f:layout name="Default" />' . "\n";
-        $frontendTemplate .= '' . "\n";
-        $frontendTemplate .= '<f:section name="Main">' . "\n";
-        $frontendTemplate .= '' . "\n";
-        $frontendTemplate .= '    <f:asset.css identifier="content-block-' . $contentBlock['packageName'] . '-be" href="CB:' . $contentBlock['packageName'] . '/dist/EditorPreview.css"/>' . "\n";
-        $frontendTemplate .= '    <f:asset.css identifier="content-block-' . $contentBlock['packageName'] . '" href="CB:' . $contentBlock['packageName'] . '/dist/Frontend.css"/>' . "\n";
-        $frontendTemplate .= '    <f:asset.script identifier="content-block-' . $contentBlock['packageName'] . '" src="CB:' . $contentBlock['packageName'] . '/dist/Frontend.js"/>' . "\n";
-        $frontendTemplate .= '' . "\n";
-        $frontendTemplate .= '    <div class="' . $contentBlock['packageName'] . '">' . "\n";
+        $frontendTemplate = '<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">' . "\n";
+        $frontendTemplate .= "\n";
+        $frontendTemplate .= '    <f:layout name="Default" />' . "\n";
+        $frontendTemplate .= "\n";
+        $frontendTemplate .= '    <f:section name="Main">' . "\n";
+        $frontendTemplate .= "\n";
+        $frontendTemplate .= '        <f:asset.css identifier="content-block-' . $contentBlock['packageName'] . '-be" href="CB:' . $contentBlock['packageName'] . '/dist/EditorPreview.css"/>' . "\n";
+        $frontendTemplate .= '        <f:asset.css identifier="content-block-' . $contentBlock['packageName'] . '" href="CB:' . $contentBlock['packageName'] . '/dist/Frontend.css"/>' . "\n";
+        $frontendTemplate .= '        <f:asset.script identifier="content-block-' . $contentBlock['packageName'] . '" src="CB:' . $contentBlock['packageName'] . '/dist/Frontend.js"/>' . "\n";
+        $frontendTemplate .= "\n";
+        $frontendTemplate .= '        <div class="' . $contentBlock['packageName'] . '">' . "\n";
         $frontendTemplate .= $fieldsForTemplate . "\n";
-        $frontendTemplate .= '    </div>' . "\n";
-        $frontendTemplate .= '' . "\n";
-        $frontendTemplate .= '</f:section>' . "\n";
+        $frontendTemplate .= '        </div>' . "\n";
+        $frontendTemplate .= "\n";
+        $frontendTemplate .= '    </f:section>' . "\n";
+        $frontendTemplate .= '</html>' . "\n";
 
         file_put_contents(
             $cbBasePath . 'src/Frontend.html',
