@@ -17,7 +17,7 @@
     "require": {
         "php": "^7.2 || ^8.0",
         "ext-json": "*",
-        "typo3-contentblocks/composer-plugin": "*",
+        "typo3-contentblocks/composer-plugin": "^2.0",
         "typo3/cms-core": "^10.4 || ^11.5",
         "typo3/cms-filelist": "^10.4 || ^11.5"
     },
