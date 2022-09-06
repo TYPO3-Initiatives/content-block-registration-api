@@ -29,6 +29,12 @@ Because each content block is described in a separate composer package, they
 must define their type property as `typo3-contentblock`. TYPO3 then uses a
 custom composer installer to place these packages in a dedicated location.
 
+.. attention::
+   **Composer package type changed!** Due to problems with the TYPO3 composer
+   installer the required composer package type changed from `typo3-cms-contentblock`
+   to `typo3-contentblock`. Please adjust it in your content block packages, when
+   upgrading to version 3.0.0 and above.
+
 To separate the working directories for “classic extensions” (plugins, …), usual
 libraries and content blocks, the target folder is `typo3conf/contentBlocks/`.
 This is also compatible with the local package repository approach you would
