@@ -9,6 +9,7 @@
 /.typo3/
 /Tests/.phpunit.result.cache
 /.php_cs.cache
+/.php-cs-fixer.cache
 
 # Rendered docs
 /Documentation-GENERATED-temp/
