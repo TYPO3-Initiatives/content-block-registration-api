@@ -26,6 +26,7 @@
         "helhum/typo3-console": " ^6.6 || ^7.0",
         "rector/rector": "^0.12.19",
         "roave/security-advisories": "dev-master",
+		"typo3/coding-standards": "^0.4.0",
         "typo3-contentblocks/call-to-action-local": "@dev",
         "typo3-contentblocks/counter-local": "@dev",
         "typo3-contentblocks/example-local": "@dev",
@@ -116,13 +117,13 @@
             "[ -L .typo3/public/typo3conf/ext/contentblocks_reg_api ] || ( mkdir -p .typo3/public/typo3conf/ext/ && ln -snvf ../../../../. .typo3/public/typo3conf/ext/contentblocks_reg_api )"
         ],
         "fix-staged:cgl:php-cs": [
-            "php-cs-fixer --config=.php_cs.dist fix -v --using-cache=no `git diff --cached --name-only '*.php'`"
+            "php-cs-fixer --config=.php-cs-fixer.dist.php fix -v --using-cache=no `git diff --cached --name-only '*.php'`"
         ],
         "fix:cgl": [
             "@fix:cgl:php-cs"
         ],
         "fix:cgl:php-cs": [
-            "php-cs-fixer --config=.php_cs.dist fix --using-cache=no"
+            "php-cs-fixer --config=.php-cs-fixer.dist.php fix --using-cache=no"
         ],
         "install-typo3": [
             "typo3cms install:setup --admin-user-name=admin --admin-password=adminadmin --site-setup-type=site --site-name='Content Block API' --no-interaction",
@@ -143,13 +144,13 @@
             "@test-staged:cgl:php-cs"
         ],
         "test-staged:cgl:php-cs": [
-            "if [ `git diff --cached --name-only '*.php' | wc -l` -ne 0 ]; then php-cs-fixer --config=.php_cs.dist fix -v --diff --diff-format=udiff --dry-run `git diff --cached --name-only --relative '*.php'`; else true; fi"
+            "if [ `git diff --cached --name-only '*.php' | wc -l` -ne 0 ]; then php-cs-fixer --config=.php-cs-fixer.dist.php fix -v --diff --diff-format=udiff --dry-run `git diff --cached --name-only --relative '*.php'`; else true; fi"
         ],
         "test:cgl": [
             "@test:cgl:php-cs"
         ],
         "test:cgl:php-cs": [
-            "php-cs-fixer --config=.php_cs.dist fix -v --dry-run"
+            "php-cs-fixer --config=.php-cs-fixer.dist.php fix -v --dry-run"
         ],
         "test:unit": [
             "phpunit -c Tests/UnitTests.phpunit.xml"
