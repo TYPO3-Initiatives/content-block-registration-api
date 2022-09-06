@@ -11,7 +11,6 @@ declare(strict_types=1);
 
 namespace Typo3Contentblocks\ContentblocksRegApi\Validator;
 
-use TYPO3\CMS\Core\Http\ApplicationType;
 use TYPO3\CMS\Core\SingletonInterface;
 
 class ContentBlockValidator implements SingletonInterface
@@ -67,11 +66,11 @@ class ContentBlockValidator implements SingletonInterface
         // check composer type
         $composerJson = json_decode(file_get_contents($cbPath . 'composer.json'), true);
         // If there is an old content block with type of 'typo3-cms-contentblock'?
-        if ( $composerJson['type'] === 'typo3-cms-contentblock') {
+        if ($composerJson['type'] === 'typo3-cms-contentblock') {
             throw new \Exception(sprintf('Your ContentBlock %s is of old type \'typo3-cms-contentblock\'. You must migrate the composer type to \'typo3-contentblock\' in your composer.json.', $cbPath));
         }
         // Is the ContentBlock of type 'typo3-contentblock'?
-        if ( $composerJson['type'] !== 'typo3-contentblock') {
+        if ($composerJson['type'] !== 'typo3-contentblock') {
             throw new \Exception(sprintf('Your ContentBlock must be of composer type \'typo3-contentblock\' in %s', $cbPath));
         }
 
