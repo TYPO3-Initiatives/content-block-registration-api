@@ -48,14 +48,14 @@ class YamlToSqlTranslationService implements SingletonInterface
 
         switch ($type) {
             case 'Checkbox':
-               return $returnVarchar;
+                return $returnVarchar;
             case 'Collection':
-               return $returnInt;
+                return $returnInt;
             case 'Color':
-               return $returnVarchar;
+                return $returnVarchar;
             case 'Date':
             case 'DateTime':
-               return $returnInt;
+                return $returnInt;
             case 'Email':
                 return $returnVarchar;
             case 'Image':
@@ -75,11 +75,11 @@ class YamlToSqlTranslationService implements SingletonInterface
             case 'Tel':
                 return $returnVarchar;
             case 'Text':
-               return $returnVarchar;
+                return $returnVarchar;
             case 'Textarea':
-               return "$uniqueColumnName text";
+                return "$uniqueColumnName text";
             case 'TextMultiline':
-               return "$uniqueColumnName text";
+                return "$uniqueColumnName text";
             case 'Time':
                 return $returnInt;
             case 'Toggle':

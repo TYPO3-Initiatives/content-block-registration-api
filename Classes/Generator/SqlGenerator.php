@@ -99,7 +99,7 @@ class SqlGenerator implements SingletonInterface
                             if (strlen('' . $fieldSql) > 3) {
                                 $sqlStatement .= (($sqlStatement !== $sqlStatementReset) ? ',' : '') . ' ' . $fieldSql;
                             }
-                            // TODO: else throw usefull exeption if not supported
+                        // TODO: else throw usefull exeption if not supported
                         }
 
                         // Add collection fields

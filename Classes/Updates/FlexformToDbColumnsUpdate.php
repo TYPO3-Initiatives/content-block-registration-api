@@ -302,7 +302,7 @@ class FlexformToDbColumnsUpdate implements UpgradeWizardInterface, RepeatableInt
             case 'Icon': // Icon was supported in v1, so we should migrate that to image
             case 'Image':
             case 'Integer':
-               return $castInteger;
+                return $castInteger;
             case 'Money':
                 return $castDouble;
             case 'MultiSelect':

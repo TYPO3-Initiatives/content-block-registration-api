@@ -534,36 +534,36 @@ class FlexFormGenerator
             return $this->createCollection($field, $contentBlock);
         }
         switch ($field['type']) {
-                case 'Email':
-                case 'Integer':
-                case 'Money':
-                case 'Number':
-                case 'Percent':
-                case 'Text':
-                case 'Password':
-                case 'Range':
-                case 'Tel':
-                case 'Color':
-                case 'Date':
-                case 'DateTime':
-                case 'Time':
-                    return $this->createInputField($field, $contentBlock);
-                case 'Textarea':
-                case 'TextMultiline':
-                    return $this->createTextarea($field, $contentBlock);
-                case 'Link':
-                case 'Url':
-                    return $this->createTypoLink($field, $contentBlock);
-                case 'Image':
-                    return $this->createImageField($field, $contentBlock);
-                case 'Select':
-                case 'Checkbox':
-                case 'MultiSelect':
-                case 'Radiobox':
-                case 'Toggle':
-                    return $this->createSelections($field, $contentBlock);
-                default:
-                    return '';
-            }
+            case 'Email':
+            case 'Integer':
+            case 'Money':
+            case 'Number':
+            case 'Percent':
+            case 'Text':
+            case 'Password':
+            case 'Range':
+            case 'Tel':
+            case 'Color':
+            case 'Date':
+            case 'DateTime':
+            case 'Time':
+                return $this->createInputField($field, $contentBlock);
+            case 'Textarea':
+            case 'TextMultiline':
+                return $this->createTextarea($field, $contentBlock);
+            case 'Link':
+            case 'Url':
+                return $this->createTypoLink($field, $contentBlock);
+            case 'Image':
+                return $this->createImageField($field, $contentBlock);
+            case 'Select':
+            case 'Checkbox':
+            case 'MultiSelect':
+            case 'Radiobox':
+            case 'Toggle':
+                return $this->createSelections($field, $contentBlock);
+            default:
+                return '';
+        }
     }
 }
