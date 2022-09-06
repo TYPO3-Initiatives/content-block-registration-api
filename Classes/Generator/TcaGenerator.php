@@ -120,7 +120,6 @@ class TcaGenerator
                             $ttContentShowitemFields .= "\n" . $tempUniqueColumnName . ',';
                             $ttContentColumns[$tempUniqueColumnName] = $this->tcaFieldService->getMatchedTcaConfig($contentBlock, $field);
                         }
-                    // TODO: else throw usefull exeption if not supported
                     }
 
                     // Add collection fields
