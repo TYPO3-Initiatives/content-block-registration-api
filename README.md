@@ -7,7 +7,7 @@
 
 ## Introduction
 
-This API provides an easy and reliable way to register content blocks (composer packages). 
+This API provides an easy and reliable way to register content blocks (composer packages).
 Follow this README for a quick getting started overview.
 Find the full [Documentation](https://github.com/TYPO3-Initiatives/content-block-registration-api/blob/master/Documentation/Index.rst) inside this repository.
 
@@ -72,7 +72,7 @@ You can also add a Content Block directory manually to `typo3conf/contentBlocks`
 ### Detecting a content block
 
 The detection of content blocks depends on the composer package type.
-The custom composer installer then retrieves all packages, which are of type `typo3-cms-contentblock`.
+The custom composer installer then retrieves all packages, which are of type `typo3-contentblock`.
 
 ### Validation
 
@@ -106,7 +106,7 @@ is generated and stored in `tt_content.content_block`.
 
 ## Extension configuration
 
-For some reason it might be necessary to inherit content blocks from your own definition. E. g. if you want to inherit content blocks from lib.contentElement. In that case you can extend the default TypoScript as you need. 
+For some reason it might be necessary to inherit content blocks from your own definition. E. g. if you want to inherit content blocks from lib.contentElement. In that case you can extend the default TypoScript as you need.
 This is the default Code:
 
 <pre>

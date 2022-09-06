@@ -49,7 +49,7 @@ composer package represents exactly one content block.
 **You must**
 
 *  provide this file
-*  set the type property to: typo3-cms-contentblock
+*  set the type property to: `typo3-contentblock`
 
 **You may**
 

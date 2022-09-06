@@ -244,7 +244,7 @@ class WizardController extends ActionController
         $composerJson = [
             'name' => 'typo3-contentblocks/' . $contentBlock['packageName'],
             'description' => 'Content block created by Content Block Builder.',
-            'type' => 'typo3-cms-contentblock',
+            'type' => 'typo3-contentblock',
             'license' => 'GPL-2.0-or-later',
             'authors' => [['name' => 'Structured Content Initiative']],
             'require' => ['typo3-contentblocks/contentblocks-reg-api' => '*'],

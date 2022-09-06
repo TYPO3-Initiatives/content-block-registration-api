@@ -26,7 +26,7 @@ Storage of content block in the TYPO3 directory structure
 =========================================================
 
 Because each content block is described in a separate composer package, they
-must define their type property as `typo3-cms-contentblock`. TYPO3 then uses a
+must define their type property as `typo3-contentblock`. TYPO3 then uses a
 custom composer installer to place these packages in a dedicated location.
 
 To separate the working directories for “classic extensions” (plugins, …), usual
