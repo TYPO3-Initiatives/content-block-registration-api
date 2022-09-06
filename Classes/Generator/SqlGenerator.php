@@ -21,7 +21,6 @@ use Typo3Contentblocks\ContentblocksRegApi\Service\YamlToSqlTranslationService;
 /**
  * Class SqlGenerator
  * This Class adds the contentblock configuration to the compare database statement in the InstallTool.
- *
  */
 class SqlGenerator implements SingletonInterface
 {

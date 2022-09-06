@@ -29,7 +29,6 @@ use Typo3Contentblocks\ContentblocksRegApi\Service\DataService;
  *
  * After refactoring the storage method from flexform to database columns, we server a
  * tool to transform existing content blocks to the new data storage.
- *
  */
 class FlexformToDbColumnsUpdate implements UpgradeWizardInterface, RepeatableInterface, LoggerAwareInterface
 {

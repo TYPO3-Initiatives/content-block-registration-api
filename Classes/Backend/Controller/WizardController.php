@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 /*
  * This file is part of the package typo3-contentblocks/contentblocks-reg-api.
@@ -18,7 +20,6 @@ use Typo3Contentblocks\ContentblocksRegApi\Constants;
 use Typo3Contentblocks\ContentblocksRegApi\Service\DatabaseService;
 
 /**
- *
  * This file is part of the "Content Block Registration API" Extension for TYPO3 CMS.
  *
  * For the full copyright and license information, please read the
@@ -34,8 +35,6 @@ class WizardController extends ActionController
 {
     /**
      * Start viw of content blocks kickstarter
-     *
-     * @return void
      */
     public function newAction()
     {
@@ -45,7 +44,6 @@ class WizardController extends ActionController
     /**
      * Creates a new content block
      *
-     * @return void
      * @var string $contentBlocks
      */
     public function createAction(string $contentBlocks)
@@ -115,9 +113,9 @@ class WizardController extends ActionController
             $tempField['identifier'] = $field;
             $fieldIdentifierList[] = $field;
 
-            if ($value['type'] === 'Image' && intval($value['properties']['maxItems']) == 1) {
+            if ($value['type'] === 'Image' && (int)($value['properties']['maxItems']) == 1) {
                 $fieldsForTemplate .= '            <f:image image="{' . $field . '}" />' . "\n";
-            } elseif ($value['type'] === 'Image' && intval($value['properties']['maxItems']) != 1) {
+            } elseif ($value['type'] === 'Image' && (int)($value['properties']['maxItems']) != 1) {
                 $fieldsForTemplate .= "\n";
                 $fieldsForTemplate .= '            <f:for each="{' . $field . '}" as="i">' . "\n";
                 $fieldsForTemplate .= '                <f:image image="{i}" />' . "\n";

@@ -21,7 +21,7 @@ $EM_CONF[$_EXTKEY] = [
     ],
     'autoload' => [
         'psr-4' => [
-            "Typo3Contentblocks\\ContentblocksRegApi\\" => "Classes"
+            'Typo3Contentblocks\\ContentblocksRegApi\\' => 'Classes'
         ]
     ],
 ];

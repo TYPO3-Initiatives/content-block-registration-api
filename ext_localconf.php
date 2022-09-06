@@ -26,13 +26,11 @@ defined('TYPO3') || die('Access denied.');
     // TODO: find a better way to add individual definitions
     $importTypoScriptTemplate = (string)\TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Configuration\ExtensionConfiguration::class)
             ->get('contentblocks_reg_api', 'contentBlockDefinition');
-    if ( strlen($importTypoScriptTemplate) > 2)
-    {
+    if (strlen($importTypoScriptTemplate) > 2) {
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScriptSetup(
             "@import '$importTypoScriptTemplate'"
         );
-    }
-    else {
+    } else {
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScriptSetup(
             "@import 'EXT:contentblocks_reg_api/Configuration/TypoScript/setup.typoscript'"
         );

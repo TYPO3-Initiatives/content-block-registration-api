@@ -170,24 +170,22 @@ class CbProcessor implements DataProcessorInterface
             $fileCollector = GeneralUtility::makeInstance(FileCollector::class);
             $fileCollector->addFilesFromRelation($table, $fieldName, $record);
             return $fileCollector->getFiles();
-        } else {
-            // Since bug in FileCollector, we need to handle files the other way in backend to support workspaces.
-            // https://review.typo3.org/c/Packages/TYPO3.CMS/+/74185
-            // This should be removed after dropping support for v10.4
-            $workspaceId = GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('workspace', 'id', 0);
-            $files = BackendUtility::resolveFileReferences(
-                $table,
-                $fieldName,
-                $record,
-                (($workspaceId !== 0) ? $workspaceId : null)
-            );
-            if ($files instanceof FileReference) {
-                return [$files];
-            } else {
-                $files = array_reverse($files);
-                return $files;
-            }
         }
+        // Since bug in FileCollector, we need to handle files the other way in backend to support workspaces.
+        // https://review.typo3.org/c/Packages/TYPO3.CMS/+/74185
+        // This should be removed after dropping support for v10.4
+        $workspaceId = GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('workspace', 'id', 0);
+        $files = BackendUtility::resolveFileReferences(
+            $table,
+            $fieldName,
+            $record,
+            (($workspaceId !== 0) ? $workspaceId : null)
+        );
+        if ($files instanceof FileReference) {
+            return [$files];
+        }
+        $files = array_reverse($files);
+        return $files;
     }
 
     /**

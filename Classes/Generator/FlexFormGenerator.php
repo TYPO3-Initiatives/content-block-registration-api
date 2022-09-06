@@ -29,9 +29,8 @@ class FlexFormGenerator
 
     /**
      * Create a flexform typolink
-     *
     */
-    protected function createTypoLink(array $field, array $contentBlock) :string
+    protected function createTypoLink(array $field, array $contentBlock): string
     {
         $blindLinkOption = 'page,url,mail,spec,file,folder,telephone';
         if (is_array($field['properties']['linkTypes'])) {
@@ -79,9 +78,8 @@ class FlexFormGenerator
 
     /**
      * Create a input field with several renderings: Mail, Integer,  Monay, Number, Range, Telephone, Date, Time, DateTime
-     *
     */
-    protected function createInputField(array $field, array $contentBlock) :string
+    protected function createInputField(array $field, array $contentBlock): string
     {
         $items = '';
 
@@ -121,14 +119,14 @@ class FlexFormGenerator
         if (is_array($field['properties']['range'])) {
             $additionlConfig .= '
             <range>
-                <lower>' . floatval(
+                <lower>' . (float)(
                 (
                     $field['properties']['range']['lower'] !== ''
                         ? $field['properties']['range']['lower']
                         : '0'
                 )
             ) . '</lower>
-                <upper>' . floatval(
+                <upper>' . (float)(
                 (
                     $field['properties']['range']['upper'] !== ''
                         ? $field['properties']['range']['upper']
@@ -198,7 +196,7 @@ class FlexFormGenerator
     /**
      * Create an flexform inline field for pictures (Image)
     */
-    protected function createImageField(array $field, array $contentBlock) :string
+    protected function createImageField(array $field, array $contentBlock): string
     {
         return '
         <' . $field['_identifier'] . '>
@@ -282,7 +280,7 @@ class FlexFormGenerator
     /**
      * Create flexform textfields like textarea, rte fields
      */
-    protected function createTextarea(array $field, array $contentBlock) :string
+    protected function createTextarea(array $field, array $contentBlock): string
     {
         return '
         <' . $field['_identifier'] . '>
@@ -316,7 +314,7 @@ class FlexFormGenerator
      * Create inline field for a collection.
      * It overrides the TCA array directly.
      */
-    protected function createCollection(array $field, array $contentBlock) :string
+    protected function createCollection(array $field, array $contentBlock): string
     {
         // get the fields in the collections
         $fieldsConfig = '';
@@ -482,7 +480,7 @@ class FlexFormGenerator
      * Public function to create flexform settings.
      * Register the flexform directly to the TCA array.
      */
-    public function createFlexform(array $contentBlock) :void
+    public function createFlexform(array $contentBlock): void
     {
         $flexFormFieldsConfig = '';
 
@@ -499,7 +497,7 @@ class FlexFormGenerator
     /**
      * Basic generate Flexform wraping structure surrounding.
      */
-    protected function flexFormTemplate(string $fieldConfig) :string
+    protected function flexFormTemplate(string $fieldConfig): string
     {
         return '<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
             <T3DataStructure>
@@ -527,15 +525,15 @@ class FlexFormGenerator
      * Parse every single field.
      * Make a decision which method should be used. Mapping the symphony types and special types to what it is in flexform.
      */
-    protected function createField(array $field, array $contentBlock) :string
+    protected function createField(array $field, array $contentBlock): string
     {
         if (!is_array($field)) {
             return '';
         } // if no array given, return
-        elseif ($field['type'] === 'Collection') {
+        if ($field['type'] === 'Collection') {
             return $this->createCollection($field, $contentBlock);
-        } else {
-            switch ($field['type']) {
+        }
+        switch ($field['type']) {
                 case 'Email':
                 case 'Integer':
                 case 'Money':
@@ -567,6 +565,5 @@ class FlexFormGenerator
                 default:
                     return '';
             }
-        }
     }
 }

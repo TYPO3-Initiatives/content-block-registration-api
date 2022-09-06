@@ -2,10 +2,8 @@
 
 defined('TYPO3') || die('Access denied.');
 
-
 call_user_func(
-    static function()
-    {
+    static function () {
         $contentBlocksSettings = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Configuration\ExtensionConfiguration::class)->get('contentblocks_reg_api');
         $showBackendModule = isset($contentBlocksSettings['showBackendModule']) ? (bool)$contentBlocksSettings['showBackendModule'] : true;
 
@@ -32,6 +30,5 @@ call_user_func(
          * Allow Custom Records on Standard Pages
          */
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_contentblocks_reg_api_collection');
-
     }
 );

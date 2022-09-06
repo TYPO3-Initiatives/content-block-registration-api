@@ -16,7 +16,6 @@ use TYPO3\CMS\Core\SingletonInterface;
 /**
  * Class YamlToSqlTranslationService
  * Manage to get the right SQL definition for each contentblock defined field in the yaml file.
- *
  */
 class YamlToSqlTranslationService implements SingletonInterface
 {
@@ -33,7 +32,6 @@ class YamlToSqlTranslationService implements SingletonInterface
      *
      * @param string $uniqueColumnName
      * @return string SQL statement
-     *
      */
     public function getSQL(string $uniqueColumnName, string $type): string
     {

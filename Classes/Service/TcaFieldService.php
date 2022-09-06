@@ -18,7 +18,6 @@ use Typo3Contentblocks\ContentblocksRegApi\Constants;
 
 /** Class TcaFieldService
  * Manage to get the TCA configuration for each field.
- *
  */
 class TcaFieldService implements SingletonInterface
 {
@@ -40,7 +39,7 @@ class TcaFieldService implements SingletonInterface
      * Returns the matching TCA configuration as it is, as an array.
      * Supports the dynamically generated TCA.
      */
-    public function getMatchedTcaConfig(array $contentBlock, array $field) :array
+    public function getMatchedTcaConfig(array $contentBlock, array $field): array
     {
         if (strpos(Constants::LIST_INPUT_FIELD_TYPES, $field['type']) !== false) {
             return $this->getInputFieldTca($contentBlock, $field);

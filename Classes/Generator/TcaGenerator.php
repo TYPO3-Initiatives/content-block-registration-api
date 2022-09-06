@@ -50,7 +50,7 @@ class TcaGenerator
     /**
      * Create the TCA config for all Content Blocks
      **/
-    public function setTca() :void
+    public function setTca(): void
     {
         $configuration = $this->configurationService->configuration();
 
