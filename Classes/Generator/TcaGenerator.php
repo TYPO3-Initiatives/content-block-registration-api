@@ -147,6 +147,13 @@ class TcaGenerator
                 $collectionColumns
             );
 
+            // 2022-11-12 FIX: TYPO3\CMS\Backend\Form\FormDataGroup\OrderedProviderList->copile([]) removes collection columns in frontend_editing,
+            // if we do not add them to [TCA]['tx_contentblocks_reg_api_collection']['types']['1']['showitem']. It does not process the OverridesChildTca in tt_content.
+            if (count($collectionColumns) > 0) {
+                $collectionCollumnKeys = array_keys($collectionColumns);
+                $GLOBALS['TCA'][Constants::COLLECTION_FOREIGN_TABLE]['types']['1']['showitem'] = implode(',', $collectionCollumnKeys) . ',' . $GLOBALS['TCA'][Constants::COLLECTION_FOREIGN_TABLE]['types']['1']['showitem'];
+            }
+
             /***************
              * Configure element type
              */
