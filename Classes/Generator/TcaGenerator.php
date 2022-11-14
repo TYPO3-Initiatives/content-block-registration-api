@@ -114,7 +114,16 @@ class TcaGenerator
                             && array_key_exists($field['identifier'], $GLOBALS['TCA']['tt_content']['columns'])
                         ) {
                             $ttContentShowitemFields .= "\n" . $field['identifier'] . ',';
-                            $ttContentColumnsOverrides[$field['identifier']] = $this->tcaFieldService->getMatchedTcaConfig($contentBlock, $field);
+                            $newConfigForExistingElement = $this->tcaFieldService->getMatchedTcaConfig($contentBlock, $field);
+
+                            // this is not allowed: https://docs.typo3.org/m/typo3/reference-tca/main/en-us/Types/Properties/ColumnsOverrides.html
+                            unset($newConfigForExistingElement['config']['type']);
+
+                            // if exclude is set, this leads to a unexpected user rights behaviour (e. g. bodytext is not available in cb)
+                            // https://docs.typo3.org/m/typo3/reference-tca/main/en-us/Columns/Properties/Exclude.html?highlight=excl
+                            unset($newConfigForExistingElement['exclude']);
+
+                            $ttContentColumnsOverrides[$field['identifier']] = $newConfigForExistingElement;
                         } else {
                             // The "normal" way to add fields
                             $ttContentShowitemFields .= "\n" . $tempUniqueColumnName . ',';
