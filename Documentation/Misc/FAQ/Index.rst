@@ -49,3 +49,33 @@ Localization of content
 
 A field is localize-able by default, so setting the localization property is
 only necessary if special localization method is required.
+
+Can I reuse an existing field / column?
+=======================
+
+Yes you can. You can use the useExistingField property.
+
+For example if you want to use the existing column "bodytext", or "header_layout" or "image" you can do one of the following:
+
+.. code-block:: yaml
+
+    group: common
+    fields:
+        -
+            identifier: header_layout
+            type: Select
+            properties:
+                useExistingField: true
+        -
+            identifier: bodytext
+            type: Textarea
+            properties:
+                enableRichtext: true
+                useExistingField: true
+        -
+            identifier: image
+            type: Image
+            properties:
+                useExistingField: true
+
+
