@@ -134,8 +134,9 @@ class CbProcessor implements DataProcessorInterface
         }
         // get file fields
         elseif (array_key_exists($fieldConf['_identifier'], $this->cbConf['fileFields'])) {
+            $isUseExistingField = isset($fieldConf['properties']['useExistingField']) && $fieldConf['properties']['useExistingField'] === true;
             $files = $this->_getFiles(
-                (($this->_isFrontend()) ? $fieldConf['_identifier'] : $fieldColumnName),
+                (($this->_isFrontend() || $isUseExistingField) ? $fieldConf['_identifier'] : $fieldColumnName),
                 ((count($fieldConf['_path']) == 1) ? 'tt_content' : Constants::COLLECTION_FOREIGN_TABLE),
                 $record
             );
