@@ -128,7 +128,7 @@ class TcaFieldService implements SingletonInterface
             if ($field['type'] === 'Date' || $field['type'] === 'DateTime' || $field['type'] === 'Time') {
                 $config['renderType'] = 'inputDateTime';
                 // While handling with datetime objects, those fields must be set to a handleable value.
-                $config['default'] = $this->timestampConvert($config['default']);
+                $config['default'] = (isset($config['default']) ? $this->timestampConvert($config['default']) : 0);
             }
 
             if (isset($field['properties']['range']) && is_array($field['properties']['range'])) {
