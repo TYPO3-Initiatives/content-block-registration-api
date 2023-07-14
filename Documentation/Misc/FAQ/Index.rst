@@ -27,15 +27,16 @@ Switching the CType
 ===================
 
 Switching the CType without having to re-enter the content is not possible with
-different prefixes per CType. Perhaps a manual prefix could be defined so that,
-for example, an agency can define all its own content blocks on its own
-responsibility.
+different prefixes per CType. If you don't reuse any columns, your data will not
+be accessible after switching the CType. (If you switch back, the data is still
+there.)
 
-For now switching the CType without data loss won't be enabled. However,
-if the survey for editors proves that it is necessary, a strategy for this will
-be needed first.
-A `discussion <https://decisions.typo3.org/t/
-switchable-ctypes-how-to-solve-consistency-issues/660/2>`__ is currently open.
+So if you reuse existing fields, CType switching
+is possible without data loss between CTypes with the same columns. This is how
+the TYPO3 core works and is not specific to content blocks.
+
+Also have alook at the `discussion here <https://decisions.typo3.org/t/
+switchable-ctypes-how-to-solve-consistency-issues/660/2>`__ .
 
 
 Compatibility with extensions
