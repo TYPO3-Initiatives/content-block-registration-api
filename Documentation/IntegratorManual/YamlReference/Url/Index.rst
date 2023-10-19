@@ -65,7 +65,7 @@ linkPopup
       linkPopup:
         allowedExtensions: 'pdf'
         blindLinkFields: 'target,title'
-        blindLinkOptions: 'folder,spec,telefone,mail'
+        blindLinkOptions: 'folder,spec,telephone,mail'
         windowOpenParameters: 'height=800,width=600'
 
 max
@@ -147,7 +147,7 @@ Example
           linkPopup:
             allowedExtensions: 'pdf'
             blindLinkFields: 'target,title'
-            blindLinkOptions: 'folder,spec,telefone,mail'
+            blindLinkOptions: 'folder,spec,telephone,mail'
           max: 150
           placeholder: 'Placeholder text'
           required: false
