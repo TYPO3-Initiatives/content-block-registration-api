@@ -5,6 +5,10 @@
 
 # Registration API for Content Blocks
 
+## ⚠️ Attention: This is the API for TYPO3 v11 ⚠️
+
+For **TYPO3 v12**, you can find the [github repository here](https://github.com/nhovratov/content-blocks) or on [TER here](https://extensions.typo3.org/extension/content_blocks/).
+
 ## Introduction
 
 This API provides an easy and reliable way to register content blocks (composer packages).
